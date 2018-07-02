@@ -27,7 +27,7 @@ public class ProblemSolutions {
         }
         return results;
     }
-    public List<int[]> findSumInArray(int[] array, int sum){
+    public List<int[]> hashSumInArray(int[] array, int sum){
         List<int[]> results = new LinkedList<>();
         Map<Integer, Integer> indecesOfValues = new HashMap<>();
         for(int i = 0; i < array.length; i++){
@@ -49,6 +49,37 @@ public class ProblemSolutions {
         }
         return results;
     }
+
+    //Given a string of distinct characters J, return a count of those characters appearing in string S
+    //https://leetcode.com/problems/jewels-and-stones/description/
+    public int hashCountJewels(String J, String S){
+        Map<Character, Boolean> jewelTypes = new HashMap<>();
+
+        for(char ch : J.toCharArray()){
+            jewelTypes.put(ch, true);
+        }
+        int count = 0;
+        for(char ch: S.toCharArray()){
+            count = jewelTypes.containsKey(ch) ? count+1 : count;
+        }
+        return count;
+    }
+    //all characters are guaranteed to be letters, so let's try using this to our advantage
+    //lowercase z is number 122, uppercase A is 65, difference is 57, 58 elements though since it starts at 0
+    //solution runtime faster than 93.32% other Java solutions, alright
+    public int asciiCountJewels(String J, String S){
+        boolean[] asciiCounts = new boolean[58];
+        for(int i = 0; i < J.length(); i++){
+            asciiCounts[(int)J.charAt(i)-65] = true;
+        }
+        int count = 0;
+        for(int j = 0; j < S.length(); j++){
+            count = asciiCounts[(int)S.charAt(j)-65] ? count+1 : count;
+
+        }
+        return count;
+    }
+
 
 
 }
