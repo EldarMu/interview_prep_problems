@@ -80,6 +80,37 @@ public class ProblemSolutions {
         return count;
     }
 
+    //given a 2d array of positive ints, find by how much all the elements in the array can be increased
+    //while preserving the maximum value of each row and column
+    //https://leetcode.com/problems/max-increase-to-keep-city-skyline/description/
+    public int maxIncreaseInSkyline(int[][] grid){
+        int vertArrHeight = grid.length;
+        int horizArrHeight = grid[0].length;
+        int[] maxVertHeights = new int[vertArrHeight];
+        int[] maxHorizHeights = new int[horizArrHeight];
+
+        for(int i = 0; i < vertArrHeight; i++){
+            for(int j = 0; j < vertArrHeight; j++){
+                int heightInCell = grid[i][j];
+                maxVertHeights[i] = maxVertHeights[i] < heightInCell ? heightInCell : maxVertHeights[i];
+                maxHorizHeights[j] = maxHorizHeights[j] < heightInCell ? heightInCell : maxHorizHeights[j];
+            }
+        }
+        int sumOfExtraHeights = 0;
+        for(int i = 0; i < vertArrHeight; i++){
+            for(int j = 0; j < vertArrHeight; j++){
+                int heightInCell = grid[i][j];
+                if(maxVertHeights[i] > maxHorizHeights[j]){
+                    sumOfExtraHeights += maxHorizHeights[j] - heightInCell;
+                }
+                else{
+                    sumOfExtraHeights += maxVertHeights[i] - heightInCell;
+                }
+            }
+        }
+        return sumOfExtraHeights;
+    }
+
 
 
 }
