@@ -41,14 +41,8 @@ public class ProblemSolutions {
             if(indecesOfValues.containsKey(soughtValue) && i != indecesOfValues.get(soughtValue)){
                 int[] indices = {i, indecesOfValues.get(soughtValue)};
 
-                if(!alreadyAddedPairs.containsKey(indices[0])){
+                if(!alreadyAddedPairs.containsKey(indices[0]) || alreadyAddedPairs.get(indices[0])!=indices[1]){
                     alreadyAddedPairs.put(indices[1], indices[0]);
-                    System.out.print(indices[0] + " " + indices[1] + "\n");
-                    results.add(indices);
-                }
-                else if(alreadyAddedPairs.get(indices[0])!=indices[1]) {
-                    alreadyAddedPairs.put(indices[1], indices[0]);
-                    System.out.print(indices[0] + " " + indices[1] + "\n");
                     results.add(indices);
                 }
             }
