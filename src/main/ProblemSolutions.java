@@ -33,12 +33,24 @@ public class ProblemSolutions {
         for(int i = 0; i < array.length; i++){
             indecesOfValues.put(array[i], i);
         }
+
+        Map<Integer, Integer> alreadyAddedPairs = new HashMap<>();
         for(int i = 0; i < array.length; i++)
         {
             int soughtValue = sum - array[i];
             if(indecesOfValues.containsKey(soughtValue) && i != indecesOfValues.get(soughtValue)){
                 int[] indices = {i, indecesOfValues.get(soughtValue)};
-                results.add(indices);
+
+                if(!alreadyAddedPairs.containsKey(indices[0])){
+                    alreadyAddedPairs.put(indices[1], indices[0]);
+                    System.out.print(indices[0] + " " + indices[1] + "\n");
+                    results.add(indices);
+                }
+                else if(alreadyAddedPairs.get(indices[0])!=indices[1]) {
+                    alreadyAddedPairs.put(indices[1], indices[0]);
+                    System.out.print(indices[0] + " " + indices[1] + "\n");
+                    results.add(indices);
+                }
             }
         }
         return results;
