@@ -9,6 +9,7 @@ import static org.junit.Assert.*;
  * Created by eldar on 7/2/2018.
  */
 public class ProblemSolutionsTest {
+
     @Test
     public void naiveSumInArray() throws Exception {
         List<int[]> testList = new LinkedList<>();
@@ -94,6 +95,12 @@ public class ProblemSolutionsTest {
     public void maxIncreaseInSkyline() throws Exception {
         ProblemSolutions tester = new ProblemSolutions();
         assertEquals(35, tester.maxIncreaseInSkyline(new int[][] {{3,0,8,4},{2,4,5,7},{9,2,6,3},{0,3,1,0}}));
+    }
+    @Test
+    public void uniqueMorseCodeRepresentations() throws Exception {
+        ProblemSolutions tester = new ProblemSolutions();
+        assertEquals(2, tester.uniqueMorseCodeRepresentations(new String[] {"gin", "zen", "gig", "msg"}));
+
     }
 
 }

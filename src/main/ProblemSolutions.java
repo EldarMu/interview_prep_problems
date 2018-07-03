@@ -3,6 +3,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import static java.lang.Math.abs;
+
 /*
 //Class to store the various methods implemented over the course of getting interview
 //interview problem urls listed
@@ -109,6 +111,29 @@ public class ProblemSolutions {
             }
         }
         return sumOfExtraHeights;
+    }
+
+    //unique morse code words
+    //given a list of words and the morse code for the letters, many words will have the same representation
+    //find all unique representations in the list
+    //ascii lowercase a is 97
+    public int uniqueMorseCodeRepresentations(String[] words){
+        int count = 0;
+        String[] morseCode = {".-","-...","-.-.","-..",".","..-.","--.","....","..",".---",
+                "-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--",
+                "-..-","-.--","--.."};
+        Map<String, Boolean> wordAlreadyOccured = new HashMap<>();
+        for(int i = 0; i < words.length; i++){
+            StringBuilder morseString = new StringBuilder();
+            for(int j = 0; j < words[i].length(); j++){
+                morseString.append(morseCode[(int)words[i].charAt(j)-97]);
+            }
+            if(!wordAlreadyOccured.containsKey(morseString.toString())){
+                count++;
+                wordAlreadyOccured.put(morseString.toString(),true);
+            }
+        }
+        return count;
     }
 
 
