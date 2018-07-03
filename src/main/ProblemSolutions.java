@@ -3,8 +3,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import static java.lang.Math.abs;
-
 /*
 //Class to store the various methods implemented over the course of getting interview
 //interview problem urls listed
@@ -148,6 +146,48 @@ public class ProblemSolutions {
             b = intermed << 1;
         }
         return a;
+    }
+
+    //given a product that costs 5 and no initial change in the drawer,
+    //return true if it is possible to give every customer exact change
+    //https://leetcode.com/problems/lemonade-change
+    // a customer that has 5 needs no change
+    // a customer that has 10 needs a 5
+    // a customer that has 20 needs either three 5s or a 10 and a 5
+    // preference given to handing out 10s to customers with 20s.
+    public boolean returnChange(int[] bills){
+        boolean possibleToReturnChange = true;
+        int tens = 0;
+        int fives = 0;
+        int iterator = 0;
+        while(iterator < bills.length && possibleToReturnChange){
+            if(bills[iterator] == 5){
+                fives++;
+            }
+            else if(bills[iterator] == 10){
+                if(fives==0){
+                    possibleToReturnChange = false;
+                }
+                else{
+                    tens++;
+                    fives--;
+                }
+            }
+            else{
+                if(tens>0&&fives>0){
+                    tens--;
+                    fives--;
+                }
+                else if(fives>2){
+                    fives -=3;
+                }
+                else{
+                    possibleToReturnChange = false;
+                }
+            }
+            iterator++;
+        }
+        return possibleToReturnChange;
     }
 
 

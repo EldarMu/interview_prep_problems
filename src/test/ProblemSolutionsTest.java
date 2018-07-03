@@ -107,7 +107,13 @@ public class ProblemSolutionsTest {
         ProblemSolutions tester = new ProblemSolutions();
         assertEquals(5, tester.sumWithoutOperators(4,1));
         assertEquals(0, tester.sumWithoutOperators(0,0));
-
+    }
+    @Test
+    public void returnChange() throws Exception {
+        ProblemSolutions tester = new ProblemSolutions();
+        assertEquals(true, tester.returnChange(new int[] {5,5,5,10,20}));
+        assertEquals(true, tester.returnChange(new int[] {5,5,10}));
+        assertEquals(false, tester.returnChange(new int[] {10, 20}));
     }
 
 }
