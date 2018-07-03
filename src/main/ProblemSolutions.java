@@ -136,6 +136,20 @@ public class ProblemSolutions {
         return count;
     }
 
+    //calculate sum of a and b without using + or -
+    //using bit operations is pretty straightforward here
+    //https://leetcode.com/problems/sum-of-two-integers/
+    public int sumWithoutOperators(int a, int b){
+        int intermed;
+        while(b!=0)
+        {
+            intermed = a & b;
+            a = a ^ b;
+            b = intermed << 1;
+        }
+        return a;
+    }
+
 
 
 }

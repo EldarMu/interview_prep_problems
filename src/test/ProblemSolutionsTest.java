@@ -102,5 +102,12 @@ public class ProblemSolutionsTest {
         assertEquals(2, tester.uniqueMorseCodeRepresentations(new String[] {"gin", "zen", "gig", "msg"}));
 
     }
+    @Test
+    public void sumWithoutOperators() throws Exception {
+        ProblemSolutions tester = new ProblemSolutions();
+        assertEquals(5, tester.sumWithoutOperators(4,1));
+        assertEquals(0, tester.sumWithoutOperators(0,0));
+
+    }
 
 }
