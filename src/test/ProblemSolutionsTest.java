@@ -138,5 +138,15 @@ public class ProblemSolutionsTest {
         assertTrue(right.left.val == 0);
         assertTrue(left.right.right.val == 1);
     }
+    @Test
+    public void flipAndInvertImage() throws Exception {
+        ProblemSolutions tester = new ProblemSolutions();
+        assertArrayEquals(new int[][] {{1,0,0}, {0,1,0}, {1,1,1}},
+                tester.flipAndInvertImage(new int[][] {{1,1,0},{1,0,1},{0,0,0}}));
+        assertArrayEquals(new int[][] {{0}, {1}, {1}},
+                tester.flipAndInvertImage(new int[][] {{1}, {0}, {0}}));
+    }
+
+
 
 }

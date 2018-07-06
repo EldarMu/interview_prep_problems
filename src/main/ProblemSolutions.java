@@ -273,4 +273,30 @@ public class ProblemSolutions {
         curNode.right = maxValIndex == rightIndex? null : recursBuildTree(maxValIndex+1, rightIndex, nums);
         return curNode;
     }
+
+    //given a two dimensional matrix of ones and zeros, flip it horizontally, then invert the values
+    //https://leetcode.com/problems/flipping-an-image
+    //it's just a test of understanding java 2d matrices
+    //runtime better than 97.4% of submissions
+    public int[][] flipAndInvertImage(int[][] A) {
+        int leftVal = 0;
+        int rightVal = 0;
+        int midVal = 0;
+        for(int i = 0; i < A.length; i++){
+            for(int j = 0; j < (A[0].length/2); j++){
+                leftVal = A[i][j];
+                rightVal = A[i][A[0].length-1-j];
+                leftVal = leftVal == 0 ? 1 : 0;
+                rightVal = rightVal == 0 ? 1 : 0;
+                A[i][j] = rightVal;
+                A[i][A[0].length-1-j] = leftVal;
+            }
+            if(A[0].length%2 == 1){
+                midVal = A[i][(A[0].length/2)];
+                midVal = midVal == 0 ? 1 : 0;
+                A[i][(A[0].length/2)] = midVal;
+            }
+        }
+        return A;
+    }
 }
