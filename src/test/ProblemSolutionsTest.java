@@ -115,5 +115,15 @@ public class ProblemSolutionsTest {
         assertEquals(true, tester.returnChange(new int[] {5,5,10}));
         assertEquals(false, tester.returnChange(new int[] {10, 20}));
     }
+    @Test
+    public void topKFrequent() throws Exception {
+        ProblemSolutions tester = new ProblemSolutions();
+        List<Integer> results = tester.topKFrequent(new int[] {3,2,291,3,5,54,2,2,1,1,6,6,7,1,1}, 3);
+        int[] expectedResults = new int[] {1,2,3};
+        assertTrue(expectedResults.length == results.size());
+        for(int i = 0; i < expectedResults.length; i++){
+            assertEquals(expectedResults[i],(int) results.get(i));
+        }
+    }
 
 }

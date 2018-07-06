@@ -1,7 +1,4 @@
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /*
 //Class to store the various methods implemented over the course of getting interview
@@ -190,6 +187,51 @@ public class ProblemSolutions {
         return possibleToReturnChange;
     }
 
-
-
+    //given an array of n integers and an int k, return the k most frequent elements
+    //https://leetcode.com/problems/top-k-frequent-elements/description/
+    //better than O(NlogN) complexity
+    //going to try doing it without implementing a max-heap
+    //beats 46% of solution runtimes, so really average.
+    public List<Integer> topKFrequent(int[] nums, int k){
+        NumCount[] mostFrequentArr = new NumCount[nums.length];
+        int lastUnfilledIndex = 0;
+        Map<Integer, NumCount> occuringNumsMap = new HashMap<>();
+        int maxCount = 0;
+        for(int i=0; i<nums.length; i++) {
+            if (!occuringNumsMap.containsKey(nums[i])) {
+                NumCount newVal = new NumCount(nums[i], 1, lastUnfilledIndex);
+                occuringNumsMap.put(nums[i], newVal);
+                mostFrequentArr[lastUnfilledIndex] = newVal;
+                lastUnfilledIndex++;
+            } else {
+                NumCount curVal = occuringNumsMap.get(nums[i]);
+                curVal.count++;
+                while(curVal.index != 0 && curVal.count > mostFrequentArr[curVal.index-1].count){
+                    int curIndex = curVal.index;
+                    int newIndex = curVal.index-1;
+                    NumCount temp = curVal;
+                    mostFrequentArr[curIndex] = mostFrequentArr[newIndex];
+                    mostFrequentArr[curIndex].index = curIndex;
+                    mostFrequentArr[newIndex] = curVal;
+                    curVal.index = newIndex;
+                }
+            }
+        }
+        List<Integer> results = new LinkedList<>();
+        for(int i = 0; i < k; i++)
+        {
+            results.add(mostFrequentArr[i].value);
+        }
+        return results;
+    }
+    class NumCount{
+        int index;
+        int count;
+        int value;
+        public NumCount(int value, int count, int index){
+            this.index = index;
+            this.count = count;
+            this.value = value;
+        }
+    }
 }
