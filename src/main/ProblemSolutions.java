@@ -234,4 +234,43 @@ public class ProblemSolutions {
             this.value = value;
         }
     }
+
+    //given an array of numbers, build a maximum binary tree in the following way:
+    //the max value becomes the root, the max value of the array slice to its left becomes
+    //the left child, and so forth..
+    //https://leetcode.com/problems/maximum-binary-tree/
+    //Beat 100% of solution runtimes
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
+    }
+
+    public TreeNode constructMaximumBinaryTree(int[] nums) {
+        return recursBuildTree(0, nums.length-1, nums);
+    }
+    private TreeNode recursBuildTree(int leftIndex, int rightIndex, int[] nums){
+        int maxVal = nums[leftIndex];
+        int maxValIndex = leftIndex;
+        if(leftIndex == rightIndex){
+            return new TreeNode(nums[leftIndex]);
+        }
+        else{
+            for(int i = leftIndex; i <= rightIndex; i++){
+                if(maxVal < nums[i]){
+                    maxVal = nums[i];
+                    maxValIndex = i;
+                }
+            }
+        }
+
+        TreeNode curNode = new TreeNode(maxVal);
+        curNode.left = maxValIndex == leftIndex ? null : recursBuildTree(leftIndex, maxValIndex-1, nums);
+        curNode.right = maxValIndex == rightIndex? null : recursBuildTree(maxValIndex+1, rightIndex, nums);
+        return curNode;
+    }
 }

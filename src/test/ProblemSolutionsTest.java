@@ -125,5 +125,18 @@ public class ProblemSolutionsTest {
             assertEquals(expectedResults[i],(int) results.get(i));
         }
     }
+    @Test
+    public void constructMaximumBinaryTree() throws Exception {
+        ProblemSolutions tester = new ProblemSolutions();
+        ProblemSolutions.TreeNode tn = tester.constructMaximumBinaryTree(new int[] {3,2,1,6,0,5});
+        assertTrue(tn.val == 6);
+        ProblemSolutions.TreeNode left = tn.left;
+        ProblemSolutions.TreeNode right = tn.right;
+        assertTrue(left.val == 3);
+        assertTrue(right.val == 5);
+        assertTrue(left.right.val == 2);
+        assertTrue(right.left.val == 0);
+        assertTrue(left.right.right.val == 1);
+    }
 
 }
