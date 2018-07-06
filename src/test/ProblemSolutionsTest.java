@@ -146,6 +146,11 @@ public class ProblemSolutionsTest {
         assertArrayEquals(new int[][] {{0}, {1}, {1}},
                 tester.flipAndInvertImage(new int[][] {{1}, {0}, {0}}));
     }
+    @Test
+    public void twoSum() throws Exception {
+        ProblemSolutions tester = new ProblemSolutions();
+        assertArrayEquals(new int[] {0,1}, tester.twoSum(new int[] {2, 7, 11, 15}, 9));
+    }
 
 
 

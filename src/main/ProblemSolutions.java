@@ -299,4 +299,26 @@ public class ProblemSolutions {
         }
         return A;
     }
+    //given an array of ints and a sum,
+    //return indices of ints that together produce the sum
+    //https://leetcode.com/problems/two-sum
+    //beats runtime of 98.38% of submissions
+    public int[] twoSum(int[] nums, int target) {
+        Map<Integer, Integer> valsAndIndeces = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (valsAndIndeces.containsKey(target - nums[i])) {
+                return new int[]{valsAndIndeces.get(target - nums[i]), i};
+            }
+            if (!valsAndIndeces.containsKey(nums[i])) {
+                valsAndIndeces.put(nums[i], i);
+            }
+        }
+        for (int j = 0; j < nums.length; j++) {
+            if (valsAndIndeces.containsKey(target - nums[j])) {
+                return new int[]{j, valsAndIndeces.get(target - nums[j])};
+            }
+        }
+        return new int[]{0, 0};
+    }
+
 }
