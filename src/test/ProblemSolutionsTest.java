@@ -151,6 +151,20 @@ public class ProblemSolutionsTest {
         ProblemSolutions tester = new ProblemSolutions();
         assertArrayEquals(new int[] {0,1}, tester.twoSum(new int[] {2, 7, 11, 15}, 9));
     }
+    @Test
+    public void addTwoNumbers() throws Exception {
+        ProblemSolutions tester = new ProblemSolutions();
+        ProblemSolutions.ListNode l1 = tester.new ListNode(2);
+        l1.next = tester.new ListNode(4);
+        l1.next.next = tester.new ListNode(3);
+        ProblemSolutions.ListNode l2 = tester.new ListNode(5);
+        l2.next = tester.new ListNode(6);
+        l2.next.next = tester.new ListNode(4);
+        ProblemSolutions.ListNode result = tester.addTwoNumbers(l1,l2);
+        assertTrue(result.val == 7);
+        assertTrue(result.next.val == 0);
+        assertTrue(result.next.next.val == 8);
+    }
 
 
 

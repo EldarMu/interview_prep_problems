@@ -321,4 +321,46 @@ public class ProblemSolutions {
         return new int[]{0, 0};
     }
 
+    //given two non-empty linked-lists representing two numbers
+    //with each digit as a separate node, in reverse order
+    //return the sum of the numbers
+    //https://leetcode.com/problems/add-two-numbers
+    //beat 99.74% of solution runtimes (for Java)
+    public class ListNode {
+        int val;
+        ListNode next;
+        ListNode(int x) { val = x; }
+    }
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        List<ListNode> listNodeLinkedList = new LinkedList<>();
+        boolean carryone = false;
+        ListNode curL1 = l1;
+        ListNode curL2 = l2;
+        while(curL1 != null || curL2 != null){
+            boolean firstListDone = curL1 == null;
+            boolean secondListDone = curL2 == null;
+            int initVal = 0;
+            if(!firstListDone && !secondListDone){
+                initVal = curL1.val + curL2.val;
+            }
+            else if(firstListDone && !secondListDone){
+                initVal = curL2.val;
+            }
+            else if(!firstListDone && secondListDone){
+                initVal = curL1.val;
+            }
+            initVal = carryone ? initVal + 1 : initVal;
+            carryone = initVal > 9;
+            initVal = initVal%10;
+            listNodeLinkedList.add(new ListNode(initVal));
+            curL1 = curL1 == null? null : curL1.next;
+            curL2 = curL2 == null? null : curL2.next;
+        }
+        if(carryone){listNodeLinkedList.add(new ListNode(1));}
+        for(int i = 0; i < listNodeLinkedList.size()-1; i++){
+            listNodeLinkedList.get(i).next = listNodeLinkedList.get(i+1);
+        }
+        return listNodeLinkedList.get(0);
+    }
+
 }
