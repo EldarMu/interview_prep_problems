@@ -1,20 +1,24 @@
-import java.util.LinkedList;
-import java.util.List;
+package com.eldar;
 
 //class for checking random language functionality
 //in this case seeing if there's a quicker way to solve the jewels and stones problem than with a hashmap
 public class ScratchPaper {
     public static void main(String[] args){
-        System.out.println((int)'z');
-        System.out.println((int)'a');
-        int[][] matrix = new int[20][30];
-        System.out.println("Number of rows = " + matrix.length);
-        System.out.println("Number of columns = " + matrix[0].length);
-        //ProblemSolutions tester = new ProblemSolutions();
+        Boolean b = false;
+        ScratchPaper tester = new ScratchPaper();
+        tester.testEncapsulationValueChange(b);
+        System.out.print(b + "");
+
+        //com.eldar.ProblemSolutions tester = new com.eldar.ProblemSolutions();
         //System.out.print(tester.maxReduceLenOfSubArray(new int[] {1}, 1));
         //System.out.println(tester.maxReduceLenOfSubArray(new int[] {77,19,35,10,-14}, 19));
         //System.out.println(tester.maxReduceLenOfSubArray(new int[] {56,-21,56,35}, 19));
 
+    }
+
+    public void testEncapsulationValueChange(Boolean b){
+        b = true;
+        return;
     }
 
     public int shortestSubarray(int[] A, int K) {

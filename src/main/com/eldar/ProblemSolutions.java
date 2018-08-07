@@ -1,3 +1,5 @@
+package com.eldar;
+
 import java.util.*;
 
 /*
@@ -114,7 +116,7 @@ public class ProblemSolutions {
     //ascii lowercase a is 97
     public int uniqueMorseCodeRepresentations(String[] words){
         int count = 0;
-        String[] morseCode = {".-","-...","-.-.","-..",".","..-.","--.","....","..",".---",
+        String[] morseCode = {".-","-...","-.-.","-..",".","..-.","--.","....", "..",".---",
                 "-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--",
                 "-..-","-.--","--.."};
         Map<String, Boolean> wordAlreadyOccured = new HashMap<>();

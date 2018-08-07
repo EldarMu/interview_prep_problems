@@ -1,3 +1,6 @@
+package com.eldar;
+
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.LinkedList;
@@ -5,9 +8,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by eldar on 7/2/2018.
- */
+
 public class ProblemSolutionsTest {
 
     @Test
@@ -79,41 +80,43 @@ public class ProblemSolutionsTest {
     @Test
     public void hashCountJewels() throws Exception {
         ProblemSolutions tester = new ProblemSolutions();
-        assertEquals(5, tester.hashCountJewels("aAbBZ", "afuinefdsnBdasZA"));
-        assertEquals(0, tester.hashCountJewels("", ""));
+        Assert.assertEquals(5, tester.hashCountJewels("aAbBZ", "afuinefdsnBdasZA"));
+        Assert.assertEquals(0, tester.hashCountJewels("", ""));
 
     }
 
     @Test
     public void asciiCountJewels() throws Exception {
         ProblemSolutions tester = new ProblemSolutions();
-        assertEquals(5, tester.asciiCountJewels("aAbBZ", "afuinefdsnBdasZA"));
-        assertEquals(0, tester.asciiCountJewels("", ""));
+        Assert.assertEquals(5, tester.asciiCountJewels("aAbBZ", "afuinefdsnBdasZA"));
+        Assert.assertEquals(0, tester.asciiCountJewels("", ""));
 
     }
     @Test
     public void maxIncreaseInSkyline() throws Exception {
         ProblemSolutions tester = new ProblemSolutions();
-        assertEquals(35, tester.maxIncreaseInSkyline(new int[][] {{3,0,8,4},{2,4,5,7},{9,2,6,3},{0,3,1,0}}));
+        Assert
+            .assertEquals(35, tester.maxIncreaseInSkyline(new int[][] {{3,0,8,4},{2,4,5,7},{9,2,6,3},{0,3,1,0}}));
     }
     @Test
     public void uniqueMorseCodeRepresentations() throws Exception {
         ProblemSolutions tester = new ProblemSolutions();
-        assertEquals(2, tester.uniqueMorseCodeRepresentations(new String[] {"gin", "zen", "gig", "msg"}));
+        Assert
+            .assertEquals(2, tester.uniqueMorseCodeRepresentations(new String[] {"gin", "zen", "gig", "msg"}));
 
     }
     @Test
     public void sumWithoutOperators() throws Exception {
         ProblemSolutions tester = new ProblemSolutions();
-        assertEquals(5, tester.sumWithoutOperators(4,1));
-        assertEquals(0, tester.sumWithoutOperators(0,0));
+        Assert.assertEquals(5, tester.sumWithoutOperators(4,1));
+        Assert.assertEquals(0, tester.sumWithoutOperators(0,0));
     }
     @Test
     public void returnChange() throws Exception {
         ProblemSolutions tester = new ProblemSolutions();
-        assertEquals(true, tester.returnChange(new int[] {5,5,5,10,20}));
-        assertEquals(true, tester.returnChange(new int[] {5,5,10}));
-        assertEquals(false, tester.returnChange(new int[] {10, 20}));
+        Assert.assertEquals(true, tester.returnChange(new int[] {5,5,5,10,20}));
+        Assert.assertEquals(true, tester.returnChange(new int[] {5,5,10}));
+        Assert.assertEquals(false, tester.returnChange(new int[] {10, 20}));
     }
     @Test
     public void topKFrequent() throws Exception {
@@ -141,15 +144,15 @@ public class ProblemSolutionsTest {
     @Test
     public void flipAndInvertImage() throws Exception {
         ProblemSolutions tester = new ProblemSolutions();
-        assertArrayEquals(new int[][] {{1,0,0}, {0,1,0}, {1,1,1}},
+        Assert.assertArrayEquals(new int[][] {{1,0,0}, {0,1,0}, {1,1,1}},
                 tester.flipAndInvertImage(new int[][] {{1,1,0},{1,0,1},{0,0,0}}));
-        assertArrayEquals(new int[][] {{0}, {1}, {1}},
+        Assert.assertArrayEquals(new int[][] {{0}, {1}, {1}},
                 tester.flipAndInvertImage(new int[][] {{1}, {0}, {0}}));
     }
     @Test
     public void twoSum() throws Exception {
         ProblemSolutions tester = new ProblemSolutions();
-        assertArrayEquals(new int[] {0,1}, tester.twoSum(new int[] {2, 7, 11, 15}, 9));
+        Assert.assertArrayEquals(new int[] {0,1}, tester.twoSum(new int[] {2, 7, 11, 15}, 9));
     }
     @Test
     public void addTwoNumbers() throws Exception {
