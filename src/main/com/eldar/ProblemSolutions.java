@@ -365,4 +365,36 @@ public class ProblemSolutions {
         return listNodeLinkedList.get(0);
     }
 
+  //Given a string, find the longest substring consisting of non-repeating elements
+  //
+  public int lengthOfLongestSubstring(String s) {
+    int result = 0;
+    int[] asciiVals = new int[127];
+    Arrays.fill(asciiVals, -1);
+    int startIndex = 0;
+    int substrEndIndex = 0;
+    int substrLen = 0;
+    while(substrEndIndex < s.length()){
+      char curChar = s.charAt(substrEndIndex);
+      if(asciiVals[curChar]==-1){
+        asciiVals[curChar] = substrEndIndex;
+        substrLen++;
+        result = substrLen > result ? substrLen : result;
+        substrEndIndex++;
+      }
+      else{
+        int repeatIndex = asciiVals[curChar];
+        for(int i = startIndex; i <= repeatIndex; i++){
+          asciiVals[s.charAt(i)] = -1;
+          substrLen--;
+        }
+        startIndex = repeatIndex+1;
+      }
+    }
+    return result;
+  }
+
+
+
+
 }

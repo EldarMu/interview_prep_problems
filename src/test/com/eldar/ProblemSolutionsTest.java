@@ -168,6 +168,13 @@ public class ProblemSolutionsTest {
         assertTrue(result.next.val == 0);
         assertTrue(result.next.next.val == 8);
     }
+    @Test
+  public void lengthOfLongestSubstring() throws Exception {
+      ProblemSolutions tester = new ProblemSolutions();
+      Assert.assertEquals(tester.lengthOfLongestSubstring("abcabcbb"), 3);
+      Assert.assertEquals(tester.lengthOfLongestSubstring(" "), 1);
+      Assert.assertEquals(tester.lengthOfLongestSubstring(""), 0);
+    }
 
 
 
