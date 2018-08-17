@@ -209,4 +209,12 @@ public class ProblemSolutionsTest {
       Assert.assertEquals(Integer.MIN_VALUE, tester.myAtoi("-20000000000000000000"));
       Assert.assertEquals(0, tester.myAtoi("  nope"));
     }
+
+    @Test
+  public void isNumAPalindrome() throws Exception {
+      ProblemSolutions tester = new ProblemSolutions();
+      Assert.assertTrue(tester.isNumAPalindrome(121));
+      Assert.assertFalse(tester.isNumAPalindrome(-121));
+      Assert.assertTrue(tester.isNumAPalindrome(0));
+    }
 }

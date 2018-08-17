@@ -559,4 +559,14 @@ public class ProblemSolutions {
     if(result<Integer.MIN_VALUE){return Integer.MIN_VALUE;}
     return (int)result;
   }
+
+  //determine if a number is a palindrome. Signs matter
+  //https://leetcode.com/problems/palindrome-number/
+  public boolean isNumAPalindrome(int x) {
+    String str = Integer.toString(x);
+    for(int i = 0; i < str.length()/2; i++){
+      if(str.charAt(i)!=str.charAt(str.length()-i-1)){return false;}
+    }
+    return true;
+  }
 }
