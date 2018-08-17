@@ -176,6 +176,15 @@ public class ProblemSolutionsTest {
       Assert.assertEquals(tester.lengthOfLongestSubstring(""), 0);
     }
 
+    @Test
+  public void longestPalindrome() throws Exception {
+      ProblemSolutions tester = new ProblemSolutions();
+      Assert.assertTrue("aaaa".equals(tester.longestPalindrome("aaaa")));
+      Assert.assertTrue("".equals(tester.longestPalindrome("")));
+      Assert.assertTrue("a".equals(tester.longestPalindrome("a")));
+      Assert.assertTrue("a".equals(tester.longestPalindrome("abcd")));
+    }
+
 
 
 }

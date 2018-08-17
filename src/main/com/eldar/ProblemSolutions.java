@@ -394,7 +394,58 @@ public class ProblemSolutions {
     return result;
   }
 
-
-
-
+  //find the longest palindrome in a string, return the palindrome
+  //approach seeks to find the potential centers, and work away from them to palindrome max
+  public String longestPalindrome(String s) {
+    if (s.length() < 2) {
+      return s;
+    }
+    int leftPalinIndex = 0;
+    int rightPalinIndex = 0;
+    int longestPalinLen = 0;
+    char[] strAsCharArr = s.toCharArray();
+    for (int i = 0; i < strAsCharArr.length; i++) {
+      if (i > 0 && i < strAsCharArr.length - 1) {
+        if (strAsCharArr[i-1] == strAsCharArr[i+1]) {
+          int tempPalinLen = 3;
+          int left = i-1;
+          int right = i+1;
+          while(left>0&&right<strAsCharArr.length-1){
+            if(strAsCharArr[left-1]==strAsCharArr[right+1]){
+              tempPalinLen+=2;
+              left--;
+              right++;
+            }
+            else{break;}
+          }
+          if(longestPalinLen<tempPalinLen){
+            longestPalinLen = tempPalinLen;
+            leftPalinIndex = left;
+            rightPalinIndex = right;
+          }
+        }
+      }
+      if(i<strAsCharArr.length-1){
+        if(strAsCharArr[i]==strAsCharArr[i+1]){
+          int tempPalinLen = 2;
+          int left = i;
+          int right = i+1;
+          while(left>0&&right<strAsCharArr.length-1){
+            if(strAsCharArr[left-1]==strAsCharArr[right+1]){
+              tempPalinLen += 2;
+              left--;
+              right++;
+            }
+            else{break;}
+          }
+          if(longestPalinLen < tempPalinLen){
+            longestPalinLen = tempPalinLen;
+            leftPalinIndex = left;
+            rightPalinIndex = right;
+          }
+        }
+      }
+    }
+    return s.substring(leftPalinIndex, rightPalinIndex+1);
+  }
 }
