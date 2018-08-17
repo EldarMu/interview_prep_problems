@@ -490,6 +490,8 @@ public class ProblemSolutions {
   //given a signed integer, return it with the digits reversed (leading zeros removed, sign kept)
   //if it overflows return 0
   //https://leetcode.com/problems/reverse-integer/description/
+  //like a regex problem, this one is defined by the edge cases of what technically counts as
+  //a valid way to write a number.
   public int integerReverse(int x) {
     String intAsChArr = Integer.toString(x);
     boolean negative = intAsChArr.charAt(0) == '-';
@@ -504,5 +506,57 @@ public class ProblemSolutions {
     long absResult = Long.parseLong(new String(reverseChArr));
     if(absResult>Integer.MAX_VALUE){ return 0;}
     return negative ? (int)-absResult : (int) absResult;
+  }
+  //parse an int from a string that may contain words or other noise;
+  //
+  public int myAtoi(String str) {
+    if(str.length()==0){return 0;}
+    int startOfNum = 0;
+    int endOfNum = 0;
+    boolean startFound = false;
+    boolean endFound = false;
+    int indexPtr = 0;
+    boolean initialSignFound = false;
+    boolean initialMinus = false;
+    while(!startFound&&indexPtr<str.length()) {
+      char ch = str.charAt(indexPtr);
+      if((ch=='-'||ch=='+')&&indexPtr+1<str.length()&&Character.isDigit(str.charAt(indexPtr+1))){
+        if(ch=='-'){initialMinus=true;}
+        startFound = true;
+        startOfNum = indexPtr;
+        initialSignFound = true;
+      }
+      else if(!Character.isDigit(ch)&&!(ch==' ')){return 0;}
+      else if(Character.isDigit(str.charAt(indexPtr))){
+        startFound = true;
+        startOfNum = indexPtr;
+      }
+      else{
+        indexPtr++;
+        startOfNum++;
+      }
+    }
+    endOfNum = initialSignFound? ++indexPtr : indexPtr;
+    while(!endFound&&indexPtr<str.length()){
+      char ch = str.charAt(indexPtr);
+      if(Character.isDigit(ch)){
+        indexPtr++;
+        endOfNum++;
+      }
+      else{
+        endFound = true;
+      }
+    }
+    if(startOfNum>=endOfNum){return 0;}
+    long result = Long.MAX_VALUE;
+    try{
+      result = Long.parseLong(str.substring(startOfNum, endOfNum));
+    }
+    catch(Exception e){
+      return initialMinus? Integer.MIN_VALUE: Integer.MAX_VALUE;
+    }
+    if(result>Integer.MAX_VALUE){return Integer.MAX_VALUE;}
+    if(result<Integer.MIN_VALUE){return Integer.MIN_VALUE;}
+    return (int)result;
   }
 }

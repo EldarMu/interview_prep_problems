@@ -200,4 +200,13 @@ public class ProblemSolutionsTest {
       Assert.assertEquals(23445, tester.integerReverse(544320000));
       Assert.assertEquals(0, tester.integerReverse(-2147483648));
     }
+
+    @Test
+  public void myAtoi() throws Exception {
+      ProblemSolutions tester = new ProblemSolutions();
+      Assert.assertEquals(-42, tester.myAtoi("   -42"));
+      Assert.assertEquals(Integer.MAX_VALUE, tester.myAtoi("20000000000000000000"));
+      Assert.assertEquals(Integer.MIN_VALUE, tester.myAtoi("-20000000000000000000"));
+      Assert.assertEquals(0, tester.myAtoi("  nope"));
+    }
 }
