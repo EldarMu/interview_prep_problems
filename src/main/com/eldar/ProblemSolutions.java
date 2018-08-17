@@ -448,4 +448,43 @@ public class ProblemSolutions {
     }
     return s.substring(leftPalinIndex, rightPalinIndex+1);
   }
+
+  //convert zig-zag text (string, with number of rows it's spread on)
+  //into the resulting flat string with rows read top to bottom
+  //https://leetcode.com/problems/zigzag-conversion/description/
+  //text first goes down, with 1 per row, then up diagonally, and repeat
+  public String zigZagConvert(String s, int numRows) {
+    if(numRows==1){return s;}
+    List<StringBuilder> rowStrings = new ArrayList<>(numRows);
+    char[] charVerOfStr = s.toCharArray();
+    for(int i = 0; i < numRows; i++){
+      rowStrings.add(i, new StringBuilder(""));
+    }
+    boolean goingDown = false;
+    boolean goingUpDiagonally = false;
+    int rowPtr = 0;
+    for(int j = 0; j < charVerOfStr.length; j++){
+      if(rowPtr == 0){
+        goingDown = true;
+        goingUpDiagonally = false;
+      }
+      else if(rowPtr == numRows-1){
+        goingDown = false;
+        goingUpDiagonally = true;
+      }
+      if(goingDown){
+        rowStrings.get(rowPtr).append(charVerOfStr[j]);
+        rowPtr++;
+      }
+      else if(goingUpDiagonally){
+        rowStrings.get(rowPtr).append(charVerOfStr[j]);
+        rowPtr--;
+      }
+    }
+    StringBuilder result = new StringBuilder("");
+    for(int k = 0; k < rowStrings.size(); k++){
+      result.append(rowStrings.get(k));
+    }
+    return result.toString();
+  }
 }

@@ -185,6 +185,14 @@ public class ProblemSolutionsTest {
       Assert.assertTrue("a".equals(tester.longestPalindrome("abcd")));
     }
 
+    @Test
+  public void zigZagConvert() throws Exception{
+      ProblemSolutions tester = new ProblemSolutions();
+      Assert.assertTrue("PAHNAPLSIIGYIR".equals(tester.zigZagConvert("PAYPALISHIRING", 3)));
+      Assert.assertTrue("".equals(tester.zigZagConvert("", 5)));
+      Assert.assertTrue("abcd".equals(tester.zigZagConvert("abcd", 1)));
+    }
+
 
 
 }
