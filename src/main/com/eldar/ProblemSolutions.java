@@ -279,24 +279,19 @@ public class ProblemSolutions {
     //given a two dimensional matrix of ones and zeros, flip it horizontally, then invert the values
     //https://leetcode.com/problems/flipping-an-image
     //it's just a test of understanding java 2d matrices
-    //runtime better than 97.4% of submissions
+    //runtime better than 100% of submissions
     public int[][] flipAndInvertImage(int[][] A) {
-        int leftVal = 0;
-        int rightVal = 0;
-        int midVal = 0;
+        int columnLen = A[0].length;
+        boolean oddColumnNum = columnLen%2 == 1;
+        int tmp = 0;
         for(int i = 0; i < A.length; i++){
-            for(int j = 0; j < (A[0].length/2); j++){
-                leftVal = A[i][j];
-                rightVal = A[i][A[0].length-1-j];
-                leftVal = leftVal == 0 ? 1 : 0;
-                rightVal = rightVal == 0 ? 1 : 0;
-                A[i][j] = rightVal;
-                A[i][A[0].length-1-j] = leftVal;
+            for(int j = 0; j < (columnLen/2); j++){
+                tmp = A[i][j];
+                A[i][j] = 1^A[i][columnLen-1-j];
+                A[i][columnLen-1-j] = 1^tmp;
             }
-            if(A[0].length%2 == 1){
-                midVal = A[i][(A[0].length/2)];
-                midVal = midVal == 0 ? 1 : 0;
-                A[i][(A[0].length/2)] = midVal;
+            if(oddColumnNum){
+                A[i][(columnLen/2)] = 1^A[i][(columnLen/2)];
             }
         }
         return A;
