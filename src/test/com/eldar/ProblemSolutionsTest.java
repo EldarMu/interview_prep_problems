@@ -193,6 +193,11 @@ public class ProblemSolutionsTest {
       Assert.assertTrue("abcd".equals(tester.zigZagConvert("abcd", 1)));
     }
 
-
-
+    @Test
+  public void integerReverse() throws Exception {
+      ProblemSolutions tester = new ProblemSolutions();
+      Assert.assertEquals(123, tester.integerReverse(321));
+      Assert.assertEquals(23445, tester.integerReverse(544320000));
+      Assert.assertEquals(0, tester.integerReverse(-2147483648));
+    }
 }

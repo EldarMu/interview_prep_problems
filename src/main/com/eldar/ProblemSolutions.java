@@ -487,4 +487,22 @@ public class ProblemSolutions {
     }
     return result.toString();
   }
+  //given a signed integer, return it with the digits reversed (leading zeros removed, sign kept)
+  //if it overflows return 0
+  //https://leetcode.com/problems/reverse-integer/description/
+  public int integerReverse(int x) {
+    String intAsChArr = Integer.toString(x);
+    boolean negative = intAsChArr.charAt(0) == '-';
+    int endVal = negative ? 1 : 0;
+    int startVal = intAsChArr.length()-1;
+    char[] reverseChArr = new char[startVal-endVal+1];
+    int secondaryIndex = 0;
+    for(int j = startVal; j >= endVal; j--){
+      reverseChArr[secondaryIndex] = intAsChArr.charAt(j);
+      secondaryIndex++;
+    }
+    long absResult = Long.parseLong(new String(reverseChArr));
+    if(absResult>Integer.MAX_VALUE){ return 0;}
+    return negative ? (int)-absResult : (int) absResult;
+  }
 }
