@@ -564,4 +564,27 @@ public class ProblemSolutions {
     }
     return true;
   }
+  //given an array of integers, representing heights of lines, with their distance from each other
+  //in the array representing length of a side of a hypothetical rectangle they form
+  //return the maximum area possible between any two heights in the array.
+  //the shorter height defines the height of the rectangle
+  //https://leetcode.com/problems/container-with-most-water/description/
+  //solution faster than 92% of submissions
+  public int maxArea(int[] height) {
+    int curMaxArea = 0;
+    int leftPtr = 0;
+    int rightPtr = height.length-1;
+    while(leftPtr!=rightPtr){
+      boolean leftHeightSmaller = height[leftPtr] < height[rightPtr];
+      int tmpArea = leftHeightSmaller ? height[leftPtr]*(rightPtr-leftPtr) : height[rightPtr] * (rightPtr-leftPtr);
+      if(tmpArea > curMaxArea){curMaxArea = tmpArea;}
+      if(leftHeightSmaller){
+        leftPtr++;
+      }
+      else{
+        rightPtr--;
+      }
+    }
+    return curMaxArea;
+  }
 }

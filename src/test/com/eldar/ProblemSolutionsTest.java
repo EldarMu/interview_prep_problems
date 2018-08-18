@@ -217,4 +217,12 @@ public class ProblemSolutionsTest {
       Assert.assertFalse(tester.isNumAPalindrome(-121));
       Assert.assertTrue(tester.isNumAPalindrome(0));
     }
+
+    @Test
+  public void maxArea() throws Exception {
+      ProblemSolutions tester = new ProblemSolutions();
+      Assert.assertEquals(49, tester.maxArea(new int[] {1,8,6,2,5,4,8,3,7}));
+      Assert.assertEquals(0, tester.maxArea(new int[] {0,0}));
+      Assert.assertEquals(2000, tester.maxArea(new int[] {500, 10, 0, 50000, 501}));
+    }
 }
