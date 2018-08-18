@@ -587,4 +587,24 @@ public class ProblemSolutions {
     }
     return curMaxArea;
   }
+
+  //find longest common prefix in a string array
+  //return empty string if no common prefix
+  //https://leetcode.com/problems/longest-common-prefix/description/
+  public String longestCommonPrefix(String[] strs) {
+    if(strs.length<1){return "";} //in reality ought to throw an IllegalArgumentException for empty array
+    int maxPotentialPrefixLen = strs[0].length();
+    for(int i = 1; i < strs.length; i++){
+      maxPotentialPrefixLen = maxPotentialPrefixLen > strs[i].length()? strs[i].length() : maxPotentialPrefixLen;
+      int counter = maxPotentialPrefixLen-1;
+      while(counter>=0){
+        if(strs[0].charAt(counter)!=strs[i].charAt(counter)){
+          maxPotentialPrefixLen = counter;
+        }
+        counter--;
+      }
+      if(maxPotentialPrefixLen==0){return "";}
+    }
+    return strs[0].substring(0, maxPotentialPrefixLen);
+  }
 }

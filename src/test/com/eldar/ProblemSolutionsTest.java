@@ -225,4 +225,12 @@ public class ProblemSolutionsTest {
       Assert.assertEquals(0, tester.maxArea(new int[] {0,0}));
       Assert.assertEquals(2000, tester.maxArea(new int[] {500, 10, 0, 50000, 501}));
     }
+
+    @Test
+  public void longestCommonPrefix() throws Exception {
+      ProblemSolutions tester = new ProblemSolutions();
+      Assert.assertTrue("".equals(tester.longestCommonPrefix(new String[] {"cba", "abc"})));
+      Assert.assertTrue("co".equals(tester.longestCommonPrefix((new String[] {"cows", "company", "cobweb"}))));
+      Assert.assertTrue("".equals(tester.longestCommonPrefix(new String[] {""})));
+    }
 }
