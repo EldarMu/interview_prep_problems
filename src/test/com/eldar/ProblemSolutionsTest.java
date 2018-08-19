@@ -233,4 +233,15 @@ public class ProblemSolutionsTest {
       Assert.assertTrue("co".equals(tester.longestCommonPrefix((new String[] {"cows", "company", "cobweb"}))));
       Assert.assertTrue("".equals(tester.longestCommonPrefix(new String[] {""})));
     }
+
+    @Test
+  public void threeSum() throws Exception {
+      ProblemSolutions tester = new ProblemSolutions();
+      List<List<Integer>> results = tester.threeSum(new int[] {1,-1,-1,0});
+      int[] resultToArr = new int[] {results.get(0).get(0), results.get(0).get(1), results.get(0).get(2)};
+      Assert.assertArrayEquals(new int[] {-1, 0, 1}, resultToArr);
+      results = tester.threeSum(new int[] {0,-4,-1,-4,-2,-3,2});
+      resultToArr = new int[] {results.get(0).get(0), results.get(0).get(1), results.get(0).get(2)};
+      Assert.assertArrayEquals(new int[] {-2, 0, 2}, resultToArr);
+    }
 }

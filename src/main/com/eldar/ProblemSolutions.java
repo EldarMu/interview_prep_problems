@@ -607,4 +607,41 @@ public class ProblemSolutions {
     }
     return strs[0].substring(0, maxPotentialPrefixLen);
   }
+
+  //3sum problem
+  //given an array of ints and a target value, find all unique combinations of values
+  //such that their sum is zero
+  //no recombinations of triplets already entered into the result list
+  //https://leetcode.com/problems/3sum/description/
+  //just a bog standard two pointer two-sum solution.
+  public List<List<Integer>> threeSum(int[] nums) {
+    Arrays.sort(nums);
+    List<List<Integer>> results = new LinkedList<>();
+    for(int i = 0; i < nums.length-2; i++){
+      if(i==0||nums[i]!=nums[i-1]){
+        int leftPtr = i+1;
+        int rightPtr = nums.length-1;
+        int soughtVal = 0 - nums[i];
+        while(leftPtr < rightPtr){
+          if(nums[leftPtr]+nums[rightPtr]==soughtVal){
+            List<Integer> tmp = new LinkedList<>();
+            tmp.add(nums[i]);
+            tmp.add(nums[leftPtr]);
+            tmp.add(nums[rightPtr]);
+            results.add(tmp);
+            while(leftPtr < rightPtr && nums[leftPtr]==nums[leftPtr+1]){leftPtr++;}
+            while(leftPtr < rightPtr && nums[rightPtr]==nums[rightPtr-1]){rightPtr--;}
+            leftPtr++;
+            rightPtr--;
+          } else if(nums[leftPtr]+nums[rightPtr] < soughtVal){
+            leftPtr++;
+          }
+          else{
+            rightPtr--;
+          }
+        }
+      }
+    }
+    return results;
+  }
 }
