@@ -1,5 +1,6 @@
 package com.eldar;
 
+import com.eldar.ProblemSolutions.ListNode;
 import java.util.Arrays;
 import org.junit.Assert;
 import org.junit.Test;
@@ -260,5 +261,30 @@ public class ProblemSolutionsTest {
       Assert.assertTrue(results.remove(0).equals("a"));
       Assert.assertTrue(results.remove(0).equals("b"));
       Assert.assertTrue(results.remove(0).equals("c"));
+    }
+
+    @Test
+  public void removeNthFromEnd() throws Exception {
+      ProblemSolutions tester = new ProblemSolutions();
+      ProblemSolutions.ListNode head = tester.new ListNode(1);
+
+      Assert.assertNull(tester.removeNthFromEnd(head, 1));
+
+      ProblemSolutions.ListNode tail = tester.new ListNode(2);
+      head.next = tail;
+      ProblemSolutions.ListNode tmp = tester.new ListNode(3);
+      tail.next = tmp;
+      tail = tmp;
+      tmp = tester.new ListNode(4);
+      tail.next = tmp;
+      tail = tmp;
+      tmp = tester.new ListNode(5);
+      tail.next = tmp;
+      tmp = tester.removeNthFromEnd(head, 2);
+      int[] expectedNodeVals = new int[] {1,2,3,5};
+      for(int i = 0; i < expectedNodeVals.length; i++){
+        Assert.assertEquals(expectedNodeVals[i], tmp.val);
+        tmp = tmp.next;
+      }
     }
 }

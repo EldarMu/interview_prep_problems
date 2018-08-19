@@ -672,6 +672,7 @@ public class ProblemSolutions {
   //given a string consisting of digits 2-9, with each digit corresponding to up to 4 letters
   //(as one might see on a home phone), return an array of strings consisting of all possible
   //letter combinations resulting from the digits
+  //https://leetcode.com/problems/letter-combinations-of-a-phone-number/
   public List<String> letterCombinations(String digits) {
     if(digits.length()==0) {
       return new LinkedList<>();
@@ -715,5 +716,29 @@ public class ProblemSolutions {
       results.add(new String(resultsAsChArr[k]));
     }
     return results;
+  }
+
+
+  //remove nth from the end list node in linear time
+  //given a singly-linked list (e.g. the head of a linked list)
+  //https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/
+  //beats 99.9% of java submissions.
+  public ListNode removeNthFromEnd(ListNode head, int n) {
+    if(head.next==null){return null;}
+    ListNode pointerToNth = head;
+    ListNode curNode = head;
+    int iterator = 0;
+    while(curNode.next!=null){
+      curNode = curNode.next;
+      iterator++;
+      if(iterator > n){
+        pointerToNth = pointerToNth.next;
+      }
+    }
+    //all of that works with the premise that the curNode has a chance to move at least once
+    //if the ith element is the head, just return head.next
+    if(iterator+1==n){return head.next;}
+    pointerToNth.next = pointerToNth.next.next;
+    return head;
   }
 }
