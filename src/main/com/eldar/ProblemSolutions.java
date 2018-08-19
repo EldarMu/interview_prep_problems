@@ -669,5 +669,51 @@ public class ProblemSolutions {
     }
   }
 
-  
+  //given a string consisting of digits 2-9, with each digit corresponding to up to 4 letters
+  //(as one might see on a home phone), return an array of strings consisting of all possible
+  //letter combinations resulting from the digits
+  public List<String> letterCombinations(String digits) {
+    if(digits.length()==0) {
+      return new LinkedList<>();
+    }
+    Map<Character,String> combinations = new HashMap<>();
+    combinations.put('2', "abc");
+    combinations.put('3', "def");
+    combinations.put('4', "ghi");
+    combinations.put('5', "jkl");
+    combinations.put('6', "mno");
+    combinations.put('7', "pqrs");
+    combinations.put('8', "tuv");
+    combinations.put('9', "wxyz");
+
+    int totalStringNum = 1;
+    for(int i = 0; i < digits.length(); i++){
+      totalStringNum *= combinations.get(digits.charAt(i)).length();
+    }
+
+    char[][] resultsAsChArr = new char[totalStringNum][digits.length()];
+    int digitsIndex = 0;
+    while(digitsIndex < digits.length()){
+      char tmpChar = digits.charAt(digitsIndex);
+      String tmpStr = combinations.get(tmpChar);
+      int repeatsPerChar = totalStringNum/tmpStr.length();
+      int letterIndex = 0;
+      int letterRepeatCount = 0;
+      for(int i = 0; i < resultsAsChArr.length; i++){
+        resultsAsChArr[i][digitsIndex] = tmpStr.charAt(letterIndex);
+        letterRepeatCount++;
+        if(letterRepeatCount==repeatsPerChar){
+          letterRepeatCount = 0;
+          letterIndex = letterIndex+1==tmpStr.length()? 0 : letterIndex+1;
+        }
+      }
+      totalStringNum/=tmpStr.length();
+      digitsIndex++;
+    }
+    List<String> results = new LinkedList<>();
+    for(int k = 0; k < resultsAsChArr.length; k++){
+      results.add(new String(resultsAsChArr[k]));
+    }
+    return results;
+  }
 }

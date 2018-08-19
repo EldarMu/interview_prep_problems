@@ -252,4 +252,13 @@ public class ProblemSolutionsTest {
       Assert.assertEquals(5.0, tester.medianOfIntStream(Arrays.stream(new Integer[] {0, 6, 5, 7, 2})), 0.00001);
       Assert.assertEquals(5.5, tester.medianOfIntStream(Arrays.stream(new Integer[] {6, 0, 6, 5, 7, 2})), 0.00001);
     }
+
+    @Test
+  public void letterCombinations() throws Exception {
+      ProblemSolutions tester = new ProblemSolutions();
+      List<String> results = tester.letterCombinations("2");
+      Assert.assertTrue(results.remove(0).equals("a"));
+      Assert.assertTrue(results.remove(0).equals("b"));
+      Assert.assertTrue(results.remove(0).equals("c"));
+    }
 }
