@@ -1,5 +1,6 @@
 package com.eldar;
 
+import java.util.Arrays;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -243,5 +244,12 @@ public class ProblemSolutionsTest {
       results = tester.threeSum(new int[] {0,-4,-1,-4,-2,-3,2});
       resultToArr = new int[] {results.get(0).get(0), results.get(0).get(1), results.get(0).get(2)};
       Assert.assertArrayEquals(new int[] {-2, 0, 2}, resultToArr);
+    }
+
+    @Test
+  public void medianOfIntStream() throws Exception {
+      ProblemSolutions tester = new ProblemSolutions();
+      Assert.assertEquals(5.0, tester.medianOfIntStream(Arrays.stream(new Integer[] {0, 6, 5, 7, 2})), 0.00001);
+      Assert.assertEquals(5.5, tester.medianOfIntStream(Arrays.stream(new Integer[] {6, 0, 6, 5, 7, 2})), 0.00001);
     }
 }

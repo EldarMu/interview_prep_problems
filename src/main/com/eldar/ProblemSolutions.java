@@ -1,6 +1,7 @@
 package com.eldar;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 /*
 //Class to store the various methods implemented over the course of getting interview
@@ -644,4 +645,29 @@ public class ProblemSolutions {
     }
     return results;
   }
+
+  //given a stream of integers, calculate the median value
+  public double medianOfIntStream(Stream<Integer> intStream){
+    Queue<Integer> minHeap = new PriorityQueue<>();
+    Queue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
+    intStream.forEach(x -> updateMedian(x, minHeap, maxHeap));
+    if(minHeap.size()==maxHeap.size()){
+      return (double)(minHeap.peek()+maxHeap.peek())/2.0;
+    }
+    else if (minHeap.size()>maxHeap.size()){
+      return (double)minHeap.peek();
+    }
+    else{
+      return (double)maxHeap.peek();
+    }
+  }
+  private void updateMedian(int x, Queue<Integer> minHeap, Queue<Integer> maxHeap){
+    minHeap.offer(x);
+    maxHeap.offer(minHeap.poll());
+    if(maxHeap.size()!=minHeap.size()){
+      minHeap.offer(maxHeap.poll());
+    }
+  }
+
+  
 }
