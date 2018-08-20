@@ -287,4 +287,11 @@ public class ProblemSolutionsTest {
         tmp = tmp.next;
       }
     }
+
+    @Test
+  public void isValidParentheses() throws Exception {
+      ProblemSolutions tester = new ProblemSolutions();
+      Assert.assertTrue(tester.isValidParentheses("(){}[]"));
+      Assert.assertTrue(tester.isValidParentheses("(([{{}}]()[]))"));
+    }
 }

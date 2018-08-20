@@ -741,4 +741,36 @@ public class ProblemSolutions {
     pointerToNth.next = pointerToNth.next.next;
     return head;
   }
+
+  //given a string of parentheses (){}[], check if the string is valid
+  //meaning parentheses of the same type are closed before closing parentheses of another
+  //type are opened and every opened parenthesis is closed.
+  //initial solution used stack data structure, found a much more elegant idea using
+  //an array as a stack and case switch. kudos to mario.macias.upc on leetcode
+  //beats 96% of solutions
+  public boolean isValidParentheses(String s) {
+    char[] stack = new char[s.length()];
+    int ptr = 0;
+    boolean pointerAtZero = true;
+    for(char c : s.toCharArray()){
+      pointerAtZero = ptr==0;
+      switch(c){
+        case '(':
+        case '{':
+        case '[':
+          stack[ptr++] = c;
+          break;
+        case ')':
+          if(pointerAtZero||stack[--ptr]!='('){return false;}
+          break;
+        case '}':
+          if(pointerAtZero||stack[--ptr]!='{'){return false;}
+          break;
+        case ']':
+          if(pointerAtZero||stack[--ptr]!='['){return false;}
+          break;
+      }
+    }
+    return ptr==0;
+  }
 }
