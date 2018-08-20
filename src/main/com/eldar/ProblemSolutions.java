@@ -773,4 +773,70 @@ public class ProblemSolutions {
     }
     return ptr==0;
   }
+
+  //merge k sorted lists of listnodes (given head nodes in an array)
+  //https://leetcode.com/problems/merge-k-sorted-lists/description/
+  //took three revisions, but it beats 70% of java submissions
+  public ListNode mergeKLists(ListNode[] lists) {
+    if(lists.length==0){return null;} //really should thrown InvalidArgumentException
+    int listArrMax = lists.length;
+    int listIndex = 0;
+    int firstListFoundIndex = 0;
+    boolean firstListFound = false;
+    ListNode currentList = null;
+    while(listArrMax>1){
+      for(int i = 0; i < listArrMax; i++){
+        if(lists[i]==null){continue;}
+        else if(firstListFound){
+          lists[listIndex++]= merge2Lists(lists[firstListFoundIndex], lists[i]);
+          firstListFound = false;
+        }
+        else{
+          firstListFoundIndex = i;
+          firstListFound = true;
+        }
+      }
+      if(firstListFound){
+        lists[listIndex++] = lists[firstListFoundIndex];
+      }
+      firstListFound = false;
+      firstListFoundIndex = 0;
+      listArrMax = listIndex;
+      listIndex = 0;
+    }
+    return lists[0];
+  }
+  private ListNode merge2Lists(ListNode l1, ListNode l2){
+    ListNode head = null;
+    ListNode cur = null;
+    if(l1.val < l2.val){
+      head = l1;
+      cur = head;
+      l1 = l1.next;
+    }
+    else{
+      head = l2;
+      cur = head;
+      l2 = l2.next;
+    }
+    while(l1!=null&&l2!=null){
+      if(l1.val < l2.val){
+        cur.next = l1;
+        cur = l1;
+        l1 = l1.next;
+      }
+      else{
+        cur.next = l2;
+        cur = l2;
+        l2 = l2.next;
+      }
+    }
+    if(l1==null){
+      cur.next = l2;
+    }
+    if(l2==null){
+      cur.next = l1;
+    }
+    return head;
+  }
 }

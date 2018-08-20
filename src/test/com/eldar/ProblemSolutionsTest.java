@@ -294,4 +294,29 @@ public class ProblemSolutionsTest {
       Assert.assertTrue(tester.isValidParentheses("(){}[]"));
       Assert.assertTrue(tester.isValidParentheses("(([{{}}]()[]))"));
     }
+
+    @Test
+    //[[1,4,5],[1,3,4],[2,6]]
+  public void mergeKLists() throws Exception {
+      ProblemSolutions tester = new ProblemSolutions();
+      Assert.assertNull(tester.mergeKLists(new ListNode[1]));
+      ProblemSolutions.ListNode head1= tester.new ListNode(1);
+      head1.next = tester.new ListNode(4);
+      head1.next.next = tester.new ListNode(5);
+      ProblemSolutions.ListNode head2 = tester.new ListNode(1);
+      head2.next = tester.new ListNode(3);
+      head2.next.next = tester.new ListNode(4);
+      ProblemSolutions.ListNode head3 = tester.new ListNode(2);
+      head3.next = tester.new ListNode(6);
+      ProblemSolutions.ListNode[] listOfNodes = new ListNode[3];
+      listOfNodes[0] = head1;
+      listOfNodes[1] = head2;
+      listOfNodes[2] = head3;
+      ProblemSolutions.ListNode result =  tester.mergeKLists(listOfNodes);
+      int[] expectedResults = new int[] {1,1,2,3,4,4,5,6};
+      for(int i = 0; i < expectedResults.length; i++){
+        Assert.assertEquals(expectedResults[i], result.val);
+        result = result.next;
+      }
+    }
 }
