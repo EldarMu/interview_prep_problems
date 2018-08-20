@@ -807,6 +807,9 @@ public class ProblemSolutions {
     return lists[0];
   }
   private ListNode merge2Lists(ListNode l1, ListNode l2){
+    if(l1==null&&l2==null){return null;}
+    else if(l1==null){return l2;}
+    else if(l2==null){return l1;}
     ListNode head = null;
     ListNode cur = null;
     if(l1.val < l2.val){
@@ -838,5 +841,24 @@ public class ProblemSolutions {
       cur.next = l1;
     }
     return head;
+  }
+
+  //given a linked list, for every two nodes, swap their positions
+  //https://leetcode.com/problems/swap-nodes-in-pairs/description/
+  //implemented solution as per approach taken by tusizi on leetcode
+  //beats 100% of submissions.
+  public ListNode swapPairs(ListNode head) {
+    ListNode tmpHead = new ListNode(0);
+    tmpHead.next = head;
+    ListNode cur = tmpHead;
+    while(cur.next!=null&&cur.next.next!=null){
+      ListNode first = cur.next;
+      ListNode second = first.next;
+      cur.next = second;
+      first.next = second.next;
+      second.next = first;
+      cur = cur.next.next;
+    }
+    return tmpHead.next;
   }
 }

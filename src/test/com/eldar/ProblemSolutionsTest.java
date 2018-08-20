@@ -319,4 +319,21 @@ public class ProblemSolutionsTest {
         result = result.next;
       }
     }
+
+    @Test
+    //1,2,3,4,5
+  public void swapPairs() throws Exception {
+      ProblemSolutions tester = new ProblemSolutions();
+      ProblemSolutions.ListNode head = tester.new ListNode(1);
+      head.next = tester.new ListNode(2);
+      head.next.next = tester.new ListNode(3);
+      head.next.next.next = tester.new ListNode(4);
+      head.next.next.next.next = tester.new ListNode(5);
+      ListNode results = tester.swapPairs(head);
+      int[] expectedResults = new int[] {2,1,4,3,5};
+      for(int i = 0; i < expectedResults.length; i++){
+        Assert.assertEquals(expectedResults[i], results.val);
+        results = results.next;
+      }
+    }
 }
