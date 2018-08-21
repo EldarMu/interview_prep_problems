@@ -336,4 +336,11 @@ public class ProblemSolutionsTest {
         results = results.next;
       }
     }
+    @Test
+  public void removeDuplicates() throws Exception {
+      ProblemSolutions tester = new ProblemSolutions();
+      Assert.assertEquals(3, tester.removeDuplicates(new int[] {1,1,1,3,3,3,4,4}));
+      Assert.assertEquals(1, tester.removeDuplicates(new int[] {1}));
+      Assert.assertEquals(0, tester.removeDuplicates(new int[0]));
+    }
 }

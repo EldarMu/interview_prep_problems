@@ -861,4 +861,26 @@ public class ProblemSolutions {
     }
     return tmpHead.next;
   }
+
+  //given an array potentially containing duplicates
+  //modify the array such that, if it has n unique elements,
+  //the first n positions of the array are occupied by them, in order of appearance
+  //then return n
+  //beats 100% of java submissions
+  public int removeDuplicates(int[] nums) {
+    if(nums.length<2){return nums.length;}
+    int duplWriteIndex = 1;
+    //given that we know nothing of the range of values
+    //and thus can't simply use a new array's index positions
+    //we choose to use a hashmap
+    for(int i = 1; i < nums.length; i++){
+      if(!(nums[i]==nums[i-1])){
+        nums[duplWriteIndex]=nums[i];
+        duplWriteIndex++;
+      }
+    }
+    return duplWriteIndex;
+  }
+
+
 }
