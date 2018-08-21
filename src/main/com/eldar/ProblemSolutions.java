@@ -882,5 +882,29 @@ public class ProblemSolutions {
     return duplWriteIndex;
   }
 
+  //return all combinations of provided integers that sum to target number
+  //https://leetcode.com/problems/combination-sum/
+  //bog-standard recursive solution
+  //beats 98% of solutions, seemingly because there's no sorting and ArrayList instead of LinkedList
+  public List<List<Integer>> combinationSum(int[] candidates, int target) {
+    List<List<Integer>> results = new LinkedList<>();
+    combineInts(candidates, new ArrayList<>(), results, target, 0);
+    return results;
+  }
+  private void combineInts(int[] candidates, List<Integer> curList, List<List<Integer>> fullList, int target, int startPos){
+    if(target==0){
+      fullList.add(new ArrayList<>(curList));
+    }
+    else if(target<0){return;}
+    else{
+      for(int i = startPos; i < candidates.length; i++){
+        curList.add(candidates[i]);
+        combineInts(candidates, curList, fullList, target-candidates[i], i);
+        curList.remove(curList.size()-1);
+      }
+    }
+    return;
+  }
+
 
 }

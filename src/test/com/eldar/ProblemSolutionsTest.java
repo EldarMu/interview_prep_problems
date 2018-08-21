@@ -343,4 +343,27 @@ public class ProblemSolutionsTest {
       Assert.assertEquals(1, tester.removeDuplicates(new int[] {1}));
       Assert.assertEquals(0, tester.removeDuplicates(new int[0]));
     }
+
+    @Test
+  public void combinationSum() throws Exception {
+      ProblemSolutions tester = new ProblemSolutions();
+      List<List<Integer>> results = tester.combinationSum(new int[] {2,3,5}, 8);
+      int[][] expectedResults = new int[][] {{2,2,2,2},{2,3,3},{3,5}};
+      Assert.assertTrue(results.size()==expectedResults.length);
+      for(int i = 0; i < results.size(); i++){
+        Assert.assertTrue(results.get(i).size()==expectedResults[i].length);
+        for(int j = 0; j < results.get(i).size(); j++){
+          Assert.assertTrue(results.get(i).get(j)==expectedResults[i][j]);
+        }
+      }
+      results = tester.combinationSum(new int[] {2,3,6,7}, 7);
+      expectedResults = new int[][] {{2,2,3}, {7}};
+      Assert.assertTrue(results.size()==expectedResults.length);
+      for(int i = 0; i < results.size(); i++){
+        Assert.assertTrue(results.get(i).size()==expectedResults[i].length);
+        for(int j = 0; j < results.get(i).size(); j++){
+          Assert.assertTrue(results.get(i).get(j)==expectedResults[i][j]);
+        }
+      }
+    }
 }
