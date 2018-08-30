@@ -908,40 +908,19 @@ public class ProblemSolutions {
   //given a double x and int n, return x to the nth power
   //x is between 100 and -100
   //https://leetcode.com/problems/powx-n/description/
-  //recursion is the way to go
-  //fastest solution on leetcode uses bitwise multiplication, however.
+  //ultimately the fastest solution was to use the "egyptian/russian/peasant" method
+  //with bitwise operators
+  //beats 100% of results
   public double myPow(double x, int n) {
-    if(n==0){return 1;}
-    boolean negInput = x<0;
-    boolean negPower = n<0;
-    boolean negResult = negInput&&n%2!=0;
-    //a special edge case for a sneaky test case
-    if(n==Integer.MIN_VALUE){n=Integer.MAX_VALUE;}
-    else{
-      n = negPower? -n:n;
-    }
-    x = negInput? -x:x;
-    double result = powRecurs(x, n);
-    result = negPower? 1/result:result;
-    result = negResult? -result:result;
-    return result;
-  }
-  private double powRecurs(double x, int n){
-    if(n<4){
-      double result = 1.0;
-      for(int i = 0; i < n; i++){
-        result*= x;
-      }
-      return result;
-    }
-    int roundedSqrt = (int)Math.sqrt(n);
-    int remainder = n-roundedSqrt*roundedSqrt;
-    double sqrtNResult = powRecurs(x, roundedSqrt);
+    long m = n>0? n: -(long)n;
     double result = 1.0;
-    for(int i = 0; i < roundedSqrt; i++){
-      result*=sqrtNResult;
+    while(m!=0){
+      if((m&1)==1){
+        result*=x;
+      }
+      x*=x;
+      m>>=1;
     }
-    result*=powRecurs(x, remainder);
-    return result;
+    return n>0? result:1/result;
   }
 }
