@@ -366,4 +366,13 @@ public class ProblemSolutionsTest {
         }
       }
     }
+
+    @Test
+  public void myPow() throws Exception {
+      ProblemSolutions tester = new ProblemSolutions();
+      Assert.assertTrue(1024.0==tester.myPow(2.0, 10));
+      Assert.assertTrue(0.25==tester.myPow(2.0, -2));
+      Assert.assertTrue(Math.abs(9.261-tester.myPow(2.1, 3))<0.0000001);
+      Assert.assertTrue(1.0==tester.myPow(1.0, -2147483648));
+    }
 }
