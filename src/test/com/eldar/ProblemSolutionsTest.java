@@ -375,4 +375,12 @@ public class ProblemSolutionsTest {
       Assert.assertTrue(Math.abs(9.261-tester.myPow(2.1, 3))<0.0000001);
       Assert.assertTrue(1.0==tester.myPow(1.0, -2147483648));
     }
+
+    @Test
+  public void removeElement() throws Exception{
+      ProblemSolutions tester = new ProblemSolutions();
+      Assert.assertEquals(5, tester.removeElement(new int[] {5,13,9,8,7,13,13,2,13}, 13));
+      Assert.assertEquals(0, tester.removeElement(new int[] {}, 0));
+      Assert.assertEquals(0, tester.removeElement(new int[] {5,5,5,5,5}, 5));
+    }
 }

@@ -910,6 +910,7 @@ public class ProblemSolutions {
   //https://leetcode.com/problems/powx-n/description/
   //ultimately the fastest solution was to use the "egyptian/russian/peasant" method
   //with bitwise operators
+  //inspiration: FlorenceMachine on leetcode
   //beats 100% of results
   public double myPow(double x, int n) {
     long m = n>0? n: -(long)n;
@@ -922,5 +923,28 @@ public class ProblemSolutions {
       m>>=1;
     }
     return n>0? result:1/result;
+  }
+
+  //given an array and a value requiring removal
+  //return the same array and an int indicating new end of array
+  //such that the selected value has been removed from that part
+  //and all other values shifted left
+  //https://leetcode.com/problems/remove-element/description/
+  //faster than 99.98% of solutions
+  public int removeElement(int[] nums, int val) {
+    if(nums.length==0){return 0;}
+    int writeIndex = 0;
+    for(int i = 0; i < nums.length; i++){
+      if(nums[i]!=val){
+        if(i==writeIndex){
+          writeIndex++;
+        }
+        else{
+          nums[writeIndex]=nums[i];
+          writeIndex++;
+        }
+      }
+    }
+    return writeIndex;
   }
 }
