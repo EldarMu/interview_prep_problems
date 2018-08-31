@@ -383,4 +383,17 @@ public class ProblemSolutionsTest {
       Assert.assertEquals(0, tester.removeElement(new int[] {}, 0));
       Assert.assertEquals(0, tester.removeElement(new int[] {5,5,5,5,5}, 5));
     }
+
+    @Test
+  public void reverseString() throws Exception{
+      ProblemSolutions tester = new ProblemSolutions();
+      String initial = "cat math";
+      String reverse = "math cat";
+      Assert.assertTrue(reverse.equals(tester.reverseString(initial)));
+      initial = "The rain in Spain stays mainly in the plain";
+      reverse = "plain the in mainly stays Spain in rain The";
+      Assert.assertTrue(reverse.equals(tester.reverseString(initial)));
+      Assert.assertTrue("travel".equals(tester.reverseString("travel")));
+      Assert.assertTrue("".equals(tester.reverseString("")));
+    }
 }

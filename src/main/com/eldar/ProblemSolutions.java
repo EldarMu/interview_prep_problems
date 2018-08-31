@@ -947,4 +947,36 @@ public class ProblemSolutions {
     }
     return writeIndex;
   }
+
+  //given a string of words with spaces between them
+  //perform an in-place reversal using constant extra memory
+  //such that a string with the words in the opposite order is returned
+  //note-since java strings are immutable, an in-place reversal on a char array is done instead
+  public String reverseString(String words){
+    char[] wordsArr = words.toCharArray();
+    int runningPtr = 0;
+    int wordLen=0;
+    int wordStart =0;
+    while(runningPtr<wordsArr.length){
+      while(runningPtr<wordsArr.length&&wordsArr[runningPtr]!=' '){
+        runningPtr++;
+        wordLen++;
+      }
+      for(int i = 0; i < wordLen/2; i++){
+        char tmp = wordsArr[wordStart+i];
+        wordsArr[wordStart+i]=wordsArr[runningPtr-1-i];
+        wordsArr[runningPtr-1-i]=tmp;
+      }
+      runningPtr++;
+      wordStart=runningPtr;
+      wordLen=0;
+    }
+    for(int j = 0; j < wordsArr.length/2; j++){
+      char tmp = wordsArr[j];
+      wordsArr[j] = wordsArr[wordsArr.length-1-j];
+      wordsArr[wordsArr.length-1-j] = tmp;
+    }
+    return new String(wordsArr);
+  }
+
 }
