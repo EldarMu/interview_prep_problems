@@ -979,4 +979,53 @@ public class ProblemSolutions {
     return new String(wordsArr);
   }
 
+  //find first occurence of a substring in a string
+  //https://leetcode.com/problems/implement-strstr/description/
+  //bog standard solution without any substring algorithms used, just a hashmap.
+  //technically linear time, though having to get all those substrings is a hidden cost
+  public int strStr(String haystack, String needle) {
+    if(haystack.length()==0){return 0;}
+    if(needle.length()>haystack.length()){return -1;}
+    Map<String, Boolean> needleStorage = new HashMap<>(1);
+    needleStorage.put(needle, true);
+    for(int i = 0; i <= haystack.length()-needle.length(); i++){
+      if(needleStorage.containsKey(haystack.substring(i,i+needle.length()))){return i;}
+    }
+    return -1;
+  }
+
+  //given a low->high sorted int array, find the starting and ending position of a value
+  //return [-1,-1] if it is not present
+  //https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/description/
+  public int[] searchRange(int[] nums, int target) {
+    if(nums.length==0){return new int[] {-1,-1};}
+    return recursSearch(nums, 0, nums.length-1, target);
+  }
+
+  private int[] recursSearch(int[] nums, int leftIndex, int rightIndex, int target){
+    if(leftIndex>rightIndex){return new int[] {-1,-1};}
+    if(rightIndex==leftIndex){
+      if (nums[leftIndex]==target){return new int[] {leftIndex, leftIndex};}
+      else{return new int[] {-1, -1};}
+    }
+    int centerVal = leftIndex + (rightIndex-leftIndex)/2;
+    if(nums[centerVal] == target){
+      int leftEnd = centerVal;
+      int rightEnd = centerVal;
+      while(leftEnd>0&&nums[leftEnd-1]==target){
+        leftEnd--;
+      }
+      while(rightEnd<nums.length-1&&nums[rightEnd+1]==target){
+        rightEnd++;
+      }
+      return new int[] {leftEnd, rightEnd};
+    }
+    else if(nums[centerVal]>target){
+      return recursSearch(nums, leftIndex, centerVal-1, target);
+    }
+    else{
+      return recursSearch(nums, centerVal+1, rightIndex, target);
+    }
+  }
+
 }

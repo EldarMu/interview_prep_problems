@@ -396,4 +396,24 @@ public class ProblemSolutionsTest {
       Assert.assertTrue("travel".equals(tester.reverseString("travel")));
       Assert.assertTrue("".equals(tester.reverseString("")));
     }
+    @Test
+  public void strStr() throws Exception{
+      ProblemSolutions tester = new ProblemSolutions();
+      String haystack = "a";
+      String needle = "a";
+      Assert.assertEquals(0, tester.strStr(haystack, needle));
+      haystack = "hallowed";
+      needle = "ll";
+      Assert.assertEquals(2, tester.strStr(haystack, needle));
+      Assert.assertEquals(-1, tester.strStr("candle", "row"));
+    }
+
+    @Test
+  public void searchRange()throws Exception{
+      ProblemSolutions tester = new ProblemSolutions();
+      Assert.assertArrayEquals(new int[] {-1,-1}, tester.searchRange(new int[] {2,2}, 1));
+      Assert.assertArrayEquals(new int[] {-1,-1}, tester.searchRange(new int[]{5,7,7,8,8,10}, 6));
+      Assert.assertArrayEquals(new int[] {3,4}, tester.searchRange(new int[]{5,7,7,8,8,10}, 8));
+      Assert.assertArrayEquals(new int[] {-1,-1}, tester.searchRange(new int[] {}, 0));
+    }
 }
