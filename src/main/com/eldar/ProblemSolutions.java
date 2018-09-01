@@ -1071,4 +1071,39 @@ public class ProblemSolutions {
     return ++curMid;
   }
 
+  //merge one array into another one (with sufficient extra space)
+  //https://leetcode.com/problems/merge-sorted-array/description/
+  //nums1-array to merge into, nums2-array to merge
+  //nums1 has m initialized elements, nums2 has n;
+  //beats 100% of java solutions
+  public void mergeArrs(int[] nums1, int m, int[] nums2, int n) {
+    int mPtr = 1;
+    int nPtr = 1;
+    int j = 0;
+    while(m>=mPtr||n>=nPtr){
+      if(m>=mPtr&&n>=nPtr){
+        if(nums1[m-mPtr]<=nums2[n-nPtr]){
+          nums1[nums1.length-1-j]=nums2[n-nPtr];
+          nPtr++;
+          j++;
+        }
+        else{
+          nums1[nums1.length-1-j]=nums1[m-mPtr];
+          mPtr++;
+          j++;
+        }
+      }
+      else if(mPtr > m){
+        nums1[nums1.length-1-j]=nums2[n-nPtr];
+        nPtr++;
+        j++;
+      }
+      else{
+        nums1[nums1.length-1-j]=nums1[m-mPtr];
+        mPtr++;
+        j++;
+      }
+    }
+  }
+
 }

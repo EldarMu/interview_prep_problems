@@ -426,4 +426,15 @@ public class ProblemSolutionsTest {
       Assert.assertEquals(4, tester.searchInsert(new int[] {1,3,5,6}, 7));
       Assert.assertEquals(0, tester.searchInsert(new int[] {1,3,5,6}, 0));
     }
+
+    @Test
+  public void mergeArrs() throws Exception {
+      ProblemSolutions tester = new ProblemSolutions();
+      int[] result = new int[] {1,2,3,0,0,0};
+      tester.mergeArrs(result, 3, new int[] {2,5,6}, 3);
+      Assert.assertArrayEquals(new int[] {1,2,2,3,5,6}, result);
+      result = new int[] {0};
+      tester.mergeArrs(result, 0, new int[] {1}, 1);
+      Assert.assertArrayEquals(new int[] {1}, result);
+    }
 }
