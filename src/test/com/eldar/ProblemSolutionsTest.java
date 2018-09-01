@@ -416,4 +416,14 @@ public class ProblemSolutionsTest {
       Assert.assertArrayEquals(new int[] {3,4}, tester.searchRange(new int[]{5,7,7,8,8,10}, 8));
       Assert.assertArrayEquals(new int[] {-1,-1}, tester.searchRange(new int[] {}, 0));
     }
+
+    @Test
+  public void searchInsert() throws Exception{
+      ProblemSolutions tester = new ProblemSolutions();
+      Assert.assertEquals(3, tester.searchInsert(new int[] {3,5,7,9,10}, 8));
+      Assert.assertEquals(2, tester.searchInsert(new int[] {1,3,5,6}, 5));
+      Assert.assertEquals(1, tester.searchInsert(new int[] {1,3,5,6}, 2));
+      Assert.assertEquals(4, tester.searchInsert(new int[] {1,3,5,6}, 7));
+      Assert.assertEquals(0, tester.searchInsert(new int[] {1,3,5,6}, 0));
+    }
 }

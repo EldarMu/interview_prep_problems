@@ -999,10 +999,10 @@ public class ProblemSolutions {
   //https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/description/
   public int[] searchRange(int[] nums, int target) {
     if(nums.length==0){return new int[] {-1,-1};}
-    return recursSearch(nums, 0, nums.length-1, target);
+    return recursSearchRange(nums, 0, nums.length-1, target);
   }
 
-  private int[] recursSearch(int[] nums, int leftIndex, int rightIndex, int target){
+  private int[] recursSearchRange(int[] nums, int leftIndex, int rightIndex, int target){
     if(leftIndex>rightIndex){return new int[] {-1,-1};}
     if(rightIndex==leftIndex){
       if (nums[leftIndex]==target){return new int[] {leftIndex, leftIndex};}
@@ -1021,11 +1021,54 @@ public class ProblemSolutions {
       return new int[] {leftEnd, rightEnd};
     }
     else if(nums[centerVal]>target){
-      return recursSearch(nums, leftIndex, centerVal-1, target);
+      return recursSearchRange(nums, leftIndex, centerVal-1, target);
     }
     else{
-      return recursSearch(nums, centerVal+1, rightIndex, target);
+      return recursSearchRange(nums, centerVal+1, rightIndex, target);
     }
+  }
+
+  //given a sorted int array and a target value
+  //return either the index of the target value
+  //or where it would be if it were in the array
+  //https://leetcode.com/problems/search-insert-position/description/
+  //beats 100% of java solutions, but the edge cases sure make it look ugly.
+  public int searchInsert(int[] nums, int target) {
+    //first a binary search that keeps track of the mid pointer externally
+    int left = 0;
+    int right = nums.length-1;
+    int curMid = 0;
+    while(left<right){
+      curMid = left +(right-left)/2;
+      if(nums[curMid]>target){
+        right = curMid;
+      }
+      else if(nums[curMid]<target){
+        left = curMid+1;
+      }
+      else{
+        return curMid;
+      }
+    }
+    //edge case - left==right, at target value
+    //after this, we know for sure the value was not found
+    if(nums[curMid]==target){return curMid;}
+    //only exception to rule - if target < nums[0] return 0;
+    if(curMid==0&&nums[curMid]>target){return 0;}
+    //decrement curMid if possible in case curMid is currently stuck
+    //on the first value larger than it
+    if(curMid!=0&&nums[curMid]>target){curMid--;}
+    //find index of largest value smaller than target, then add 1 to it.
+    boolean rightAdjustDone = false;
+    while(curMid<nums.length-1&&!rightAdjustDone){
+      if(nums[curMid+1]<target){
+        curMid++;
+      }
+      else{
+        rightAdjustDone=true;
+      }
+    }
+    return ++curMid;
   }
 
 }
