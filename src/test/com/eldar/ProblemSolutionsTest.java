@@ -437,4 +437,21 @@ public class ProblemSolutionsTest {
       tester.mergeArrs(result, 0, new int[] {1}, 1);
       Assert.assertArrayEquals(new int[] {1}, result);
     }
+
+    @Test
+  public void inorderTraversal() throws Exception{
+      ProblemSolutions tester = new ProblemSolutions();
+      ProblemSolutions.TreeNode head = tester.new TreeNode(1);
+      head.left = null;
+      head.right = tester.new TreeNode(2);
+      head.right.right = null;
+      head.right.left = tester.new TreeNode(3);
+      List<Integer> results = tester.inorderTraversal(head);
+      int[] expectedResults = new int[] {1,3,2};
+      for(int i = 0; i < expectedResults.length; i++){
+        Assert.assertEquals(expectedResults[i], (int)results.get(i));
+      }
+
+      Assert.assertEquals(0, (int)tester.inorderTraversal(tester.new TreeNode(0)).get(0));
+    }
 }

@@ -1106,4 +1106,28 @@ public class ProblemSolutions {
     }
   }
 
+  //non-recursive in-order traversal of a binary tree
+  //https://leetcode.com/problems/binary-tree-inorder-traversal/description/
+  //we'll use a stack and a while loop
+  //ultimately ended up using a hashmap to keep from double-writing values
+  //standard solution
+  public List<Integer> inorderTraversal(TreeNode root) {
+    List<Integer> results = new ArrayList<>();
+    if(root==null){return results;}
+    Stack<TreeNode> recursStack = new Stack<>();
+    Map<TreeNode, Boolean> alreadyWritten = new HashMap<>();
+    recursStack.push(root);
+    while(!recursStack.isEmpty()){
+      TreeNode tmp = recursStack.peek();
+      if(tmp.left!=null&&!alreadyWritten.containsKey(tmp.left)){recursStack.push(tmp.left);}
+      else{
+        results.add(tmp.val);
+        tmp = recursStack.pop();
+        alreadyWritten.put(tmp, true);
+        if(tmp.right!=null&&!alreadyWritten.containsKey(tmp.right)){recursStack.push(tmp.right);}
+      }
+    }
+    return results;
+  }
+
 }
