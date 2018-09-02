@@ -1130,4 +1130,21 @@ public class ProblemSolutions {
     return results;
   }
 
+  //count different number of ways to climb stairs
+  //at any point with two or more stairsteps, an individual may take a normal or double step (1/2)
+  //had to write it on paper, but it's just a fibonacci puzzle
+  //probably best to avoid recursion here.
+  public int climbStairs(int n) {
+    if(n<1){return 0;}
+    if(n==1){return 1;}
+    int firstVal = 1;
+    int secondVal = 2;
+    int tmp = 0;
+    for(int i = 3; i <= n; i++){
+      tmp = firstVal+secondVal;
+      firstVal = secondVal;
+      secondVal = tmp;
+    }
+    return secondVal;
+  }
 }

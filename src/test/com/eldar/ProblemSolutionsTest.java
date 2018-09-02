@@ -451,7 +451,16 @@ public class ProblemSolutionsTest {
       for(int i = 0; i < expectedResults.length; i++){
         Assert.assertEquals(expectedResults[i], (int)results.get(i));
       }
-
       Assert.assertEquals(0, (int)tester.inorderTraversal(tester.new TreeNode(0)).get(0));
+    }
+
+    @Test
+  public void climbStairs() throws Exception{
+      ProblemSolutions tester = new ProblemSolutions();
+      Assert.assertEquals(3, tester.climbStairs(3));
+      Assert.assertEquals(2, tester.climbStairs(2));
+      Assert.assertEquals(13, tester.climbStairs(6));
+      Assert.assertEquals(0, tester.climbStairs(0));
+      Assert.assertEquals(0, tester.climbStairs(-3));
     }
 }
