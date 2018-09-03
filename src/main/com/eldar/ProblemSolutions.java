@@ -1134,17 +1134,96 @@ public class ProblemSolutions {
   //at any point with two or more stairsteps, an individual may take a normal or double step (1/2)
   //had to write it on paper, but it's just a fibonacci puzzle
   //probably best to avoid recursion here.
+  //beats 100% of java solutions
   public int climbStairs(int n) {
     if(n<1){return 0;}
     if(n==1){return 1;}
     int firstVal = 1;
     int secondVal = 2;
-    int tmp = 0;
+    int tmp;
     for(int i = 3; i <= n; i++){
       tmp = firstVal+secondVal;
       firstVal = secondVal;
       secondVal = tmp;
     }
     return secondVal;
+  }
+  //class for next problem concerning inserting/merging intervals
+  public class Interval {
+    int start;
+    int end;
+    Interval() { start = 0; end = 0; }
+    Interval(int s, int e) { start = s; end = e; }
+  }
+
+  //given a list of non-overlapping intervals sorted by start times
+  //and an interval to be inserted, insert and merge as needed
+  //then return the resulting list
+  //https://leetcode.com/problems/insert-interval/description/
+  //a very verbose solution that worked on the first try
+  //and works faster than 96% of solutions
+  public List<Interval> insertInterval(List<Interval> intervals, Interval newInterval) {
+    Interval[] intervArr = intervals.toArray(new Interval[0]);
+    List<Interval> resultList = new ArrayList<>();
+    int smallerStartValIndex = -1;
+    int biggerEndValIndex = intervArr.length;
+    boolean startInInterval = false;
+    boolean endInInterval = false;
+    for(int i = 0; i < intervArr.length; i++){
+      if(intervArr[i].start<=newInterval.start){
+        smallerStartValIndex++;
+      }
+      if(intervArr[intervArr.length-1-i].end>=newInterval.end){
+        biggerEndValIndex--;
+      }
+    }
+    if(smallerStartValIndex>-1&&intervArr[smallerStartValIndex].end>=newInterval.start){
+      startInInterval = true;
+    }
+    if(biggerEndValIndex<intervArr.length&&intervArr[biggerEndValIndex].start<=newInterval.end){
+      endInInterval = true;
+    }
+    if(smallerStartValIndex==-1&&biggerEndValIndex==intervArr.length){
+      resultList.add(newInterval);
+      return resultList;
+    }
+    else if(smallerStartValIndex==-1){
+      if(endInInterval){
+        newInterval.end = intervArr[biggerEndValIndex].end;
+        biggerEndValIndex++;
+      }
+      resultList.add(newInterval);
+      for(int j = biggerEndValIndex; j<intervArr.length; j++){
+        resultList.add(intervArr[j]);
+      }
+    }
+    else if(biggerEndValIndex==intervArr.length){
+      if(startInInterval){
+        newInterval.start=intervArr[smallerStartValIndex].start;
+        smallerStartValIndex--;
+      }
+      for(int j = 0; j <=smallerStartValIndex; j++){
+        resultList.add(intervArr[j]);
+      }
+      resultList.add(newInterval);
+    }
+    else{
+      if(startInInterval){
+        newInterval.start = intervArr[smallerStartValIndex].start;
+        smallerStartValIndex--;
+      }
+      if(endInInterval){
+        newInterval.end = intervArr[biggerEndValIndex].end;
+        biggerEndValIndex++;
+      }
+      for(int j = 0; j <= smallerStartValIndex; j++){
+        resultList.add(intervArr[j]);
+      }
+      resultList.add(newInterval);
+      for(int j = biggerEndValIndex; j <intervArr.length; j++){
+        resultList.add(intervArr[j]);
+      }
+    }
+    return resultList;
   }
 }

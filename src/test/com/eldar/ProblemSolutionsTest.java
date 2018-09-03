@@ -1,6 +1,8 @@
 package com.eldar;
 
+import com.eldar.ProblemSolutions.Interval;
 import com.eldar.ProblemSolutions.ListNode;
+import java.util.ArrayList;
 import java.util.Arrays;
 import org.junit.Assert;
 import org.junit.Test;
@@ -462,5 +464,35 @@ public class ProblemSolutionsTest {
       Assert.assertEquals(13, tester.climbStairs(6));
       Assert.assertEquals(0, tester.climbStairs(0));
       Assert.assertEquals(0, tester.climbStairs(-3));
+    }
+
+    @Test
+  public void insertInterval() throws Exception{
+      ProblemSolutions tester = new ProblemSolutions();
+      List<Interval> initIntervals = new ArrayList<>();
+      initIntervals.add(tester.new Interval(1,2));
+      initIntervals.add(tester.new Interval(3,5));
+      initIntervals.add(tester.new Interval(6,7));
+      initIntervals.add(tester.new Interval(8,10));
+      initIntervals.add(tester.new Interval(12, 16));
+      List<Interval> result = tester.insertInterval(initIntervals, tester.new Interval(4,8));
+      int[][] expectedResults = new int[][] {{1,2},{3,10},{12,16}};
+      Assert.assertEquals(expectedResults.length, result.size());
+      for(int i = 0; i < result.size(); i++){
+        Assert.assertEquals(expectedResults[i][0], result.get(i).start);
+        Assert.assertEquals(expectedResults[i][1], result.get(i).end);
+      }
+
+      initIntervals = new ArrayList<>();
+      initIntervals.add(tester.new Interval(1,3));
+      initIntervals.add(tester.new Interval(6,9));
+      result = tester.insertInterval(initIntervals, tester.new Interval(2,5));
+      expectedResults = new int[][] {{1,5},{6,9}};
+      Assert.assertEquals(expectedResults.length, result.size());
+      for(int i = 0; i < result.size(); i++){
+        Assert.assertEquals(expectedResults[i][0], result.get(i).start);
+        Assert.assertEquals(expectedResults[i][1], result.get(i).end);
+      }
+
     }
 }
