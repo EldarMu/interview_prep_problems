@@ -518,4 +518,18 @@ public class ProblemSolutionsTest {
       ProblemSolutions tester = new ProblemSolutions();
       Assert.assertTrue("BANC".equals(tester.minWindow("ADOBECODEBANC", "ABC")));
     }
+
+    @Test
+  public void isValidBST() throws Exception{
+      ProblemSolutions tester = new ProblemSolutions();
+      ProblemSolutions.TreeNode head = tester.new TreeNode(2);
+      head.left = tester.new TreeNode(1);
+      head.right = tester.new TreeNode(3);
+      //Assert.assertTrue(tester.isValidBST(head));
+      head = tester.new TreeNode(1);
+      head.left = tester.new TreeNode(1);
+      //Assert.assertFalse(tester.isValidBST(head));
+      head = tester.new TreeNode(-2147483648);
+      Assert.assertTrue(tester.isValidBST(head));
+    }
 }

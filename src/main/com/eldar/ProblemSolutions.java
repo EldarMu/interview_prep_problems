@@ -1381,4 +1381,31 @@ public class ProblemSolutions {
     }
     return s.substring(minDistLeft, minDistRight+1);
     }
+
+  //validate a BST
+  //
+  public boolean isValidBST(TreeNode root) {
+    if(root==null){return true;}
+    List<Integer> inorderAsList = new LinkedList<>();
+    inorderTraversal(root, inorderAsList);
+    long prevVal = Long.MIN_VALUE;
+    for(Integer s: inorderAsList){
+      long tmp = Long.valueOf(s);
+      if(tmp<=prevVal){return false;}
+      else{
+        prevVal = tmp;
+      }
+    }
+    return true;
+  }
+
+  private void inorderTraversal(TreeNode node, List<Integer> list){
+    if(node.left!=null){
+      inorderTraversal(node.left, list);
+    }
+    list.add(node.val);
+    if(node.right!=null){
+      inorderTraversal(node.right, list);
+    }
+  }
 }
