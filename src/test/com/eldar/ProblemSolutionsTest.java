@@ -552,4 +552,14 @@ public class ProblemSolutionsTest {
       tester.setZeroes(testMatrix);
       Assert.assertArrayEquals(new int[][] {{}}, testMatrix);
     }
+
+    @Test
+  public void plusOne() throws Exception{
+      ProblemSolutions tester = new ProblemSolutions();
+      int[] testArr = new int[] {1,2,3,4,5};
+      Assert.assertArrayEquals(new int[] {1,2,3,4,6}, tester.plusOne(testArr));
+      testArr = new int[] {9,9};
+      Assert.assertArrayEquals(new int[] {1,0,0}, tester.plusOne(testArr));
+      Assert.assertArrayEquals(new int[] {}, tester.plusOne(new int[] {}));
+    }
 }

@@ -1427,5 +1427,32 @@ public class ProblemSolutions {
     }
   }
 
+  //given a number represented as an array of digits
+  //add one to the value, and return as resulting array
+  //https://leetcode.com/problems/plus-one/description/
+  //straightforward, beats 100% of solutions
+  public int[] plusOne(int[] digits) {
+    boolean carryOne = false;
+    for(int i = digits.length-1; i>=0; i--){
+      if(digits[i]<9){
+        digits[i]=digits[i]+1;
+        break;
+      }
+      else{
+        digits[i]=0;
+        if(i==0){carryOne=true;}
+      }
+    }
+    int[] newResult = new int[] {};
+    if(carryOne){
+      newResult = new int[digits.length+1];
+      newResult[0]=1;
+      for(int j = 1; j < newResult.length; j++){
+        newResult[j]=digits[j-1];
+      }
+    }
+    return carryOne? newResult : digits;
+  }
+
 
 }
