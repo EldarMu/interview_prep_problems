@@ -525,11 +525,17 @@ public class ProblemSolutionsTest {
       ProblemSolutions.TreeNode head = tester.new TreeNode(2);
       head.left = tester.new TreeNode(1);
       head.right = tester.new TreeNode(3);
-      //Assert.assertTrue(tester.isValidBST(head));
+      Assert.assertTrue(tester.isValidBST(head));
       head = tester.new TreeNode(1);
       head.left = tester.new TreeNode(1);
-      //Assert.assertFalse(tester.isValidBST(head));
+      Assert.assertFalse(tester.isValidBST(head));
       head = tester.new TreeNode(-2147483648);
       Assert.assertTrue(tester.isValidBST(head));
+      head = tester.new TreeNode(5);
+      head.left = tester.new TreeNode(1);
+      head.right = tester.new TreeNode(4);
+      head.right.left = tester.new TreeNode(3);
+      head.right.right = tester.new TreeNode(6);
+      Assert.assertFalse(tester.isValidBST(head));
     }
 }

@@ -1383,18 +1383,13 @@ public class ProblemSolutions {
     }
 
   //validate a BST
-  //
+  //https://leetcode.com/submissions/detail/173807875/
   public boolean isValidBST(TreeNode root) {
     if(root==null){return true;}
-    List<Integer> inorderAsList = new LinkedList<>();
+    List<Integer> inorderAsList = new ArrayList<>();
     inorderTraversal(root, inorderAsList);
-    long prevVal = Long.MIN_VALUE;
-    for(Integer s: inorderAsList){
-      long tmp = Long.valueOf(s);
-      if(tmp<=prevVal){return false;}
-      else{
-        prevVal = tmp;
-      }
+    for(int i = 1; i < inorderAsList.size(); i++){
+      if(Long.valueOf(inorderAsList.get(i))<=Long.valueOf(inorderAsList.get(i-1))){return false;}
     }
     return true;
   }
