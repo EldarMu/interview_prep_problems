@@ -503,4 +503,13 @@ public class ProblemSolutionsTest {
       Assert.assertTrue(tester.wordExists(board, "ABCCED"));
       Assert.assertTrue(tester.wordExists(board, "SEE"));
     }
+
+    @Test
+  public void removeTriplicates() throws Exception{
+      ProblemSolutions tester = new ProblemSolutions();
+      Assert.assertEquals(5, tester.removeTriplicates(new int[] {1,1,1,2,2,3}));
+      Assert.assertEquals(0, tester.removeTriplicates(new int[] {}));
+      Assert.assertEquals(7, tester.removeTriplicates(new int[] {0,0,1,1,1,1,2,3,3}));
+      Assert.assertEquals(3, tester.removeTriplicates(new int[] {1,2,2}));
+    }
 }

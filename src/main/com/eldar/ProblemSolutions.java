@@ -1287,4 +1287,35 @@ public class ProblemSolutions {
     }
     return false;
   }
+
+  //given a sorted int array, remove duplicates (>2) by shifting array vals left
+  //https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/description/
+  //a pretty standard solution
+  public int removeTriplicates(int[] nums) {
+    if(nums.length<3){return nums.length;}
+    boolean foundWriteIndex = false;
+    int curInt = nums[0];
+    int curIntCount = 1;
+    int writeIndex = 0;
+    for(int i = 1; i < nums.length; i++){
+      if(curInt==nums[i]){curIntCount++;}
+      else{
+        curInt = nums[i];
+        curIntCount = 1;
+      }
+      if(!foundWriteIndex){
+        if(curIntCount==3){
+          writeIndex = i;
+          foundWriteIndex = true;
+        }
+      }
+      else{
+        if(curIntCount<3){
+          nums[writeIndex]=nums[i];
+          writeIndex++;
+        }
+      }
+    }
+    return foundWriteIndex? writeIndex : nums.length;
+  }
 }
