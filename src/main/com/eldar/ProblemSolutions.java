@@ -1384,23 +1384,19 @@ public class ProblemSolutions {
 
   //validate a BST
   //https://leetcode.com/submissions/detail/173807875/
+  //borrowed idea from jeantimex of leetcode for a more performant solution
   public boolean isValidBST(TreeNode root) {
-    if(root==null){return true;}
-    List<Integer> inorderAsList = new ArrayList<>();
-    inorderTraversal(root, inorderAsList);
-    for(int i = 1; i < inorderAsList.size(); i++){
-      if(Long.valueOf(inorderAsList.get(i))<=Long.valueOf(inorderAsList.get(i-1))){return false;}
+    return recursValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);
+  }
+  private boolean recursValidBST(TreeNode node, long min, long max){
+    if(node==null){return true;}
+    if(node.val<=min||node.val>=max){return false;}
+    if(node.left!=null){
+      if(!recursValidBST(node.left, min, node.val)){return false;}
+    }
+    if(node.right!=null){
+      if(!recursValidBST(node.right, node.val, max)){return false;}
     }
     return true;
-  }
-
-  private void inorderTraversal(TreeNode node, List<Integer> list){
-    if(node.left!=null){
-      inorderTraversal(node.left, list);
-    }
-    list.add(node.val);
-    if(node.right!=null){
-      inorderTraversal(node.right, list);
-    }
   }
 }
