@@ -538,4 +538,18 @@ public class ProblemSolutionsTest {
       head.right.right = tester.new TreeNode(6);
       Assert.assertFalse(tester.isValidBST(head));
     }
+
+    @Test
+  public void setZeroes() throws Exception{
+      ProblemSolutions tester = new ProblemSolutions();
+      int[][] testMatrix = new int[][] {{1,1,1},{1,0,1},{1,1,1}};
+      int[][] expectedResult = new int[][] {{1,0,1},{0,0,0},{1,0,1}};
+      tester.setZeroes(testMatrix);
+      for(int i = 0; i < expectedResult.length; i++){
+        Assert.assertArrayEquals(expectedResult[i], testMatrix[i]);
+      }
+      testMatrix = new int[][] {{}};
+      tester.setZeroes(testMatrix);
+      Assert.assertArrayEquals(new int[][] {{}}, testMatrix);
+    }
 }

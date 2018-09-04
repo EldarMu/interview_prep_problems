@@ -1399,4 +1399,33 @@ public class ProblemSolutions {
     }
     return true;
   }
+
+  //given a matrix of int values
+  //for any zero, set that row and column to all zeroes
+  //https://leetcode.com/problems/set-matrix-zeroes/description/
+  //find a constant space solution
+  public void setZeroes(int[][] matrix) {
+    Map<Integer, Boolean> rows = new HashMap<>();
+    Map<Integer, Boolean> cols = new HashMap<>();
+    for(int i = 0; i < matrix.length; i++){
+      for(int j = 0; j < matrix[0].length; j++){
+        if(matrix[i][j]==0){
+          rows.put(j, true);
+          cols.put(i, true);
+        }
+      }
+    }
+    for(Integer j: rows.keySet()){
+      for(int i = 0; i < matrix.length; i++){
+        if(matrix[i][j]!=0){matrix[i][j]=0;}
+      }
+    }
+    for(Integer i: cols.keySet()){
+      for(int j = 0; j < matrix[0].length; j++){
+        if(matrix[i][j]!=0){matrix[i][j]=0;}
+      }
+    }
+  }
+
+
 }
