@@ -1226,4 +1226,65 @@ public class ProblemSolutions {
     }
     return resultList;
   }
+
+  //given a two-dimensional array (a 'board') of letters
+  //find if a word can be constructed by connecting adjacent letters on the board
+  //https://leetcode.com/problems/word-search/description/
+  //beats 82% of java solutions
+  public boolean wordExists(char[][] board, String word) {
+    char[] wordArr = word.toCharArray();
+    boolean[][] visited = new boolean[board.length][board[0].length];
+    for(int i = 0; i < board.length; i++){
+      for(int j = 0; j < board[0].length; j++){
+        if(board[i][j]==wordArr[0]){
+          visited[i][j] = true;
+          if(recursWordExists(board, visited, i, j, wordArr, 1)){return true;}
+          visited[i][j] = false;
+        }
+      }
+    }
+    return false;
+  }
+  private boolean recursWordExists(char[][] board, boolean[][] visited, int row, int col, char[] word, int wordIndex){
+    if(wordIndex==word.length){return true;}
+    int tmpRow = 0;
+    int tmpCol = 0;
+    if(row>0&&board[row-1][col]==word[wordIndex]){
+      tmpRow = row-1;
+      tmpCol = col;
+      if(!visited[tmpRow][tmpCol]){
+        visited[tmpRow][tmpCol]=true;
+        if(recursWordExists(board, visited, tmpRow, tmpCol, word, wordIndex+1)){return true;}
+        visited[tmpRow][tmpCol]=false;
+      }
+    }
+    if(row<board.length-1&&board[row+1][col]==word[wordIndex]){
+      tmpRow = row+1;
+      tmpCol = col;
+      if(!visited[tmpRow][tmpCol]){
+        visited[tmpRow][tmpCol]=true;
+        if(recursWordExists(board, visited, tmpRow, tmpCol, word, wordIndex+1)){return true;}
+        visited[tmpRow][tmpCol]=false;
+      }
+    }
+    if(col>0&&board[row][col-1]==word[wordIndex]){
+      tmpRow = row;
+      tmpCol = col-1;
+      if(!visited[tmpRow][tmpCol]){
+        visited[tmpRow][tmpCol]=true;
+        if(recursWordExists(board, visited, tmpRow, tmpCol, word, wordIndex+1)){return true;}
+        visited[tmpRow][tmpCol]=false;
+      }
+    }
+    if(col<board[0].length-1&&board[row][col+1]==word[wordIndex]){
+      tmpRow = row;
+      tmpCol = col+1;
+      if(!visited[tmpRow][tmpCol]){
+        visited[tmpRow][tmpCol]=true;
+        if(recursWordExists(board, visited, tmpRow, tmpCol, word, wordIndex+1)){return true;}
+        visited[tmpRow][tmpCol]=false;
+      }
+    }
+    return false;
+  }
 }

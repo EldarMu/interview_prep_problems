@@ -493,6 +493,14 @@ public class ProblemSolutionsTest {
         Assert.assertEquals(expectedResults[i][0], result.get(i).start);
         Assert.assertEquals(expectedResults[i][1], result.get(i).end);
       }
+    }
 
+    @Test
+  public void wordExists() throws Exception{
+      ProblemSolutions tester = new ProblemSolutions();
+      char[][] board = new char[][] {{'A','B','C','E'},{'S','F','C','S'},{'A','D','E','E'}};
+      Assert.assertFalse(tester.wordExists(board, "ABCB"));
+      Assert.assertTrue(tester.wordExists(board, "ABCCED"));
+      Assert.assertTrue(tester.wordExists(board, "SEE"));
     }
 }
