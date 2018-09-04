@@ -512,4 +512,10 @@ public class ProblemSolutionsTest {
       Assert.assertEquals(7, tester.removeTriplicates(new int[] {0,0,1,1,1,1,2,3,3}));
       Assert.assertEquals(3, tester.removeTriplicates(new int[] {1,2,2}));
     }
+
+    @Test
+  public void minWindow() throws Exception{
+      ProblemSolutions tester = new ProblemSolutions();
+      Assert.assertTrue("BANC".equals(tester.minWindow("ADOBECODEBANC", "ABC")));
+    }
 }

@@ -1318,4 +1318,67 @@ public class ProblemSolutions {
     }
     return foundWriteIndex? writeIndex : nums.length;
   }
+
+  //given a string S and a set of characters T
+  //find the smallest substring of S containing all characters in T
+  //https://leetcode.com/problems/minimum-window-substring/description/
+  public String minWindow(String s, String t) {
+    if(t==null||s==null||t.length()==0||s.length()==0||t.length()>s.length()){return "";}
+    Map<Character, Integer> subStrChars = new HashMap<>();
+    for(int i=0; i<t.length(); i++){
+      subStrChars.put(t.charAt(i), 0);
+    }
+    Map<Character, List<Integer>> instOfChars = new HashMap<>();
+    for(int j=0; j<s.length(); j++) {
+      if (subStrChars.get(s.charAt(j)) != null) {
+        if (instOfChars.get(s.charAt(j)) == null) {
+          List<Integer> charIndeces = new ArrayList<>();
+          charIndeces.add(j);
+          instOfChars.put(s.charAt(j), charIndeces);
+        } else {
+          instOfChars.get(s.charAt(j)).add(j);
+        }
+      }
+    }
+    if (instOfChars.size() != t.length()) {
+      return "";
+    }
+    int minDist = s.length();
+    int minDistLeft = 0;
+    int minDistRight = 0;
+    boolean minimalSolFound = false;
+    while (!minimalSolFound) {
+      int tmpDist;
+      int tmpLeft = s.length();
+      int tmpRight = -1;
+      char minChar = t.charAt(0);
+      for (int l = 0; l < t.length(); l++) {
+        char tmpChar = t.charAt(l);
+        int tmpListIndex = subStrChars.get(tmpChar);
+        int tmpCharIndex = instOfChars.get(tmpChar).get(tmpListIndex);
+        if (tmpCharIndex < tmpLeft) {
+          tmpLeft = tmpCharIndex;
+          minChar = tmpChar;
+        }
+        if (tmpCharIndex > tmpRight) {
+          tmpRight = tmpCharIndex;
+        }
+      }
+      tmpDist = tmpRight - tmpLeft;
+      if (tmpDist < minDist) {
+        minDist = tmpDist;
+        minDistLeft = tmpLeft;
+        minDistRight = tmpRight;
+      }
+      int curMinListIndex = subStrChars.get(minChar);
+      if(curMinListIndex == instOfChars.get(minChar).size()-1){
+        minimalSolFound = true;
+      }
+      else{
+        subStrChars.put(minChar, subStrChars.get(minChar) + 1);
+      }
+
+    }
+    return s.substring(minDistLeft, minDistRight+1);
+    }
 }
