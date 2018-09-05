@@ -571,4 +571,13 @@ public class ProblemSolutionsTest {
       testMatrix = new int[][] {{1,1,1,1},{20,20,20,1},{1,1,1,1},{1,20,20,20},{1,1,1,1}};
       Assert.assertEquals(14, tester.minPathSum(testMatrix));
     }
+
+  @Test
+  public void greedyMinPathSum() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    int[][] testMatrix = new int[][] {{1,3,1}, {1,5,1}, {4,2,1}};
+    Assert.assertEquals(7, tester.greedyMinPathSum(testMatrix));
+    testMatrix = new int[][] {{1,1,1,1},{20,20,20,1},{1,1,1,1},{1,20,20,20},{1,1,1,1}};
+    Assert.assertEquals(14, tester.greedyMinPathSum(testMatrix));
+  }
 }

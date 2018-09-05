@@ -1473,27 +1473,66 @@ public class ProblemSolutions {
       if(curVal<minPath[0]){minPath[0]=curVal;}
       return;
     }
-    if(row+1<grid.length&&!visited[row+1][col]){
+    if(row+1<grid.length&&!visited[row+1][col]&&curVal+grid[row+1][col]<minPath[0]){
       visited[row+1][col]=true;
       recursMinPathSum(grid, minPath, visited, row+1, col, curVal);
       visited[row+1][col]=false;
     }
-    if(row-1>=0&&!visited[row-1][col]){
+    if(row-1>=0&&!visited[row-1][col]&&curVal+grid[row-1][col]<minPath[0]){
       visited[row-1][col]=true;
       recursMinPathSum(grid, minPath, visited, row-1, col, curVal);
       visited[row-1][col]=false;
     }
-    if(col+1<grid[0].length&&!visited[row][col+1]){
+    if(col+1<grid[0].length&&!visited[row][col+1]&&curVal+grid[row][col+1]<minPath[0]){
       visited[row][col+1]=true;
       recursMinPathSum(grid, minPath, visited, row, col+1, curVal);
       visited[row][col+1]=false;
     }
-    if(col-1>=0&&!visited[row][col-1]){
+    if(col-1>=0&&!visited[row][col-1]&&curVal+grid[row][col-1]<minPath[0]){
       visited[row][col-1]=true;
       recursMinPathSum(grid, minPath, visited, row, col-1, curVal);
       visited[row][col-1]=false;
     }
     return;
+  }
+
+  //let's try again with a greedy algorithm
+  public int greedyMinPathSum(int[][] grid){
+    boolean[][] visited = new boolean[grid.length][grid[0].length];
+    visited[0][0]=true;
+    int row = 0;
+    int col = 0;
+    int pathVal = grid[0][0];
+    do{
+      int cheapestPath = Integer.MAX_VALUE;
+      int[] nextCoord = new int[2];
+      if(row+1<grid.length&&!visited[row+1][col]&&grid[row+1][col]<cheapestPath){
+        cheapestPath = grid[row+1][col];
+        nextCoord[0] = row+1;
+        nextCoord[1] = col;
+      }
+      if(col+1<grid[0].length&&!visited[row][col+1]&&grid[row][col+1]<cheapestPath){
+        cheapestPath = grid[row][col+1];
+        nextCoord[0] = row;
+        nextCoord[1] = col+1;
+      }
+      if(row-1>=0&&!visited[row-1][col]&&grid[row-1][col]<cheapestPath){
+        cheapestPath = grid[row-1][col];
+        nextCoord[0] = row-1;
+        nextCoord[1] = col;
+      }
+      if(col-1>=0&&!visited[row][col-1]&&grid[row][col-1]<cheapestPath){
+        cheapestPath = grid[row][col-1];
+        nextCoord[0] = row;
+        nextCoord[1] = col-1;
+      }
+      visited[nextCoord[0]][nextCoord[1]]=true;
+      pathVal += cheapestPath;
+      row = nextCoord[0];
+      col = nextCoord[1];
+
+    }while(row!=grid.length-1||col!=grid[0].length-1);
+    return pathVal;
   }
 
 
