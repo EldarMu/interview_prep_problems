@@ -1525,4 +1525,28 @@ public class ProblemSolutions {
   }
 
 
+  //rotate singly-linked list to the right by k
+  //https://leetcode.com/problems/rotate-list/description/
+  public ListNode rotateListRight(ListNode head, int k) {
+    if(head==null||head.next==null){
+      return head;
+    }
+    List<ListNode> tmpList = new ArrayList<>();
+    tmpList.add(head);
+    ListNode tmpNode = head;
+    while(tmpNode.next!=null){
+      tmpList.add(tmpNode.next);
+      tmpNode = tmpNode.next;
+    }
+    k = k%tmpList.size();
+    if(k==0){return head;}
+    else{
+      tmpNode = tmpList.get(tmpList.size()-k-1);
+      tmpNode.next = null;
+      tmpList.get(tmpList.size()-1).next = tmpList.get(0);
+    }
+    return tmpList.get(tmpList.size()-k);
+  }
+
+
 }
