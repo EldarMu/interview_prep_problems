@@ -1478,61 +1478,50 @@ public class ProblemSolutions {
       recursMinPathSum(grid, minPath, visited, row+1, col, curVal);
       visited[row+1][col]=false;
     }
-    if(row-1>=0&&!visited[row-1][col]&&curVal+grid[row-1][col]<minPath[0]){
-      visited[row-1][col]=true;
-      recursMinPathSum(grid, minPath, visited, row-1, col, curVal);
-      visited[row-1][col]=false;
-    }
     if(col+1<grid[0].length&&!visited[row][col+1]&&curVal+grid[row][col+1]<minPath[0]){
       visited[row][col+1]=true;
       recursMinPathSum(grid, minPath, visited, row, col+1, curVal);
       visited[row][col+1]=false;
     }
-    if(col-1>=0&&!visited[row][col-1]&&curVal+grid[row][col-1]<minPath[0]){
-      visited[row][col-1]=true;
-      recursMinPathSum(grid, minPath, visited, row, col-1, curVal);
-      visited[row][col-1]=false;
-    }
     return;
   }
 
-  //let's try again with a greedy algorithm
-  public int greedyMinPathSum(int[][] grid){
-    boolean[][] visited = new boolean[grid.length][grid[0].length];
-    visited[0][0]=true;
-    int row = 0;
-    int col = 0;
-    int pathVal = grid[0][0];
-    do{
-      int cheapestPath = Integer.MAX_VALUE;
-      int[] nextCoord = new int[2];
-      if(row+1<grid.length&&!visited[row+1][col]&&grid[row+1][col]<cheapestPath){
-        cheapestPath = grid[row+1][col];
-        nextCoord[0] = row+1;
-        nextCoord[1] = col;
+  //let's try again
+  //key words from description - You can only move either down or right at any point in time.
+  public int downRightMinPathSum(int[][] grid){
+    if(grid.length==0){
+      return 0;
+    }
+    else if(grid.length==1){
+      int result = 0;
+      for(int i = 0; i < grid[0].length; i++){
+        result+= grid[0][i];
       }
-      if(col+1<grid[0].length&&!visited[row][col+1]&&grid[row][col+1]<cheapestPath){
-        cheapestPath = grid[row][col+1];
-        nextCoord[0] = row;
-        nextCoord[1] = col+1;
+      return result;
+    }
+    else if(grid[0].length==1){
+      int result = 0;
+      for(int i = 0; i < grid.length; i++){
+        result += grid[i][0];
       }
-      if(row-1>=0&&!visited[row-1][col]&&grid[row-1][col]<cheapestPath){
-        cheapestPath = grid[row-1][col];
-        nextCoord[0] = row-1;
-        nextCoord[1] = col;
-      }
-      if(col-1>=0&&!visited[row][col-1]&&grid[row][col-1]<cheapestPath){
-        cheapestPath = grid[row][col-1];
-        nextCoord[0] = row;
-        nextCoord[1] = col-1;
-      }
-      visited[nextCoord[0]][nextCoord[1]]=true;
-      pathVal += cheapestPath;
-      row = nextCoord[0];
-      col = nextCoord[1];
+    }
 
-    }while(row!=grid.length-1||col!=grid[0].length-1);
-    return pathVal;
+    for(int i = 1; i < grid[0].length; i++){
+      grid[0][i]+=grid[0][i-1];
+    }
+    for(int j = 1; j < grid.length; j++){
+      for(int k = 0; k < grid[0].length; k++){
+        if(k==0){grid[j][k]+=grid[j-1][k];}
+        else if(j==grid.length-1&&k==grid[0].length-1){break;}
+        else{
+          int smallerVal = grid[j-1][k]<grid[j][k-1]? grid[j-1][k]:grid[j][k-1];
+          grid[j][k] += smallerVal;
+        }
+      }
+    }
+    int leftVal = grid[grid.length-1][grid[0].length-2]+grid[grid.length-1][grid[0].length-1];
+    int upVal = grid[grid.length-2][grid[0].length-1]+grid[grid.length-1][grid[0].length-1];
+    return leftVal < upVal ? leftVal:upVal;
   }
 
 
