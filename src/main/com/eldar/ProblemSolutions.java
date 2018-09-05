@@ -1454,5 +1454,47 @@ public class ProblemSolutions {
     return carryOne? newResult : digits;
   }
 
+  //given a matrix of positive ints
+  //find a path from top left to bottom right that minimizes the journey cost
+  //https://leetcode.com/problems/minimum-path-sum/description/
+  //oh look, a dynamic programming problem
+  public int minPathSum(int[][] grid) {
+    boolean[][] visited = new boolean[grid.length][grid[0].length];
+    int[] minPath = new int[] {Integer.MAX_VALUE};
+    visited[0][0]=true;
+    recursMinPathSum(grid, minPath, visited, 0, 0, 0);
+    return minPath[0];
+  }
+
+  private void recursMinPathSum(int[][] grid, int[] minPath, boolean[][] visited, int  row, int col, int curVal){
+    curVal+=grid[row][col];
+    if(curVal>=minPath[0]){return;}
+    if(row==grid.length-1&&col==grid[0].length-1){
+      if(curVal<minPath[0]){minPath[0]=curVal;}
+      return;
+    }
+    if(row+1<grid.length&&!visited[row+1][col]){
+      visited[row+1][col]=true;
+      recursMinPathSum(grid, minPath, visited, row+1, col, curVal);
+      visited[row+1][col]=false;
+    }
+    if(row-1>=0&&!visited[row-1][col]){
+      visited[row-1][col]=true;
+      recursMinPathSum(grid, minPath, visited, row-1, col, curVal);
+      visited[row-1][col]=false;
+    }
+    if(col+1<grid[0].length&&!visited[row][col+1]){
+      visited[row][col+1]=true;
+      recursMinPathSum(grid, minPath, visited, row, col+1, curVal);
+      visited[row][col+1]=false;
+    }
+    if(col-1>=0&&!visited[row][col-1]){
+      visited[row][col-1]=true;
+      recursMinPathSum(grid, minPath, visited, row, col-1, curVal);
+      visited[row][col-1]=false;
+    }
+    return;
+  }
+
 
 }

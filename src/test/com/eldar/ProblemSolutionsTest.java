@@ -562,4 +562,13 @@ public class ProblemSolutionsTest {
       Assert.assertArrayEquals(new int[] {1,0,0}, tester.plusOne(testArr));
       Assert.assertArrayEquals(new int[] {}, tester.plusOne(new int[] {}));
     }
+
+    @Test
+  public void minPathSum() throws Exception{
+      ProblemSolutions tester = new ProblemSolutions();
+      int[][] testMatrix = new int[][] {{1,3,1}, {1,5,1}, {4,2,1}};
+      Assert.assertEquals(7, tester.minPathSum(testMatrix));
+      testMatrix = new int[][] {{1,1,1,1},{20,20,20,1},{1,1,1,1},{1,20,20,20},{1,1,1,1}};
+      Assert.assertEquals(14, tester.minPathSum(testMatrix));
+    }
 }
