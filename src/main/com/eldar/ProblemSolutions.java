@@ -1609,4 +1609,23 @@ public class ProblemSolutions {
     }
     return maxRect;
   }
+
+  //reverse linked list from position l to position m in one pass
+  //I'll use ArrayList
+  //https://leetcode.com/problems/reverse-linked-list-ii/description/
+  public ListNode reverseListBetween(ListNode head, int m, int n) {
+    if(head==null||head.next==null){return head;}
+    List<ListNode> listStorage = new ArrayList<>();
+    while(head!=null){
+      listStorage.add(head);
+      head = head.next;
+    }
+    for(int i = 0; i <= (n-m)/2; i++){
+      int tmp = listStorage.get(m-1+i).val;
+      listStorage.get(m-1+i).val = listStorage.get(n-1-i).val;
+      listStorage.get(n-1-i).val = tmp;
+    }
+    return listStorage.get(0);
+
+  }
 }

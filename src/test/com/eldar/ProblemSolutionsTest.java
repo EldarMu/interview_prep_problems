@@ -648,4 +648,31 @@ public class ProblemSolutionsTest {
     Assert.assertEquals(10, tester.largestRectangleArea(testArr));
     Assert.assertEquals(2, tester.largestRectangleArea(new int[] {1,1}));
   }
+
+  @Test
+  public void reverseListBetween() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    ProblemSolutions.ListNode head = tester.new ListNode(1);
+    ProblemSolutions.ListNode tmp = tester.new ListNode(2);
+    head.next = tmp;
+    tmp.next = tester.new ListNode(3);
+    tmp = tmp.next;
+    tmp.next = tester.new ListNode(4);
+    tmp = tmp.next;
+    tmp.next = tester.new ListNode(5);
+    int[] expected = new int[] {1,4,3,2,5};
+    head = tester.reverseListBetween(head, 2,4);
+    for(int i = 0; i < expected.length; i++){
+      Assert.assertNotNull(head);
+      Assert.assertEquals(expected[i], head.val);
+      head = head.next;
+    }
+    head = tester.new ListNode(3);
+    head.next = tester.new ListNode(5);
+    head = tester.reverseListBetween(head,1,2);
+    Assert.assertEquals(5, head.val);
+    Assert.assertEquals(3, head.next.val);
+    Assert.assertNull(tester.reverseListBetween(null, 1,2));
+    Assert.assertEquals(1, tester.reverseListBetween(tester.new ListNode(1),1,2).val);
+  }
 }
