@@ -1570,5 +1570,39 @@ public class ProblemSolutions {
     return head;
   }
 
-
+  //given an array of int (as if a histogram), find the max rectangle area
+  //that can be created from the filled parts of the histogram
+  //https://leetcode.com/problems/largest-rectangle-in-histogram/description/
+  //find largest value in histogram, find all values that are above thisValue -1
+  //find largest resulting rectangle
+  //keep moving target height down until such a value is attained
+  //that no rectangle below it could have more unless due to width limitations
+  public int largestRectangleArea(int[] heights) {
+    int[] left = new int[heights.length];
+    int[] right = new int[heights.length];
+    int curLeftPtr = 0;
+    int curRightPtr = heights.length-1;
+    for(int i = 0; i < heights.length; i++){
+      curLeftPtr=i;
+      while(curLeftPtr>=0&&heights[curLeftPtr]>=heights[i]){
+        curLeftPtr--;
+      }
+      curLeftPtr++;
+      left[i]=curLeftPtr;
+    }
+    for(int j = heights.length-1; j>=0; j--){
+      curRightPtr = j;
+      while(curRightPtr<heights.length&&heights[curRightPtr]>=heights[j]){
+        curRightPtr++;
+      }
+      curRightPtr--;
+      right[j]=curRightPtr;
+    }
+    int maxRect = 0;
+    for(int k = 0; k < heights.length; k++){
+      int tmpRect = heights[k]*(right[k]-left[k]+1);
+      maxRect = tmpRect>maxRect?tmpRect:maxRect;
+    }
+    return maxRect;
+  }
 }

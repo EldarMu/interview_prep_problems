@@ -640,4 +640,12 @@ public class ProblemSolutionsTest {
       tmp = tmp.next;
     }
   }
+
+  @Test
+  public void largestRectangleArea() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    int[] testArr = new int[] {2,1,5,6,2,3};
+    Assert.assertEquals(10, tester.largestRectangleArea(testArr));
+    Assert.assertEquals(2, tester.largestRectangleArea(new int[] {1,1}));
+  }
 }
