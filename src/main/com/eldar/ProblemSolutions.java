@@ -1577,30 +1577,34 @@ public class ProblemSolutions {
   //find largest resulting rectangle
   //keep moving target height down until such a value is attained
   //that no rectangle below it could have more unless due to width limitations
+  //beats 91% of java solutions
   public int largestRectangleArea(int[] heights) {
+    if(heights==null||heights.length==0){return 0;}
     int[] left = new int[heights.length];
     int[] right = new int[heights.length];
+    left[0]=-1;
+    right[heights.length-1]=heights.length;
     int curLeftPtr = 0;
     int curRightPtr = heights.length-1;
-    for(int i = 0; i < heights.length; i++){
-      curLeftPtr=i;
+    for(int i = 1; i < heights.length; i++){
+      curLeftPtr=i-1;
       while(curLeftPtr>=0&&heights[curLeftPtr]>=heights[i]){
-        curLeftPtr--;
+        curLeftPtr = left[curLeftPtr];
+        if(curLeftPtr==-1){break;}
       }
-      curLeftPtr++;
       left[i]=curLeftPtr;
     }
-    for(int j = heights.length-1; j>=0; j--){
-      curRightPtr = j;
+    for(int j = heights.length-2; j>=0; j--){
+      curRightPtr = j+1;
       while(curRightPtr<heights.length&&heights[curRightPtr]>=heights[j]){
-        curRightPtr++;
+        curRightPtr=right[curRightPtr];
+        if(curRightPtr==heights.length){break;}
       }
-      curRightPtr--;
       right[j]=curRightPtr;
     }
     int maxRect = 0;
     for(int k = 0; k < heights.length; k++){
-      int tmpRect = heights[k]*(right[k]-left[k]+1);
+      int tmpRect = heights[k]*(right[k]-left[k]-1);
       maxRect = tmpRect>maxRect?tmpRect:maxRect;
     }
     return maxRect;
