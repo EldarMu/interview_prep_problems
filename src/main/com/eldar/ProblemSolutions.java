@@ -1548,5 +1548,27 @@ public class ProblemSolutions {
     return tmpList.get(tmpList.size()-k);
   }
 
+  //solution that doesn't require an additional data structure
+  //beats 99% of java solutions
+  public ListNode altRotateListRight(ListNode head, int k){
+    if(head==null||head.next==null){return head;}
+    int listSize=1;
+    ListNode tmp = head;
+    while(tmp.next!=null){
+      tmp = tmp.next;
+      listSize++;
+    }
+    k = k%listSize;
+    if(k==0){return head;}
+    tmp.next = head;
+    tmp = head;
+    for(int i = 0; i < listSize-1-k; i++){
+      tmp = tmp.next;
+    }
+    head = tmp.next;
+    tmp.next = null;
+    return head;
+  }
+
 
 }

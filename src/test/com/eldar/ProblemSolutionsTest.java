@@ -611,4 +611,33 @@ public class ProblemSolutionsTest {
       tmp = tmp.next;
     }
   }
+
+  @Test
+  public void altRotateListRight() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    ProblemSolutions.ListNode head = tester.new ListNode(1);
+    ProblemSolutions.ListNode tmp = tester.new ListNode(2);
+    head.next = tmp;
+    tmp.next = tester.new ListNode(3);
+    tmp = tmp.next;
+    tmp.next = tester.new ListNode(4);
+    tmp = tmp.next;
+    tmp.next = tester.new ListNode(5);
+    int[] expectedResult = new int[] {4,5,1,2,3};
+    tmp = tester.altRotateListRight(head, 2);
+    for(int i = 0; i < expectedResult.length; i++){
+      Assert.assertEquals(expectedResult[i],tmp.val);
+      tmp = tmp.next;
+    }
+    head = tester.new ListNode(0);
+    tmp = tester.new ListNode(1);
+    head.next = tmp;
+    tmp.next = tester.new ListNode(2);
+    tmp = tester.altRotateListRight(head, 4);
+    expectedResult = new int[] {2,0,1};
+    for(int i = 0; i < expectedResult.length; i++){
+      Assert.assertEquals(expectedResult[i], tmp.val);
+      tmp = tmp.next;
+    }
+  }
 }
