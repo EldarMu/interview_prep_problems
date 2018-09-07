@@ -1735,4 +1735,22 @@ public class ProblemSolutions {
     }
     return nums[0];
   }
+
+  //same problem as above, but every value except one appears thrice
+  //https://leetcode.com/problems/single-number-ii/description/
+  public int singleNumberTwo(int[] nums) {
+    Map<Integer, Integer> unpairedVals = new HashMap<>(nums.length/3+1);
+    for(int i = 0; i < nums.length; i ++){
+      if(!unpairedVals.containsKey(nums[i])){
+        unpairedVals.put(nums[i], 1);
+      }
+      else if(unpairedVals.get(nums[i])==1){
+        unpairedVals.put(nums[i], 2);
+      }
+      else if(unpairedVals.get(nums[i])==2){
+        unpairedVals.remove(nums[i]);
+      }
+    }
+    return unpairedVals.keySet().toArray(new Integer[1])[0];
+  }
 }

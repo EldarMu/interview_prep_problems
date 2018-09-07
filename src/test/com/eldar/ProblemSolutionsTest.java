@@ -748,4 +748,12 @@ public class ProblemSolutionsTest {
     Assert.assertEquals(1, tester.altSingleNumber(new int[] {2,2,1}));
     Assert.assertEquals(4, tester.altSingleNumber(new int[] {4,2,1,3,3,2,1}));
   }
+
+  @Test
+  public void singleNumberTwo() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    Assert.assertEquals(1, tester.singleNumberTwo(new int[] {2,2,2,1}));
+    Assert.assertEquals(4, tester.singleNumberTwo(new int[] {4,2,1,2,3,3,2,1,3,1}));
+    Assert.assertEquals(0, tester.singleNumberTwo(new int[] {0}));
+  }
 }
