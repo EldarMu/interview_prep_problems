@@ -1677,14 +1677,11 @@ public class ProblemSolutions {
     int downBound = matrix.length-1;
     boolean[][] visited = new boolean[matrix.length][matrix[0].length];
     List<Integer> result = new ArrayList<>(matrix.length*matrix[0].length);
-    boolean nowhereToGo = false;
-    while(!nowhereToGo){
-      nowhereToGo = true;
+    while(leftBound<=rightBound&&upBound<=downBound){
       for(int i = leftBound; i<=rightBound; i++){
         if(!visited[upBound][i]){
           result.add(matrix[upBound][i]);
           visited[upBound][i]=true;
-          if(nowhereToGo){nowhereToGo=false;}
         }
       }
       upBound++;
@@ -1692,7 +1689,6 @@ public class ProblemSolutions {
         if(!visited[i][rightBound]){
           result.add(matrix[i][rightBound]);
           visited[i][rightBound] = true;
-          if(nowhereToGo){nowhereToGo=false;}
         }
       }
       rightBound--;
@@ -1700,7 +1696,6 @@ public class ProblemSolutions {
         if(!visited[downBound][i]){
           result.add(matrix[downBound][i]);
           visited[downBound][i] = true;
-          if(nowhereToGo){nowhereToGo=false;}
         }
       }
       downBound--;
@@ -1708,7 +1703,6 @@ public class ProblemSolutions {
         if(!visited[i][leftBound]){
           result.add(matrix[i][leftBound]);
           visited[i][leftBound]=true;
-          if(nowhereToGo){nowhereToGo=false;}
         }
       }
       leftBound++;
