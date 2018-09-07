@@ -684,4 +684,54 @@ public class ProblemSolutionsTest {
     Assert.assertEquals(2, tester.mySqrt(8));
     Assert.assertEquals(0, tester.mySqrt(0));
   }
+
+  @Test
+  public void spiralOrder() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    int[][] testMatrix = new int[1][1];
+    int[] expectedResult = new int[1];
+    List<Integer> actualResult = new ArrayList<>();
+
+    testMatrix = new int[][] {{6,9,7}};
+    expectedResult = new int[] {6,9,7};
+    actualResult = tester.spiralOrder(testMatrix);
+    Assert.assertEquals(expectedResult.length, actualResult.size());
+    for(int i = 0; i < expectedResult.length; i ++){
+      Assert.assertEquals(expectedResult[i], (int)actualResult.get(i));
+    }
+
+    testMatrix = new int[][] {{6},{9},{7}};
+    actualResult = tester.spiralOrder(testMatrix);
+    Assert.assertEquals(expectedResult.length, actualResult.size());
+    for(int i = 0; i < expectedResult.length; i ++){
+      Assert.assertEquals(expectedResult[i], (int)actualResult.get(i));
+    }
+
+    testMatrix = new int[][] {{1,2,3,4},
+        {5,6,7,8},{9,10,11,12},{13,14,15,16}};
+    expectedResult = new int[] {1,2,3,4,8,12,16,15,14,13,9,5,6,7,11,10};
+    actualResult = tester.spiralOrder(testMatrix);
+    Assert.assertEquals(expectedResult.length, actualResult.size());
+    for(int i = 0; i < expectedResult.length; i ++){
+      Assert.assertEquals(expectedResult[i], (int)actualResult.get(i));
+    }
+
+    testMatrix = new int[][] {{1,2,3,4},{5,6,7,8},{9,10,11,12}};
+    expectedResult = new int[] {1,2,3,4,8,12,11,10,9,5,6,7};
+    actualResult = tester.spiralOrder(testMatrix);
+    Assert.assertEquals(expectedResult.length, actualResult.size());
+    for(int i = 0; i < expectedResult.length; i ++){
+      Assert.assertEquals(expectedResult[i], (int)actualResult.get(i));
+    }
+
+    testMatrix = new int[][] {{1,2,3},{4,5,6},{7,8,9}};
+    expectedResult = new int[] {1,2,3,6,9,8,7,4,5};
+    actualResult = tester.spiralOrder(testMatrix);
+    Assert.assertEquals(expectedResult.length, actualResult.size());
+    for(int i = 0; i < expectedResult.length; i ++){
+      Assert.assertEquals(expectedResult[i], (int)actualResult.get(i));
+    }
+
+    Assert.assertTrue(tester.spiralOrder(new int[][] {{}}).isEmpty());
+  }
 }

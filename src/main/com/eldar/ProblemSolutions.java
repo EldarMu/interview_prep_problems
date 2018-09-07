@@ -1631,6 +1631,8 @@ public class ProblemSolutions {
   //compute sqrt(x) - x guaranteed to be non-negative integer;
   //https://leetcode.com/problems/sqrtx/
   //standard speed sol'n with essentially a binary search;
+  //beats 60% of java solutions
+  //to get faster, have to change to bit operations;
   public int mySqrt(int x) {
     double left = 0;
     double right = x;
@@ -1646,5 +1648,71 @@ public class ProblemSolutions {
     }
     if((int)result <(int)(result+.000001)){result+=.000001;}
     return (int)result;
+  }
+
+  //given an nxm matrix, return the elements in spiral order
+  //left->down->right->up
+  //https://leetcode.com/problems/spiral-matrix/description/
+  //a verbose but functional solution
+  //made worse by edge cases
+  public List<Integer> spiralOrder(int[][] matrix) {
+    if(matrix==null||matrix.length==0){return new ArrayList<>();}
+    else if(matrix.length==1){
+      List<Integer> result = new ArrayList<>(matrix.length*matrix[0].length);
+      for(int i = 0; i < matrix[0].length; i++){
+        result.add(matrix[0][i]);
+      }
+      return result;
+    }
+    else if(matrix[0].length==1){
+      List<Integer> result = new ArrayList<>(matrix.length*matrix[0].length);
+      for(int i = 0; i < matrix.length; i++){
+        result.add(matrix[i][0]);
+      }
+      return result;
+    }
+    int upBound = 0;
+    int leftBound = 0;
+    int rightBound = matrix[0].length-1;
+    int downBound = matrix.length-1;
+    boolean[][] visited = new boolean[matrix.length][matrix[0].length];
+    List<Integer> result = new ArrayList<>(matrix.length*matrix[0].length);
+    boolean nowhereToGo = false;
+    while(!nowhereToGo){
+      nowhereToGo = true;
+      for(int i = leftBound; i<=rightBound; i++){
+        if(!visited[upBound][i]){
+          result.add(matrix[upBound][i]);
+          visited[upBound][i]=true;
+          if(nowhereToGo){nowhereToGo=false;}
+        }
+      }
+      upBound++;
+      for(int i = upBound; i <= downBound; i++){
+        if(!visited[i][rightBound]){
+          result.add(matrix[i][rightBound]);
+          visited[i][rightBound] = true;
+          if(nowhereToGo){nowhereToGo=false;}
+        }
+      }
+      rightBound--;
+      for(int i = rightBound; i >= leftBound; i--){
+        if(!visited[downBound][i]){
+          result.add(matrix[downBound][i]);
+          visited[downBound][i] = true;
+          if(nowhereToGo){nowhereToGo=false;}
+        }
+      }
+      downBound--;
+      for(int i = downBound; i >= upBound; i--){
+        if(!visited[i][leftBound]){
+          result.add(matrix[i][leftBound]);
+          visited[i][leftBound]=true;
+          if(nowhereToGo){nowhereToGo=false;}
+        }
+      }
+      leftBound++;
+    }
+    return result;
   }
 }
