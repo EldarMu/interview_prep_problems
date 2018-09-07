@@ -675,4 +675,13 @@ public class ProblemSolutionsTest {
     Assert.assertNull(tester.reverseListBetween(null, 1,2));
     Assert.assertEquals(1, tester.reverseListBetween(tester.new ListNode(1),1,2).val);
   }
+
+  @Test
+  public void mySqrt() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    Assert.assertEquals(2, tester.mySqrt(4));
+    Assert.assertEquals(7, tester.mySqrt(49));
+    Assert.assertEquals(2, tester.mySqrt(8));
+    Assert.assertEquals(0, tester.mySqrt(0));
+  }
 }

@@ -1626,6 +1626,25 @@ public class ProblemSolutions {
       listStorage.get(n-1-i).val = tmp;
     }
     return listStorage.get(0);
+  }
 
+  //compute sqrt(x) - x guaranteed to be non-negative integer;
+  //https://leetcode.com/problems/sqrtx/
+  //standard speed sol'n with essentially a binary search;
+  public int mySqrt(int x) {
+    double left = 0;
+    double right = x;
+    double result = 1;
+    while(Math.abs(result*result-(double)x)>.000001){
+      result = left+(right-left)/2.0;
+      if(result*result>x){
+        right = result;
+      }
+      else{
+        left = result;
+      }
+    }
+    if((int)result <(int)(result+.000001)){result+=.000001;}
+    return (int)result;
   }
 }
