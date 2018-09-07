@@ -734,4 +734,18 @@ public class ProblemSolutionsTest {
 
     Assert.assertTrue(tester.spiralOrder(new int[][] {{}}).isEmpty());
   }
+
+  @Test
+  public void singleNumber() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    Assert.assertEquals(1, tester.singleNumber(new int[] {2,2,1}));
+    Assert.assertEquals(4, tester.singleNumber(new int[] {4,2,1,3,3,2,1}));
+  }
+
+  @Test
+  public void altSingleNumber() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    Assert.assertEquals(1, tester.altSingleNumber(new int[] {2,2,1}));
+    Assert.assertEquals(4, tester.altSingleNumber(new int[] {4,2,1,3,3,2,1}));
+  }
 }

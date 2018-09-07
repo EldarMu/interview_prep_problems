@@ -1709,4 +1709,30 @@ public class ProblemSolutions {
     }
     return result;
   }
+
+  //given an array where each int that appears in it, appears in it twice, except one
+  //find that one that has no duplicate
+  //https://leetcode.com/problems/single-number/description/
+  //first let's try the obvious hashmap solution
+  public int singleNumber(int[] nums) {
+    Map<Integer, Boolean> unpairedVals = new HashMap<>(nums.length / 2 + 1);
+    for (int i = 0; i < nums.length; i++) {
+      if(!unpairedVals.containsKey(nums[i])){
+        unpairedVals.put(nums[i],true);
+      }
+      else{
+        unpairedVals.remove(nums[i]);
+      }
+    }
+    return unpairedVals.keySet().toArray(new Integer[1])[0];
+  }
+
+  //and here's the super-clever bit operation solution
+  //beats 62% of java solutions
+  public int altSingleNumber(int[] nums){
+    for(int i = 1; i < nums.length; i++){
+      nums[0] ^= nums[i];
+    }
+    return nums[0];
+  }
 }
