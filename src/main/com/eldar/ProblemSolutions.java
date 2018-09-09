@@ -1885,4 +1885,35 @@ public class ProblemSolutions {
       recursMarkSafe(board, safeOChars, row, col+1);
     }
   }
+
+
+  //given a string and a series of potential substrings
+  //see if the string can be created from those substrings
+  //a substring may be reused
+  //https://leetcode.com/problems/word-break/description/
+  //first the naive solution
+  public boolean wordBreak(String s, List<String> wordDict) {
+    char[] strAsArr = s.toCharArray();
+    return recursWordBreak(wordDict, strAsArr, 0);
+  }
+
+  private boolean recursWordBreak(List<String> wordDict, char[] strAsArr, int left){
+    if(left>=strAsArr.length){return true;}
+    for(String s: wordDict){
+      boolean wordFailed = false;
+      for(int i = 0; i < s.length(); i++){
+        if(s.length()+left>strAsArr.length){
+          wordFailed=true;
+          continue;
+        }
+        if(s.charAt(i)!=strAsArr[left+i]){
+          wordFailed=true;
+          continue;
+        }
+      }
+      if(!wordFailed&&recursWordBreak(wordDict, strAsArr, left+s.length())){return true;}
+    }
+    return false;
+  }
+
 }

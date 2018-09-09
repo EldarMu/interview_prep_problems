@@ -850,4 +850,28 @@ public class ProblemSolutionsTest {
       }
     }
   }
+
+  @Test
+  public void wordBreak() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    List<String> wordDict = new ArrayList<>();
+
+    wordDict.clear();
+    wordDict.add("cat");
+    wordDict.add("sand");
+    wordDict.add("cats");
+    wordDict.add("dog");
+    wordDict.add("and");
+    Assert.assertFalse(tester.wordBreak("catsandog", wordDict));
+
+    wordDict.add("leet");
+    wordDict.add("code");
+    Assert.assertTrue(tester.wordBreak("leetcode", wordDict));
+
+    wordDict.clear();
+
+    wordDict.add("apple");
+    wordDict.add("pen");
+    Assert.assertTrue(tester.wordBreak("applepenapple", wordDict));
+  }
 }
