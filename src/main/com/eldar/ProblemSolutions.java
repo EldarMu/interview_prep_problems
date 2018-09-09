@@ -1758,34 +1758,27 @@ public class ProblemSolutions {
   //with each root->lead path representing a value
   //return the sum of these values
   //https://leetcode.com/problems/sum-root-to-leaf-numbers/description/
+  //beats 100% of java submissions
   public int sumNumbers(TreeNode root) {
     if(root==null){return 0;}
-    List<Integer> curPath = new ArrayList<>();
+    int pathVal = 0;
     int[] sum = new int[] {0};
-    recursSumNumbers(root, curPath, sum);
+    recursSumNumbers(root, pathVal,  sum);
     return sum[0];
   }
 
-  private void recursSumNumbers(TreeNode node, List<Integer> path, int[] sum){
-    path.add(node.val);
+  private void recursSumNumbers(TreeNode node, int pathVal, int[] sum){
+    pathVal *= 10;
+    pathVal += node.val;
     if(node.left==null&&node.right==null){
-      int val = 0;
-      int tenMultipl = 1;
-      for(int i = path.size()-1; i>=0; i--){
-        val += path.get(i)*tenMultipl;
-        tenMultipl*=10;
-      }
-      sum[0]+=val;
-      path.remove(path.size()-1);
+      sum[0]+=pathVal;
       return;
     }
     if(node.left!=null){
-      recursSumNumbers(node.left, path, sum);
+      recursSumNumbers(node.left, pathVal, sum);
     }
-    if (node.right != null) {
-      recursSumNumbers(node.right, path, sum);
+    if(node.right!=null){
+      recursSumNumbers(node.right, pathVal, sum);
     }
-    path.remove(path.size()-1);
-    return;
   }
 }

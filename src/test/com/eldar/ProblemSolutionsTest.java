@@ -762,17 +762,17 @@ public class ProblemSolutionsTest {
     ProblemSolutions tester = new ProblemSolutions();
     ProblemSolutions.TreeNode head;
 
-    head = tester.new TreeNode(1);
-    head.left = tester.new TreeNode(2);
-    head.right = tester.new TreeNode(3);
-    Assert.assertEquals(25, tester.sumNumbers(head));
-
     head = tester.new TreeNode(4);
     head.left = tester.new TreeNode(9);
     head.left.left = tester.new TreeNode(5);
     head.left.right = tester.new TreeNode(1);
     head.right = tester.new TreeNode(0);
     Assert.assertEquals(1026, tester.sumNumbers(head));
+
+    head = tester.new TreeNode(1);
+    head.left = tester.new TreeNode(2);
+    head.right = tester.new TreeNode(3);
+    Assert.assertEquals(25, tester.sumNumbers(head));
 
     Assert.assertEquals(0, tester.sumNumbers(null));
 
