@@ -1,5 +1,6 @@
 package com.eldar;
 
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -1780,5 +1781,64 @@ public class ProblemSolutions {
     if(node.right!=null){
       recursSumNumbers(node.right, pathVal, sum);
     }
+  }
+
+  //breadth-first traversal, with every second level reversed
+  //https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/description/
+  //beats 96% of java submissions
+  //compiled, ran, and passed on first try
+  //░░░░░░░░░▄██████████▄▄░░░░░░░░
+  //░░░░░░▄█████████████████▄░░░░░
+  //░░░░░██▀▀▀▀▀▀▀▀▀▀▀████████░░░░
+  //░░░░██░░░░░░░░░░░░░░███████░░░
+  //░░░██░░░░░░░░░░░░░░░████████░░
+  //░░░█▀░░░░░░░░░░░░░░░▀███████░░
+  //░░░█▄▄██▄░░░▀█████▄░░▀██████░░
+  //░░░█▀███▄▀░░░▄██▄▄█▀░░░█████▄░
+  //░░░█░░▀▀█░░░░░▀▀░░░▀░░░██░░▀▄█
+  //░░░█░░░█░░░▄░░░░░░░░░░░░░██░██
+  //░░░█░░█▄▄▄▄█▄▀▄░░░░░░░░░▄▄█▄█░
+  //░░░█░░█▄▄▄▄▄▄░▀▄░░░░░░░░▄░▀█░░
+  //░░░█░█▄████▀██▄▀░░░░░░░█░▀▀░░░
+  //░░░░██▀░▄▄▄▄░░░▄▀░░░░▄▀█░░░░░░
+  //░░░░░█▄▀░░░░▀█▀█▀░▄▄▀░▄▀░░░░░░
+  //░░░░░▀▄░░░░░░░░▄▄▀░░░░█░░░░░░░
+  //░░░░░▄██▀▀▀▀▀▀▀░░░░░░░█▄░░░░░░
+  //░░▄▄▀░░░▀▄░░░░░░░░░░▄▀░▀▀▄░░░░
+  //▄▀▀░░░░░░░█▄░░░░░░▄▀░░░░░░█▄░░
+  //█░░░░░░░░░░░░░░░░░░░░░░░░░░▀█▄
+  //░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+  //█▄░░█ █▀▀█ ▀▀█▀▀░░█▀▀█ █▀▀█ █▀▀▄
+  //█░█░█ █░░█ ░░█░░░░█▀▀▄ █▄▄█ █░░█
+  //█░░▀█ █▄▄█ ░░█░░░░█▄▄█ █░░█ █▄▄▀
+  //░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+  public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+    if(root == null){return new ArrayList<>();}
+    List<List<Integer>> results = new ArrayList<>();
+    boolean leftToRight = true;
+    List<TreeNode> curLevel = new ArrayList<>();
+    curLevel.add(root);
+    while(!curLevel.isEmpty()){
+      List<TreeNode> newLevel = new ArrayList<>();
+      for(int i = 0; i < curLevel.size(); i++){
+        if(curLevel.get(i).left!=null){newLevel.add(curLevel.get(i).left);}
+        if(curLevel.get(i).right!=null){newLevel.add(curLevel.get(i).right);}
+      }
+      List<Integer> tmp = new ArrayList<>();
+      if(leftToRight){
+        for(int j = 0; j < curLevel.size(); j++){
+          tmp.add(curLevel.get(j).val);
+        }
+      }
+      else{
+        for(int j = curLevel.size()-1; j>=0; j--){
+          tmp.add(curLevel.get(j).val);
+        }
+      }
+      results.add(tmp);
+      leftToRight=!leftToRight;
+      curLevel = newLevel;
+    }
+    return results;
   }
 }

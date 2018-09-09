@@ -778,4 +778,32 @@ public class ProblemSolutionsTest {
 
     Assert.assertEquals(5, tester.sumNumbers(tester.new TreeNode(5)));
   }
+
+  @Test
+  public void zigzagLevelOrder() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    ProblemSolutions.TreeNode head;
+    List<List<Integer>> results;
+    List<int[]> expectedResults;
+
+    head = tester.new TreeNode(3);
+    head.left = tester.new TreeNode(9);
+    head.right = tester.new TreeNode(20);
+    head.right.left = tester.new TreeNode(15);
+    head.right.right = tester.new TreeNode(7);
+    results = tester.zigzagLevelOrder(head);
+    expectedResults = new ArrayList<>();
+    expectedResults.add(new int[] {3});
+    expectedResults.add(new int[] {20,9});
+    expectedResults.add(new int[] {15,7});
+    Assert.assertEquals(expectedResults.size(), results.size());
+    for(int i = 0; i<expectedResults.size(); i++){
+      Assert.assertEquals(expectedResults.get(i).length, results.get(i).size());
+      for(int j = 0; j < expectedResults.get(i).length; j++){
+        Assert.assertEquals(expectedResults.get(i)[j], (int)results.get(i).get(j));
+      }
+    }
+
+    Assert.assertTrue(tester.zigzagLevelOrder(null).isEmpty());
+  }
 }
