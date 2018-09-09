@@ -1753,4 +1753,39 @@ public class ProblemSolutions {
     }
     return unpairedVals.keySet().toArray(new Integer[1])[0];
   }
+
+  //given a binary tree of digits (0-9)
+  //with each root->lead path representing a value
+  //return the sum of these values
+  //https://leetcode.com/problems/sum-root-to-leaf-numbers/description/
+  public int sumNumbers(TreeNode root) {
+    if(root==null){return 0;}
+    List<Integer> curPath = new ArrayList<>();
+    int[] sum = new int[] {0};
+    recursSumNumbers(root, curPath, sum);
+    return sum[0];
+  }
+
+  private void recursSumNumbers(TreeNode node, List<Integer> path, int[] sum){
+    path.add(node.val);
+    if(node.left==null&&node.right==null){
+      int val = 0;
+      int tenMultipl = 1;
+      for(int i = path.size()-1; i>=0; i--){
+        val += path.get(i)*tenMultipl;
+        tenMultipl*=10;
+      }
+      sum[0]+=val;
+      path.remove(path.size()-1);
+      return;
+    }
+    if(node.left!=null){
+      recursSumNumbers(node.left, path, sum);
+    }
+    if (node.right != null) {
+      recursSumNumbers(node.right, path, sum);
+    }
+    path.remove(path.size()-1);
+    return;
+  }
 }
