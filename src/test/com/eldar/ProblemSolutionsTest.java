@@ -806,4 +806,48 @@ public class ProblemSolutionsTest {
 
     Assert.assertTrue(tester.zigzagLevelOrder(null).isEmpty());
   }
+
+  @Test
+  public void captureOVals() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    char[][] testMatrix;
+    char[][] expectedResult;
+
+    testMatrix = new char[][]
+        {{'X','X','X','X'},{'X','O','O','X'},{'X','X','O','X'},{'X','O','X','X'}};
+    expectedResult = new char[][]
+        {{'X','X','X','X'},{'X','X','X','X'},{'X','X','X','X'},{'X','O','X','X'}};
+    tester.captureOVals(testMatrix);
+    for(int i = 0; i < testMatrix.length; i++){
+      for(int j = 0; j < testMatrix[0].length; j++){
+        Assert.assertEquals(expectedResult[i][j], testMatrix[i][j]);
+      }
+    }
+
+    testMatrix = new char[][] {{'X','O','X'}};
+    expectedResult = new char[][] {{'X','O','X'}};
+    tester.captureOVals(testMatrix);
+    for(int i = 0; i < testMatrix.length; i++){
+      for(int j = 0; j < testMatrix[0].length; j++){
+        Assert.assertEquals(expectedResult[i][j], testMatrix[i][j]);
+      }
+    }
+    testMatrix = new char[][] {{'X'},{'O'},{'X'}};
+    expectedResult = new char[][] {{'X'},{'O'},{'X'}};
+    tester.captureOVals(testMatrix);
+    for(int i = 0; i < testMatrix.length; i++){
+      for(int j = 0; j < testMatrix[0].length; j++){
+        Assert.assertEquals(expectedResult[i][j], testMatrix[i][j]);
+      }
+    }
+
+    testMatrix = new char[][] {{}};
+    expectedResult = new char[][] {{}};
+    tester.captureOVals(testMatrix);
+    for(int i = 0; i < testMatrix.length; i++){
+      for(int j = 0; j < testMatrix[0].length; j++){
+        Assert.assertEquals(expectedResult[i][j], testMatrix[i][j]);
+      }
+    }
+  }
 }

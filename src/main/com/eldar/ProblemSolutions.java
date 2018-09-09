@@ -1,11 +1,10 @@
 package com.eldar;
 
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Stream;
 
 /*
-//Class to store the various methods implemented over the course of getting interview
+//Class to store the various methods implemented over the course of interview practice
 //interview problem urls listed
 //occasionally, numerous solutions (generally a naive one to structure thoughts and an actually good one) are listed
 //each problem prefaced with a commented description
@@ -1786,32 +1785,6 @@ public class ProblemSolutions {
   //breadth-first traversal, with every second level reversed
   //https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/description/
   //beats 96% of java submissions
-  //compiled, ran, and passed on first try
-  //░░░░░░░░░▄██████████▄▄░░░░░░░░
-  //░░░░░░▄█████████████████▄░░░░░
-  //░░░░░██▀▀▀▀▀▀▀▀▀▀▀████████░░░░
-  //░░░░██░░░░░░░░░░░░░░███████░░░
-  //░░░██░░░░░░░░░░░░░░░████████░░
-  //░░░█▀░░░░░░░░░░░░░░░▀███████░░
-  //░░░█▄▄██▄░░░▀█████▄░░▀██████░░
-  //░░░█▀███▄▀░░░▄██▄▄█▀░░░█████▄░
-  //░░░█░░▀▀█░░░░░▀▀░░░▀░░░██░░▀▄█
-  //░░░█░░░█░░░▄░░░░░░░░░░░░░██░██
-  //░░░█░░█▄▄▄▄█▄▀▄░░░░░░░░░▄▄█▄█░
-  //░░░█░░█▄▄▄▄▄▄░▀▄░░░░░░░░▄░▀█░░
-  //░░░█░█▄████▀██▄▀░░░░░░░█░▀▀░░░
-  //░░░░██▀░▄▄▄▄░░░▄▀░░░░▄▀█░░░░░░
-  //░░░░░█▄▀░░░░▀█▀█▀░▄▄▀░▄▀░░░░░░
-  //░░░░░▀▄░░░░░░░░▄▄▀░░░░█░░░░░░░
-  //░░░░░▄██▀▀▀▀▀▀▀░░░░░░░█▄░░░░░░
-  //░░▄▄▀░░░▀▄░░░░░░░░░░▄▀░▀▀▄░░░░
-  //▄▀▀░░░░░░░█▄░░░░░░▄▀░░░░░░█▄░░
-  //█░░░░░░░░░░░░░░░░░░░░░░░░░░▀█▄
-  //░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-  //█▄░░█ █▀▀█ ▀▀█▀▀░░█▀▀█ █▀▀█ █▀▀▄
-  //█░█░█ █░░█ ░░█░░░░█▀▀▄ █▄▄█ █░░█
-  //█░░▀█ █▄▄█ ░░█░░░░█▄▄█ █░░█ █▄▄▀
-  //░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
   public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
     if(root == null){return new ArrayList<>();}
     List<List<Integer>> results = new ArrayList<>();
@@ -1840,5 +1813,76 @@ public class ProblemSolutions {
       curLevel = newLevel;
     }
     return results;
+  }
+
+  //given a matrix consisting of the chars 'X' and 'O'
+  //flip all 'O' chars if they are surrounded by 'X'
+  //i.e. they don't have an exit path of 'O' chars to matrix edge
+  //https://leetcode.com/problems/surrounded-regions/description/
+  //standard-issue solution, beats 75% of java submissions
+  public void captureOVals(char[][] board) {
+    if(board==null||board.length==0||board[0].length==0
+        ||board.length==1||board[0].length==1){return;}
+    boolean[][] safeOChars = new boolean[board.length][board[0].length];
+    for(int i = 0; i < board.length; i++){
+      if(board[i][0]=='O'){
+        safeOChars[i][0]=true;
+      }
+      if(board[i][board[0].length-1]=='O'){
+        safeOChars[i][board[0].length-1]=true;
+      }
+    }
+    for(int i = 0; i < board[0].length; i++){
+      if(board[0][i]=='O'){
+        safeOChars[0][i]=true;
+      }
+      if(board[board.length-1][i]=='O'){
+        safeOChars[board.length-1][i]=true;
+      }
+    }
+
+    for(int i = 0; i < board.length; i++){
+      if(safeOChars[i][0]==true){
+        recursMarkSafe(board, safeOChars, i, 0);
+      }
+      if(safeOChars[i][board[0].length-1]==true){
+        recursMarkSafe(board, safeOChars, i, board[0].length-1);
+      }
+    }
+    for(int i = 0; i < board[0].length; i++){
+      if(safeOChars[0][i]==true){
+        recursMarkSafe(board, safeOChars, 0, i);
+      }
+      if(safeOChars[board.length-1][i]==true){
+        recursMarkSafe(board, safeOChars, board.length-1, i);
+      }
+    }
+
+    for(int i = 0; i < board.length; i++){
+      for(int j = 0; j < board[0].length; j++){
+        if(board[i][j]=='O'&&safeOChars[i][j]==false){
+          board[i][j]='X';
+        }
+      }
+    }
+  }
+
+  private void recursMarkSafe(char[][] board, boolean[][] safeOChars, int row, int col){
+    if(row>0&&board[row-1][col]=='O'&&!safeOChars[row-1][col]){
+      safeOChars[row-1][col]=true;
+      recursMarkSafe(board, safeOChars, row-1, col);
+    }
+    if(col>0&&board[row][col-1]=='O'&&!safeOChars[row][col-1]){
+      safeOChars[row][col-1] = true;
+      recursMarkSafe(board, safeOChars, row, col-1);
+    }
+    if(row<board.length-1&&board[row+1][col]=='O'&&!safeOChars[row+1][col]){
+      safeOChars[row+1][col] = true;
+      recursMarkSafe(board, safeOChars, row+1, col);
+    }
+    if(col<board[0].length-1&&board[row][col+1]=='O'&&!safeOChars[row][col+1]){
+      safeOChars[row][col+1] = true;
+      recursMarkSafe(board, safeOChars, row, col+1);
+    }
   }
 }
