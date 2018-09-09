@@ -1915,5 +1915,52 @@ public class ProblemSolutions {
     }
     return false;
   }
+  class TupleNode {
+    int val;
+    int occurence;
+    TupleNode next;
+    TupleNode(int val, int occurrence){
+      this.val = val;
+      this.occurence = occurrence;
+      next = null;
+    }
+  }
+
+  //given five values separately,
+  //with a guarantee that there is a value that occurs more than others
+  //find that value (the mode) without using any structures (not even arrays)
+  public int findMode(int a, int b, int c, int d, int e){
+    TupleNode head = new TupleNode(a, 1);
+    buildModeList(b, head);
+    buildModeList(c, head);
+    buildModeList(d, head);
+    buildModeList(e, head);
+    int mode=0;
+    int modeOccurrence=0;
+    TupleNode tmp = head;
+    while(tmp!=null){
+      if(tmp.occurence>modeOccurrence){
+        mode = tmp.val;
+        modeOccurrence = tmp.occurence;
+      }
+      tmp = tmp.next;
+    }
+    return mode;
+  }
+
+  public void buildModeList(int val, TupleNode head){
+    TupleNode tmp = head;
+    boolean valOccurred = false;
+    boolean lastVal = false;
+    while(!lastVal){
+      if(tmp.val==val){
+        tmp.occurence+=1;
+        valOccurred=true;
+      }
+      if(tmp.next!=null){tmp=tmp.next;}
+      else{lastVal=true;}
+    }
+    if(!valOccurred){tmp.next = new TupleNode(val, 1);}
+  }
 
 }

@@ -857,6 +857,21 @@ public class ProblemSolutionsTest {
     List<String> wordDict = new ArrayList<>();
 
     wordDict.clear();
+    wordDict.add("a");
+    wordDict.add("aa");
+    wordDict.add("aaa");
+    wordDict.add("aaaa");
+    wordDict.add("aaaaa");
+    wordDict.add("aaaaaa");
+    wordDict.add("aaaaaaa");
+    wordDict.add("aaaaaaaa");
+    wordDict.add("aaaaaaaaa");
+    wordDict.add("aaaaaaaaaa");
+    String testStr = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab";
+    Assert.assertFalse(tester.wordBreak(testStr, wordDict));
+
+    wordDict.clear();
     wordDict.add("cat");
     wordDict.add("sand");
     wordDict.add("cats");
@@ -873,5 +888,12 @@ public class ProblemSolutionsTest {
     wordDict.add("apple");
     wordDict.add("pen");
     Assert.assertTrue(tester.wordBreak("applepenapple", wordDict));
+  }
+
+  @Test
+  public void findMode() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    Assert.assertEquals(5, tester.findMode(4,2,3,5,5));
+    Assert.assertEquals(5, tester.findMode(4,5,4,5,5));
   }
 }
