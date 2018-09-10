@@ -919,4 +919,13 @@ public class ProblemSolutionsTest {
 
     Assert.assertNull(tester.sortedArrayToBST(new int[] {}));
   }
+
+  @Test
+  public void maxProfit() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    Assert.assertEquals(0, tester.maxProfit(new int[] {}));
+    Assert.assertEquals(0, tester.maxProfit(new int[] {7,6,4,3,1}));
+    Assert.assertEquals(4, tester.maxProfit(new int[] {3,2,6,5,0,3}));
+    Assert.assertEquals(5, tester.maxProfit(new int[] {7,1,5,3,6,4}));
+  }
 }

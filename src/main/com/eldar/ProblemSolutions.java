@@ -1973,4 +1973,33 @@ public class ProblemSolutions {
     result.right = recursSortArrayToBST(nums, mid+1, rightIncl);
     return result;
   }
+
+  //a wizard gives you the price of a certain stock for future x days
+  //figure out the optimal price to buy that stock, and then sell it
+  //and return the difference per stock
+  //if no optimal time to buy and sell exists, return 0
+  //https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/
+  public int maxProfit(int[] prices) {
+    if(prices.length==0){return 0;}
+    int[] minThusFar = new int[prices.length];
+    int[] maxThusFar = new int[prices.length];
+    int curMin = Integer.MAX_VALUE;
+    int curMax = Integer.MIN_VALUE;
+    for(int i = 0; i < prices.length; i++){
+      if(prices[i]<curMin){
+        curMin = prices[i];
+      }
+      minThusFar[i]= curMin;
+      if(prices[prices.length-1-i]>curMax){
+        curMax = prices[prices.length-1-i];
+      }
+      maxThusFar[prices.length-1-i]=curMax;
+    }
+    int maxDiff = 0;
+    for(int i = 0; i < prices.length; i++){
+      int curDiff = maxThusFar[i]-minThusFar[i];
+      maxDiff = curDiff>maxDiff? curDiff:maxDiff;
+    }
+    return maxDiff;
+  }
 }
