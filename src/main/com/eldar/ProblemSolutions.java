@@ -1891,27 +1891,21 @@ public class ProblemSolutions {
   //see if the string can be created from those substrings
   //a substring may be reused
   //https://leetcode.com/problems/word-break/description/
-  //first the naive solution
+  //reworked to skip looking for a solution to an already solved substring
+  //beats 88% of java submissions
   public boolean wordBreak(String s, List<String> wordDict) {
-    char[] strAsArr = s.toCharArray();
-    return recursWordBreak(wordDict, strAsArr, 0);
+    Map<String, Boolean> alreadyDone = new HashMap<>();
+    return recursWordBreak(wordDict, s, alreadyDone);
   }
 
-  private boolean recursWordBreak(List<String> wordDict, char[] strAsArr, int left){
-    if(left>=strAsArr.length){return true;}
-    for(String s: wordDict){
-      boolean wordFailed = false;
-      for(int i = 0; i < s.length(); i++){
-        if(s.length()+left>strAsArr.length){
-          wordFailed=true;
-          continue;
-        }
-        if(s.charAt(i)!=strAsArr[left+i]){
-          wordFailed=true;
-          continue;
-        }
+  private boolean recursWordBreak(List<String> wordDict, String s, Map<String,Boolean> alreadyDone){
+    if(s.length()==0){return true;}
+    if(alreadyDone.containsKey(s)){return false;}
+    alreadyDone.put(s, true);
+    for(String word: wordDict){
+      if(s.startsWith(word)&&recursWordBreak(wordDict, s.substring(word.length()), alreadyDone)){
+        return true;
       }
-      if(!wordFailed&&recursWordBreak(wordDict, strAsArr, left+s.length())){return true;}
     }
     return false;
   }
