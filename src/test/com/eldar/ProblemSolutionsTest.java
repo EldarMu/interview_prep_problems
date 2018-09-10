@@ -4,6 +4,7 @@ import com.eldar.ProblemSolutions.Interval;
 import com.eldar.ProblemSolutions.ListNode;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Queue;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -895,5 +896,27 @@ public class ProblemSolutionsTest {
     ProblemSolutions tester = new ProblemSolutions();
     Assert.assertEquals(5, tester.findMode(4,2,3,5,5));
     Assert.assertEquals(5, tester.findMode(4,5,4,5,5));
+  }
+
+  @Test
+  public void sortedArrayToBST() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    Queue<ProblemSolutions.TreeNode> treeLevel = new LinkedList<>();
+    treeLevel.add(tester.sortedArrayToBST(new int[] {-10,-3,0,5,9}));
+    int[] expectedResult = new int[] {0,-10,5,-3,9};
+    int counter = 0;
+    while(!treeLevel.isEmpty()){
+      Queue<ProblemSolutions.TreeNode> tmpQueue = new LinkedList<>();
+      while(treeLevel.peek()!=null){
+        ProblemSolutions.TreeNode tmp = treeLevel.poll();
+        Assert.assertEquals(expectedResult[counter], tmp.val);
+        counter++;
+        if(tmp.left!=null){tmpQueue.offer(tmp.left);}
+        if(tmp.right!=null){tmpQueue.offer(tmp.right);}
+      }
+      treeLevel = tmpQueue;
+    }
+
+    Assert.assertNull(tester.sortedArrayToBST(new int[] {}));
   }
 }

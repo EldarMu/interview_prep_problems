@@ -1957,4 +1957,20 @@ public class ProblemSolutions {
     if(!valOccurred){tmp.next = new TupleNode(val, 1);}
   }
 
+  //convert sorted array of unique integers into a balanced binary tree
+  //https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/
+  //bog-standard recursive solution
+  public TreeNode sortedArrayToBST(int[] nums) {
+    return recursSortArrayToBST(nums, 0, nums.length-1);
+  }
+
+  private TreeNode recursSortArrayToBST(int[] nums, int leftIncl, int rightIncl){
+    if(leftIncl>rightIncl){return null;}
+    else if(leftIncl==rightIncl){return new TreeNode(nums[leftIncl]);}
+    int mid = leftIncl+(rightIncl-leftIncl)/2;
+    TreeNode result = new TreeNode(nums[mid]);
+    result.left = recursSortArrayToBST(nums, leftIncl, mid-1);
+    result.right = recursSortArrayToBST(nums, mid+1, rightIncl);
+    return result;
+  }
 }
