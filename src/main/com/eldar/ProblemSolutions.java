@@ -2038,4 +2038,29 @@ public class ProblemSolutions {
     recursConnectTreeLevels(root.left);
     recursConnectTreeLevels(root.right);
   }
+
+  //given an unsorted array
+  //find the longest sequence (n, n+1, n+2...) and return its length
+  //in linear time (so no sorting)
+  //https://leetcode.com/problems/longest-consecutive-sequence/description/
+  //functional solution that runs slowly
+  public int longestConsecutive(int[] nums) {
+    if(nums.length==0){return 0;}
+    else if(nums.length==1){return 1;}
+    Map<Integer, Boolean> values = new HashMap<>();
+    for(int i = 0; i < nums.length; i++){
+      values.put(nums[i], true);
+    }
+    int maxRun = 0;
+    for(Integer s : values.keySet()){
+      int tmpRun = 1;
+      int incrementer = 1;
+      while(values.containsKey(s+incrementer)){
+        tmpRun++;
+        incrementer++;
+      }
+      maxRun = tmpRun>maxRun? tmpRun:maxRun;
+    }
+    return maxRun;
+  }
 }

@@ -984,4 +984,13 @@ public class ProblemSolutionsTest {
       tmp = nextTmp;
     }
   }
+
+  @Test
+  public void longestConsecutive() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    Assert.assertEquals(4, tester.longestConsecutive(new int[] {100, 4, 200, 1, 3, 2}));
+    Assert.assertEquals(0, tester.longestConsecutive(new int[] {}));
+    Assert.assertEquals(1, tester.longestConsecutive(new int[] {1}));
+    Assert.assertEquals(1, tester.longestConsecutive(new int[] {1,11,21,31,41,51,61,71,81,91,101}));
+  }
 }
