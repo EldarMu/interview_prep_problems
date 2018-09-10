@@ -2047,19 +2047,21 @@ public class ProblemSolutions {
   public int longestConsecutive(int[] nums) {
     if(nums.length==0){return 0;}
     else if(nums.length==1){return 1;}
-    Map<Integer, Boolean> values = new HashMap<>();
+    Set<Integer> values = new HashSet<>();
     for(int i = 0; i < nums.length; i++){
-      values.put(nums[i], true);
+      values.add(nums[i]);
     }
     int maxRun = 0;
-    for(Integer s : values.keySet()){
-      int tmpRun = 1;
-      int incrementer = 1;
-      while(values.containsKey(s+incrementer)){
-        tmpRun++;
-        incrementer++;
+    for(Integer s : values){
+      if(!values.contains(s-1)){
+        int tmpRun = 1;
+        int incrementer = 1;
+        while(values.contains(s+incrementer)){
+          tmpRun++;
+          incrementer++;
+        }
+        maxRun = tmpRun>maxRun? tmpRun:maxRun;
       }
-      maxRun = tmpRun>maxRun? tmpRun:maxRun;
     }
     return maxRun;
   }
