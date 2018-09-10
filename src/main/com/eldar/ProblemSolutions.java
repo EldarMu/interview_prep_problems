@@ -2013,6 +2013,7 @@ public class ProblemSolutions {
   //https://leetcode.com/problems/populating-next-right-pointers-in-each-node/description/
   //standard BFS solution
   public void connectTreeLevels(TreeLinkNode root) {
+    if(root==null){return;}
     Queue<TreeLinkNode> level = new LinkedList<>();
     level.add(root);
     while(!level.isEmpty()){
@@ -2026,5 +2027,15 @@ public class ProblemSolutions {
       }
       level = nextLevel;
     }
+  }
+
+  //same problem with recursion
+  //beats 100% of java solutions
+  public void recursConnectTreeLevels(TreeLinkNode root){
+    if(root==null){return;}
+    if(root.left!=null){root.left.next=root.right;}
+    if(root.next!=null&&root.right!=null){root.right.next=root.next.left;}
+    recursConnectTreeLevels(root.left);
+    recursConnectTreeLevels(root.right);
   }
 }

@@ -956,4 +956,32 @@ public class ProblemSolutionsTest {
       tmp = nextTmp;
     }
   }
+
+  @Test
+  public void recursConnectTreeLevels() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    ProblemSolutions.TreeLinkNode head = tester.new TreeLinkNode(1);
+    head.left = tester.new TreeLinkNode(2);
+    head.right = tester.new TreeLinkNode(3);
+    head.left.left = tester.new TreeLinkNode(4);
+    head.left.right = tester.new TreeLinkNode(5);
+    head.right.left = tester.new TreeLinkNode(6);
+    head.right.right = tester.new TreeLinkNode(7);
+    tester.recursConnectTreeLevels(head);
+
+    List<int[]> expectedResult = new ArrayList<>();
+    expectedResult.add(new int[] {1});
+    expectedResult.add(new int[] {2,3});
+    expectedResult.add(new int[] {4,5,6,7});
+
+    ProblemSolutions.TreeLinkNode tmp = head;
+    for(int[] curLevel: expectedResult){
+      ProblemSolutions.TreeLinkNode nextTmp = tmp.left;
+      for(int i = 0; i < curLevel.length; i++){
+        Assert.assertEquals(curLevel[i], tmp.val);
+        tmp = tmp.next;
+      }
+      tmp = nextTmp;
+    }
+  }
 }
