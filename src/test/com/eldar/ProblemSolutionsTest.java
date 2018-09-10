@@ -928,4 +928,32 @@ public class ProblemSolutionsTest {
     Assert.assertEquals(4, tester.maxProfit(new int[] {3,2,6,5,0,3}));
     Assert.assertEquals(5, tester.maxProfit(new int[] {7,1,5,3,6,4}));
   }
+
+  @Test
+  public void connectTreeLevels() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    ProblemSolutions.TreeLinkNode head = tester.new TreeLinkNode(1);
+    head.left = tester.new TreeLinkNode(2);
+    head.right = tester.new TreeLinkNode(3);
+    head.left.left = tester.new TreeLinkNode(4);
+    head.left.right = tester.new TreeLinkNode(5);
+    head.right.left = tester.new TreeLinkNode(6);
+    head.right.right = tester.new TreeLinkNode(7);
+    tester.connectTreeLevels(head);
+
+    List<int[]> expectedResult = new ArrayList<>();
+    expectedResult.add(new int[] {1});
+    expectedResult.add(new int[] {2,3});
+    expectedResult.add(new int[] {4,5,6,7});
+
+    ProblemSolutions.TreeLinkNode tmp = head;
+    for(int[] curLevel: expectedResult){
+      ProblemSolutions.TreeLinkNode nextTmp = tmp.left;
+      for(int i = 0; i < curLevel.length; i++){
+        Assert.assertEquals(curLevel[i], tmp.val);
+        tmp = tmp.next;
+      }
+      tmp = nextTmp;
+    }
+  }
 }

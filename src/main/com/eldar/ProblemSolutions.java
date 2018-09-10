@@ -2002,4 +2002,29 @@ public class ProblemSolutions {
     }
     return maxDiff;
   }
+
+  public class TreeLinkNode {
+    int val;
+    TreeLinkNode left, right, next;
+    TreeLinkNode(int x) { val = x; }
+  }
+  //given a perfect binary tree
+  //fill in another pointer, next, that points along the level rather than down
+  //https://leetcode.com/problems/populating-next-right-pointers-in-each-node/description/
+  //standard BFS solution
+  public void connectTreeLevels(TreeLinkNode root) {
+    Queue<TreeLinkNode> level = new LinkedList<>();
+    level.add(root);
+    while(!level.isEmpty()){
+      TreeLinkNode tmpTLN;
+      Queue<TreeLinkNode> nextLevel = new LinkedList<>();
+      while(level.peek()!=null){
+        tmpTLN = level.poll();
+        if(tmpTLN.left!=null){nextLevel.offer(tmpTLN.left);}
+        if(tmpTLN.right!=null){nextLevel.offer(tmpTLN.right);}
+        tmpTLN.next = level.peek();
+      }
+      level = nextLevel;
+    }
+  }
 }
