@@ -993,4 +993,26 @@ public class ProblemSolutionsTest {
     Assert.assertEquals(1, tester.longestConsecutive(new int[] {1}));
     Assert.assertEquals(1, tester.longestConsecutive(new int[] {1,11,21,31,41,51,61,71,81,91,101}));
   }
+
+  @Test
+  public void generatePascalTriangle() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    List<List<Integer>> actualResult;
+    List<int[]> expectedResult = new ArrayList<>();
+
+    Assert.assertTrue(tester.generatePascalTriangle(0).isEmpty());
+    Assert.assertTrue(tester.generatePascalTriangle(-5).isEmpty());
+
+    actualResult = tester.generatePascalTriangle(5);
+    expectedResult.add(new int[] {1});
+    expectedResult.add(new int[] {1,1});
+    expectedResult.add(new int[] {1,2,1});
+    expectedResult.add(new int[] {1,3,3,1});
+    expectedResult.add(new int[] {1,4,6,4,1});
+    Assert.assertEquals(expectedResult.size(), actualResult.size());
+    for(int i = 0; i < expectedResult.size(); i++){
+      Assert.assertArrayEquals(expectedResult.get(i), actualResult.get(i).stream().mapToInt(j->j).toArray());
+    }
+
+  }
 }

@@ -2043,7 +2043,7 @@ public class ProblemSolutions {
   //find the longest sequence (n, n+1, n+2...) and return its length
   //in linear time (so no sorting)
   //https://leetcode.com/problems/longest-consecutive-sequence/description/
-  //functional solution that runs slowly
+  //average solution using set rather than map
   public int longestConsecutive(int[] nums) {
     if(nums.length==0){return 0;}
     else if(nums.length==1){return 1;}
@@ -2064,5 +2064,27 @@ public class ProblemSolutions {
       }
     }
     return maxRun;
+  }
+
+  //generate pascal's triangle of height numRows
+  //https://leetcode.com/problems/pascals-triangle/
+  //standard solution, beats 100% of java submissions
+  public List<List<Integer>> generatePascalTriangle(int numRows) {
+    if(numRows <= 0){return new ArrayList<>();}
+    List<List<Integer>> results = new ArrayList<>(numRows);
+    List<Integer> curRow = new ArrayList<>(1);
+    curRow.add(1);
+    results.add(curRow);
+    while(results.size()!=numRows){
+      List<Integer> tmpRow = new ArrayList<>(curRow.size()+1);
+      tmpRow.add(1);
+      for(int i = 0; i < curRow.size()-1; i++){
+        tmpRow.add(curRow.get(i)+curRow.get(i+1));
+      }
+      tmpRow.add(1);
+      results.add(tmpRow);
+      curRow = tmpRow;
+    }
+    return results;
   }
 }
