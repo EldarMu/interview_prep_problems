@@ -2087,4 +2087,29 @@ public class ProblemSolutions {
     }
     return results;
   }
+
+  //return the kth row of pascal's triangle with k>0 and k<=33
+  //using only k extra space
+  //https://leetcode.com/problems/pascals-triangle-ii/description/
+  //pretty standard solution, beats 90% of java submissions
+  public List<Integer> getPascalRow(int rowIndex) {
+    if(rowIndex<=0){return new ArrayList<>();}
+    List<Integer> row = new ArrayList<>(rowIndex);
+    row.add(0, 1);
+    int tmp = 0;
+    int tmpSum = 0;
+    for(int i = 0; i < rowIndex; i++){
+      tmp = 1;
+      for(int j = 1; j < i; j++){
+        tmpSum = tmp + row.get(j);
+        tmp = row.get(j);
+        row.remove(j);
+        row.add(j, tmpSum);
+      }
+      row.add(1);
+    }
+    return row;
+  }
+
+
 }

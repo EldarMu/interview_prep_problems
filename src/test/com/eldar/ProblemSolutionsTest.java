@@ -1013,6 +1013,21 @@ public class ProblemSolutionsTest {
     for(int i = 0; i < expectedResult.size(); i++){
       Assert.assertArrayEquals(expectedResult.get(i), actualResult.get(i).stream().mapToInt(j->j).toArray());
     }
+  }
 
+  @Test
+  public void getPascalRow() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    int[] expectedResult;
+    int[] result;
+
+    expectedResult = new int[] {1,4,6,4,1};
+    result = tester.getPascalRow(5).stream().mapToInt(i->i).toArray();
+    Assert.assertArrayEquals(expectedResult,result);
+
+    Assert.assertArrayEquals(new int[] {1}, tester.getPascalRow(1).stream().mapToInt(i->i).toArray());
+    Assert.assertArrayEquals(new int[] {1,1}, tester.getPascalRow(2).stream().mapToInt(i->i).toArray());
+    Assert.assertTrue(tester.getPascalRow(0).isEmpty());
+    Assert.assertTrue(tester.getPascalRow(-2).isEmpty());
   }
 }
