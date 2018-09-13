@@ -2,6 +2,8 @@ package com.eldar;
 
 import com.eldar.ProblemSolutions.Interval;
 import com.eldar.ProblemSolutions.ListNode;
+import com.eldar.ProblemSolutions.TreeNode;
+import com.eldar.ProblemSolutions.TreeLinkNode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Queue;
@@ -176,9 +178,9 @@ public class ProblemSolutionsTest {
     @Test
   public void lengthOfLongestSubstring() throws Exception {
       ProblemSolutions tester = new ProblemSolutions();
-      Assert.assertEquals(tester.lengthOfLongestSubstring("abcabcbb"), 3);
-      Assert.assertEquals(tester.lengthOfLongestSubstring(" "), 1);
-      Assert.assertEquals(tester.lengthOfLongestSubstring(""), 0);
+      Assert.assertEquals(3, tester.lengthOfLongestSubstring("abcabcbb"));
+      Assert.assertEquals(1, tester.lengthOfLongestSubstring(" "));
+      Assert.assertEquals(0, tester.lengthOfLongestSubstring(""));
     }
 
     @Test
@@ -1029,5 +1031,20 @@ public class ProblemSolutionsTest {
     Assert.assertArrayEquals(new int[] {1,1}, tester.getPascalRow(2).stream().mapToInt(i->i).toArray());
     Assert.assertTrue(tester.getPascalRow(0).isEmpty());
     Assert.assertTrue(tester.getPascalRow(-2).isEmpty());
+  }
+
+  @Test
+  public void listHasCycle() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    ListNode head = tester.new ListNode(3);
+    head.next = tester.new ListNode(4);
+    head.next.next = tester.new ListNode(5);
+    ListNode tmp = head.next.next;
+    tmp.next = tester.new ListNode(1);
+    tmp.next.next = tester.new ListNode(2);
+    tmp.next.next.next = tmp;
+
+    Assert.assertTrue(tester.listHasCycle(head));
+    Assert.assertFalse(tester.listHasCycle(tester.new ListNode(0)));
   }
 }

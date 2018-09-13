@@ -2104,5 +2104,29 @@ public class ProblemSolutions {
     return row;
   }
 
-
+  //given a linked list, determine if it contains a cycle
+  //without extra space
+  //https://leetcode.com/problems/linked-list-cycle/description/
+  //constant space, but only beats 25% of solutions
+  public boolean listHasCycle(ListNode head) {
+    if(head==null||head.next==null){return false;}
+    boolean stepDelay = true;
+    ListNode tmpFast = head;
+    ListNode tmpSlow = head;
+    while(tmpFast.next!=null){
+      if(stepDelay){
+        tmpFast = tmpFast.next;
+        stepDelay = !stepDelay;
+      }
+      else{
+        tmpFast = tmpFast.next;
+        tmpSlow = tmpSlow.next;
+        stepDelay = !stepDelay;
+      }
+      if(tmpFast==tmpSlow){
+        return true;
+      }
+    }
+    return false;
+  }
 }
