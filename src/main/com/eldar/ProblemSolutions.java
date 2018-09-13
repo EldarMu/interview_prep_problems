@@ -1,5 +1,6 @@
 package com.eldar;
 
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -52,14 +53,14 @@ public class ProblemSolutions {
 
     //Given a string of distinct characters J, return a count of those characters appearing in string S
     //https://leetcode.com/problems/jewels-and-stones/description/
-    public int hashCountJewels(String J, String S){
+    public int hashCountJewels(String distChars, String str){
         Map<Character, Boolean> jewelTypes = new HashMap<>();
 
-        for(char ch : J.toCharArray()){
+        for(char ch : distChars.toCharArray()){
             jewelTypes.put(ch, true);
         }
         int count = 0;
-        for(char ch: S.toCharArray()){
+        for(char ch: str.toCharArray()){
             count = jewelTypes.containsKey(ch) ? count+1 : count;
         }
         return count;
@@ -67,14 +68,14 @@ public class ProblemSolutions {
     //all characters are guaranteed to be letters, so let's try using this to our advantage
     //lowercase z is number 122, uppercase A is 65, difference is 57, 58 elements though since it starts at 0
     //solution runtime faster than 93.32% other Java solutions, alright
-    public int asciiCountJewels(String J, String S){
+    public int asciiCountJewels(String distChars, String str){
         boolean[] asciiCounts = new boolean[58];
-        for(int i = 0; i < J.length(); i++){
-            asciiCounts[(int)J.charAt(i)-65] = true;
+        for(int i = 0; i < distChars.length(); i++){
+            asciiCounts[(int)distChars.charAt(i)-65] = true;
         }
         int count = 0;
-        for(int j = 0; j < S.length(); j++){
-            count = asciiCounts[(int)S.charAt(j)-65] ? count+1 : count;
+        for(int j = 0; j < str.length(); j++){
+            count = asciiCounts[(int)str.charAt(j)-65] ? count+1 : count;
 
         }
         return count;
@@ -212,7 +213,6 @@ public class ProblemSolutions {
                 while(curVal.index != 0 && curVal.count > mostFrequentArr[curVal.index-1].count){
                     int curIndex = curVal.index;
                     int newIndex = curVal.index-1;
-                    NumCount temp = curVal;
                     mostFrequentArr[curIndex] = mostFrequentArr[newIndex];
                     mostFrequentArr[curIndex].index = curIndex;
                     mostFrequentArr[newIndex] = curVal;
@@ -281,21 +281,21 @@ public class ProblemSolutions {
     //https://leetcode.com/problems/flipping-an-image
     //it's just a test of understanding java 2d matrices
     //runtime better than 100% of submissions
-    public int[][] flipAndInvertImage(int[][] A) {
-        int columnLen = A[0].length;
+    public int[][] flipAndInvertImage(int[][] matrix) {
+        int columnLen = matrix[0].length;
         boolean oddColumnNum = columnLen%2 == 1;
         int tmp = 0;
-        for(int i = 0; i < A.length; i++){
+        for(int i = 0; i < matrix.length; i++){
             for(int j = 0; j < (columnLen/2); j++){
-                tmp = A[i][j];
-                A[i][j] = 1^A[i][columnLen-1-j];
-                A[i][columnLen-1-j] = 1^tmp;
+                tmp = matrix[i][j];
+                matrix[i][j] = 1^matrix[i][columnLen-1-j];
+                matrix[i][columnLen-1-j] = 1^tmp;
             }
             if(oddColumnNum){
-                A[i][(columnLen/2)] = 1^A[i][(columnLen/2)];
+                matrix[i][(columnLen/2)] = 1^matrix[i][(columnLen/2)];
             }
         }
-        return A;
+        return matrix;
     }
     //given an array of ints and a sum,
     //return indices of ints that together produce the sum
@@ -504,7 +504,6 @@ public class ProblemSolutions {
     return negative ? (int)-absResult : (int) absResult;
   }
   //parse an int from a string that may contain words or other noise;
-  //
   public int myAtoi(String str) {
     if(str.length()==0){return 0;}
     int startOfNum = 0;
@@ -522,7 +521,7 @@ public class ProblemSolutions {
         startOfNum = indexPtr;
         initialSignFound = true;
       }
-      else if(!Character.isDigit(ch)&&!(ch==' ')){return 0;}
+      else if(!Character.isDigit(ch)&&ch!=' '){return 0;}
       else if(Character.isDigit(str.charAt(indexPtr))){
         startFound = true;
         startOfNum = indexPtr;
@@ -751,7 +750,7 @@ public class ProblemSolutions {
   public boolean isValidParentheses(String s) {
     char[] stack = new char[s.length()];
     int ptr = 0;
-    boolean pointerAtZero = true;
+    boolean pointerAtZero;
     for(char c : s.toCharArray()){
       pointerAtZero = ptr==0;
       switch(c){
@@ -769,6 +768,8 @@ public class ProblemSolutions {
         case ']':
           if(pointerAtZero||stack[--ptr]!='['){return false;}
           break;
+        default:
+          throw new IllegalArgumentException("input contains a character not in '()[]{}'");
       }
     }
     return ptr==0;
@@ -783,7 +784,6 @@ public class ProblemSolutions {
     int listIndex = 0;
     int firstListFoundIndex = 0;
     boolean firstListFound = false;
-    ListNode currentList = null;
     while(listArrMax>1){
       for(int i = 0; i < listArrMax; i++){
         if(lists[i]==null){continue;}
@@ -810,8 +810,8 @@ public class ProblemSolutions {
     if(l1==null&&l2==null){return null;}
     else if(l1==null){return l2;}
     else if(l2==null){return l1;}
-    ListNode head = null;
-    ListNode cur = null;
+    ListNode head;
+    ListNode cur;
     if(l1.val < l2.val){
       head = l1;
       cur = head;
@@ -874,7 +874,7 @@ public class ProblemSolutions {
     //and thus can't simply use a new array's index positions
     //we choose to use a hashmap
     for(int i = 1; i < nums.length; i++){
-      if(!(nums[i]==nums[i-1])){
+      if(nums[i]!=nums[i-1]){
         nums[duplWriteIndex]=nums[i];
         duplWriteIndex++;
       }
@@ -903,7 +903,6 @@ public class ProblemSolutions {
         curList.remove(curList.size()-1);
       }
     }
-    return;
   }
   //given a double x and int n, return x to the nth power
   //x is between 100 and -100
@@ -1114,7 +1113,7 @@ public class ProblemSolutions {
   public List<Integer> inorderTraversal(TreeNode root) {
     List<Integer> results = new ArrayList<>();
     if(root==null){return results;}
-    Stack<TreeNode> recursStack = new Stack<>();
+    Deque<TreeNode> recursStack = new ArrayDeque<>();
     Map<TreeNode, Boolean> alreadyWritten = new HashMap<>();
     recursStack.push(root);
     while(!recursStack.isEmpty()){
@@ -1247,8 +1246,8 @@ public class ProblemSolutions {
   }
   private boolean recursWordExists(char[][] board, boolean[][] visited, int row, int col, char[] word, int wordIndex){
     if(wordIndex==word.length){return true;}
-    int tmpRow = 0;
-    int tmpCol = 0;
+    int tmpRow;
+    int tmpCol;
     if(row>0&&board[row-1][col]==word[wordIndex]){
       tmpRow = row-1;
       tmpCol = col;
@@ -1483,7 +1482,6 @@ public class ProblemSolutions {
       recursMinPathSum(grid, minPath, visited, row, col+1, curVal);
       visited[row][col+1]=false;
     }
-    return;
   }
 
   //let's try again
@@ -1499,13 +1497,6 @@ public class ProblemSolutions {
       }
       return result;
     }
-    else if(grid[0].length==1){
-      int result = 0;
-      for(int i = 0; i < grid.length; i++){
-        result += grid[i][0];
-      }
-    }
-
     for(int i = 1; i < grid[0].length; i++){
       grid[0][i]+=grid[0][i-1];
     }
@@ -1584,8 +1575,8 @@ public class ProblemSolutions {
     int[] right = new int[heights.length];
     left[0]=-1;
     right[heights.length-1]=heights.length;
-    int curLeftPtr = 0;
-    int curRightPtr = heights.length-1;
+    int curLeftPtr;
+    int curRightPtr;
     for(int i = 1; i < heights.length; i++){
       curLeftPtr=i-1;
       while(curLeftPtr>=0&&heights[curLeftPtr]>=heights[i]){
@@ -1628,11 +1619,11 @@ public class ProblemSolutions {
     return listStorage.get(0);
   }
 
-  //compute sqrt(x) - x guaranteed to be non-negative integer;
-  //https://leetcode.com/problems/sqrtx/
-  //standard speed sol'n with essentially a binary search;
-  //beats 60% of java solutions
-  //to get faster, have to change to bit operations;
+  // compute sqrt(x) - x guaranteed to be non-negative integer;
+  // https://leetcode.com/problems/sqrtx/
+  // standard speed sol'n with essentially a binary search;
+  // beats 60% of java solutions
+  // to get faster, have to change to bit operations;
   public int mySqrt(int x) {
     double left = 0;
     double right = x;
@@ -1842,25 +1833,25 @@ public class ProblemSolutions {
     }
 
     for(int i = 0; i < board.length; i++){
-      if(safeOChars[i][0]==true){
+      if(safeOChars[i][0]){
         recursMarkSafe(board, safeOChars, i, 0);
       }
-      if(safeOChars[i][board[0].length-1]==true){
+      if(safeOChars[i][board[0].length-1]){
         recursMarkSafe(board, safeOChars, i, board[0].length-1);
       }
     }
     for(int i = 0; i < board[0].length; i++){
-      if(safeOChars[0][i]==true){
+      if(safeOChars[0][i]){
         recursMarkSafe(board, safeOChars, 0, i);
       }
-      if(safeOChars[board.length-1][i]==true){
+      if(safeOChars[board.length-1][i]){
         recursMarkSafe(board, safeOChars, board.length-1, i);
       }
     }
 
     for(int i = 0; i < board.length; i++){
       for(int j = 0; j < board[0].length; j++){
-        if(board[i][j]=='O'&&safeOChars[i][j]==false){
+        if(board[i][j]=='O'&&!safeOChars[i][j]){
           board[i][j]='X';
         }
       }
@@ -2005,7 +1996,9 @@ public class ProblemSolutions {
 
   public class TreeLinkNode {
     int val;
-    TreeLinkNode left, right, next;
+    TreeLinkNode left;
+    TreeLinkNode right;
+    TreeLinkNode next;
     TreeLinkNode(int x) { val = x; }
   }
   //given a perfect binary tree
@@ -2096,9 +2089,9 @@ public class ProblemSolutions {
     if(rowIndex<=0){return new ArrayList<>();}
     List<Integer> row = new ArrayList<>(rowIndex);
     row.add(0, 1);
-    int tmp = 0;
-    int tmpSum = 0;
-    for(int i = 0; i < rowIndex; i++){
+    int tmp;
+    int tmpSum;
+    for(int i = 1; i < rowIndex; i++){
       tmp = 1;
       for(int j = 1; j < i; j++){
         tmpSum = tmp + row.get(j);

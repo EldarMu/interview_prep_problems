@@ -568,7 +568,7 @@ public class ProblemSolutionsTest {
   public void minPathSum() throws Exception {
       ProblemSolutions tester = new ProblemSolutions();
       int[][] testMatrix = new int[][]{{1, 3, 1}, {1, 5, 1}, {4, 2, 1}};
-      //Assert.assertEquals(7, tester.minPathSum(testMatrix));
+      Assert.assertEquals(7, tester.minPathSum(testMatrix));
       testMatrix = new int[][] {{0}};
       Assert.assertEquals(0, tester.minPathSum(testMatrix));
 
@@ -578,7 +578,7 @@ public class ProblemSolutionsTest {
   public void downRightMinPathSum() throws Exception{
     ProblemSolutions tester = new ProblemSolutions();
     int[][] testMatrix = new int[][] {{1,3,1}, {1,5,1}, {4,2,1}};
-    //Assert.assertEquals(7, tester.downRightMinPathSum(testMatrix));
+    Assert.assertEquals(7, tester.downRightMinPathSum(testMatrix));
     testMatrix = new int[][] {{0}};
     Assert.assertEquals(0, tester.downRightMinPathSum(testMatrix));
 
@@ -689,9 +689,9 @@ public class ProblemSolutionsTest {
   @Test
   public void spiralOrder() throws Exception{
     ProblemSolutions tester = new ProblemSolutions();
-    int[][] testMatrix = new int[1][1];
-    int[] expectedResult = new int[1];
-    List<Integer> actualResult = new ArrayList<>();
+    int[][] testMatrix;
+    int[] expectedResult;
+    List<Integer> actualResult;
 
     testMatrix = new int[][] {{6,9,7}};
     expectedResult = new int[] {6,9,7};
