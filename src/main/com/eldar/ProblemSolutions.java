@@ -2129,4 +2129,26 @@ public class ProblemSolutions {
     }
     return false;
   }
+
+  //given a binary tree, turn it into a linked list using TreeNode.right insead of LinkNode.next;
+  //note that the tree should be read as a preorder traversal
+  //https://leetcode.com/problems/flatten-binary-tree-to-linked-list/description/
+  //first a less-than-perfect solution using an arraylist
+  public void flatten(TreeNode root) {
+    if(root==null){return;}
+    List<TreeNode> sorted = new ArrayList<>();
+    recursFlatten(sorted, root);
+    TreeNode tmp;
+    for(int i = 0; i < sorted.size()-1; i++){
+      tmp = sorted.get(i);
+      tmp.left=null;
+      tmp.right=sorted.get(i+1);
+    }
+  }
+
+  private void recursFlatten(List<TreeNode> sorted, TreeNode root){
+    sorted.add(root);
+    if(root.left!=null){recursFlatten(sorted, root.left);}
+    if(root.right!=null){recursFlatten(sorted, root.right);}
+  }
 }

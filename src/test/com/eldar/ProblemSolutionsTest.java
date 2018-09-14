@@ -1047,4 +1047,29 @@ public class ProblemSolutionsTest {
     Assert.assertTrue(tester.listHasCycle(head));
     Assert.assertFalse(tester.listHasCycle(tester.new ListNode(0)));
   }
+
+  @Test
+  public void flatten() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    TreeNode root;
+
+    root = tester.new TreeNode(2);
+    tester.flatten(root);
+    Assert.assertTrue(root.left==null&&root.right==null);
+
+    root = tester.new TreeNode(1);
+    root.left = tester.new TreeNode(2);
+    root.left.left = tester.new TreeNode(3);
+    root.left.right = tester.new TreeNode(4);
+    root.right = tester.new TreeNode(5);
+    root.right.right = tester.new TreeNode(6);
+    tester.flatten(root);
+
+    TreeNode tmp = root;
+    for(int i = 1; i <= 6; i++){
+      Assert.assertNotNull(tmp);
+      Assert.assertEquals(i, tmp.val);
+      tmp = tmp.right;
+    }
+  }
 }
