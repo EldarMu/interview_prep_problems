@@ -2151,4 +2151,34 @@ public class ProblemSolutions {
     if(root.left!=null){recursFlatten(sorted, root.left);}
     if(root.right!=null){recursFlatten(sorted, root.right);}
   }
+
+  //slightly better DFS solution
+  public void altFlatten(TreeNode root){
+    if(root==null){return;}
+    recursAltFlatten(root);
+  }
+
+  private TreeNode[] recursAltFlatten(TreeNode root){
+    TreeNode[] firstAndLast = new TreeNode[2];
+
+    TreeNode tmpRight = root.right;
+    TreeNode tmpLeft = root.left;
+    root.right = null;
+    root.left = null;
+
+    firstAndLast[0]=root;
+    firstAndLast[1]=root;
+
+    if(tmpLeft!=null){
+      TreeNode[] leftFirstAndLast = recursAltFlatten(tmpLeft);
+      firstAndLast[1].right = leftFirstAndLast[0];
+      firstAndLast[1]=leftFirstAndLast[1];
+    }
+    if(tmpRight!=null) {
+      TreeNode[] rightFirstAndLast = recursAltFlatten(tmpRight);
+      firstAndLast[1].right=rightFirstAndLast[0];
+      firstAndLast[1]=rightFirstAndLast[1];
+    }
+    return firstAndLast;
+  }
 }
