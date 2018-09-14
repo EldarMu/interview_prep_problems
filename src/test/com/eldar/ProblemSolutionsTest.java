@@ -1097,4 +1097,56 @@ public class ProblemSolutionsTest {
       tmp = tmp.right;
     }
   }
+
+  @Test
+  public void detectCycle() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    Assert.assertNull(tester.detectCycle(tester.new ListNode(1)));
+
+    ListNode root = tester.new ListNode(1);
+    root.next = tester.new ListNode(2);
+    root.next.next = tester.new ListNode(3);
+    ListNode tmp = root.next.next;
+    tmp.next = tester.new ListNode(6);
+    tmp = tmp.next;
+    tmp.next = tester.new ListNode(5);
+    tmp = tmp.next;
+    tmp.next = tester.new ListNode(4);
+    tmp = tmp.next;
+    tmp.next = root.next.next;
+
+    Assert.assertEquals(3, tester.detectCycle(root).val);
+  }
+
+  @Test
+  public void findRepeatedDNASequences() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    List<String> results;
+    List<String> expectedResults;
+
+    results = tester.findRepeatedDnaSequences("");
+    Assert.assertTrue(results.isEmpty());
+
+    results = tester.findRepeatedDnaSequences("AAAAAAAAAAAA");
+    expectedResults = new ArrayList<>();
+    expectedResults.add("AAAAAAAAAA");
+    Assert.assertEquals(expectedResults.size(), results.size());
+    Assert.assertTrue(expectedResults.get(0).equals(results.get(0)));
+
+    results = tester.findRepeatedDnaSequences("AAAAAAAAAAA");
+    expectedResults = new ArrayList<>();
+    expectedResults.add("AAAAAAAAAA");
+    Assert.assertEquals(expectedResults.size(), results.size());
+    Assert.assertTrue(expectedResults.get(0).equals(results.get(0)));
+
+    results = tester.findRepeatedDnaSequences("AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT");
+    expectedResults = new ArrayList<>();
+    expectedResults.add("AAAAACCCCC");
+    expectedResults.add("CCCCCAAAAA");
+
+    Assert.assertEquals(expectedResults.size(), results.size());
+    for(int i = 0; i < expectedResults.size(); i++){
+      Assert.assertTrue(expectedResults.get(i).equals(results.get(i)));
+    }
+  }
 }

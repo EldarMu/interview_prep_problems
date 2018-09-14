@@ -2181,4 +2181,44 @@ public class ProblemSolutions {
     }
     return firstAndLast;
   }
+
+  //given a linked list, return the element at which a cycle begins
+  //if no cycle, return null
+  //https://leetcode.com/problems/linked-list-cycle-ii/description/
+  //Technically this is an O(N) solution, but it has some overhead
+  //and takes up linear space
+  public ListNode detectCycle(ListNode head) {
+    Set<ListNode> nodes = new HashSet<>();
+    while(head!=null){
+      if(!nodes.contains(head)){nodes.add(head);}
+      else{
+        return head;
+      }
+      head = head.next;
+    }
+    return null;
+  }
+
+  //given dna in string format consisting of chars g,a,t, and c
+  //return all repeating 10-char substrings
+  //https://leetcode.com/problems/repeated-dna-sequences/description/
+  //standard hashmap sol'n
+  public List<String> findRepeatedDnaSequences(String fullSeq) {
+    if(fullSeq.length()<10){return new ArrayList<>();}
+    Map<String, Integer> sequences = new HashMap<>();
+    List<String> repeats = new ArrayList<>();
+    for(int i = 0; i < fullSeq.length()-9; i++){
+      String curSubStr = fullSeq.substring(i, i+10);
+      if(sequences.containsKey(curSubStr)){
+        if(sequences.get(curSubStr)==0){
+          repeats.add(curSubStr);
+          sequences.put(curSubStr, 1);
+        }
+      }
+      else{
+        sequences.put(curSubStr, 0);
+      }
+    }
+    return repeats;
+  }
 }
