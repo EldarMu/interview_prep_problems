@@ -1156,5 +1156,17 @@ public class ProblemSolutionsTest {
     Assert.assertEquals(-1, tester.majorityElement(new int[] {}));
     Assert.assertEquals(3, tester.majorityElement(new int[] {3,2,3}));
     Assert.assertEquals(2, tester.majorityElement(new int[] {2,2,1,1,1,2,2}));
+    Assert.assertEquals(3, tester.majorityElement(new int[] {3,3,4}));
+    Assert.assertEquals(7, tester.majorityElement(new int[] {8,8,7,7,7}));
+  }
+
+  @Test
+  public void altMajorityElement() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    Assert.assertEquals(7, tester.altMajorityElement(new int[] {8,8,7,7,7}));
+    Assert.assertEquals(3, tester.altMajorityElement(new int[] {3,3,4}));
+    Assert.assertEquals(-1, tester.altMajorityElement(new int[] {}));
+    Assert.assertEquals(3, tester.altMajorityElement(new int[] {3,2,3}));
+    Assert.assertEquals(2, tester.altMajorityElement(new int[] {2,2,1,1,1,2,2}));
   }
 }

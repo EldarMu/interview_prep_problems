@@ -2243,4 +2243,29 @@ public class ProblemSolutions {
     }
     return -1;
   }
+
+  //using the fact that only one of the elements can constitute more than
+  //n.length/2+1 elements of the array
+  //beats 67% of java submissions
+  public int altMajorityElement(int[] nums){
+    if(nums.length==0){return -1;}
+    else if(nums.length<3){return nums[0];}
+    int curTopVal = nums[0];
+    int topCount = 1;
+    for(int i = 1; i < nums.length; i++){
+      if(nums[i]==curTopVal){
+        topCount++;
+      }
+      else{
+        if(topCount==0){
+          curTopVal = nums[i];
+          topCount = 1;
+        }
+        else{
+          topCount--;
+        }
+      }
+    }
+    return curTopVal;
+  }
 }
