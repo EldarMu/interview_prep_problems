@@ -1,5 +1,6 @@
 package com.eldar;
 
+import com.eldar.commonDataStructs.DoubleLinkListNode;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -69,16 +70,6 @@ public class LRUCache {
           head=head.next;
         }
       }
-    }
-  }
-  class DoubleLinkListNode{
-    int val;
-    int key;
-    DoubleLinkListNode next;
-    DoubleLinkListNode prev;
-    DoubleLinkListNode(int key, int val){
-      this.key=key;
-      this.val=val;
     }
   }
 }

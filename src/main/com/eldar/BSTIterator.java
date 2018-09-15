@@ -1,6 +1,6 @@
 package com.eldar;
 
-import com.eldar.ProblemSolutions.TreeNode;
+import com.eldar.commonDataStructs.TreeNode;
 import java.util.LinkedList;
 import java.util.Queue;
 

@@ -1,9 +1,6 @@
 package com.eldar;
 
-import com.eldar.ProblemSolutions.Interval;
-import com.eldar.ProblemSolutions.ListNode;
-import com.eldar.ProblemSolutions.TreeNode;
-import com.eldar.ProblemSolutions.TreeLinkNode;
+import com.eldar.commonDataStructs.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Queue;
@@ -138,10 +135,10 @@ public class ProblemSolutionsTest {
     @Test
     public void constructMaximumBinaryTree() throws Exception {
         ProblemSolutions tester = new ProblemSolutions();
-        ProblemSolutions.TreeNode tn = tester.constructMaximumBinaryTree(new int[] {3,2,1,6,0,5});
+        TreeNode tn = tester.constructMaximumBinaryTree(new int[] {3,2,1,6,0,5});
         assertTrue(tn.val == 6);
-        ProblemSolutions.TreeNode left = tn.left;
-        ProblemSolutions.TreeNode right = tn.right;
+        TreeNode left = tn.left;
+        TreeNode right = tn.right;
         assertTrue(left.val == 3);
         assertTrue(right.val == 5);
         assertTrue(left.right.val == 2);
@@ -164,13 +161,13 @@ public class ProblemSolutionsTest {
     @Test
     public void addTwoNumbers() throws Exception {
         ProblemSolutions tester = new ProblemSolutions();
-        ProblemSolutions.ListNode l1 = tester.new ListNode(2);
-        l1.next = tester.new ListNode(4);
-        l1.next.next = tester.new ListNode(3);
-        ProblemSolutions.ListNode l2 = tester.new ListNode(5);
-        l2.next = tester.new ListNode(6);
-        l2.next.next = tester.new ListNode(4);
-        ProblemSolutions.ListNode result = tester.addTwoNumbers(l1,l2);
+        ListNode l1 = new ListNode(2);
+        l1.next = new ListNode(4);
+        l1.next.next = new ListNode(3);
+        ListNode l2 = new ListNode(5);
+        l2.next = new ListNode(6);
+        l2.next.next = new ListNode(4);
+        ListNode result = tester.addTwoNumbers(l1,l2);
         assertTrue(result.val == 7);
         assertTrue(result.next.val == 0);
         assertTrue(result.next.next.val == 8);
@@ -271,19 +268,19 @@ public class ProblemSolutionsTest {
     @Test
   public void removeNthFromEnd() throws Exception {
       ProblemSolutions tester = new ProblemSolutions();
-      ProblemSolutions.ListNode head = tester.new ListNode(1);
+      ListNode head = new ListNode(1);
 
       Assert.assertNull(tester.removeNthFromEnd(head, 1));
 
-      ProblemSolutions.ListNode tail = tester.new ListNode(2);
+      ListNode tail = new ListNode(2);
       head.next = tail;
-      ProblemSolutions.ListNode tmp = tester.new ListNode(3);
+      ListNode tmp = new ListNode(3);
       tail.next = tmp;
       tail = tmp;
-      tmp = tester.new ListNode(4);
+      tmp = new ListNode(4);
       tail.next = tmp;
       tail = tmp;
-      tmp = tester.new ListNode(5);
+      tmp = new ListNode(5);
       tail.next = tmp;
       tmp = tester.removeNthFromEnd(head, 2);
       int[] expectedNodeVals = new int[] {1,2,3,5};
@@ -305,19 +302,19 @@ public class ProblemSolutionsTest {
   public void mergeKLists() throws Exception {
       ProblemSolutions tester = new ProblemSolutions();
       Assert.assertNull(tester.mergeKLists(new ListNode[1]));
-      ProblemSolutions.ListNode head1= tester.new ListNode(1);
-      head1.next = tester.new ListNode(4);
-      head1.next.next = tester.new ListNode(5);
-      ProblemSolutions.ListNode head2 = tester.new ListNode(1);
-      head2.next = tester.new ListNode(3);
-      head2.next.next = tester.new ListNode(4);
-      ProblemSolutions.ListNode head3 = tester.new ListNode(2);
-      head3.next = tester.new ListNode(6);
-      ProblemSolutions.ListNode[] listOfNodes = new ListNode[3];
+      ListNode head1= new ListNode(1);
+      head1.next = new ListNode(4);
+      head1.next.next = new ListNode(5);
+      ListNode head2 = new ListNode(1);
+      head2.next = new ListNode(3);
+      head2.next.next = new ListNode(4);
+      ListNode head3 = new ListNode(2);
+      head3.next = new ListNode(6);
+      ListNode[] listOfNodes = new ListNode[3];
       listOfNodes[0] = head1;
       listOfNodes[1] = head2;
       listOfNodes[2] = head3;
-      ProblemSolutions.ListNode result =  tester.mergeKLists(listOfNodes);
+      ListNode result =  tester.mergeKLists(listOfNodes);
       int[] expectedResults = new int[] {1,1,2,3,4,4,5,6};
       for(int i = 0; i < expectedResults.length; i++){
         Assert.assertEquals(expectedResults[i], result.val);
@@ -329,11 +326,11 @@ public class ProblemSolutionsTest {
     //1,2,3,4,5
   public void swapPairs() throws Exception {
       ProblemSolutions tester = new ProblemSolutions();
-      ProblemSolutions.ListNode head = tester.new ListNode(1);
-      head.next = tester.new ListNode(2);
-      head.next.next = tester.new ListNode(3);
-      head.next.next.next = tester.new ListNode(4);
-      head.next.next.next.next = tester.new ListNode(5);
+      ListNode head = new ListNode(1);
+      head.next = new ListNode(2);
+      head.next.next = new ListNode(3);
+      head.next.next.next = new ListNode(4);
+      head.next.next.next.next = new ListNode(5);
       ListNode results = tester.swapPairs(head);
       int[] expectedResults = new int[] {2,1,4,3,5};
       for(int i = 0; i < expectedResults.length; i++){
@@ -446,17 +443,17 @@ public class ProblemSolutionsTest {
     @Test
   public void inorderTraversal() throws Exception{
       ProblemSolutions tester = new ProblemSolutions();
-      ProblemSolutions.TreeNode head = tester.new TreeNode(1);
+      TreeNode head = new TreeNode(1);
       head.left = null;
-      head.right = tester.new TreeNode(2);
+      head.right = new TreeNode(2);
       head.right.right = null;
-      head.right.left = tester.new TreeNode(3);
+      head.right.left = new TreeNode(3);
       List<Integer> results = tester.inorderTraversal(head);
       int[] expectedResults = new int[] {1,3,2};
       for(int i = 0; i < expectedResults.length; i++){
         Assert.assertEquals(expectedResults[i], (int)results.get(i));
       }
-      Assert.assertEquals(0, (int)tester.inorderTraversal(tester.new TreeNode(0)).get(0));
+      Assert.assertEquals(0, (int)tester.inorderTraversal(new TreeNode(0)).get(0));
     }
 
     @Test
@@ -473,12 +470,12 @@ public class ProblemSolutionsTest {
   public void insertInterval() throws Exception{
       ProblemSolutions tester = new ProblemSolutions();
       List<Interval> initIntervals = new ArrayList<>();
-      initIntervals.add(tester.new Interval(1,2));
-      initIntervals.add(tester.new Interval(3,5));
-      initIntervals.add(tester.new Interval(6,7));
-      initIntervals.add(tester.new Interval(8,10));
-      initIntervals.add(tester.new Interval(12, 16));
-      List<Interval> result = tester.insertInterval(initIntervals, tester.new Interval(4,8));
+      initIntervals.add(new Interval(1,2));
+      initIntervals.add(new Interval(3,5));
+      initIntervals.add(new Interval(6,7));
+      initIntervals.add(new Interval(8,10));
+      initIntervals.add(new Interval(12, 16));
+      List<Interval> result = tester.insertInterval(initIntervals, new Interval(4,8));
       int[][] expectedResults = new int[][] {{1,2},{3,10},{12,16}};
       Assert.assertEquals(expectedResults.length, result.size());
       for(int i = 0; i < result.size(); i++){
@@ -487,9 +484,9 @@ public class ProblemSolutionsTest {
       }
 
       initIntervals = new ArrayList<>();
-      initIntervals.add(tester.new Interval(1,3));
-      initIntervals.add(tester.new Interval(6,9));
-      result = tester.insertInterval(initIntervals, tester.new Interval(2,5));
+      initIntervals.add(new Interval(1,3));
+      initIntervals.add(new Interval(6,9));
+      result = tester.insertInterval(initIntervals, new Interval(2,5));
       expectedResults = new int[][] {{1,5},{6,9}};
       Assert.assertEquals(expectedResults.length, result.size());
       for(int i = 0; i < result.size(); i++){
@@ -525,20 +522,20 @@ public class ProblemSolutionsTest {
     @Test
   public void isValidBST() throws Exception{
       ProblemSolutions tester = new ProblemSolutions();
-      ProblemSolutions.TreeNode head = tester.new TreeNode(2);
-      head.left = tester.new TreeNode(1);
-      head.right = tester.new TreeNode(3);
+      TreeNode head = new TreeNode(2);
+      head.left = new TreeNode(1);
+      head.right = new TreeNode(3);
       Assert.assertTrue(tester.isValidBST(head));
-      head = tester.new TreeNode(1);
-      head.left = tester.new TreeNode(1);
+      head = new TreeNode(1);
+      head.left = new TreeNode(1);
       Assert.assertFalse(tester.isValidBST(head));
-      head = tester.new TreeNode(-2147483648);
+      head = new TreeNode(-2147483648);
       Assert.assertTrue(tester.isValidBST(head));
-      head = tester.new TreeNode(5);
-      head.left = tester.new TreeNode(1);
-      head.right = tester.new TreeNode(4);
-      head.right.left = tester.new TreeNode(3);
-      head.right.right = tester.new TreeNode(6);
+      head = new TreeNode(5);
+      head.left = new TreeNode(1);
+      head.right = new TreeNode(4);
+      head.right.left = new TreeNode(3);
+      head.right.right = new TreeNode(6);
       Assert.assertFalse(tester.isValidBST(head));
     }
 
@@ -589,24 +586,24 @@ public class ProblemSolutionsTest {
   @Test
   public void rotateListRight() throws Exception{
     ProblemSolutions tester = new ProblemSolutions();
-    ProblemSolutions.ListNode head = tester.new ListNode(1);
-    ProblemSolutions.ListNode tmp = tester.new ListNode(2);
+    ListNode head = new ListNode(1);
+    ListNode tmp = new ListNode(2);
     head.next = tmp;
-    tmp.next = tester.new ListNode(3);
+    tmp.next = new ListNode(3);
     tmp = tmp.next;
-    tmp.next = tester.new ListNode(4);
+    tmp.next = new ListNode(4);
     tmp = tmp.next;
-    tmp.next = tester.new ListNode(5);
+    tmp.next = new ListNode(5);
     int[] expectedResult = new int[] {4,5,1,2,3};
     tmp = tester.rotateListRight(head, 2);
     for(int i = 0; i < expectedResult.length; i++){
       Assert.assertEquals(expectedResult[i],tmp.val);
       tmp = tmp.next;
     }
-    head = tester.new ListNode(0);
-    tmp = tester.new ListNode(1);
+    head = new ListNode(0);
+    tmp = new ListNode(1);
     head.next = tmp;
-    tmp.next = tester.new ListNode(2);
+    tmp.next = new ListNode(2);
     tmp = tester.rotateListRight(head, 4);
     expectedResult = new int[] {2,0,1};
     for(int i = 0; i < expectedResult.length; i++){
@@ -618,24 +615,24 @@ public class ProblemSolutionsTest {
   @Test
   public void altRotateListRight() throws Exception{
     ProblemSolutions tester = new ProblemSolutions();
-    ProblemSolutions.ListNode head = tester.new ListNode(1);
-    ProblemSolutions.ListNode tmp = tester.new ListNode(2);
+    ListNode head = new ListNode(1);
+    ListNode tmp = new ListNode(2);
     head.next = tmp;
-    tmp.next = tester.new ListNode(3);
+    tmp.next = new ListNode(3);
     tmp = tmp.next;
-    tmp.next = tester.new ListNode(4);
+    tmp.next = new ListNode(4);
     tmp = tmp.next;
-    tmp.next = tester.new ListNode(5);
+    tmp.next = new ListNode(5);
     int[] expectedResult = new int[] {4,5,1,2,3};
     tmp = tester.altRotateListRight(head, 2);
     for(int i = 0; i < expectedResult.length; i++){
       Assert.assertEquals(expectedResult[i],tmp.val);
       tmp = tmp.next;
     }
-    head = tester.new ListNode(0);
-    tmp = tester.new ListNode(1);
+    head = new ListNode(0);
+    tmp = new ListNode(1);
     head.next = tmp;
-    tmp.next = tester.new ListNode(2);
+    tmp.next = new ListNode(2);
     tmp = tester.altRotateListRight(head, 4);
     expectedResult = new int[] {2,0,1};
     for(int i = 0; i < expectedResult.length; i++){
@@ -655,14 +652,14 @@ public class ProblemSolutionsTest {
   @Test
   public void reverseListBetween() throws Exception{
     ProblemSolutions tester = new ProblemSolutions();
-    ProblemSolutions.ListNode head = tester.new ListNode(1);
-    ProblemSolutions.ListNode tmp = tester.new ListNode(2);
+    ListNode head = new ListNode(1);
+    ListNode tmp = new ListNode(2);
     head.next = tmp;
-    tmp.next = tester.new ListNode(3);
+    tmp.next = new ListNode(3);
     tmp = tmp.next;
-    tmp.next = tester.new ListNode(4);
+    tmp.next = new ListNode(4);
     tmp = tmp.next;
-    tmp.next = tester.new ListNode(5);
+    tmp.next = new ListNode(5);
     int[] expected = new int[] {1,4,3,2,5};
     head = tester.reverseListBetween(head, 2,4);
     for(int i = 0; i < expected.length; i++){
@@ -670,13 +667,13 @@ public class ProblemSolutionsTest {
       Assert.assertEquals(expected[i], head.val);
       head = head.next;
     }
-    head = tester.new ListNode(3);
-    head.next = tester.new ListNode(5);
+    head = new ListNode(3);
+    head.next = new ListNode(5);
     head = tester.reverseListBetween(head,1,2);
     Assert.assertEquals(5, head.val);
     Assert.assertEquals(3, head.next.val);
     Assert.assertNull(tester.reverseListBetween(null, 1,2));
-    Assert.assertEquals(1, tester.reverseListBetween(tester.new ListNode(1),1,2).val);
+    Assert.assertEquals(1, tester.reverseListBetween(new ListNode(1),1,2).val);
   }
 
   @Test
@@ -763,37 +760,37 @@ public class ProblemSolutionsTest {
   @Test
   public void sumNumbers() throws Exception{
     ProblemSolutions tester = new ProblemSolutions();
-    ProblemSolutions.TreeNode head;
+    TreeNode head;
 
-    head = tester.new TreeNode(4);
-    head.left = tester.new TreeNode(9);
-    head.left.left = tester.new TreeNode(5);
-    head.left.right = tester.new TreeNode(1);
-    head.right = tester.new TreeNode(0);
+    head = new TreeNode(4);
+    head.left = new TreeNode(9);
+    head.left.left = new TreeNode(5);
+    head.left.right = new TreeNode(1);
+    head.right = new TreeNode(0);
     Assert.assertEquals(1026, tester.sumNumbers(head));
 
-    head = tester.new TreeNode(1);
-    head.left = tester.new TreeNode(2);
-    head.right = tester.new TreeNode(3);
+    head = new TreeNode(1);
+    head.left = new TreeNode(2);
+    head.right = new TreeNode(3);
     Assert.assertEquals(25, tester.sumNumbers(head));
 
     Assert.assertEquals(0, tester.sumNumbers(null));
 
-    Assert.assertEquals(5, tester.sumNumbers(tester.new TreeNode(5)));
+    Assert.assertEquals(5, tester.sumNumbers(new TreeNode(5)));
   }
 
   @Test
   public void zigzagLevelOrder() throws Exception{
     ProblemSolutions tester = new ProblemSolutions();
-    ProblemSolutions.TreeNode head;
+    TreeNode head;
     List<List<Integer>> results;
     List<int[]> expectedResults;
 
-    head = tester.new TreeNode(3);
-    head.left = tester.new TreeNode(9);
-    head.right = tester.new TreeNode(20);
-    head.right.left = tester.new TreeNode(15);
-    head.right.right = tester.new TreeNode(7);
+    head = new TreeNode(3);
+    head.left = new TreeNode(9);
+    head.right = new TreeNode(20);
+    head.right.left = new TreeNode(15);
+    head.right.right = new TreeNode(7);
     results = tester.zigzagLevelOrder(head);
     expectedResults = new ArrayList<>();
     expectedResults.add(new int[] {3});
@@ -903,14 +900,14 @@ public class ProblemSolutionsTest {
   @Test
   public void sortedArrayToBST() throws Exception{
     ProblemSolutions tester = new ProblemSolutions();
-    Queue<ProblemSolutions.TreeNode> treeLevel = new LinkedList<>();
+    Queue<TreeNode> treeLevel = new LinkedList<>();
     treeLevel.add(tester.sortedArrayToBST(new int[] {-10,-3,0,5,9}));
     int[] expectedResult = new int[] {0,-10,5,-3,9};
     int counter = 0;
     while(!treeLevel.isEmpty()){
-      Queue<ProblemSolutions.TreeNode> tmpQueue = new LinkedList<>();
+      Queue<TreeNode> tmpQueue = new LinkedList<>();
       while(treeLevel.peek()!=null){
-        ProblemSolutions.TreeNode tmp = treeLevel.poll();
+        TreeNode tmp = treeLevel.poll();
         Assert.assertEquals(expectedResult[counter], tmp.val);
         counter++;
         if(tmp.left!=null){tmpQueue.offer(tmp.left);}
@@ -934,13 +931,13 @@ public class ProblemSolutionsTest {
   @Test
   public void connectTreeLevels() throws Exception{
     ProblemSolutions tester = new ProblemSolutions();
-    ProblemSolutions.TreeLinkNode head = tester.new TreeLinkNode(1);
-    head.left = tester.new TreeLinkNode(2);
-    head.right = tester.new TreeLinkNode(3);
-    head.left.left = tester.new TreeLinkNode(4);
-    head.left.right = tester.new TreeLinkNode(5);
-    head.right.left = tester.new TreeLinkNode(6);
-    head.right.right = tester.new TreeLinkNode(7);
+    TreeLinkNode head = new TreeLinkNode(1);
+    head.left = new TreeLinkNode(2);
+    head.right = new TreeLinkNode(3);
+    head.left.left = new TreeLinkNode(4);
+    head.left.right = new TreeLinkNode(5);
+    head.right.left = new TreeLinkNode(6);
+    head.right.right = new TreeLinkNode(7);
     tester.connectTreeLevels(head);
 
     List<int[]> expectedResult = new ArrayList<>();
@@ -948,9 +945,9 @@ public class ProblemSolutionsTest {
     expectedResult.add(new int[] {2,3});
     expectedResult.add(new int[] {4,5,6,7});
 
-    ProblemSolutions.TreeLinkNode tmp = head;
+    TreeLinkNode tmp = head;
     for(int[] curLevel: expectedResult){
-      ProblemSolutions.TreeLinkNode nextTmp = tmp.left;
+      TreeLinkNode nextTmp = tmp.left;
       for(int i = 0; i < curLevel.length; i++){
         Assert.assertEquals(curLevel[i], tmp.val);
         tmp = tmp.next;
@@ -962,13 +959,13 @@ public class ProblemSolutionsTest {
   @Test
   public void recursConnectTreeLevels() throws Exception{
     ProblemSolutions tester = new ProblemSolutions();
-    ProblemSolutions.TreeLinkNode head = tester.new TreeLinkNode(1);
-    head.left = tester.new TreeLinkNode(2);
-    head.right = tester.new TreeLinkNode(3);
-    head.left.left = tester.new TreeLinkNode(4);
-    head.left.right = tester.new TreeLinkNode(5);
-    head.right.left = tester.new TreeLinkNode(6);
-    head.right.right = tester.new TreeLinkNode(7);
+    TreeLinkNode head = new TreeLinkNode(1);
+    head.left = new TreeLinkNode(2);
+    head.right = new TreeLinkNode(3);
+    head.left.left = new TreeLinkNode(4);
+    head.left.right = new TreeLinkNode(5);
+    head.right.left = new TreeLinkNode(6);
+    head.right.right = new TreeLinkNode(7);
     tester.recursConnectTreeLevels(head);
 
     List<int[]> expectedResult = new ArrayList<>();
@@ -976,9 +973,9 @@ public class ProblemSolutionsTest {
     expectedResult.add(new int[] {2,3});
     expectedResult.add(new int[] {4,5,6,7});
 
-    ProblemSolutions.TreeLinkNode tmp = head;
+    TreeLinkNode tmp = head;
     for(int[] curLevel: expectedResult){
-      ProblemSolutions.TreeLinkNode nextTmp = tmp.left;
+      TreeLinkNode nextTmp = tmp.left;
       for(int i = 0; i < curLevel.length; i++){
         Assert.assertEquals(curLevel[i], tmp.val);
         tmp = tmp.next;
@@ -1036,16 +1033,16 @@ public class ProblemSolutionsTest {
   @Test
   public void listHasCycle() throws Exception{
     ProblemSolutions tester = new ProblemSolutions();
-    ListNode head = tester.new ListNode(3);
-    head.next = tester.new ListNode(4);
-    head.next.next = tester.new ListNode(5);
+    ListNode head = new ListNode(3);
+    head.next = new ListNode(4);
+    head.next.next = new ListNode(5);
     ListNode tmp = head.next.next;
-    tmp.next = tester.new ListNode(1);
-    tmp.next.next = tester.new ListNode(2);
+    tmp.next = new ListNode(1);
+    tmp.next.next = new ListNode(2);
     tmp.next.next.next = tmp;
 
     Assert.assertTrue(tester.listHasCycle(head));
-    Assert.assertFalse(tester.listHasCycle(tester.new ListNode(0)));
+    Assert.assertFalse(tester.listHasCycle(new ListNode(0)));
   }
 
   @Test
@@ -1053,16 +1050,16 @@ public class ProblemSolutionsTest {
     ProblemSolutions tester = new ProblemSolutions();
     TreeNode root;
 
-    root = tester.new TreeNode(2);
+    root = new TreeNode(2);
     tester.flatten(root);
     Assert.assertTrue(root.left==null&&root.right==null);
 
-    root = tester.new TreeNode(1);
-    root.left = tester.new TreeNode(2);
-    root.left.left = tester.new TreeNode(3);
-    root.left.right = tester.new TreeNode(4);
-    root.right = tester.new TreeNode(5);
-    root.right.right = tester.new TreeNode(6);
+    root = new TreeNode(1);
+    root.left = new TreeNode(2);
+    root.left.left = new TreeNode(3);
+    root.left.right = new TreeNode(4);
+    root.right = new TreeNode(5);
+    root.right.right = new TreeNode(6);
     tester.flatten(root);
 
     TreeNode tmp = root;
@@ -1078,16 +1075,16 @@ public class ProblemSolutionsTest {
     ProblemSolutions tester = new ProblemSolutions();
     TreeNode root;
 
-    root = tester.new TreeNode(2);
+    root = new TreeNode(2);
     tester.altFlatten(root);
     Assert.assertTrue(root.left==null&&root.right==null);
 
-    root = tester.new TreeNode(1);
-    root.left = tester.new TreeNode(2);
-    root.left.left = tester.new TreeNode(3);
-    root.left.right = tester.new TreeNode(4);
-    root.right = tester.new TreeNode(5);
-    root.right.right = tester.new TreeNode(6);
+    root = new TreeNode(1);
+    root.left = new TreeNode(2);
+    root.left.left = new TreeNode(3);
+    root.left.right = new TreeNode(4);
+    root.right = new TreeNode(5);
+    root.right.right = new TreeNode(6);
     tester.altFlatten(root);
 
     TreeNode tmp = root;
@@ -1101,17 +1098,17 @@ public class ProblemSolutionsTest {
   @Test
   public void detectCycle() throws Exception{
     ProblemSolutions tester = new ProblemSolutions();
-    Assert.assertNull(tester.detectCycle(tester.new ListNode(1)));
+    Assert.assertNull(tester.detectCycle(new ListNode(1)));
 
-    ListNode root = tester.new ListNode(1);
-    root.next = tester.new ListNode(2);
-    root.next.next = tester.new ListNode(3);
+    ListNode root = new ListNode(1);
+    root.next = new ListNode(2);
+    root.next.next = new ListNode(3);
     ListNode tmp = root.next.next;
-    tmp.next = tester.new ListNode(6);
+    tmp.next = new ListNode(6);
     tmp = tmp.next;
-    tmp.next = tester.new ListNode(5);
+    tmp.next = new ListNode(5);
     tmp = tmp.next;
-    tmp.next = tester.new ListNode(4);
+    tmp.next = new ListNode(4);
     tmp = tmp.next;
     tmp.next = root.next.next;
 

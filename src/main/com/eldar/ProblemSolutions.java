@@ -1,6 +1,6 @@
 package com.eldar;
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
+import com.eldar.commonDataStructs.*;
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -243,16 +243,6 @@ public class ProblemSolutions {
     //the left child, and so forth..
     //https://leetcode.com/problems/maximum-binary-tree/
     //Beat 100% of solution runtimes
-    public class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
-
     public TreeNode constructMaximumBinaryTree(int[] nums) {
         return recursBuildTree(0, nums.length-1, nums);
     }
@@ -324,11 +314,6 @@ public class ProblemSolutions {
     //return the sum of the numbers
     //https://leetcode.com/problems/add-two-numbers
     //beat 99.74% of solution runtimes (for Java)
-    public class ListNode {
-        int val;
-        ListNode next;
-        ListNode(int x) { val = x; }
-    }
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         List<ListNode> listNodeLinkedList = new LinkedList<>();
         boolean carryone = false;
@@ -1147,13 +1132,6 @@ public class ProblemSolutions {
     }
     return secondVal;
   }
-  //class for next problem concerning inserting/merging intervals
-  public class Interval {
-    int start;
-    int end;
-    Interval() { start = 0; end = 0; }
-    Interval(int s, int e) { start = s; end = e; }
-  }
 
   //given a list of non-overlapping intervals sorted by start times
   //and an interval to be inserted, insert and merge as needed
@@ -1900,16 +1878,7 @@ public class ProblemSolutions {
     }
     return false;
   }
-  class TupleNode {
-    int val;
-    int occurence;
-    TupleNode next;
-    TupleNode(int val, int occurrence){
-      this.val = val;
-      this.occurence = occurrence;
-      next = null;
-    }
-  }
+
 
   //given five values separately,
   //with a guarantee that there is a value that occurs more than others
@@ -1994,13 +1963,6 @@ public class ProblemSolutions {
     return maxDiff;
   }
 
-  public class TreeLinkNode {
-    int val;
-    TreeLinkNode left;
-    TreeLinkNode right;
-    TreeLinkNode next;
-    TreeLinkNode(int x) { val = x; }
-  }
   //given a perfect binary tree
   //fill in another pointer, next, that points along the level rather than down
   //https://leetcode.com/problems/populating-next-right-pointers-in-each-node/description/

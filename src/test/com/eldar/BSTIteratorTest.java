@@ -1,6 +1,6 @@
 package com.eldar;
 
-import com.eldar.ProblemSolutions.TreeNode;
+import com.eldar.commonDataStructs.TreeNode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import org.junit.Assert;
@@ -21,16 +21,16 @@ public class BSTIteratorTest {
     test = new BSTIterator(null);
     Assert.assertFalse(test.hasNext());
 
-    root = tester.new TreeNode(8);
-    root.left = tester.new TreeNode(3);
-    root.left.left = tester.new TreeNode(1);
-    root.left.right = tester.new TreeNode(6);
+    root = new TreeNode(8);
+    root.left = new TreeNode(3);
+    root.left.left = new TreeNode(1);
+    root.left.right = new TreeNode(6);
     TreeNode tmp = root.left.right;
-    tmp.left = tester.new TreeNode(4);
-    tmp.right = tester.new TreeNode(7);
-    root.right = tester.new TreeNode(10);
-    root.right.right = tester.new TreeNode(14);
-    root.right.right.left = tester.new TreeNode(13);
+    tmp.left = new TreeNode(4);
+    tmp.right = new TreeNode(7);
+    root.right = new TreeNode(10);
+    root.right.right = new TreeNode(14);
+    root.right.right.left = new TreeNode(13);
 
     test = new BSTIterator(root);
     expected = new ArrayList<>(Arrays.asList(new Integer[] {1,3,4,6,7,8,10,13,14}));
