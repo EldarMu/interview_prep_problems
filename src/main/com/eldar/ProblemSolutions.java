@@ -2268,4 +2268,34 @@ public class ProblemSolutions {
     }
     return curTopVal;
   }
+
+  //two-sum with sorted array
+  //guaranteed presence of solution, can't reuse same index
+  //https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/
+  //standard O(Nlog(N)) solution
+  public int[] twoSumSorted(int[] numbers, int target) {
+    if(numbers.length==2){return new int[] {1,2};}
+    for(int i = 0; i < numbers.length; i++){
+      int tryFind = binSearchForTwoSum(numbers, target-numbers[i], i+1, numbers.length-1);
+      if(tryFind!=-1){return new int[] {i+1, tryFind+1};}
+    }
+    return new int[] {-1, -1};
+  }
+  private int binSearchForTwoSum(int[] numbers, int target, int left, int right){
+    if(left==right){
+      if(numbers[left]==target){return left;}
+      else{return -1;}
+    }
+    else if(left>right){return -1;}
+
+    if(left>right){return -1;}
+    int mid = left + (right-left)/2;
+    if(numbers[mid]==target){return mid;}
+    else if(numbers[mid]>target){
+      return binSearchForTwoSum(numbers, target, left, mid-1);
+    }
+    else{
+      return binSearchForTwoSum(numbers, target, mid+1, right);
+    }
+  }
 }

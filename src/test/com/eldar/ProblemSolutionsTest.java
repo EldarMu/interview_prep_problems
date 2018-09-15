@@ -1169,4 +1169,12 @@ public class ProblemSolutionsTest {
     Assert.assertEquals(3, tester.altMajorityElement(new int[] {3,2,3}));
     Assert.assertEquals(2, tester.altMajorityElement(new int[] {2,2,1,1,1,2,2}));
   }
+
+  @Test
+  public void twoSumSorted() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    Assert.assertArrayEquals(new int[] {1,2}, tester.twoSumSorted(new int[] {2,7,11,15}, 9));
+    Assert.assertArrayEquals(new int[] {5,8}, tester.twoSumSorted(new int[] {-5,-3,-1,0,3,4,6,8}, 11));
+    Assert.assertArrayEquals(new int[] {2,7}, tester.twoSumSorted(new int[] {-9,-4,-2,-1,0,3,4,7,8,11}, 0));
+  }
 }
