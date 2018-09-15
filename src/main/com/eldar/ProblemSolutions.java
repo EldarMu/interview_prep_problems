@@ -2279,5 +2279,23 @@ public class ProblemSolutions {
     return new int[] {-1, -1};
   }
 
+  //given a positive number, add the digits of that number
+  //then if the given numbers is more than 1 digit
+  //repeat
+  //until the result is a 1 digit value
+  //basic solution
+  public int addDigits(int num) {
+    if(num<10){return num;}
+    while(num>9){
+      int tmp = 0;
+      while(num>0){
+        tmp += num%10;
+        num /=10;
+      }
+      num = tmp;
+    }
+    return num;
+  }
+
 
 }

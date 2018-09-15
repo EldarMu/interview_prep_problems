@@ -1182,4 +1182,13 @@ public class ProblemSolutionsTest {
     Assert.assertArrayEquals(new int[] {5,8}, tester.altTwoSumSorted(new int[] {-5,-3,-1,0,3,4,6,8}, 11));
     Assert.assertArrayEquals(new int[] {2,7}, tester.altTwoSumSorted(new int[] {-9,-4,-2,-1,0,3,4,7,8,11}, 0));
   }
+
+  @Test
+  public void addDigits() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    Assert.assertEquals(5, tester.addDigits(5));
+    Assert.assertEquals(2, tester.addDigits(38));
+    Assert.assertEquals(6, tester.addDigits(12345));
+    Assert.assertEquals(9, tester.addDigits(999999));
+  }
 }
