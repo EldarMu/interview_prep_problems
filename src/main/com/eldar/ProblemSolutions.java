@@ -2298,4 +2298,22 @@ public class ProblemSolutions {
       return binSearchForTwoSum(numbers, target, mid+1, right);
     }
   }
+
+  //let's try the same thing with two pointers and no binary search
+  //note that we are guaranteed a unique solution
+  //standard linear time solution
+  //beats 67% of java submissions
+  public int[] altTwoSumSorted(int[] numbers, int target){
+    int leftPtr = 0;
+    int rightPtr = numbers.length-1;
+    while(leftPtr!=rightPtr){
+      int curSum = numbers[leftPtr]+numbers[rightPtr];
+      if(curSum==target){
+        return new int[] {leftPtr+1, rightPtr+1};
+      }
+      else if(curSum>target){rightPtr--;}
+      else{leftPtr++;}
+    }
+    return new int[] {-1, -1};
+  }
 }

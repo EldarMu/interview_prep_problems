@@ -1177,4 +1177,12 @@ public class ProblemSolutionsTest {
     Assert.assertArrayEquals(new int[] {5,8}, tester.twoSumSorted(new int[] {-5,-3,-1,0,3,4,6,8}, 11));
     Assert.assertArrayEquals(new int[] {2,7}, tester.twoSumSorted(new int[] {-9,-4,-2,-1,0,3,4,7,8,11}, 0));
   }
+
+  @Test
+  public void altTwoSumSorted() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    Assert.assertArrayEquals(new int[] {1,2}, tester.altTwoSumSorted(new int[] {2,7,11,15}, 9));
+    Assert.assertArrayEquals(new int[] {5,8}, tester.altTwoSumSorted(new int[] {-5,-3,-1,0,3,4,6,8}, 11));
+    Assert.assertArrayEquals(new int[] {2,7}, tester.altTwoSumSorted(new int[] {-9,-4,-2,-1,0,3,4,7,8,11}, 0));
+  }
 }
