@@ -2221,4 +2221,26 @@ public class ProblemSolutions {
     }
     return repeats;
   }
+
+
+  //given an array wherein some value constitutes more than half the elements
+  //find this element. Note that we're guaranteed the presence of a majority element
+  //first the naive linear solution
+  public int majorityElement(int[] nums) {
+    if(nums.length==0){return -1;}
+    else if(nums.length==1){return nums[0];}
+    Map<Integer, Integer> occurenceCounts = new HashMap<>();
+    for(int i = 0; i < nums.length; i++){
+      if(occurenceCounts.containsKey(nums[i])){
+        int curCount = occurenceCounts.get(nums[i]);
+        curCount++;
+        if(curCount>nums.length/2){return nums[i];}
+        occurenceCounts.put(nums[i], curCount);
+      }
+      else{
+        occurenceCounts.put(nums[i], 1);
+      }
+    }
+    return -1;
+  }
 }

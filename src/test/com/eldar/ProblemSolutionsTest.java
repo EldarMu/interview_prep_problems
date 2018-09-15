@@ -1149,4 +1149,12 @@ public class ProblemSolutionsTest {
       Assert.assertTrue(expectedResults.get(i).equals(results.get(i)));
     }
   }
+
+  @Test
+  public void majorityElement() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    Assert.assertEquals(-1, tester.majorityElement(new int[] {}));
+    Assert.assertEquals(3, tester.majorityElement(new int[] {3,2,3}));
+    Assert.assertEquals(2, tester.majorityElement(new int[] {2,2,1,1,1,2,2}));
+  }
 }
