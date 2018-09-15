@@ -1,8 +1,6 @@
 package com.eldar.commonDataStructs;
 
-/**
- * Created by eldar on 9/15/2018.
- */
+//simple BST Tree Node
 public class TreeNode {
   public int val;
   public TreeNode left;

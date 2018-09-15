@@ -1,8 +1,7 @@
 package com.eldar.commonDataStructs;
 
-/**
- * Created by eldar on 9/15/2018.
- */
+//a BST TreeNode that also has a reference
+//to the element to its right in its own row
 public class TreeLinkNode {
   public int val;
   public TreeLinkNode left;

@@ -1,8 +1,6 @@
 package com.eldar.commonDataStructs;
 
-/**
- * Created by eldar on 9/15/2018.
- */
+//a node in a singly-linked list
 public class ListNode {
   public int val;
   public ListNode next;

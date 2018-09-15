@@ -1,6 +1,6 @@
 package com.eldar.commonDataStructs;
 
-//class for next problem concerning inserting/merging intervals
+//simple tuple int class
 public class Interval {
   public int start;
   public int end;

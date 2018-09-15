@@ -1,8 +1,8 @@
 package com.eldar.commonDataStructs;
 
-/**
- * Created by eldar on 9/15/2018.
- */
+//a listnode with a previous reference
+//that in the implementation it was needed for was reached via key
+//so it also stores the key
 public class DoubleLinkListNode{
   public int val;
   public int key;

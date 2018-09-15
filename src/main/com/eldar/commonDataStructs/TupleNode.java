@@ -1,8 +1,6 @@
 package com.eldar.commonDataStructs;
 
-/**
- * Created by eldar on 9/15/2018.
- */
+//Int Tuple class for unique values, and the number of times they've occured
 public class TupleNode {
   public int val;
   public int occurence;
