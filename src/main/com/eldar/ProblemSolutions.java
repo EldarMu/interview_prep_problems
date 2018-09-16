@@ -2297,5 +2297,35 @@ public class ProblemSolutions {
     return num;
   }
 
+  //given a binary search tree and two nodes known to be present in it
+  //find the lowest common ancestor
+  //https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/description/
+  //bit of a slow solution, but it works
+  public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+    if(root==null){return null;}
+    if(root.val==p.val||root.val==q.val){return root;}
+    if(root.right==null){return lowestCommonAncestor(root.left, p, q);}
+    else if(root.left==null){return lowestCommonAncestor(root.right, p, q);}
+    else{
+      boolean pRight = findValInBST(root.right, p);
+      boolean qLeft = findValInBST(root.left, q);
+      if(pRight&&qLeft||!pRight&&!qLeft){return root;}
+      else if(pRight&&!qLeft){return lowestCommonAncestor(root.right, p, q);}
+      else{return lowestCommonAncestor(root.left, p, q);}
+    }
+  }
+
+  private boolean findValInBST(TreeNode root, TreeNode tn){
+    if(root.val==tn.val){return true;}
+    else if(root.val>tn.val){
+      if(root.left==null){return false;}
+      else{return findValInBST(root.left, tn);}
+    }
+    else{
+      if(root.right==null){return false;}
+      else{return findValInBST(root.right, tn);}
+    }
+  }
+
 
 }
