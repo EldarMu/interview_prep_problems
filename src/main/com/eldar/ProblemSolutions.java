@@ -2327,5 +2327,75 @@ public class ProblemSolutions {
     }
   }
 
+  List<Contact> mergeDuplicateContacts(List<Contact> contacts){
+    if(contacts==null){return new ArrayList<>();}
+    if(contacts.size()<2){return contacts;}
+    Map<String, List<Integer>> emailToContact = new HashMap<>();
+    for(int i = 0; i < contacts.size(); i++){
+      for(String email: contacts.get(i).emails){
+        if(!emailToContact.containsKey(email)){
+          List<Integer> contactIndeces = new ArrayList<>();
+          contactIndeces.add(i);
+          emailToContact.put(email, contactIndeces);
+        }
+        else{
+          emailToContact.get(email).add(i);
+        }
+      }
+    }
+    //now I have a list of emails to array indeces of the contacts that have them
+    //if an array index is paired with another array index, they need to be in the same
+    //"duplicates to merge" group
+    int[] contactGroups = new int[contacts.size()];
+    int contactCounter = 1;
+    for(String email: emailToContact.keySet()){
+      List<Integer> indeces = emailToContact.get(email);
+      int dupeIndex = -1;
+      for(Integer index: indeces){
+        if(contactGroups[index]!=0){
+          dupeIndex = contactGroups[index];
+          break;
+        }
+      }
+      if(dupeIndex!=-1){
+        for(Integer index: indeces){
+          contactGroups[index] = dupeIndex;
+        }
+      }
+      else{
+        for(Integer index: indeces){
+          contactGroups[index] = contactCounter;
+        }
+        contactCounter++;
+      }
+
+    }
+    //now we've got an array with all duplicate indeces marked with same int
+    List<Contact> result = new ArrayList<>();
+    for(int i = 1; i < contactCounter; i++){
+      String name = "";
+      List<String> emails = new ArrayList<>();
+      Set<String> emailUniquenessCheck = new HashSet<>();
+      boolean setName = false;
+      for(int j = 0; j < contactGroups.length; j++){
+        if(contactGroups[j]==i){
+          Contact curContact = contacts.get(j);
+          if(!setName){
+            name = curContact.name;
+            setName = true;
+          }
+          for(String email: curContact.emails){
+            if(!emailUniquenessCheck.contains(email)){
+              emails.add(email);
+              emailUniquenessCheck.add(email);
+            }
+          }
+        }
+      }
+      result.add(new Contact(name, emails));
+    }
+    return result;
+  }
+
 
 }

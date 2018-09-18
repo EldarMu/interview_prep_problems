@@ -3,7 +3,13 @@ package com.eldar;
 import com.eldar.commonDataStructs.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.Queue;
+import java.util.Random;
+import java.util.Set;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -1190,5 +1196,59 @@ public class ProblemSolutionsTest {
     Assert.assertEquals(2, tester.addDigits(38));
     Assert.assertEquals(6, tester.addDigits(12345));
     Assert.assertEquals(9, tester.addDigits(999999));
+  }
+
+  @Test
+  public void mergeDuplicateContacts() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    List<Contact> contactData;
+    List<List<String>> emails;
+    List<String> names;
+
+
+    names = new ArrayList<>();
+    emails = new ArrayList<>();
+    String[] nameStarts = new String[] {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k"};
+
+    for(int i = 0; i < nameStarts.length; i++) {
+      names.add(nameStarts[i]);
+      List<String> curEmails = new ArrayList<>();
+      for (int j = 0; j < nameStarts.length; j++) {
+        curEmails.add(nameStarts[i] + nameStarts[j]);
+      }
+      emails.add(curEmails);
+    }
+
+    contactData = new ArrayList<>();
+    Random rnd = new Random();
+    for(int i = 0; i < nameStarts.length; i++){
+      for(int j = 0; j < 5; j++){
+        Contact curContact = new Contact(nameStarts[i], new ArrayList<>());
+        curContact.emails.add(emails.get(i).get(rnd.nextInt(emails.get(i).size())));
+        curContact.emails.add(emails.get(i).get(rnd.nextInt(emails.get(i).size())));
+        curContact.emails.add(emails.get(i).get(rnd.nextInt(emails.get(i).size())));
+        curContact.emails.add(emails.get(i).get(rnd.nextInt(emails.get(i).size())));
+        contactData.add(curContact);
+      }
+    }
+    Collections.shuffle(contactData);
+    List<Contact> results = tester.mergeDuplicateContacts(contactData);
+    Map<String, Set<String>> nameToEmails = new HashMap<>();
+    for(int i = 0; i < nameStarts.length; i++){
+      Set<String> emailSet = new HashSet<>();
+      for(String email: emails.get(i)){
+        emailSet.add(email);
+      }
+      nameToEmails.put(nameStarts[i], emailSet);
+    }
+
+    for(int i = 0; i < results.size(); i++){
+      String curName = results.get(i).name;
+      List<String> curEmailList = results.get(i).emails;
+      for(int j = 0; j < curEmailList.size(); j++){
+        Assert.assertTrue(nameToEmails.get(curName).contains(curEmailList.get(j)));
+      }
+    }
+
   }
 }
