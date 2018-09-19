@@ -2397,5 +2397,34 @@ public class ProblemSolutions {
     return result;
   }
 
+  //given a list of rooms, each potentially containing keys to other rooms
+  //with room 0 being unlocked
+  //check if it's possible to visit all rooms
+  //https://leetcode.com/problems/keys-and-rooms/
+  //first a naive solution
+  public boolean canVisitAllRooms(List<List<Integer>> rooms) {
+    if(rooms==null||rooms.size()<2){return true;}
+    Set<Integer> roomKeys = new HashSet<>();
+    Set<Integer> visitedRooms = new HashSet<>();
+    roomKeys.add(0);
+
+    while(roomKeys.size()!=visitedRooms.size()){
+      int uncheckedRoom=-1;
+      for(Integer key: roomKeys){
+        if(!visitedRooms.contains(key)){
+          uncheckedRoom=key;
+          break;
+        }
+      }
+      if(uncheckedRoom==-1){break;}
+      List<Integer> curRoom = rooms.get(uncheckedRoom);
+      visitedRooms.add(uncheckedRoom);
+      for(int i = 0; i < curRoom.size(); i++){
+        if(!roomKeys.contains(curRoom.get(i))){roomKeys.add(curRoom.get(i));}
+      }
+    }
+    return roomKeys.size()==rooms.size();
+  }
+
 
 }

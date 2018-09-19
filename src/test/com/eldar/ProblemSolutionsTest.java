@@ -1249,6 +1249,61 @@ public class ProblemSolutionsTest {
         Assert.assertTrue(nameToEmails.get(curName).contains(curEmailList.get(j)));
       }
     }
+  }
 
+  @Test
+  public void canVisitAllRooms() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    List<List<Integer>> rooms;
+    List<Integer> tmpRoom;
+    int[][] roomsAsMatrix;
+
+    Assert.assertTrue(tester.canVisitAllRooms(new ArrayList<>()));
+
+    roomsAsMatrix = new int[][] {{1},{2},{3},{-1}};
+    rooms = new ArrayList<>();
+
+    for(int i = 0; i < roomsAsMatrix.length; i++){
+      tmpRoom = new ArrayList<>();
+      for(int j = 0; j < roomsAsMatrix[0].length; j++){
+        if(roomsAsMatrix[i][j]!=-1){
+          tmpRoom.add(roomsAsMatrix[i][j]);
+        }
+      }
+      rooms.add(tmpRoom);
+    }
+
+    Assert.assertTrue(tester.canVisitAllRooms(rooms));
+
+    roomsAsMatrix = new int[][] {{2}, {-1}, {1}};
+    rooms = new ArrayList<>();
+
+    for(int i = 0; i < roomsAsMatrix.length; i++){
+      tmpRoom = new ArrayList<>();
+      for(int j = 0; j < roomsAsMatrix[0].length; j++){
+        if(roomsAsMatrix[i][j]!=-1){
+          tmpRoom.add(roomsAsMatrix[i][j]);
+        }
+      }
+      rooms.add(tmpRoom);
+    }
+
+    Assert.assertTrue(tester.canVisitAllRooms(rooms));
+
+    
+    roomsAsMatrix = new int[][] {{1,3,-1}, {3,0,1}, {2,-1,-1}, {0,-1,-1}};
+    rooms = new ArrayList<>();
+
+    for(int i = 0; i < roomsAsMatrix.length; i++){
+      tmpRoom = new ArrayList<>();
+      for(int j = 0; j < roomsAsMatrix[0].length; j++){
+        if(roomsAsMatrix[i][j]!=-1){
+          tmpRoom.add(roomsAsMatrix[i][j]);
+        }
+      }
+      rooms.add(tmpRoom);
+    }
+
+    Assert.assertFalse(tester.canVisitAllRooms(rooms));
   }
 }
