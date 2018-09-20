@@ -2401,29 +2401,35 @@ public class ProblemSolutions {
   //with room 0 being unlocked
   //check if it's possible to visit all rooms
   //https://leetcode.com/problems/keys-and-rooms/
-  //first a naive solution
+  //standard issue solution, beats roughly 50% of java submissions
   public boolean canVisitAllRooms(List<List<Integer>> rooms) {
     if(rooms==null||rooms.size()<2){return true;}
-    Set<Integer> roomKeys = new HashSet<>();
-    Set<Integer> visitedRooms = new HashSet<>();
-    roomKeys.add(0);
-
-    while(roomKeys.size()!=visitedRooms.size()){
-      int uncheckedRoom=-1;
-      for(Integer key: roomKeys){
-        if(!visitedRooms.contains(key)){
-          uncheckedRoom=key;
-          break;
+    boolean[] unlockedRooms = new boolean[rooms.size()];
+    boolean[] visitedRooms = new boolean[rooms.size()];
+    unlockedRooms[0]=true;
+    int curUnlockedRooms = 1;
+    int curUnvisitedRooms = rooms.size();
+    List<Integer> roomsToVisit = new ArrayList<>();
+    while(curUnvisitedRooms!=0&&curUnlockedRooms!=rooms.size()-curUnvisitedRooms){
+      for(int i = 0; i < unlockedRooms.length; i++){
+        if(unlockedRooms[i]&&!visitedRooms[i]) {
+          roomsToVisit.add(i);
+          visitedRooms[i] = true;
+          curUnvisitedRooms--;
         }
       }
-      if(uncheckedRoom==-1){break;}
-      List<Integer> curRoom = rooms.get(uncheckedRoom);
-      visitedRooms.add(uncheckedRoom);
-      for(int i = 0; i < curRoom.size(); i++){
-        if(!roomKeys.contains(curRoom.get(i))){roomKeys.add(curRoom.get(i));}
+      for(int i = 0; i < roomsToVisit.size(); i++){
+        List<Integer> curRoom = rooms.get(roomsToVisit.get(i));
+        for(int j = 0; j < curRoom.size(); j++){
+          if(!visitedRooms[curRoom.get(j)]){
+            unlockedRooms[curRoom.get(j)]=true;
+            curUnlockedRooms++;
+          }
+        }
       }
+      roomsToVisit.clear();
     }
-    return roomKeys.size()==rooms.size();
+    return curUnvisitedRooms==0;
   }
 
 
