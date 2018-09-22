@@ -2408,5 +2408,26 @@ public class ProblemSolutions {
     return curUnvisitedRooms==0;
   }
 
+  //given an array with a certain number of zeroes
+  //move the zeroes to the end without disrupting the order of other elements in-place
+  //https://leetcode.com/problems/move-zeroes/
+  //beats 100% of java submissions
+  //admittedly a trivial problem
+  public void moveZeroes(int[] nums) {
+    if(nums.length<2){return;}
+    int replaceIndex = -1;
+    for(int i = 0; i<nums.length; i++){
+      if(nums[i]==0&&replaceIndex==-1){
+        replaceIndex=i;
+        continue;
+      }
+      else if(nums[i]!=0&&replaceIndex!=-1){
+        nums[replaceIndex]=nums[i];
+        nums[i]=0;
+        replaceIndex++;
+      }
+    }
+  }
+
 
 }

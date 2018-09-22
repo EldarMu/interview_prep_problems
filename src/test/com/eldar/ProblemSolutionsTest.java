@@ -1306,4 +1306,35 @@ public class ProblemSolutionsTest {
 
     Assert.assertFalse(tester.canVisitAllRooms(rooms));
   }
+
+  @Test
+  public void moveZeroes() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    int[] result;
+    int[] expectedResult;
+
+    result = new int[] {0,1,0,3,12};
+    expectedResult = new int[] {1,3,12,0,0};
+    tester.moveZeroes(result);
+    Assert.assertArrayEquals(expectedResult, result);
+
+    result = new int[] {};
+    tester.moveZeroes(result);
+    Assert.assertTrue(result.length==0);
+
+    result = new int[] {1};
+    expectedResult = new int[] {1};
+    tester.moveZeroes(result);
+    Assert.assertArrayEquals(expectedResult, result);
+
+    result = new int[] {0};
+    expectedResult = new int[] {0};
+    tester.moveZeroes(result);
+    Assert.assertArrayEquals(expectedResult, result);
+
+    result = new int[] {0,1};
+    expectedResult = new int[] {1,0};
+    tester.moveZeroes(result);
+    Assert.assertArrayEquals(expectedResult, result);
+  }
 }
