@@ -2429,8 +2429,29 @@ public class ProblemSolutions {
     }
   }
 
-
-
-
-
+  //given two arrays, find all values present in both
+  //https://leetcode.com/problems/intersection-of-two-arrays/
+  //simple solution using a map, beats 91% of java submissions
+  public int[] intersection(int[] nums1, int[] nums2) {
+    Map<Integer, Boolean> inBoth = new HashMap<>();
+    for(int i = 0; i < nums1.length; i++){
+      if(!inBoth.containsKey(nums1[i])) inBoth.put(nums1[i], false);
+    }
+    int numOfIntersections = 0;
+    for(int j = 0; j < nums2.length; j++){
+      if(inBoth.containsKey(nums2[j])&&!inBoth.get(nums2[j])){
+        inBoth.put(nums2[j], true);
+        numOfIntersections++;
+      }
+    }
+    int[] result = new int[numOfIntersections];
+    int index = 0;
+    for(Integer key: inBoth.keySet()){
+      if(inBoth.get(key)){
+        result[index] = key;
+        index++;
+      }
+    }
+    return result;
+  }
 }

@@ -1337,4 +1337,14 @@ public class ProblemSolutionsTest {
     tester.moveZeroes(result);
     Assert.assertArrayEquals(expectedResult, result);
   }
+
+  @Test
+  public void intersectionArgTest() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    Assert.assertArrayEquals(new int [] {}, tester.intersection(new int[] {1,2}, new int[] {}));
+    int[] result = tester.intersection(new int[] {1,2,0,3,4,5,9,34,62,63,12}, new int[] {2,2,2,2,1,2,2,2,2,2});
+    Assert.assertEquals(2, result.length);
+    Assert.assertTrue((result[0]==2&&result[1]==1)||(result[0]==1&&result[1]==2));
+  }
+
 }
