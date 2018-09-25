@@ -1347,4 +1347,25 @@ public class ProblemSolutionsTest {
     Assert.assertTrue((result[0]==2&&result[1]==1)||(result[0]==1&&result[1]==2));
   }
 
+  @Test
+  public void calcEquation() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    String[][] equations;
+    double[] values;
+    String[][] queries;
+    double results[];
+    double[] expectedResults;
+
+    equations = new String[][] {{"a", "b"}, {"b", "c"}};
+    values = new double[] {2.0, 3.0};
+    queries = new String[][] {{"a", "c"}, {"b", "a"}, {"a", "e"}, {"a", "a"}, {"x", "x"}};
+    expectedResults = new double[] {6.0, .5, -1.0, 1.0, -1.0};
+    results = tester.calcEquation(equations, values, queries);
+
+    Assert.assertEquals(expectedResults.length, results.length);
+    for(int i = 0; i < results.length; i++){
+      Assert.assertEquals(expectedResults[i], results[i], 0.009);
+    }
+  }
+
 }

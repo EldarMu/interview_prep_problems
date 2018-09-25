@@ -2454,4 +2454,52 @@ public class ProblemSolutions {
     }
     return result;
   }
+
+  //given a series of equations and result values (a/b=2.0) as {{"a", "b"}}, {2.0}
+  //return the results of new division queries if possible
+  //first approach makes the assumption that the equations can make a connected graph
+  public double[] calcEquation(String[][] equations, double[] values, String[][] queries) {
+    Map<String, Map<String, Double>> dividendMap = new HashMap<>();
+    for(int i = 0; i < equations.length; i++){
+      if(dividendMap.containsKey(equations[i][0])){
+        dividendMap.get(equations[i][0]).put(equations[i][1], values[i]);
+      }
+      else{
+        Map<String, Double> curDivisor = new HashMap<>();
+        curDivisor.put(equations[i][1], values[i]);
+        dividendMap.put(equations[i][0], curDivisor);
+      }
+    }
+    Set<String> checkInNextLoop = new HashSet<>();
+
+    Map<String, Double> quotientMap = new HashMap<>();
+    checkInNextLoop.add(equations[0][0]);
+    while(!checkInNextLoop.isEmpty()){
+      List<String> nextCheckInNextLoop = new LinkedList<>();
+      for(String curDividend: checkInNextLoop){
+        if(!quotientMap.containsKey(curDividend)) quotientMap.put(curDividend, 1.0);
+        double quotientFromDividend = quotientMap.get(curDividend);
+        if(dividendMap.containsKey(curDividend)){
+          for(String divisor: dividendMap.get(curDividend).keySet()){
+            if(!quotientMap.containsKey(divisor)){
+              nextCheckInNextLoop.add(divisor);
+              quotientMap.put(divisor, quotientFromDividend*dividendMap.get(curDividend).get(divisor));
+            }
+          }
+        }
+      }
+      checkInNextLoop = new HashSet<>(nextCheckInNextLoop);
+    }
+    double[] results = new double[queries.length];
+    for(int i = 0; i < results.length; i++){
+      if(!quotientMap.containsKey(queries[i][0])||!quotientMap.containsKey(queries[i][1])){
+        results[i] = -1.0;
+      }
+      else{
+        results[i] = 1.0/quotientMap.get(queries[i][0])*quotientMap.get(queries[i][1]);
+      }
+    }
+    return results;
+  }
+
 }
