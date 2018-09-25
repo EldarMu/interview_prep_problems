@@ -1387,4 +1387,45 @@ public class ProblemSolutionsTest {
       Assert.assertEquals(expectedResults[i], results[i], 0.009);
     }
   }
+
+  @Test
+  public void unconnectedCalcEquation() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    String[][] equations;
+    double[] values;
+    String[][] queries;
+    double results[];
+    double[] expectedResults;
+
+    equations = new String[][] {{"a", "e"}, {"b", "e"}};
+    values = new double[] {4.0, 3.0};
+    queries = new String[][] {{"a", "b"}, {"e", "e"}, {"x", "x"}};
+    expectedResults = new double[] {1.333, 1.0, -1.0};
+    results = tester.unconnectedCalcEquation(equations, values, queries);
+    Assert.assertEquals(expectedResults.length, results.length);
+    for(int i = 0; i < results.length; i++){
+      Assert.assertEquals(expectedResults[i], results[i], 0.009);
+    }
+
+    equations = new String[][] {{"a", "b"}, {"b", "c"}};
+    values = new double[] {2.0, 3.0};
+    queries = new String[][] {{"a", "c"}, {"b", "a"}, {"a", "e"}, {"a", "a"}, {"x", "x"}};
+    expectedResults = new double[] {6.0, .5, -1.0, 1.0, -1.0};
+    results = tester.unconnectedCalcEquation(equations, values, queries);
+
+    Assert.assertEquals(expectedResults.length, results.length);
+    for(int i = 0; i < results.length; i++){
+      Assert.assertEquals(expectedResults[i], results[i], 0.009);
+    }
+
+    equations = new String[][] {{"a", "b"}, {"b", "c"}, {"bc", "cd"}};
+    values = new double[] {1.5, 2.5, 5.0};
+    queries = new String[][] {{"a", "c"}, {"c", "b"}, {"bc", "cd"}, {"cd", "bc"}};
+    expectedResults = new double[] {3.75, 0.4, 5.0, 0.2};
+    results = tester.unconnectedCalcEquation(equations, values, queries);
+    Assert.assertEquals(expectedResults.length, results.length);
+    for(int i = 0; i < results.length; i++){
+      Assert.assertEquals(expectedResults[i], results[i], 0.009);
+    }
+  }
 }

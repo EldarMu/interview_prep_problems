@@ -2516,4 +2516,94 @@ public class ProblemSolutions {
     }
     return result;
   }
+
+  //same problem as above, but using maps
+  //significantly slower, but the test cases are a bit limited
+  //this is a valid way to do it, and for larger data sets seems like it'd be better than DFS
+  public double[] unconnectedCalcEquation(String[][] equations, double[] values, String[][] queries) {
+    Map<String, Map<String, Double>> dividendMap = new HashMap<>();
+    Set<String> uncheckedDividends = new HashSet<>();
+    for(int i = 0; i < equations.length; i++){
+      if(dividendMap.containsKey(equations[i][0])){
+        dividendMap.get(equations[i][0]).put(equations[i][1], values[i]);
+      }
+      else{
+        uncheckedDividends.add(equations[i][0]);
+        Map<String, Double> curDivisor = new HashMap<>();
+        curDivisor.put(equations[i][1], values[i]);
+        dividendMap.put(equations[i][0], curDivisor);
+      }
+      if(dividendMap.containsKey(equations[i][1])){
+        dividendMap.get(equations[i][1]).put(equations[i][0], 1.0/values[i]);
+      }
+      else{
+        uncheckedDividends.add(equations[i][1]);
+        Map<String, Double> curDivisor = new HashMap<>();
+        curDivisor.put(equations[i][0], 1.0/values[i]);
+        dividendMap.put(equations[i][1], curDivisor);
+      }
+
+    }
+
+
+    List<Map<String, Double>> quotientMapList = new ArrayList<>();
+    List<Set> valueGroupings = new ArrayList<>();
+
+    while(!uncheckedDividends.isEmpty()){
+      String initialDividend = "";
+      for(String s: uncheckedDividends){
+        initialDividend = s;
+        break;
+      }
+      uncheckedDividends.remove(initialDividend);
+
+      Map<String, Double> quotientMap = new HashMap<>();
+      Set<String> curVals = new HashSet<>();
+      Set<String> checkInNextLoop = new HashSet<>();
+      curVals.add(initialDividend);
+      checkInNextLoop.add(initialDividend);
+
+      while(!checkInNextLoop.isEmpty()){
+        List<String> nextCheckInNextLoop = new LinkedList<>();
+        for(String curDividend: checkInNextLoop){
+          if(!quotientMap.containsKey(curDividend)){
+            quotientMap.put(curDividend, 1.0);
+
+          }
+          double quotientFromDividend = quotientMap.get(curDividend);
+          if(dividendMap.containsKey(curDividend)){
+            for(String divisor: dividendMap.get(curDividend).keySet()){
+              if(!quotientMap.containsKey(divisor)){
+                nextCheckInNextLoop.add(divisor);
+                quotientMap.put(divisor, quotientFromDividend*dividendMap.get(curDividend).get(divisor));
+                uncheckedDividends.remove(divisor);
+                curVals.add(divisor);
+              }
+            }
+          }
+        }
+        checkInNextLoop = new HashSet<>(nextCheckInNextLoop);
+      }
+
+      valueGroupings.add(curVals);
+      quotientMapList.add(quotientMap);
+    }
+
+    double[] results = new double[queries.length];
+    for(int i = 0; i < results.length; i++){
+      int soughtSet = -1;
+      for(int j = 0; j < valueGroupings.size(); j++){
+        if(valueGroupings.get(j).contains(queries[i][0])&&valueGroupings.get(j).contains(queries[i][1])){
+          soughtSet = j;
+        }
+      }
+      if(soughtSet==-1) results[i] = -1;
+      else{
+        Map<String, Double> quotientMap = quotientMapList.get(soughtSet);
+        results[i] = 1.0/quotientMap.get(queries[i][0])*quotientMap.get(queries[i][1]);
+      }
+    }
+    return results;
+  }
+
 }
