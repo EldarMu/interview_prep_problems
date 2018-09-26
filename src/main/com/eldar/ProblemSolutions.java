@@ -2611,16 +2611,17 @@ public class ProblemSolutions {
   //trick is the same as get square root of num
   //beats 100% of java submissions
   public boolean isPerfectSquare(int num) {
+    double tolerableDoubleError = 0.00001;
     if(num==1||num==0) return true;
     double x = num/2.0;
     double range = num - x;
-    while (Math.abs(num-x*x)>0.00001){
+    while (Math.abs(num-x*x)>tolerableDoubleError){
       if(x*x>num) x = x - range/2;
       else x = x + range/2;
       range/=2;
     }
-    int intVersOfX = (int)(x+0.00001);
-    return Math.abs(x - intVersOfX)<0.00001;
+    int intVersOfX = (int)(x+tolerableDoubleError);
+    return Math.abs(x - intVersOfX)<tolerableDoubleError;
   }
 
 }
