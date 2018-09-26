@@ -1428,4 +1428,12 @@ public class ProblemSolutionsTest {
       Assert.assertEquals(expectedResults[i], results[i], 0.009);
     }
   }
+
+  @Test
+  public void isPerfectSquare() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    Assert.assertTrue(tester.isPerfectSquare(1));
+    Assert.assertTrue(tester.isPerfectSquare(16));
+    Assert.assertFalse(tester.isPerfectSquare(14));
+  }
 }

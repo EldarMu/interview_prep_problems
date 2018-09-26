@@ -2606,4 +2606,20 @@ public class ProblemSolutions {
     return results;
   }
 
+  //given a number, return true if it's square root is a whole number
+  //https://leetcode.com/problems/valid-perfect-square/description/
+  //trick is the same as get square root of num
+  public boolean isPerfectSquare(int num) {
+    if(num==1||num==0) return true;
+    double x = num/2.0;
+    double range = num - x;
+    while (Math.abs(num-x*x)>0.00001){
+      if(x*x>num) x = x - range/2;
+      else x = x + range/2;
+      range/=2;
+    }
+    int intVersOfX = (int)x;
+    return Math.abs(x - intVersOfX)<0.00001;
+  }
+
 }
