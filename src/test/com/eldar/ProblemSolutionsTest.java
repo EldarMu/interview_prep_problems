@@ -1432,6 +1432,7 @@ public class ProblemSolutionsTest {
   @Test
   public void isPerfectSquare() throws Exception{
     ProblemSolutions tester = new ProblemSolutions();
+    Assert.assertTrue(tester.isPerfectSquare(64516));
     Assert.assertTrue(tester.isPerfectSquare(1));
     Assert.assertTrue(tester.isPerfectSquare(16));
     Assert.assertFalse(tester.isPerfectSquare(14));
