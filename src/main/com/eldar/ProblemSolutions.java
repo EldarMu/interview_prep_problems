@@ -2624,4 +2624,25 @@ public class ProblemSolutions {
     return Math.abs(x - intVersOfX)<tolerableDoubleError;
   }
 
+  //given a list of N lightbulbs, turn all on, then every 2nd on,
+  //then toggle every third one... then toggle every nth
+  //then return the number of bulbs turned on
+  //curious if there's a super-clever binary operation solution
+  //https://leetcode.com/problems/bulb-switcher/description/
+  //let's try the obvious solution first
+  public int bulbSwitch(int n) {
+    if(n<0) return 0;
+    boolean[] bulbs = new boolean[n];
+    for(int i = 1; i <= n; i++){
+      for(int j = i-1; j < bulbs.length; j+=i){
+        bulbs[j] = !bulbs[j];
+      }
+    }
+    int result = 0;
+    for(int k = 0; k < bulbs.length; k++){
+      if(bulbs[k]) result++;
+    }
+    return result;
+  }
+
 }

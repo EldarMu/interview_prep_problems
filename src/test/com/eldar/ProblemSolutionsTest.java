@@ -1437,4 +1437,11 @@ public class ProblemSolutionsTest {
     Assert.assertTrue(tester.isPerfectSquare(16));
     Assert.assertFalse(tester.isPerfectSquare(14));
   }
+
+  @Test
+  public void bulbSwitch() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    Assert.assertEquals(1, tester.bulbSwitch(3));
+    Assert.assertEquals(316, tester.bulbSwitch(99999));
+  }
 }
