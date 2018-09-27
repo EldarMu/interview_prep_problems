@@ -2645,4 +2645,10 @@ public class ProblemSolutions {
     return result;
   }
 
+  //it's a math problem, apparently
+  //source - every single suggestion on leetcode
+  public int mathBulbSwitch(int n){
+    return (int)Math.sqrt(n);
+  }
+
 }

@@ -1443,5 +1443,16 @@ public class ProblemSolutionsTest {
     ProblemSolutions tester = new ProblemSolutions();
     Assert.assertEquals(1, tester.bulbSwitch(3));
     Assert.assertEquals(316, tester.bulbSwitch(99999));
+    Assert.assertEquals(0, tester.bulbSwitch(-3));
+    Assert.assertEquals(0, tester.bulbSwitch(0));
+  }
+
+  @Test
+  public void mathBulbSwitch() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    Assert.assertEquals(1, tester.mathBulbSwitch(3));
+    Assert.assertEquals(316, tester.mathBulbSwitch(99999));
+    Assert.assertEquals(0, tester.mathBulbSwitch(-3));
+    Assert.assertEquals(0, tester.mathBulbSwitch(0));
   }
 }
