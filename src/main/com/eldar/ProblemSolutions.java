@@ -2662,24 +2662,28 @@ public class ProblemSolutions {
 
   //reverse the vowels of a string
   //https://leetcode.com/problems/reverse-vowels-of-a-string/description/
-  //bog-standard solution, beats 50% of java submissions
+  //getting rid of set means it now beats 95% of java solutions
   public String reverseVowels(String s) {
-    Set<Character> vowels = new HashSet<>(Arrays.asList(new Character[] {'a', 'A', 'e', 'E', 'i', 'I', 'o', 'O', 'u', 'U'}));
+    boolean[] vowels = new boolean[256];
+    int[] vowelIndexes = new int[] {65, 69, 73, 79, 85, 97, 101, 105, 111, 117};
+    for(int i = 0; i < vowelIndexes.length; i++){
+      vowels[vowelIndexes[i]] = true;
+    }
     char[] strAsArr = s.toCharArray();
     int startPtr = 0;
     int endPtr = strAsArr.length-1;
     while(startPtr<endPtr){
-      if(vowels.contains(strAsArr[startPtr])&&vowels.contains(strAsArr[endPtr])){
+      if(vowels[(strAsArr[startPtr])]&&vowels[(strAsArr[endPtr])]){
         char tmp = strAsArr[startPtr];
         strAsArr[startPtr] = strAsArr[endPtr];
         strAsArr[endPtr] = tmp;
         startPtr++;
         endPtr--;
       }
-      else if(vowels.contains(strAsArr[startPtr])){
+      else if(vowels[(strAsArr[startPtr])]){
         endPtr--;
       }
-      else if(vowels.contains(strAsArr[endPtr])){
+      else if(vowels[(strAsArr[endPtr])]){
         startPtr++;
       }
       else{
