@@ -2659,4 +2659,34 @@ public class ProblemSolutions {
   public boolean isPowerOfThree(int n) {
     return Integer.toString(n, 3).matches("10*");
   }
+
+  //reverse the vowels of a string
+  //https://leetcode.com/problems/reverse-vowels-of-a-string/description/
+  //bog-standard solution, beats 50% of java submissions
+  public String reverseVowels(String s) {
+    Set<Character> vowels = new HashSet<>(Arrays.asList(new Character[] {'a', 'A', 'e', 'E', 'i', 'I', 'o', 'O', 'u', 'U'}));
+    char[] strAsArr = s.toCharArray();
+    int startPtr = 0;
+    int endPtr = strAsArr.length-1;
+    while(startPtr<endPtr){
+      if(vowels.contains(strAsArr[startPtr])&&vowels.contains(strAsArr[endPtr])){
+        char tmp = strAsArr[startPtr];
+        strAsArr[startPtr] = strAsArr[endPtr];
+        strAsArr[endPtr] = tmp;
+        startPtr++;
+        endPtr--;
+      }
+      else if(vowels.contains(strAsArr[startPtr])){
+        endPtr--;
+      }
+      else if(vowels.contains(strAsArr[endPtr])){
+        startPtr++;
+      }
+      else{
+        startPtr++;
+        endPtr--;
+      }
+    }
+    return new String(strAsArr);
+  }
 }

@@ -1463,4 +1463,12 @@ public class ProblemSolutionsTest {
     Assert.assertFalse(tester.isPowerOfThree(0));
     Assert.assertFalse(tester.isPowerOfThree(199));
   }
+
+  @Test
+  public void reverseVowels() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    Assert.assertTrue("holle".equals(tester.reverseVowels("hello")));
+    Assert.assertTrue("leotcede".equals(tester.reverseVowels("leetcode")));
+    Assert.assertTrue("cross".equals(tester.reverseVowels("cross")));
+  }
 }
