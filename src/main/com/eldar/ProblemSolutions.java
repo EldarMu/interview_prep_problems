@@ -2651,4 +2651,12 @@ public class ProblemSolutions {
     return (int)Math.sqrt(n);
   }
 
+
+  //given a value, return if it's a power of three (x*3)
+  //no recursion, no loops
+  //trivial with loops
+  //brilliant solution from ElementNotFound of leetcode
+  public boolean isPowerOfThree(int n) {
+    return Integer.toString(n, 3).matches("10*");
+  }
 }

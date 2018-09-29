@@ -1455,4 +1455,12 @@ public class ProblemSolutionsTest {
     Assert.assertEquals(0, tester.mathBulbSwitch(-3));
     Assert.assertEquals(0, tester.mathBulbSwitch(0));
   }
+
+  @Test
+  public void isPowerOfThree() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    Assert.assertTrue(tester.isPowerOfThree(9));
+    Assert.assertFalse(tester.isPowerOfThree(0));
+    Assert.assertFalse(tester.isPowerOfThree(199));
+  }
 }
