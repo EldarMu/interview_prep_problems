@@ -1483,4 +1483,16 @@ public class ProblemSolutionsTest {
     Assert.assertEquals(24, tester.sumOfLeftLeaves(root));
     Assert.assertEquals(0, tester.sumOfLeftLeaves(null));
   }
+
+  @Test
+  public void altSumOfLeftLeaves() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    TreeNode root = new TreeNode(3);
+    root.left = new TreeNode(9);
+    root.right = new TreeNode(20);
+    root.right.left = new TreeNode(15);
+    root.right.right = new TreeNode(7);
+    Assert.assertEquals(24, tester.altSumOfLeftLeaves(root));
+    Assert.assertEquals(0, tester.altSumOfLeftLeaves(null));
+  }
 }

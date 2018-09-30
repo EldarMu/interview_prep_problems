@@ -2716,4 +2716,19 @@ public class ProblemSolutions {
     }
     return sum;
   }
+
+  //same deal, beats same 78% of java submissions
+  public int altSumOfLeftLeaves(TreeNode root){
+    if(root==null) return 0;
+    int[] sum = new int[] {0};
+    recurSumOfLeftLeaves(root, sum, false);
+    return sum[0];
+  }
+
+  private void recurSumOfLeftLeaves(TreeNode curNode, int[] sum, boolean left){
+    if(left&&curNode.left==null&&curNode.right==null) sum[0]+=curNode.val;
+    if(curNode.left!=null) recurSumOfLeftLeaves(curNode.left, sum, true);
+    if(curNode.right!=null) recurSumOfLeftLeaves(curNode.right, sum, false);
+  }
+
 }
