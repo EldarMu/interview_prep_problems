@@ -1471,4 +1471,16 @@ public class ProblemSolutionsTest {
     Assert.assertTrue("leotcede".equals(tester.reverseVowels("leetcode")));
     Assert.assertTrue("cross".equals(tester.reverseVowels("cross")));
   }
+
+  @Test
+  public void sumOfLeftLeaves() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    TreeNode root = new TreeNode(3);
+    root.left = new TreeNode(9);
+    root.right = new TreeNode(20);
+    root.right.left = new TreeNode(15);
+    root.right.right = new TreeNode(7);
+    Assert.assertEquals(24, tester.sumOfLeftLeaves(root));
+    Assert.assertEquals(0, tester.sumOfLeftLeaves(null));
+  }
 }

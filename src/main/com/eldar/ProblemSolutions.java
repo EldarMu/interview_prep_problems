@@ -2693,4 +2693,27 @@ public class ProblemSolutions {
     }
     return new String(strAsArr);
   }
+
+  //return the sum of left leaves in a tree
+  //This is pretty trivial, admittedly
+  //https://leetcode.com/problems/sum-of-left-leaves/description/
+  //bfs solution, beats 78% of java submissions
+  public int sumOfLeftLeaves(TreeNode root) {
+    if(root==null) return 0;
+    Queue<TreeNode> treeLevels = new LinkedList<>();
+    treeLevels.offer(root);
+    int sum = 0;
+    while(!treeLevels.isEmpty()){
+      int curLevelLen = treeLevels.size();
+      for(int i = 0; i < curLevelLen; i++){
+        TreeNode tmp = treeLevels.poll();
+        if(tmp.left!=null){
+          if(tmp.left.left==null&&tmp.left.right==null) sum += tmp.left.val;
+          else treeLevels.offer(tmp.left);
+        }
+        if(tmp.right!=null) treeLevels.offer(tmp.right);
+      }
+    }
+    return sum;
+  }
 }
