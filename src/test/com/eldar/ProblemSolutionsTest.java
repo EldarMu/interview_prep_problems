@@ -1536,4 +1536,11 @@ public class ProblemSolutionsTest {
     tester.phoneNumsToStrings("15230");
     tester.phoneNumsToStrings("1");
   }
+
+  @Test
+  public void altPhoneNumsToStrings() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    tester.altPhoneNumsToStrings("15230");
+    tester.altPhoneNumsToStrings("1");
+  }
 }

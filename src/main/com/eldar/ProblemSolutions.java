@@ -3058,4 +3058,37 @@ public class ProblemSolutions {
       }
     }
   }
+
+  public void altPhoneNumsToStrings(String phNum){
+    Map<Character, char[]> numsToChars = new HashMap<>();
+    numsToChars.put('1', new char[]{' '});
+    numsToChars.put('0', new char[]{'0'});
+    numsToChars.put('2', new char[]{'a', 'b', 'c'});
+    numsToChars.put('3', new char[]{'d', 'e', 'f'});
+    numsToChars.put('4', new char[]{'g', 'h', 'i'});
+    numsToChars.put('5', new char[]{'j', 'k', 'l'});
+    numsToChars.put('6', new char[]{'m', 'n', 'o'});
+    numsToChars.put('7', new char[]{'p', 'q', 'r', 's'});
+    numsToChars.put('8', new char[]{'t', 'u', 'v'});
+    numsToChars.put('9', new char[]{'w', 'x', 'y', 'z'});
+
+    char[] str = new char[phNum.length()];
+
+    recursPhoneNum(numsToChars, phNum, str, 0);
+  }
+
+  private void recursPhoneNum(Map<Character, char[]> numToChars, String phNum, char[] str, int curIndex){
+    if(curIndex<phNum.length()-1){
+      for(char ch: numToChars.get(phNum.charAt(curIndex))){
+        str[curIndex] = ch;
+        recursPhoneNum(numToChars, phNum, str, curIndex+1);
+      }
+    }
+    else{
+      for(char ch: numToChars.get(phNum.charAt(curIndex))){
+        str[curIndex] = ch;
+        System.out.println(new String(str));
+      }
+    }
+  }
 }
