@@ -3059,6 +3059,7 @@ public class ProblemSolutions {
     }
   }
 
+  //recursive solution to same problem
   public void altPhoneNumsToStrings(String phNum){
     Map<Character, char[]> numsToChars = new HashMap<>();
     numsToChars.put('1', new char[]{' '});
@@ -3089,6 +3090,41 @@ public class ProblemSolutions {
         str[curIndex] = ch;
         System.out.println(new String(str));
       }
+    }
+  }
+
+  //given two large numbers represented by int arays (with each cell having value 0-9)
+  //return an int array that is the sum of those values
+  public int[] sumArrays(int[] a, int[] b){
+    if(b==null||b.length==0) return a;
+    if(a==null||a.length==0) return b;
+
+    boolean bArrIsLonger = b.length>a.length;
+    boolean carryOne = false;
+    int aIndex = a.length-1;
+    int bIndex = b.length-1;
+    int aVal = 0;
+    int bVal = 0;
+    while(aIndex>=0||bIndex>=0){
+      aVal = aIndex>=0? a[aIndex]:0;
+      bVal = bIndex>=0? b[bIndex]:0;
+      int sum = aVal+bVal;
+      sum = carryOne? sum+1:sum;
+      if(sum>9) {carryOne = true; sum = sum%10;}
+      if(bArrIsLonger) b[bIndex] = sum;
+      else a[aIndex] = sum;
+      aIndex--;
+      bIndex--;
+    }
+    if(!carryOne) return bArrIsLonger? b:a;
+    else{
+      int[] biggerArr = bArrIsLonger? b: a;
+      int[] extendedArr = new int[biggerArr.length+1];
+      extendedArr[0] = 1;
+      for(int i = 1; i<extendedArr.length; i++){
+        extendedArr[i] = biggerArr[i-1];
+      }
+      return extendedArr;
     }
   }
 }

@@ -1543,4 +1543,27 @@ public class ProblemSolutionsTest {
     tester.altPhoneNumsToStrings("15230");
     tester.altPhoneNumsToStrings("1");
   }
+
+  @Test
+  public void sumArrays() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    int[] firstArr;
+    int[] secondArr;
+    int[] expectedResult;
+
+    firstArr = new int[] {5,5,5,5,5,5};
+    secondArr = new int[] {5,5,5,5,5,5};
+    expectedResult = new int[] {1,1,1,1,1,1,0};
+    Assert.assertArrayEquals(expectedResult, tester.sumArrays(firstArr, secondArr));
+
+    firstArr = new int[] {1};
+    secondArr = new int[] {9,9,9};
+    expectedResult = new int[] {1,0,0,0};
+    Assert.assertArrayEquals(expectedResult, tester.sumArrays(firstArr, secondArr));
+
+    firstArr = new int[] {};
+    secondArr = new int[] {9,9,9};
+    expectedResult = new int[] {9,9,9};
+    Assert.assertArrayEquals(expectedResult, tester.sumArrays(firstArr, secondArr));
+  }
 }
