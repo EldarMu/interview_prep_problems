@@ -1529,4 +1529,11 @@ public class ProblemSolutionsTest {
     testedMatrix = new int[][] {{-5}};
     Assert.assertEquals(-5, tester.altKthSmallest(testedMatrix, 1));
   }
+
+  @Test
+  public void phoneNumsToStrings() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    tester.phoneNumsToStrings("15230");
+    tester.phoneNumsToStrings("1");
+  }
 }
