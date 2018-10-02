@@ -2731,4 +2731,24 @@ public class ProblemSolutions {
     if(curNode.right!=null) recurSumOfLeftLeaves(curNode.right, sum, false);
   }
 
+  //given a matrix of k sorted arrays, find the kth smallest elemet
+  //https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/description/
+  //basic solution requiring k*matrix row number operations on average
+  public int kthSmallest(int[][] matrix, int k) {
+    if(matrix==null||k<1||matrix.length*matrix[0].length<k) return 0;
+    int[] rowPtrs = new int[matrix.length];
+    int lowVal = 0;
+    int lowValIndex = 0;
+    for(int i = 0; i<k; i++){
+      lowVal = Integer.MAX_VALUE;
+      for(int j = 0; j < rowPtrs.length; j++){
+        if(rowPtrs[j]<matrix.length&&matrix[j][rowPtrs[j]]<lowVal){
+          lowVal = matrix[j][rowPtrs[j]];
+          lowValIndex = j;
+        }
+      }
+      rowPtrs[lowValIndex]++;
+    }
+    return lowVal;
+  }
 }
