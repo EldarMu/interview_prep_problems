@@ -1511,6 +1511,22 @@ public class ProblemSolutionsTest {
 
     testedMatrix = new int[][] {{-5}};
     Assert.assertEquals(-5, tester.kthSmallest(testedMatrix, 1));
+  }
 
+  @Test
+  public void altKthSmallest() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    int[][] testedMatrix;
+
+    testedMatrix = new int[][] {{1,5,9}, {10,11,13}, {12, 13, 15}};
+    Assert.assertEquals(13, tester.altKthSmallest(testedMatrix, 8));
+    Assert.assertEquals(0, tester.altKthSmallest(testedMatrix, 0));
+    Assert.assertEquals(0, tester.altKthSmallest(testedMatrix, -3));
+
+    testedMatrix = new int[][] {{}};
+    Assert.assertEquals(0, tester.altKthSmallest(testedMatrix, 3));
+
+    testedMatrix = new int[][] {{-5}};
+    Assert.assertEquals(-5, tester.altKthSmallest(testedMatrix, 1));
   }
 }

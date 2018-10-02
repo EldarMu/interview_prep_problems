@@ -2734,6 +2734,7 @@ public class ProblemSolutions {
   //given a matrix of k sorted arrays, find the kth smallest elemet
   //https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/description/
   //basic solution requiring k*matrix row number operations on average
+  //only beats around 27% of java submissions
   public int kthSmallest(int[][] matrix, int k) {
     if(matrix==null||k<1||matrix.length*matrix[0].length<k) return 0;
     int[] rowPtrs = new int[matrix.length];
@@ -2750,5 +2751,33 @@ public class ProblemSolutions {
       rowPtrs[lowValIndex]++;
     }
     return lowVal;
+  }
+
+  //alternative solution using a minHeap
+  //also somehow only beats 27% of java submissions
+  //despite having klog(k) complexity
+  public int altKthSmallest(int[][] matrix, int k){
+    if(matrix==null||k<1||matrix.length*matrix[0].length<k) return 0;
+    Queue<TupleWithIndex> minHeap = new PriorityQueue<>(new Comparator<TupleWithIndex>() {
+      @Override
+      public int compare(TupleWithIndex o1, TupleWithIndex o2) {
+        return o1.value-o2.value;
+      }
+    });
+    int[] rowPtrs = new int[matrix.length];
+
+    for(int i = 0; i < rowPtrs.length; i++){
+      minHeap.offer(new TupleWithIndex(matrix[i][0], i));
+    }
+    int curVal = 0;
+    for(int j = 0; j < k; j++){
+      TupleWithIndex curTuple = minHeap.poll();
+      curVal = curTuple.value;
+      if(rowPtrs[curTuple.index]<matrix.length-1){
+        curTuple.value = matrix[curTuple.index][++rowPtrs[curTuple.index]];
+        minHeap.offer(curTuple);
+      }
+    }
+    return curVal;
   }
 }
