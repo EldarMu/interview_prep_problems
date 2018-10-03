@@ -3127,4 +3127,22 @@ public class ProblemSolutions {
       return extendedArr;
     }
   }
+
+  //given a string and the result of randomly shuffling the string and adding a letter
+  //return the letter
+  //https://leetcode.com/problems/find-the-difference/
+  //beats 30% of java submissions
+  public char findTheDifference(String s, String t) {
+    int[] asciiCounts = new int[26];
+    for(int i = 0; i < t.length(); i++){
+      asciiCounts[t.charAt(i)-97]++;
+    }
+    for(int j = 0; j < s.length(); j++){
+      asciiCounts[s.charAt(j)-97]--;
+    }
+    for(int k = 0; k < asciiCounts.length; k++){
+      if(asciiCounts[k]!=0) return (char)(k+97);
+    }
+    return ' ';
+  }
 }
