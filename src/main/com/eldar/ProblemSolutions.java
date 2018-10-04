@@ -3183,4 +3183,35 @@ public class ProblemSolutions {
     }
     return true;
   }
+
+  //translate roman number to int
+  //https://leetcode.com/problems/roman-to-integer/
+  //basic sol'n beats 28% of java submissions (I'm starting to think there's a bug in leetcode)
+  public int romanToInt(String s) {
+    Map<String, Integer> romanToVal = new HashMap<>();
+    romanToVal.put("I",1);
+    romanToVal.put("V",5);
+    romanToVal.put("X",10);
+    romanToVal.put("L", 50);
+    romanToVal.put("C", 100);
+    romanToVal.put("D", 500);
+    romanToVal.put("M",1000);
+    romanToVal.put("IV",4);
+    romanToVal.put("IX", 9);
+    romanToVal.put("XL",40);
+    romanToVal.put("XC",90);
+    romanToVal.put("CD",400);
+    romanToVal.put("CM",900);
+
+    int sum = 0;
+    for(int i=0; i<s.length();i++){
+      if ( i != s.length()-1 && romanToVal.containsKey(s.substring(i, i+2))) {
+        sum+=romanToVal.get(s.substring(i, i+2));
+        i++;
+      }
+    else sum+=romanToVal.get(s.substring(i,i+1));
+    }
+    return sum;
+  }
+
 }

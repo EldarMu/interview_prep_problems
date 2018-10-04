@@ -1612,4 +1612,14 @@ public class ProblemSolutionsTest {
     Assert.assertTrue(tester.altIsSubsequence("", "literallyanything"));
     Assert.assertFalse(tester.altIsSubsequence("line", ""));
   }
+
+  @Test
+  public void romanToInt() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    Assert.assertEquals(3, tester.romanToInt("III"));
+    Assert.assertEquals(8, tester.romanToInt("VIII"));
+    Assert.assertEquals(58, tester.romanToInt("LVIII"));
+    Assert.assertEquals(27, tester.romanToInt("XXVII"));
+    Assert.assertEquals(1994, tester.romanToInt("MCMXCIV"));
+  }
 }
