@@ -1604,4 +1604,12 @@ public class ProblemSolutionsTest {
     Assert.assertTrue(tester.isSubsequence("", "literallyanything"));
     Assert.assertFalse(tester.isSubsequence("line", ""));
   }
+
+  @Test
+  public void altIsSubsequence() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    Assert.assertTrue(tester.altIsSubsequence("abc", "aasdadsbadjnkc"));
+    Assert.assertTrue(tester.altIsSubsequence("", "literallyanything"));
+    Assert.assertFalse(tester.altIsSubsequence("line", ""));
+  }
 }

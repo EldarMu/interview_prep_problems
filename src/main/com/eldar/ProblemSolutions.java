@@ -3150,6 +3150,7 @@ public class ProblemSolutions {
   //given two strings, check if one string contains the other's characters in the same order
   //but not necessarily next to one another
   //https://leetcode.com/problems/is-subsequence/description/
+  //beats 28% of java submissions
   public boolean isSubsequence(String s, String t) {
     if(s==null||s.length()==0) return true;
     if(t==null||t.length()==0) return false;
@@ -3168,5 +3169,18 @@ public class ProblemSolutions {
       tPtr++;
     }
     return false;
+  }
+
+  //for some bizarre reason using indexOf is faster
+  //beats 100% of java submissions
+  public boolean altIsSubsequence(String s, String t){
+    if(s.length()>t.length()) return false;
+    int prevCharIndex = -1;
+    for(int i = 0; i < s.length(); i++){
+      int curCharIndex = t.indexOf(s.charAt(i), prevCharIndex+1);
+      if(curCharIndex<prevCharIndex) return false;
+      else prevCharIndex = curCharIndex;
+    }
+    return true;
   }
 }
