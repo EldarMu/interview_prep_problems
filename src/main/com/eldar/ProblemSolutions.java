@@ -3209,9 +3209,34 @@ public class ProblemSolutions {
         sum+=romanToVal.get(s.substring(i, i+2));
         i++;
       }
-    else sum+=romanToVal.get(s.substring(i,i+1));
+      else sum+=romanToVal.get(s.substring(i,i+1));
     }
     return sum;
   }
+
+  //alternative solution, beats 99.5% of java submissions
+  public int altRomanToInt(String s) {
+    int sum = 0;
+    for(int i=0; i<s.length()-1; i++){
+      int curVal = singleRomanToInt(s.charAt(i));
+      if(curVal<singleRomanToInt(s.charAt(i+1))) sum-=curVal;
+      else sum+=curVal;
+    }
+    return sum+singleRomanToInt(s.charAt(s.length()-1));
+  }
+
+  private int singleRomanToInt(char ch){
+    switch(ch){
+      case 'I': return 1;
+      case 'V': return 5;
+      case 'X': return 10;
+      case 'L': return 50;
+      case 'C': return 100;
+      case 'D': return 500;
+      case 'M': return 1000;
+      default: return 0;
+    }
+  }
+
 
 }

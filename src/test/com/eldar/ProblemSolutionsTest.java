@@ -1622,4 +1622,14 @@ public class ProblemSolutionsTest {
     Assert.assertEquals(27, tester.romanToInt("XXVII"));
     Assert.assertEquals(1994, tester.romanToInt("MCMXCIV"));
   }
+
+  @Test
+  public void altRomanToInt() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    Assert.assertEquals(3, tester.altRomanToInt("III"));
+    Assert.assertEquals(8, tester.altRomanToInt("VIII"));
+    Assert.assertEquals(58, tester.altRomanToInt("LVIII"));
+    Assert.assertEquals(27, tester.altRomanToInt("XXVII"));
+    Assert.assertEquals(1994, tester.altRomanToInt("MCMXCIV"));
+  }
 }
