@@ -1596,4 +1596,12 @@ public class ProblemSolutionsTest {
         + "kxptswwkcircwuhcavhdparjfkjypkyxhbgwxbkvpvrtzjaetahmxevmkhdfyidhrdeejapfbafwmdqjqszwnw"
         + "zgclitdhlnkaiyldwkwwzvhyorgbysyjbxsspnjdewjxbhpsvj"));
   }
+
+  @Test
+  public void isSubsequence() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    Assert.assertTrue(tester.isSubsequence("abc", "aasdadsbadjnkc"));
+    Assert.assertTrue(tester.isSubsequence("", "literallyanything"));
+    Assert.assertFalse(tester.isSubsequence("line", ""));
+  }
 }
