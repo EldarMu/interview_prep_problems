@@ -1632,4 +1632,27 @@ public class ProblemSolutionsTest {
     Assert.assertEquals(27, tester.altRomanToInt("XXVII"));
     Assert.assertEquals(1994, tester.altRomanToInt("MCMXCIV"));
   }
+
+  @Test
+  public void addStrings() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    String firstStr;
+    String secondStr;
+    String expectedResult;
+
+    firstStr = "1";
+    secondStr = "999";
+    expectedResult = "1000";
+    Assert.assertTrue(expectedResult.equals(tester.addStrings(firstStr, secondStr)));
+
+    firstStr = "555555";
+    secondStr = "555555";
+    expectedResult = "1111110";
+    Assert.assertTrue(expectedResult.equals(tester.addStrings(firstStr, secondStr)));
+
+    firstStr = "";
+    secondStr = "999";
+    expectedResult = "999";
+    Assert.assertTrue(expectedResult.equals(tester.addStrings(firstStr, secondStr)));
+  }
 }

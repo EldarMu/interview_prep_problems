@@ -3239,4 +3239,41 @@ public class ProblemSolutions {
   }
 
 
+  //given two numbers as strings, return their sum as a string
+  //https://leetcode.com/problems/add-strings/description/
+  //standard solution beats 56% of java submissions
+  public String addStrings(String num1, String num2) {
+    if(num1==null||num1.length()==0) return num2;
+    if(num2==null||num2.length()==0) return num1;
+
+    char[] sumArr = new char[num2.length()>num1.length()?num2.length()+1:num1.length()+1];
+    boolean carryOne = false;
+    int num2Index = num2.length()-1;
+    int num1Index = num1.length()-1;
+    int num1Val;
+    int num2Val;
+    for(int i=sumArr.length-1; i>0; i--){
+      if(num1Index>=0) num1Val = Character.getNumericValue(num1.charAt(num1Index));
+      else num1Val=0;
+      if(num2Index>=0) num2Val = Character.getNumericValue(num2.charAt(num2Index));
+      else num2Val=0;
+      int curSum = num1Val+num2Val;
+      curSum = carryOne?curSum+1:curSum;
+      carryOne = curSum>9;
+      curSum %=10;
+      curSum += '0';
+      sumArr[i] = (char)curSum;
+      num2Index--;
+      num1Index--;
+    }
+    if(carryOne){
+      sumArr[0] = '1';
+      return new String(sumArr);
+    }
+    else{
+      return new String(sumArr, 1, sumArr.length-1);
+    }
+  }
+
+
 }
