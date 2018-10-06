@@ -3275,5 +3275,33 @@ public class ProblemSolutions {
     }
   }
 
+  //given a non-empty array of integers, return the third biggest distinct integer
+  //seems trivial since it's 3rd rather than kth
+  //https://leetcode.com/problems/third-maximum-number/description/
+  //beats 100% of java submissions
+  public int thirdMax(int[] nums) {
+    long firstMax = Long.MIN_VALUE;
+    long secondMax = Long.MIN_VALUE;
+    long thirdMax = Long.MIN_VALUE;
+    boolean thirdExists = false;
+    for(int i=0; i<nums.length; i++){
+      if(nums[i]!=firstMax&&nums[i]!=secondMax&&nums[i]!=thirdMax){
+        if(nums[i]>firstMax){
+          thirdMax = secondMax;
+          secondMax = firstMax;
+          firstMax = nums[i];
+        }
+        else if(nums[i]>secondMax){
+          thirdMax = secondMax;
+          secondMax = nums[i];
+        }
+        else if(nums[i]>thirdMax){
+          thirdMax = nums[i];
+        }
+      }
+    }
+    return thirdMax==Long.MIN_VALUE?(int)firstMax:(int)thirdMax;
+  }
+
 
 }

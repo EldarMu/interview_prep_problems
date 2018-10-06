@@ -1655,4 +1655,13 @@ public class ProblemSolutionsTest {
     expectedResult = "999";
     Assert.assertTrue(expectedResult.equals(tester.addStrings(firstStr, secondStr)));
   }
+
+  @Test
+  public void thirdMax() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    Assert.assertEquals(Integer.MIN_VALUE, tester.thirdMax(new int[] {1, 2, Integer.MIN_VALUE}));
+    Assert.assertEquals(-1, tester.thirdMax(new int[] {1,2,-1}));
+    Assert.assertEquals(1, tester.thirdMax(new int[] {1,2,3}));
+    Assert.assertEquals(3, tester.thirdMax(new int[] {3,3,2}));
+  }
 }
