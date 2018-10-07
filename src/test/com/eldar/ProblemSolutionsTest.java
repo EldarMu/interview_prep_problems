@@ -1664,4 +1664,17 @@ public class ProblemSolutionsTest {
     Assert.assertEquals(1, tester.thirdMax(new int[] {1,2,3}));
     Assert.assertEquals(3, tester.thirdMax(new int[] {3,3,2}));
   }
+
+  @Test
+  public void guessNumber() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    GuessNumber gn;
+
+    gn = new GuessNumber(123144);
+    Assert.assertEquals(123144, tester.guessNumber(999999, gn));
+    gn = new GuessNumber(1);
+    Assert.assertEquals(1, tester.guessNumber(1, gn));
+    gn = new GuessNumber(Integer.MAX_VALUE);
+    Assert.assertEquals(Integer.MAX_VALUE, tester.guessNumber(Integer.MAX_VALUE, gn));
+  }
 }

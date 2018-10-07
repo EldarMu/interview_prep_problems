@@ -3303,5 +3303,22 @@ public class ProblemSolutions {
     return thirdMax==Long.MIN_VALUE?(int)firstMax:(int)thirdMax;
   }
 
-
+  //guessing game as a method you call guess(int num), number from 1 to n
+  //-1 if lower, 1 if higher, 0 if got it
+  //https://leetcode.com/problems/guess-number-higher-or-lower/description/
+  //this is just binary search
+  public int guessNumber(int n, GuessNumber gn) {
+    int low = 1;
+    int high = n;
+    int med = low+ (high-low)/2;
+    int prevGuess;
+    while(low<=high){
+      prevGuess = gn.guess(med);
+      if(prevGuess==0) break;
+      else if(prevGuess==-1) high = med-1;
+      else low = med+1;
+      med = low+(high-low)/2;
+    }
+    return med;
+  }
 }
