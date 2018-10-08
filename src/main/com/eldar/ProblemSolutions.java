@@ -3331,7 +3331,7 @@ public class ProblemSolutions {
   //then start with the smallest value and fill in
   //slow but functioning solution
   public int[][] reconstructQueue(int[][] people) {
-    if(people==null||people.length==0) return people;
+    if(people==null||people.length==0) return new int[0][0];
     List<Integer> uniqueVals = new ArrayList<>();
     Map<Integer, List<Integer>> valsToIndices = new HashMap<>();
     int[][] results = new int[people.length][people[0].length];
@@ -3372,4 +3372,35 @@ public class ProblemSolutions {
     }
     return results;
   }
+
+  //a better, but still slow solution
+  //beats 49% of java submissions
+  public int[][] reconstructQueueTakeTwo(int[][] people) {
+    if(people==null||people.length==0) return people;
+    int[][] results = new int[people.length][people[0].length];
+    for(int i=0; i<results.length; i++){
+      results[i][0]=Integer.MAX_VALUE;
+    }
+    Arrays.sort(people, new Comparator<int[]>() {
+      @Override
+      public int compare(int[] o1, int[] o2) {
+        return Integer.compare(o1[0], o2[0]);
+      }
+    });
+    int curValueStartIndex = 0;
+    int curValue = people[0][0];
+    for(int i=0; i<people.length; i++){
+      int count = 0;
+      int index = 0;
+      while(index<results.length&&count!=people[i][1]){
+        if(results[index][0]>=people[i][0]) count++;
+        index++;
+      }
+      while(results[index][0]!=Integer.MAX_VALUE) index++;
+      results[index][0] = people[i][0];
+      results[index][1] = people[i][1];
+    }
+    return results;
+  }
+  
 }
