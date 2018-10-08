@@ -1717,4 +1717,24 @@ public class ProblemSolutionsTest {
     randomizedQueue = tester.reconstructQueueTakeTwo(randomizedQueue);
     Assert.assertEquals(organizedQueue.length,randomizedQueue.length);
   }
+
+  @Test
+  public void reconstructQueueTakeThree() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    int[][] randomizedQueue;
+    int[][] organizedQueue;
+
+    randomizedQueue = new int[][] {{7,0},{4,4},{7,1},{5,0},{6,1},{5,2}};
+    organizedQueue = new int[][] {{5,0}, {7,0}, {5,2},{6,1},{4,4},{7,1}};
+    randomizedQueue = tester.reconstructQueueTakeThree(randomizedQueue);
+    for(int i=0; i<randomizedQueue.length; i++){
+      for(int j=0; j<randomizedQueue[0].length; j++){
+        Assert.assertEquals(organizedQueue[i][j], randomizedQueue[i][j]);
+      }
+    }
+    randomizedQueue = new int[0][0];
+    organizedQueue = new int[0][0];
+    randomizedQueue = tester.reconstructQueueTakeThree(randomizedQueue);
+    Assert.assertEquals(organizedQueue.length,randomizedQueue.length);
+  }
 }

@@ -3387,8 +3387,6 @@ public class ProblemSolutions {
         return Integer.compare(o1[0], o2[0]);
       }
     });
-    int curValueStartIndex = 0;
-    int curValue = people[0][0];
     for(int i=0; i<people.length; i++){
       int count = 0;
       int index = 0;
@@ -3402,5 +3400,22 @@ public class ProblemSolutions {
     }
     return results;
   }
-  
+
+  //improved solution based on solution from YJL1228 on leetcode
+  //beats 67% of java submissions
+  public int[][] reconstructQueueTakeThree(int[][] people){
+    if(people==null||people.length==0) return people;
+    Arrays.sort(people, new Comparator<int[]>() {
+      @Override
+      public int compare(int[] o1, int[] o2) {
+        return o1[0]==o2[0]? o1[1]-o2[1] : o2[0]-o1[0];
+      }
+    });
+    List<int[]> orderedQueue = new LinkedList<>();
+    for(int i=0; i<people.length; i++){
+      orderedQueue.add(people[i][1], people[i]);
+    }
+    return orderedQueue.toArray(people);
+  }
+
 }
