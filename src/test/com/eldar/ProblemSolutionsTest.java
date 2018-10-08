@@ -1677,4 +1677,24 @@ public class ProblemSolutionsTest {
     gn = new GuessNumber(Integer.MAX_VALUE);
     Assert.assertEquals(Integer.MAX_VALUE, tester.guessNumber(Integer.MAX_VALUE, gn));
   }
+
+  @Test
+  public void reconstructQueue() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    int[][] randomizedQueue;
+    int[][] organizedQueue;
+
+    randomizedQueue = new int[][] {{7,0},{4,4},{7,1},{5,0},{6,1},{5,2}};
+    organizedQueue = new int[][] {{5,0}, {7,0}, {5,2},{6,1},{4,4},{7,1}};
+    randomizedQueue = tester.reconstructQueue(randomizedQueue);
+    for(int i=0; i<randomizedQueue.length; i++){
+      for(int j=0; j<randomizedQueue[0].length; j++){
+        Assert.assertEquals(organizedQueue[i][j], randomizedQueue[i][j]);
+      }
+    }
+    randomizedQueue = new int[0][0];
+    organizedQueue = new int[0][0];
+    randomizedQueue = tester.reconstructQueue(randomizedQueue);
+    Assert.assertEquals(organizedQueue.length,randomizedQueue.length);
+  }
 }

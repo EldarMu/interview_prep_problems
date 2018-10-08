@@ -3321,4 +3321,55 @@ public class ProblemSolutions {
     }
     return med;
   }
+
+  //given an array of int h, int k vals with int h = height of person
+  //and int k = num of people of height equal or greater than them in front of them
+  //reconstruct the order
+  //"in front" = to the left
+  //https://leetcode.com/problems/queue-reconstruction-by-height/description/
+  //let's toss the values in a map of int->list<int>
+  //then start with the smallest value and fill in
+  //slow but functioning solution
+  public int[][] reconstructQueue(int[][] people) {
+    if(people==null||people.length==0) return people;
+    List<Integer> uniqueVals = new ArrayList<>();
+    Map<Integer, List<Integer>> valsToIndices = new HashMap<>();
+    int[][] results = new int[people.length][people[0].length];
+    for(int i=0; i<results.length; i++){
+      results[i][0]=Integer.MAX_VALUE;
+    }
+    for(int j=0; j<people.length; j++){
+      if(!valsToIndices.containsKey(people[j][0])){
+        List<Integer> peopleInFront = new ArrayList<>();
+        peopleInFront.add(people[j][1]);
+        valsToIndices.put(people[j][0], peopleInFront);
+        uniqueVals.add(people[j][0]);
+      }
+      else{
+        valsToIndices.get(people[j][0]).add(people[j][1]);
+      }
+    }
+    uniqueVals.sort(Comparator.naturalOrder());
+    for(int k=0; k<uniqueVals.size(); k++){
+      List<Integer> currentPositions = valsToIndices.get(uniqueVals.get(k));
+      currentPositions.sort(Comparator.naturalOrder());
+      for(int l=0; l<currentPositions.size(); l++){
+        int count = 0;
+        int index = 0;
+        while(index<results.length&&count!=currentPositions.get(l)){
+
+          if(results[index][0]>=uniqueVals.get(k)){
+            count++;
+          }
+          index++;
+        }
+        while(results[index][0]!=Integer.MAX_VALUE){
+          index++;
+        }
+        results[index][0]=uniqueVals.get(k);
+        results[index][1]=currentPositions.get(l);
+      }
+    }
+    return results;
+  }
 }
