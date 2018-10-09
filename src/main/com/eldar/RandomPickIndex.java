@@ -30,4 +30,17 @@ public class RandomPickIndex {
     return instancesOfTarget.get(rand.nextInt(instancesOfTarget.size()));
   }
 
+  //alternative approach
+  //beats 63% of java submissions
+  public int altPick(int target){
+    double occurences = 0.0;
+    int chosenIndex = 0;
+    for(int i=0; i<nums.length; i++){
+      if(nums[i]!=target) continue;
+      occurences+=1.0;
+      chosenIndex = rand.nextDouble()<=1.0/occurences ? i : chosenIndex;
+    }
+    return chosenIndex;
+  }
+
 }
