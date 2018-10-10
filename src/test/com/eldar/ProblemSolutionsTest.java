@@ -1737,4 +1737,24 @@ public class ProblemSolutionsTest {
     randomizedQueue = tester.reconstructQueueTakeThree(randomizedQueue);
     Assert.assertEquals(organizedQueue.length,randomizedQueue.length);
   }
+
+  @Test
+  public void findDisappearedNumbers() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    int[] testArr;
+    List<Integer> actualResult;
+    int[] expectedResult;
+
+    testArr = new int[] {4,3,2,7,8,2,3,1};
+    expectedResult = new int[] {5,6};
+    actualResult = tester.findDisappearedNumbers(testArr);
+    Assert.assertEquals(expectedResult.length, actualResult.size());
+    for(int i=0; i<expectedResult.length; i++){
+      Assert.assertEquals(expectedResult[i], (int)actualResult.get(i));
+    }
+
+    Assert.assertTrue(tester.findDisappearedNumbers(new int[] {}).isEmpty());
+    Assert.assertTrue(tester.findDisappearedNumbers(null).isEmpty());
+
+  }
 }

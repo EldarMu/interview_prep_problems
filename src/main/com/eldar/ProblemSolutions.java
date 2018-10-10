@@ -3418,4 +3418,32 @@ public class ProblemSolutions {
     return orderedQueue.toArray(people);
   }
 
+  //given an array of length n
+  //holding values between 1 and n
+  //some values appear twice, the rest appear once
+  //return all values between 1 and n that are missing
+  //at O(N) time with O(1) extra space
+  //https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/description/
+  public List<Integer> findDisappearedNumbers(int[] nums) {
+    List<Integer> results = new ArrayList<>();
+    if(nums==null||nums.length==0) return results;
+    for(int i=0; i<nums.length; i++){
+      if(nums[i]-1!=i&&nums[i]!=0){
+        int val = nums[i];
+        nums[i]=0;
+        while(val!=0&&nums[val-1]!=val){
+          int tmp = nums[val-1];
+          nums[val-1] = val;
+          val = tmp;
+        }
+      }
+    }
+    for(int j=0; j<nums.length; j++){
+      if(nums[j]==0) results.add(j+1);
+    }
+    return results;
+  }
+
+
+
 }
