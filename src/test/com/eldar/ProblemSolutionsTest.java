@@ -1755,6 +1755,47 @@ public class ProblemSolutionsTest {
 
     Assert.assertTrue(tester.findDisappearedNumbers(new int[] {}).isEmpty());
     Assert.assertTrue(tester.findDisappearedNumbers(null).isEmpty());
+  }
 
+  @Test
+  public void levelOrder(){
+    ProblemSolutions tester = new ProblemSolutions();
+    List<List<Integer>> expectedResults;
+    List<List<Integer>> actualResults;
+
+    NaryTreeNode lastLevel1 = new NaryTreeNode(5, new ArrayList<>());
+    NaryTreeNode lastLevel2 = new NaryTreeNode(6, new ArrayList<>());
+    NaryTreeNode secondLevel1 = new NaryTreeNode(3, new ArrayList<>());
+    secondLevel1.children.add(lastLevel1);
+    secondLevel1.children.add(lastLevel2);
+    NaryTreeNode root = new NaryTreeNode(1, new ArrayList<>());
+    root.children.add(secondLevel1);
+    root.children.add(new NaryTreeNode(2, new ArrayList<>()));
+    root.children.add(new NaryTreeNode(4, new ArrayList<>()));
+
+    expectedResults = new ArrayList<>();
+    List<Integer> tmpList = new ArrayList<>();
+    tmpList.add(1);
+    expectedResults.add(tmpList);
+    tmpList = new ArrayList<>();
+    tmpList.add(3);
+    tmpList.add(2);
+    tmpList.add(4);
+    expectedResults.add(tmpList);
+    tmpList = new ArrayList<>();
+    tmpList.add(5);
+    tmpList.add(6);
+    expectedResults.add(tmpList);
+
+    actualResults = tester.levelOrder(root);
+    Assert.assertEquals(expectedResults.size(), actualResults.size());
+    for(int i=0; i<expectedResults.size(); i++){
+      Assert.assertEquals(expectedResults.get(i).size(), actualResults.get(i).size());
+      for(int j=0; j<expectedResults.get(i).size(); j++){
+        Assert.assertEquals(expectedResults.get(i).get(j), actualResults.get(i).get(j));
+      }
+    }
+    actualResults = tester.levelOrder(null);
+    Assert.assertTrue(actualResults.isEmpty());
   }
 }

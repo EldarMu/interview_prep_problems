@@ -3444,6 +3444,26 @@ public class ProblemSolutions {
     return results;
   }
 
-
-
+  //level order traversal for N-ary tree
+  //https://leetcode.com/problems/n-ary-tree-level-order-traversal/description/
+  //beats 75% of java submissions
+  public List<List<Integer>> levelOrder(NaryTreeNode root) {
+    if(root==null) return new ArrayList<>();
+    Queue<NaryTreeNode> level = new LinkedList<>();
+    level.offer(root);
+    List<List<Integer>> results = new ArrayList<>();
+    while(!level.isEmpty()){
+      int curLevelSize = level.size();
+      List<Integer> levelVals = new ArrayList<>(curLevelSize);
+      for(int i=0; i<curLevelSize; i++){
+        NaryTreeNode curNode = level.poll();
+        levelVals.add(curNode.val);
+        for(int j=0; j<curNode.children.size(); j++){
+          level.add(curNode.children.get(j));
+        }
+      }
+      results.add(levelVals);
+    }
+    return results;
+  }
 }
