@@ -1808,4 +1808,66 @@ public class ProblemSolutionsTest {
     Assert.assertEquals(6, tester.numberOfArithmeticSlices(new int[] {1,2,3,4,5}));
     Assert.assertEquals(10, tester.numberOfArithmeticSlices(new int[] {1,2,3,4,5,6}));
   }
+
+  @Test
+  public void deleteNode() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    TreeNode root;
+    int[] expectedValuesOpt1;
+    int[] expectedValuesOpt2;
+    Queue<TreeNode> levels;
+    int index;
+
+    root = new TreeNode(2);
+    root.left = new TreeNode(1);
+    levels = new LinkedList<>();
+    levels.offer(tester.deleteNode(root, 2));
+    Assert.assertTrue(levels.peek().left==null&&levels.peek().right==null);
+    Assert.assertEquals(1, levels.peek().val);
+
+    root = new TreeNode(2);
+    root.left = new TreeNode(1);
+    root.right = new TreeNode(3);
+    levels = new LinkedList();
+    expectedValuesOpt1 = new int[] {1,3};
+    expectedValuesOpt2 = new int[] {3,1};
+    index = 0;
+
+    levels.offer(tester.deleteNode(root, 2));
+    while(!levels.isEmpty()){
+      int lvlSize = levels.size();
+      for(int i=0; i<lvlSize; i++){
+        TreeNode tmp = levels.poll();
+        if(tmp.left!=null) levels.offer(tmp.left);
+        if(tmp.right!=null) levels.offer(tmp.right);
+        Assert.assertTrue(tmp.val==expectedValuesOpt1[index]||tmp.val==expectedValuesOpt2[index]);
+        index++;
+      }
+    }
+
+    root = new TreeNode(5);
+    root.left = new TreeNode(3);
+    root.left.left = new TreeNode(2);
+    root.left.right = new TreeNode(4);
+    root.right = new TreeNode(6);
+    root.right.right = new TreeNode(7);
+    levels = new LinkedList<>();
+    expectedValuesOpt1 = new int[] {5,2,6,4,7};
+    expectedValuesOpt2 = new int[] {5,4,6,2,7};
+    levels.add(tester.deleteNode(root, 3));
+    index = 0;
+    while(!levels.isEmpty()){
+      int lvlSize = levels.size();
+      for(int i=0; i<lvlSize; i++){
+        TreeNode tmp = levels.poll();
+        if(tmp.left!=null) levels.offer(tmp.left);
+        if(tmp.right!=null) levels.offer(tmp.right);
+        Assert.assertTrue(tmp.val==expectedValuesOpt1[index]||tmp.val==expectedValuesOpt2[index]);
+        index++;
+      }
+    }
+
+    root = new TreeNode(0);
+    Assert.assertNull(tester.deleteNode(root, 0));
+  }
 }

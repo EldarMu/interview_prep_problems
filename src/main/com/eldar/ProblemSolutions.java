@@ -3488,4 +3488,67 @@ public class ProblemSolutions {
     }
     return numOfSlices;
   }
+
+  //delete node in BST
+  //https://leetcode.com/problems/delete-node-in-a-bst/description/
+  //beats 45% of java submissions
+  public TreeNode deleteNode(TreeNode root, int key) {
+    if(root==null) return null;
+    TreeNode parent = new TreeNode(-1);
+    parent.left=root;
+    recursFindNode(parent, root, key);
+    return parent.left;
+  }
+
+  private void recursFindNode(TreeNode parent, TreeNode root, int key){
+    if(root.val==key){
+      if(root.left!=null&&root.right!=null) root.val = findReturnDelete(root, root.right);
+      else if(root.left!=null) root.val = findReturnDelete(root, root.left);
+      else if(root.right!=null) root.val = findReturnDelete(root, root.right);
+      else{
+        if(root==parent.left) parent.left=null;
+        else parent.right=null;
+      }
+    }
+    else if(root.val>key){
+      if(root.left==null) return;
+      else recursFindNode(root, root.left, key);
+    }
+    else{
+      if(root.right==null) return;
+      else recursFindNode(root, root.right, key);
+    }
+  }
+
+  private int findReturnDelete(TreeNode parent, TreeNode root){
+    int val = -1;
+    if(parent.left==root){
+      if(root.right==null){
+        val = root.val;
+        parent.left=root.left;
+        return val;
+      }
+      while(root.right!=null){
+        parent = root;
+        root = root.right;
+      }
+      val = root.val;
+      parent.right=root.left;
+      return val;
+    }
+    else{
+      if(root.left==null){
+        val = root.val;
+        parent.right = root.right;
+        return val;
+      }
+      while(root.left!=null){
+        parent = root;
+        root = root.left;
+      }
+      val = root.val;
+      parent.left = root.right;
+      return val;
+    }
+  }
 }
