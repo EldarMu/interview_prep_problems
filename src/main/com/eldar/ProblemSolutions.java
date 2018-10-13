@@ -3466,4 +3466,26 @@ public class ProblemSolutions {
     }
     return results;
   }
+
+  //find arithmetic slices in array
+  //https://leetcode.com/problems/arithmetic-slices/description/
+  //beats 100% of java submissions
+  public int numberOfArithmeticSlices(int[] A) {
+    if(A==null||A.length<3) return 0;
+    int numOfSlices = 0;
+    for(int i=0; i<A.length-2; i++){
+      int distBetweenVals = A[i+1]-A[i];
+      int sliceIndex = i+1;
+      while(sliceIndex+1<A.length&&A[sliceIndex+1]-A[sliceIndex]==distBetweenVals) sliceIndex++;
+      if(sliceIndex+1-i>=3){
+        int multiplier = 1;
+        for(int j=sliceIndex-i+1; j>=3; j--){
+          numOfSlices += multiplier;
+          multiplier++;
+        }
+      }
+      i = sliceIndex-1;
+    }
+    return numOfSlices;
+  }
 }

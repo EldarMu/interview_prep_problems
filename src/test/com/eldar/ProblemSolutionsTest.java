@@ -1798,4 +1798,14 @@ public class ProblemSolutionsTest {
     actualResults = tester.levelOrder(null);
     Assert.assertTrue(actualResults.isEmpty());
   }
+
+  @Test
+  public void numberOfArithmeticSlices() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    Assert.assertEquals(2, tester.numberOfArithmeticSlices(new int[] {1,2,3,8,9,10}));
+    Assert.assertEquals(1, tester.numberOfArithmeticSlices(new int[] {1,2,3}));
+    Assert.assertEquals(3, tester.numberOfArithmeticSlices(new int[] {1,2,3,4}));
+    Assert.assertEquals(6, tester.numberOfArithmeticSlices(new int[] {1,2,3,4,5}));
+    Assert.assertEquals(10, tester.numberOfArithmeticSlices(new int[] {1,2,3,4,5,6}));
+  }
 }
