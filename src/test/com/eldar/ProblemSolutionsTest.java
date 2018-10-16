@@ -1870,4 +1870,13 @@ public class ProblemSolutionsTest {
     root = new TreeNode(0);
     Assert.assertNull(tester.deleteNode(root, 0));
   }
+
+  @Test
+  public void originalDigits() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    Assert.assertNull(tester.originalDigits(null));
+    Assert.assertTrue(tester.originalDigits("").length()==0);
+    Assert.assertTrue("012".equals(tester.originalDigits("owoztneoer")));
+    Assert.assertTrue("45".equals(tester.originalDigits("fviefuro")));
+  }
 }

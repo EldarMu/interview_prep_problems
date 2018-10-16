@@ -3551,4 +3551,51 @@ public class ProblemSolutions {
       return val;
     }
   }
+
+  //given a string consisting of digits as words that has been shuffled
+  //return the digits it consists of in sorted order
+  //https://leetcode.com/problems/reconstruct-original-digits-from-english/
+  //beats 77% of java submissions
+  //key idea - as we remove words, more and more words left as options have a unique letter
+  public String originalDigits(String s) {
+    if(s==null||s.length()==0) return s;
+    int[] charCounts = new int[26];
+    for(int i=0; i<s.length(); i++){
+      charCounts[s.charAt(i)-97]++;
+    }
+
+    List<char[]> digitsToChars = new ArrayList<>(10);
+    digitsToChars.add(0, new char[] {'z', 'e', 'r', 'o'});
+    digitsToChars.add(1, new char[] {'o', 'n', 'e'});
+    digitsToChars.add(2, new char[] {'t', 'w', 'o'});
+    digitsToChars.add(3, new char[] {'t', 'h', 'r', 'e', 'e'});
+    digitsToChars.add(4, new char[] {'f', 'o', 'u', 'r'});
+    digitsToChars.add(5, new char[] {'f', 'i', 'v', 'e'});
+    digitsToChars.add(6, new char[] {'s', 'i', 'x'});
+    digitsToChars.add(7, new char[] {'s', 'e', 'v', 'e', 'n'});
+    digitsToChars.add(8, new char[] {'e', 'i', 'g', 'h', 't'});
+    digitsToChars.add(9, new char[] {'n', 'i', 'n', 'e'});
+    int[] orderToReadIn = new int[] {0,2,4,6,8,1,3,5,7,9};
+    char[] keyChar = new char[] {'z', 'w', 'u', 'x', 'g', 'o', 'r', 'f', 's', 'i'};
+    List<Integer> resultAsList = new ArrayList<>();
+
+    int readIndex = 0;
+    while(readIndex<10){
+      if(charCounts[keyChar[readIndex]-97]<1) readIndex++;
+      else{
+        resultAsList.add(orderToReadIn[readIndex]);
+        char[] curWord = digitsToChars.get(orderToReadIn[readIndex]);
+        for(int i=0; i<curWord.length; i++){
+          charCounts[curWord[i]-97]--;
+        }
+      }
+    }
+    resultAsList.sort(Comparator.naturalOrder());
+    char[] result = new char[resultAsList.size()];
+    for(int j=0; j<result.length; j++){
+      int asciiDigitVal = resultAsList.get(j)+48;
+      result[j] = (char) asciiDigitVal;
+    }
+    return new String(result);
+  }
 }
