@@ -3598,4 +3598,38 @@ public class ProblemSolutions {
     }
     return new String(result);
   }
+
+  //given tuples representing intervals as a matrix (an array of tuples)
+  //create a new array such that each index points to the index of the tuple
+  //with a start value bigger than or equal to its end value
+  //https://leetcode.com/problems/find-right-interval/
+  //beats 67% of java submissions
+  public int[] findRightInterval(Interval[] intervals) {
+    if(intervals==null||intervals.length==0) return new int[] {};
+    Queue<int[]> nextSmallestStart = new PriorityQueue<>(new Comparator<int[]>() {
+      @Override
+      public int compare(int[] o1, int[] o2) {
+        return o1[0]-o2[0];
+      }
+    });
+    for(int i=0; i<intervals.length; i++){
+      nextSmallestStart.offer(new int[] {intervals[i].start, i});
+      intervals[i].start = i;
+    }
+
+
+    Arrays.sort(intervals, new Comparator<Interval>() {
+      @Override
+      public int compare(Interval o1, Interval o2) {
+        return o1.end-o2.end;
+      }
+    });
+
+    int[] results = new int[intervals.length];
+    for(int i=0; i<intervals.length; i++){
+      while(!nextSmallestStart.isEmpty()&&intervals[i].end>nextSmallestStart.peek()[0]) nextSmallestStart.poll();
+      results[intervals[i].start] = nextSmallestStart.isEmpty()? -1:nextSmallestStart.peek()[1];
+    }
+    return results;
+  }
 }

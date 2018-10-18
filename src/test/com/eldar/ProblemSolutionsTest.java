@@ -1879,4 +1879,20 @@ public class ProblemSolutionsTest {
     Assert.assertTrue("012".equals(tester.originalDigits("owoztneoer")));
     Assert.assertTrue("45".equals(tester.originalDigits("fviefuro")));
   }
+
+  @Test
+  public void findRightInterval() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    Interval[] inputData;
+    int[] expectedResult;
+
+    inputData = new Interval[3];
+    inputData[0] = new Interval(3,4);
+    inputData[1] = new Interval(2,3);
+    inputData[2] = new Interval(1,2);
+    expectedResult = new int[] {-1,0,1};
+    Assert.assertArrayEquals(expectedResult, tester.findRightInterval(inputData));
+    Assert.assertArrayEquals(new int[] {-1}, tester.findRightInterval(new Interval[] {new Interval(1,2)}));
+    Assert.assertTrue(tester.findRightInterval(new Interval[0]).length==0);
+  }
 }
