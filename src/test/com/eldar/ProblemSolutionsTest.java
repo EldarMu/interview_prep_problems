@@ -1895,4 +1895,21 @@ public class ProblemSolutionsTest {
     Assert.assertArrayEquals(new int[] {-1}, tester.findRightInterval(new Interval[] {new Interval(1,2)}));
     Assert.assertTrue(tester.findRightInterval(new Interval[0]).length==0);
   }
+
+  @Test
+  public void canFinish() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    int[][] courses;
+
+    Assert.assertTrue(tester.canFinish(3, new int[][] {}));
+
+    courses = new int[][] {{1,0}};
+    Assert.assertTrue(tester.canFinish(2, courses));
+
+    courses = new int[][] {{1,0}, {0,1}};
+    Assert.assertFalse(tester.canFinish(2, courses));
+
+    courses = new int[][] {{4,3}, {3,2}, {3,1}, {2,0}, {1,2}};
+    Assert.assertTrue(tester.canFinish(5, courses));
+  }
 }

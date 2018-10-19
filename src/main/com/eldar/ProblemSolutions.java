@@ -3632,4 +3632,51 @@ public class ProblemSolutions {
     }
     return results;
   }
+
+  //given a list of courses and prerequisites as a matrix (array of tuples)
+  //and the number of courses that need to be taken
+  //find if there is a way to take all courses (e.g. no circular dependencies)
+  //https://leetcode.com/problems/course-schedule/
+  //beats 87% of java submissions
+  public boolean canFinish(int numCourses, int[][] prerequisites) {
+    if(numCourses<1||prerequisites==null||prerequisites.length==0) return true;
+    List<List<Integer>> sortedPrereqs = new ArrayList<>(numCourses);
+    for(int i=0; i<numCourses; i++){
+      sortedPrereqs.add(new ArrayList<>());
+    }
+    for(int i=0; i<prerequisites.length; i++){
+      sortedPrereqs.get(prerequisites[i][0]).add(prerequisites[i][1]);
+    }
+    boolean[] nodeKnownAcyclical = new boolean[numCourses];
+    boolean[] visited = new boolean[numCourses];
+    for(int j=numCourses-1; j>=0; j--){
+      if(sortedPrereqs.get(j)==null) nodeKnownAcyclical[j]=true;
+      if(!nodeKnownAcyclical[j]){
+        visited[j]=true;
+        if(!dfsCourseTraversal(nodeKnownAcyclical, sortedPrereqs, visited, j)) return false;
+        nodeKnownAcyclical[j]=true;
+      }
+    }
+    return true;
+  }
+
+  private boolean dfsCourseTraversal(boolean[] nodeKnownAcyclical,
+      List<List<Integer>> sortedPrereqs,
+      boolean[] visited,
+      int course){
+    List<Integer> curPrereqs = sortedPrereqs.get(course);
+    for(int i=0; i<curPrereqs.size(); i++){
+      int curPrereq = curPrereqs.get(i);
+      if(sortedPrereqs.get(curPrereq)==null) nodeKnownAcyclical[curPrereq]=true;
+      else if(!nodeKnownAcyclical[curPrereq]){
+        if(visited[curPrereq]) return false;
+        else{
+          visited[curPrereq] = true;
+          if(!dfsCourseTraversal(nodeKnownAcyclical, sortedPrereqs, visited, curPrereq)) return false;
+          nodeKnownAcyclical[curPrereq] = true;
+        }
+      }
+    }
+    return true;
+  }
 }
