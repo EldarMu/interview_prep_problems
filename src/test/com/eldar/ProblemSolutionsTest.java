@@ -1912,4 +1912,21 @@ public class ProblemSolutionsTest {
     courses = new int[][] {{4,3}, {3,2}, {3,1}, {2,0}, {1,2}};
     Assert.assertTrue(tester.canFinish(5, courses));
   }
+
+  @Test public void nextGreaterElement() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    int[] input1;
+    int[] input2;
+    int[] expectedResult;
+
+    input1 = new int[] {4,1,2};
+    input2 = new int[] {1,3,4,2};
+    expectedResult = new int[] {-1,3,-1};
+    Assert.assertArrayEquals(expectedResult, tester.nextGreaterElement(input1, input2));
+
+    input1 = new int[] {2,4};
+    input2 = new int[] {1,2,3,4};
+    expectedResult = new int[] {3,-1};
+    Assert.assertArrayEquals(expectedResult, tester.nextGreaterElement(input1, input2));
+  }
 }

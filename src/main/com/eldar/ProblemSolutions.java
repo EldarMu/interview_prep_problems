@@ -3679,4 +3679,30 @@ public class ProblemSolutions {
     }
     return true;
   }
+
+  //given an array of integers as nums1, which are all contained in nums2 in some order
+  //find the next value greater than each value in nums1 in nums2
+  //https://leetcode.com/problems/next-greater-element-i/description/
+  //bog-standard solution, beats 52% of submissions
+  public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+    if(nums2==null||nums1==null||nums1.length==0||nums2.length==0) return new int[] {};
+    int curGreaterVal = Integer.MIN_VALUE;
+    Map<Integer, Integer> intToGreaterVal = new HashMap<>(nums2.length);
+    for(int i=nums2.length-1; i>=0; i--){
+      if(curGreaterVal<=nums2[i]){
+        while(curGreaterVal!=Integer.MIN_VALUE&&curGreaterVal<=nums2[i]){
+          curGreaterVal = intToGreaterVal.get(curGreaterVal);
+        }
+      }
+      intToGreaterVal.put(nums2[i],curGreaterVal);
+      curGreaterVal = nums2[i];
+    }
+    int[] results = new int[nums1.length];
+    for(int j=0; j<nums1.length; j++){
+      int curVal = intToGreaterVal.get(nums1[j]);
+      curVal = curVal==Integer.MIN_VALUE? -1:curVal;
+      results[j] = curVal;
+    }
+    return results;
+  }
 }
