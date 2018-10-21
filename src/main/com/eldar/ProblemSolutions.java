@@ -3705,4 +3705,46 @@ public class ProblemSolutions {
     }
     return results;
   }
+
+  //sort characters in string by frequency
+  //most frequent chars first
+  //https://leetcode.com/problems/sort-characters-by-frequency/submissions/
+  //beats 98.65% of java submissions
+  public String frequencySort(String s) {
+    if(s==null||s.length()<3) return s;
+    int[] counts = new int[256];
+    for(int i=0; i<s.length(); i++){
+      counts[s.charAt(i)]++;
+    }
+    Queue<CharWithCount> maxHeap = new PriorityQueue<>();
+    for(int j=0; j<counts.length; j++){
+      if(counts[j]!=0){
+        CharWithCount ch = new CharWithCount(counts[j], (char)j);
+        maxHeap.offer(ch);
+      }
+    }
+    char[] resultAsChar = new char[s.length()];
+    int nextCharToWrite = 0;
+    while(!maxHeap.isEmpty()){
+      CharWithCount ch = maxHeap.poll();
+      for(int k=0; k<ch.count; k++){
+        resultAsChar[nextCharToWrite]=ch.ch;
+        nextCharToWrite++;
+      }
+    }
+    return new String(resultAsChar);
+  }
+
+  private class CharWithCount implements Comparable<CharWithCount>{
+    int count;
+    char ch;
+    CharWithCount(int count, char ch) {
+      this.count = count;
+      this.ch = ch;
+    }
+
+    public int compareTo(CharWithCount charWithCount){
+      return charWithCount.count-this.count;
+    }
+  }
 }

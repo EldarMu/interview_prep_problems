@@ -1929,4 +1929,16 @@ public class ProblemSolutionsTest {
     expectedResult = new int[] {3,-1};
     Assert.assertArrayEquals(expectedResult, tester.nextGreaterElement(input1, input2));
   }
+
+  @Test
+  public void frequencySort() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    String result;
+
+    result = tester.frequencySort("tree");
+    Assert.assertTrue("eert".equals(result)||"eetr".equals(result));
+
+    result = tester.frequencySort("cccaa");
+    Assert.assertTrue("cccaa".equals(result));
+  }
 }
