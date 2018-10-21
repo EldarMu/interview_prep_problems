@@ -53,6 +53,49 @@ public class CodecTest {
   }
 
   @Test
+  public void dfsSerialize() throws Exception{
+    Codec test = new Codec();
+    String expectedResult;
+    TreeNode head;
+
+    head = new TreeNode(1);
+    expectedResult = "1";
+    Assert.assertTrue(expectedResult.equals(test.dfsSerialize(head)));
+
+    head = new TreeNode(1);
+    head.left = null;
+    head.right = new TreeNode(2);
+    head.right.right = null;
+    head.right.left = new TreeNode(3);
+    expectedResult = "1 2 3";
+    Assert.assertTrue(expectedResult.equals(test.dfsSerialize(head)));
+
+    head = new TreeNode(3);
+    head.left = new TreeNode(1);
+    head.right = new TreeNode(5);
+    head.right.left = new TreeNode(4);
+    head.right.right = new TreeNode(6);
+    expectedResult = "3 1 5 4 6";
+    Assert.assertTrue(expectedResult.equals(test.dfsSerialize(head)));
+
+    head = new TreeNode(4);
+    head.left = new TreeNode(1);
+    head.left.left = new TreeNode(0);
+    head.left.right = new TreeNode(3);
+    head.right = new TreeNode(9);
+    expectedResult = "4 1 0 3 9";
+    Assert.assertTrue(expectedResult.equals(test.dfsSerialize(head)));
+
+    head = new TreeNode(9);
+    head.left = new TreeNode(3);
+    head.right = new TreeNode(20);
+    head.right.left = new TreeNode(15);
+    head.right.right = new TreeNode(25);
+    expectedResult = "9 3 20 15 25";
+    Assert.assertTrue(expectedResult.equals(test.dfsSerialize(head)));
+  }
+
+  @Test
   public void deserialize() throws Exception{
     Codec test = new Codec();
     BSTComparator bstComparator = new BSTComparator();
