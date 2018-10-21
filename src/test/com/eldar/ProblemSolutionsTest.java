@@ -1941,4 +1941,11 @@ public class ProblemSolutionsTest {
     result = tester.frequencySort("cccaa");
     Assert.assertTrue("cccaa".equals(result));
   }
+
+  @Test
+  public void hammingDistance() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    Assert.assertEquals(2, tester.hammingDistance(4, 1));
+    Assert.assertEquals(2, tester.hammingDistance(14,4));
+  }
 }

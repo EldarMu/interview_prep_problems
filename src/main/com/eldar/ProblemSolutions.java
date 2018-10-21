@@ -3747,4 +3747,25 @@ public class ProblemSolutions {
       return charWithCount.count-this.count;
     }
   }
+
+  //find Hamming distance between two values
+  //This is not optimal, but I know how to do it without looking anything up
+  //https://leetcode.com/problems/hamming-distance/
+  //beats 61% of java submissions
+  public int hammingDistance(int x, int y) {
+    String xStr = Integer.toString(x,2);
+    String yStr = Integer.toString(y,2);
+    String longerStr = xStr.length()>yStr.length()? xStr:yStr;
+    int diff = 0;
+    int index = 0;
+    while(index<xStr.length()&&index<yStr.length()){
+      if(xStr.charAt(xStr.length()-1-index)!=yStr.charAt(yStr.length()-1-index)) diff++;
+      index++;
+    }
+    while(index<longerStr.length()){
+      if(longerStr.charAt(longerStr.length()-1-index)!='0') diff++;
+      index++;
+    }
+    return diff;
+  }
 }
