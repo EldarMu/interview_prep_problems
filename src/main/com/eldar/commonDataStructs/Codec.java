@@ -42,6 +42,8 @@ public class Codec {
 
   //let's utilize the fact that it's a bst and is actually sorted values
   //and do a preorder traversal
+  //beats 94% of java submissions
+  //despite being completely average
   public String dfsSerialize(TreeNode root){
     if(root==null) return "";
     StringBuilder sb = new StringBuilder();
@@ -86,5 +88,30 @@ public class Codec {
     return head;
   }
 
+  public TreeNode dfsDeserialize(String data){
+    if(data==null||data.length()==0) return null;
+    String[] valsAsStrings = data.split(" ");
+    int[] vals = new int[valsAsStrings.length];
+    for(int i=0; i<valsAsStrings.length; i++){
+      vals[i] = Integer.valueOf(valsAsStrings[i]);
+    }
+    TreeNode root = recursDeserialize(vals, 0, vals.length-1);
+    return root;
+  }
 
+  private TreeNode recursDeserialize(int[] vals, int left, int right){
+    if(left>right) return null;
+    else if(left==right) return new TreeNode(vals[left]);
+    else{
+      TreeNode curNode = new TreeNode(vals[left]);
+      int biggerValIndex = left+1;
+      while(biggerValIndex<=right&&vals[biggerValIndex]<curNode.val) biggerValIndex++;
+      if(biggerValIndex>right) curNode.left = recursDeserialize(vals, left+1, right);
+      else{
+        curNode.left=recursDeserialize(vals, left+1, biggerValIndex-1);
+        curNode.right=recursDeserialize(vals, biggerValIndex, right);
+      }
+      return curNode;
+    }
+  }
 }
