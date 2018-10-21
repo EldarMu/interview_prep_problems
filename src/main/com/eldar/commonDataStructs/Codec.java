@@ -41,6 +41,29 @@ public class Codec {
 
   // Decodes your encoded data to tree.
   public TreeNode deserialize(String data) {
-    return null;
+    if(data==null||data.length()==0)return null;
+    String[] levels = data.split("\\.");
+    Queue<TreeNode> level = new LinkedList<>();
+    TreeNode head = new TreeNode(Integer.valueOf(levels[0]));
+    level.offer(head);
+    for(int i=1; i<levels.length; i++){
+      String[] curLevel = levels[i].split("\\,");
+      int levelSize = level.size();
+      int curLevelChildNodeIndex = 0;
+      for(int j=0; j<levelSize; j++){
+        TreeNode curNode = level.poll();
+        if(curLevel[curLevelChildNodeIndex].charAt(0)!='n'){
+          curNode.left = new TreeNode(Integer.valueOf(curLevel[curLevelChildNodeIndex]));
+          level.offer(curNode.left);
+        }
+        curLevelChildNodeIndex++;
+        if(curLevel[curLevelChildNodeIndex].charAt(0)!='n'){
+          curNode.right = new TreeNode(Integer.valueOf(curLevel[curLevelChildNodeIndex]));
+          level.offer(curNode.right);
+        }
+        curLevelChildNodeIndex++;
+      }
+    }
+    return head;
   }
 }

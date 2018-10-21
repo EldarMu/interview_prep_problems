@@ -2,6 +2,7 @@ package com.eldar;
 
 import com.eldar.commonDataStructs.Codec;
 import com.eldar.commonDataStructs.TreeNode;
+import com.eldar.commonDataStructs.BSTComparator;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -12,13 +13,18 @@ public class CodecTest {
   public void serialize() throws Exception{
     Codec test = new Codec();
     String expectedResult;
+    TreeNode head;
 
-    TreeNode head = new TreeNode(1);
+    head = new TreeNode(1);
+    expectedResult = "1.n,n";
+    Assert.assertTrue(expectedResult.equals(test.serialize(head)));
+
+    head = new TreeNode(1);
     head.left = null;
     head.right = new TreeNode(2);
     head.right.right = null;
     head.right.left = new TreeNode(3);
-    expectedResult = "1.n,2.3,n.n";
+    expectedResult = "1.n,2.3,n.n,n";
     Assert.assertTrue(expectedResult.equals(test.serialize(head)));
 
     head = new TreeNode(5);
@@ -44,8 +50,50 @@ public class CodecTest {
     head.right.right = new TreeNode(7);
     expectedResult = "3.9,20.n,n,15,7.n,n,n,n";
     Assert.assertTrue(expectedResult.equals(test.serialize(head)));
+  }
 
+  @Test
+  public void deserialize() throws Exception{
+    Codec test = new Codec();
+    BSTComparator bstComparator = new BSTComparator();
+    TreeNode head;
+    TreeNode expectedHead;
 
+    expectedHead = new TreeNode(1);
+    head = test.deserialize("1.n,n");
+    Assert.assertTrue(bstComparator.isSameTree(expectedHead, head));
+
+    expectedHead = new TreeNode(1);
+    expectedHead.left = null;
+    expectedHead.right = new TreeNode(2);
+    expectedHead.right.right = null;
+    expectedHead.right.left = new TreeNode(3);
+    head = test.deserialize("1.n,2.3,n.n,n");
+    Assert.assertTrue(bstComparator.isSameTree(expectedHead, head));
+
+    expectedHead = new TreeNode(5);
+    expectedHead.left = new TreeNode(1);
+    expectedHead.right = new TreeNode(4);
+    expectedHead.right.left = new TreeNode(3);
+    expectedHead.right.right = new TreeNode(6);
+    head = test.deserialize("5.1,4.n,n,3,6.n,n,n,n");
+    Assert.assertTrue(bstComparator.isSameTree(expectedHead, head));
+
+    expectedHead = new TreeNode(4);
+    expectedHead.left = new TreeNode(9);
+    expectedHead.left.left = new TreeNode(5);
+    expectedHead.left.right = new TreeNode(1);
+    expectedHead.right = new TreeNode(0);
+    head = test.deserialize("4.9,0.5,1,n,n.n,n,n,n");
+    Assert.assertTrue(bstComparator.isSameTree(expectedHead, head));
+
+    expectedHead = new TreeNode(3);
+    expectedHead.left = new TreeNode(9);
+    expectedHead.right = new TreeNode(20);
+    expectedHead.right.left = new TreeNode(15);
+    expectedHead.right.right = new TreeNode(7);
+    head = test.deserialize("3.9,20.n,n,15,7.n,n,n,n");
+    Assert.assertTrue(bstComparator.isSameTree(expectedHead, head));
   }
 
 }
