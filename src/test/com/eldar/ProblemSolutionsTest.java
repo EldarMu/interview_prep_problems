@@ -1948,4 +1948,22 @@ public class ProblemSolutionsTest {
     Assert.assertEquals(2, tester.hammingDistance(4, 1));
     Assert.assertEquals(2, tester.hammingDistance(14,4));
   }
+
+  @Test
+  public void arrayNesting() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    int[] input;
+
+    input = new int[] {5,4,0,3,1,6,2};
+    Assert.assertEquals(4, tester.arrayNesting(input));
+    input = new int[] {1,0};
+    Assert.assertEquals(2, tester.arrayNesting(input));
+    input = new int[] {};
+    Assert.assertEquals(0, tester.arrayNesting(input));
+    Assert.assertEquals(0, tester.arrayNesting(null));
+
+
+
+
+  }
 }

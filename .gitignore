@@ -1,6 +1,5 @@
 # Created by .ignore support plugin (hsz.mobi)
 ### Java template
-#gitignore file isn't ignoring itself. Nice.
 
 .gitignore
 .idea/codeStyleSettings.xml
@@ -11,3 +10,5 @@ out/
 /src/main/com/eldar/ScratchPaper.java
 /interview prep problems.iml
 /.idea/
+/src/test/com/eldar/PickRandPointInRectangleTest.java
+/src/main/com/eldar/commonDataStructs/PickRandPointInRectangle.java

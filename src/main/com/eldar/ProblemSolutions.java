@@ -3768,4 +3768,36 @@ public class ProblemSolutions {
     }
     return diff;
   }
+
+  //given a zero-indexed array of size N holding values 0 - N-1
+  //find such an index that it makes the longest chain of jumps from one value to another
+  //and return the number of jumps
+  //https://leetcode.com/problems/array-nesting/
+  //beats 88% of java submissions
+  public int arrayNesting(int[] nums) {
+    if(nums==null||nums.length==0) return 0;
+    boolean[] valCalculated = new boolean[nums.length];
+    boolean[] visited = new boolean[nums.length];
+    for(int i=0; i<nums.length; i++){
+      if(!visited[i]){
+        nums[i] = recursArrayNesting(nums, visited, valCalculated, i);
+      }
+    }
+    int biggest = Integer.MIN_VALUE;
+    for(int j=0; j<nums.length; j++){
+      biggest = nums[j]>biggest? nums[j]:biggest;
+    }
+    return biggest;
+  }
+
+  private int recursArrayNesting(int[] nums, boolean[] visited, boolean[] valCalculated, int index){
+    if(valCalculated[index]) return nums[index]+1;
+    if(visited[index]) return 0;
+    else{
+      visited[index]=true;
+      nums[index] = recursArrayNesting(nums, visited, valCalculated, nums[index]);
+      valCalculated[index]=true;
+      return nums[index]+1;
+    }
+  }
 }
