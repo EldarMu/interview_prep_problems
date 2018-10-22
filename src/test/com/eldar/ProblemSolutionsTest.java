@@ -1982,4 +1982,24 @@ public class ProblemSolutionsTest {
     root.children.add(tmp);
     Assert.assertEquals(3, tester.maxDepth(root));
   }
+
+  @Test
+  public void dfsMaxDepth() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+
+    Assert.assertEquals(0, tester.dfsMaxDepth(null));
+
+    NaryTreeNode root = new NaryTreeNode(1, new ArrayList<>());
+    Assert.assertEquals(1, tester.dfsMaxDepth(root));
+
+    root.children.add(new NaryTreeNode(2, new ArrayList<>()));
+    root.children.add(new NaryTreeNode(4, new ArrayList<>()));
+    Assert.assertEquals(2, tester.dfsMaxDepth(root));
+
+    NaryTreeNode tmp = new NaryTreeNode(3, new ArrayList<>());
+    tmp.children.add(new NaryTreeNode(5, new ArrayList<>()));
+    tmp.children.add(new NaryTreeNode(6, new ArrayList<>()));
+    root.children.add(tmp);
+    Assert.assertEquals(3, tester.dfsMaxDepth(root));
+  }
 }

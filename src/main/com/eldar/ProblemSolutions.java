@@ -3822,4 +3822,25 @@ public class ProblemSolutions {
     }
     return levels;
   }
+
+
+  //alt solution with dfs
+  //beats 90% of java submissions
+  public int dfsMaxDepth(NaryTreeNode root){
+    if(root==null) return 0;
+    if(root.children.isEmpty()) return 1;
+    return recursMaxDepth(root.children)+1;
+  }
+
+  private int recursMaxDepth(List<NaryTreeNode> children){
+    int maxDepth = 0;
+    for(int i=0; i<children.size(); i++){
+      int tmp = 0;
+      if(!children.get(i).children.isEmpty()){
+        tmp = recursMaxDepth(children.get(i).children);
+        if(tmp>maxDepth) maxDepth=tmp;
+      }
+    }
+    return maxDepth+1;
+  }
 }
