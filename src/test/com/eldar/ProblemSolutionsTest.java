@@ -2002,4 +2002,23 @@ public class ProblemSolutionsTest {
     root.children.add(tmp);
     Assert.assertEquals(3, tester.dfsMaxDepth(root));
   }
+
+  @Test
+  public void isSubtree() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+
+    TreeNode root = new TreeNode(1);
+    root.left = new TreeNode(1);
+    Assert.assertTrue(tester.isSubtree(root, root.left));
+
+    TreeNode head = new TreeNode(1);
+    head.left = null;
+    head.right = new TreeNode(2);
+    head.right.right = null;
+    head.right.left = new TreeNode(3);
+    Assert.assertTrue(tester.isSubtree(head, head.right.left));
+    Assert.assertTrue(tester.isSubtree(head, head));
+    Assert.assertFalse(tester.isSubtree(head, root));
+    Assert.assertFalse(tester.isSubtree(null, head));
+  }
 }

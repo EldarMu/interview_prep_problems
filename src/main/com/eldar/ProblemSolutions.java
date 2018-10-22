@@ -3843,4 +3843,35 @@ public class ProblemSolutions {
     }
     return maxDepth+1;
   }
+
+  //check if tree t is a subtree of tree s
+  //a tree technically counts as its own subtree
+  //https://leetcode.com/problems/subtree-of-another-tree/
+  //beats 95% of java submissions
+  public boolean isSubtree(TreeNode s, TreeNode t) {
+    if(s==null&&t==null) return true;
+    if(s!=null^t!=null) return false;
+    List<TreeNode> matches = new ArrayList<>();
+    findMatchVals(s, t, matches);
+    if(matches.isEmpty()) return false;
+    for(int i=0; i<matches.size(); i++){
+      if(isSameTree(matches.get(i), t)) return true;
+    }
+    return false;
+  }
+
+  private void findMatchVals(TreeNode root, TreeNode t, List<TreeNode> matches){
+    if(root.val==t.val) matches.add(root);
+    if(root.left!=null) findMatchVals(root.left, t, matches);
+    if(root.right!=null) findMatchVals(root.right, t, matches);
+  }
+
+  private boolean isSameTree(TreeNode root1, TreeNode root2){
+    if(root1==null&&root2==null) return true;
+    if(root1==null^root2==null) return false;
+    if(root1.val!=root2.val) return false;
+    if(!isSameTree(root1.left, root2.left)) return false;
+    if(!isSameTree(root1.right, root2.right)) return false;
+    return true;
+  }
 }
