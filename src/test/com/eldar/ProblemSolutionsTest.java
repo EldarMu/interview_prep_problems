@@ -1961,9 +1961,25 @@ public class ProblemSolutionsTest {
     input = new int[] {};
     Assert.assertEquals(0, tester.arrayNesting(input));
     Assert.assertEquals(0, tester.arrayNesting(null));
+  }
 
+  @Test
+  public void maxDepth() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
 
+    Assert.assertEquals(0, tester.maxDepth(null));
 
+    NaryTreeNode root = new NaryTreeNode(1, new ArrayList<>());
+    Assert.assertEquals(1, tester.maxDepth(root));
 
+    root.children.add(new NaryTreeNode(2, new ArrayList<>()));
+    root.children.add(new NaryTreeNode(4, new ArrayList<>()));
+    Assert.assertEquals(2, tester.maxDepth(root));
+
+    NaryTreeNode tmp = new NaryTreeNode(3, new ArrayList<>());
+    tmp.children.add(new NaryTreeNode(5, new ArrayList<>()));
+    tmp.children.add(new NaryTreeNode(6, new ArrayList<>()));
+    root.children.add(tmp);
+    Assert.assertEquals(3, tester.maxDepth(root));
   }
 }

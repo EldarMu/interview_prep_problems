@@ -3800,4 +3800,26 @@ public class ProblemSolutions {
       return nums[index]+1;
     }
   }
+
+  //find depth of N-ary tree
+  //beats 54% of java submissions
+  //as standard as bfs gets
+  //https://leetcode.com/problems/maximum-depth-of-n-ary-tree/
+  public int maxDepth(NaryTreeNode root) {
+    if(root==null) return 0;
+    int levels = 0;
+    Queue<NaryTreeNode> curLevel = new LinkedList<>();
+    curLevel.offer(root);
+    while(!curLevel.isEmpty()){
+      int curLevelSize = curLevel.size();
+      for(int i=0; i<curLevelSize; i++){
+        NaryTreeNode curNode = curLevel.poll();
+        for(int j=0; j<curNode.children.size(); j++){
+          curLevel.offer(curNode.children.get(j));
+        }
+      }
+      levels++;
+    }
+    return levels;
+  }
 }
