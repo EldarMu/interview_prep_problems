@@ -3968,34 +3968,38 @@ public class ProblemSolutions {
   //return either "Radiant" or "Dire" for which party wins
   //given an in-order list of actions taken by senators as a string of their affiliations "RD"
   //https://leetcode.com/problems/dota2-senate/
-  //instantiating four priorityqueues makes this a pretty slow sol'n (only beats 20% of submissions)
+  //beats 62% of java submissions
   public String predictPartyVictory(String senate) {
-    Queue<Integer> dSenators = new PriorityQueue<>();
-    Queue<Integer> rSenators = new PriorityQueue<>();
+    List<Integer> dSenators = new LinkedList<>();
+    List<Integer> rSenators = new LinkedList<>();
     for(int i=0; i<senate.length(); i++){
       if(senate.charAt(i)=='D') dSenators.add(i);
       else rSenators.add(i);
     }
     while(!dSenators.isEmpty()&&!rSenators.isEmpty()){
-      Queue<Integer> remainingDSenators = new PriorityQueue<>();
-      Queue<Integer> remainingRSenators = new PriorityQueue<>();
+      List<Integer> remainingDSenators = new LinkedList<>();
+      List<Integer> remainingRSenators = new LinkedList<>();
       while(!dSenators.isEmpty()||!rSenators.isEmpty()){
         if(!dSenators.isEmpty()&&!rSenators.isEmpty()){
-          if(dSenators.peek()<rSenators.peek()){
-            remainingDSenators.add(dSenators.poll());
-            rSenators.poll();
+          if(dSenators.get(0)<rSenators.get(0)){
+            remainingDSenators.add(dSenators.get(0));
+            dSenators.remove(0);
+            rSenators.remove(0);
           }
           else{
-            remainingRSenators.add(rSenators.poll());
-            dSenators.poll();
+            remainingRSenators.add(rSenators.get(0));
+            rSenators.remove(0);
+            dSenators.remove(0);
           }
         }
         else if(rSenators.isEmpty()){
-          remainingDSenators.add(dSenators.poll());
-          if(!remainingRSenators.isEmpty()) remainingRSenators.poll();
+          remainingDSenators.add(dSenators.get(0));
+          dSenators.remove(0);
+          if(!remainingRSenators.isEmpty()) remainingRSenators.remove(0);
         } else if (dSenators.isEmpty()) {
-          remainingRSenators.add(rSenators.poll());
-          if(!remainingDSenators.isEmpty()) remainingDSenators.poll();
+          remainingRSenators.add(rSenators.get(0));
+          rSenators.remove(0);
+          if(!remainingDSenators.isEmpty()) remainingDSenators.remove(0);
         }
       }
       rSenators = remainingRSenators;

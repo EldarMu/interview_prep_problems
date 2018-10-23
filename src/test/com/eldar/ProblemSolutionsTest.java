@@ -2097,6 +2097,8 @@ public class ProblemSolutionsTest {
   public void predictPartyVictory() throws Exception{
     ProblemSolutions tester = new ProblemSolutions();
 
+
+    Assert.assertTrue("Radiant".equals(tester.predictPartyVictory("DRRDRDRDRDDRDRDR")));
     Assert.assertTrue("Dire".equals(tester.predictPartyVictory("DR")));
     Assert.assertTrue("Dire".equals(tester.predictPartyVictory("RDD")));
     Assert.assertTrue("Dire".equals(tester.predictPartyVictory("DDDDRRRRR")));
