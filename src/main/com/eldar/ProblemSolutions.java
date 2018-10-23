@@ -3874,4 +3874,33 @@ public class ProblemSolutions {
     if(!isSameTree(root1.right, root2.right)) return false;
     return true;
   }
+
+  //given two arrays of strings, find the string with the smallest index in either array
+  //if there are two common strings with the same early index, output both
+  //the problem is written such that there is certain to be an answer
+  public String[] findRestaurant(String[] list1, String[] list2) {
+    Map<String, Integer> list1StrToIndex = new HashMap<>();
+    for(int i=0; i<list1.length; i++){
+      list1StrToIndex.put(list1[i], i);
+    }
+    int lowestSum = list1.length+list2.length;
+    List<Integer> indexPairs = new ArrayList<>();
+
+    for(int j=0; j<list2.length; j++){
+      if(list1StrToIndex.containsKey(list2[j])){
+        int list1Index = list1StrToIndex.get(list2[j]);
+        if(list1Index+j<lowestSum){
+          lowestSum = list1Index + j;
+          indexPairs.clear();
+          indexPairs.add(j);
+        }
+        else if(list1Index+j==lowestSum) indexPairs.add(j);
+      }
+    }
+    String[] result = new String[indexPairs.size()];
+    for(int j=0; j<result.length; j++){
+      result[j] = list2[indexPairs.get(j)];
+    }
+    return result;
+  }
 }

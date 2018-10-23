@@ -2021,4 +2021,31 @@ public class ProblemSolutionsTest {
     Assert.assertFalse(tester.isSubtree(head, root));
     Assert.assertFalse(tester.isSubtree(null, head));
   }
+
+  @Test
+  public void findRestaurant() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    String[] list1;
+    String[] list2;
+    String[] result;
+    Set<String> expected;
+
+    list1 = new String[] {"Shogun", "Tapioca Express", "Burger King", "KFC"};
+    list2 = new String[] {"Piatti", "The Grill at Torrey Pines", "Hungry Hunter Steakhouse", "Shogun"};
+    expected = new HashSet<>();
+    expected.add("Shogun");
+    result = tester.findRestaurant(list1, list2);
+    for(int i=0; i<result.length; i++){
+      Assert.assertTrue(expected.contains(result[i]));
+    }
+
+    list1 = new String[] {"Shogun", "Tapioca Express", "Burger King", "Piatti", "KFC"};
+    list2 = new String[] {"Piatti", "The Grill at Torrey Pines", "Hungry Hunter Steakhouse", "Shogun"};
+    result = tester.findRestaurant(list1, list2);
+    expected.add("Piatti");
+    for(int i=0; i<result.length; i++){
+      Assert.assertTrue(expected.contains(result[i]));
+    }
+
+  }
 }
