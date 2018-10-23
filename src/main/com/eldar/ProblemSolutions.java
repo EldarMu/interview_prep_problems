@@ -3961,4 +3961,46 @@ public class ProblemSolutions {
     }
     return steps;
   }
+
+  //given two parties of senators voting
+  //with each senator either choosing to ban a senator from the opposing party from voting
+  //or announcing a victory should all remaining members be from the same party
+  //return either "Radiant" or "Dire" for which party wins
+  //given an in-order list of actions taken by senators as a string of their affiliations "RD"
+  //https://leetcode.com/problems/dota2-senate/
+  //instantiating four priorityqueues makes this a pretty slow sol'n (only beats 20% of submissions)
+  public String predictPartyVictory(String senate) {
+    Queue<Integer> dSenators = new PriorityQueue<>();
+    Queue<Integer> rSenators = new PriorityQueue<>();
+    for(int i=0; i<senate.length(); i++){
+      if(senate.charAt(i)=='D') dSenators.add(i);
+      else rSenators.add(i);
+    }
+    while(!dSenators.isEmpty()&&!rSenators.isEmpty()){
+      Queue<Integer> remainingDSenators = new PriorityQueue<>();
+      Queue<Integer> remainingRSenators = new PriorityQueue<>();
+      while(!dSenators.isEmpty()||!rSenators.isEmpty()){
+        if(!dSenators.isEmpty()&&!rSenators.isEmpty()){
+          if(dSenators.peek()<rSenators.peek()){
+            remainingDSenators.add(dSenators.poll());
+            rSenators.poll();
+          }
+          else{
+            remainingRSenators.add(rSenators.poll());
+            dSenators.poll();
+          }
+        }
+        else if(rSenators.isEmpty()){
+          remainingDSenators.add(dSenators.poll());
+          if(!remainingRSenators.isEmpty()) remainingRSenators.poll();
+        } else if (dSenators.isEmpty()) {
+          remainingRSenators.add(rSenators.poll());
+          if(!remainingDSenators.isEmpty()) remainingDSenators.poll();
+        }
+      }
+      rSenators = remainingRSenators;
+      dSenators = remainingDSenators;
+    }
+    return rSenators.isEmpty()? "Dire":"Radiant";
+  }
 }

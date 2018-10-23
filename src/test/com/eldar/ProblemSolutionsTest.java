@@ -2092,4 +2092,14 @@ public class ProblemSolutionsTest {
     Assert.assertEquals(4, tester.minSteps(4));
     Assert.assertEquals(3, tester.minSteps(3));
   }
+
+  @Test
+  public void predictPartyVictory() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+
+    Assert.assertTrue("Dire".equals(tester.predictPartyVictory("DR")));
+    Assert.assertTrue("Dire".equals(tester.predictPartyVictory("RDD")));
+    Assert.assertTrue("Dire".equals(tester.predictPartyVictory("DDDDRRRRR")));
+    Assert.assertTrue("Radiant".equals(tester.predictPartyVictory("RDDDRRDRRR")));
+  }
 }
