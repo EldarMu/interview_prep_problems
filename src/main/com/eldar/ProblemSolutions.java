@@ -3968,10 +3968,11 @@ public class ProblemSolutions {
   //return either "Radiant" or "Dire" for which party wins
   //given an in-order list of actions taken by senators as a string of their affiliations "RD"
   //https://leetcode.com/problems/dota2-senate/
-  //beats 62% of java submissions
+  //beats 69% of java submissions
   public String predictPartyVictory(String senate) {
     List<Integer> dSenators = new LinkedList<>();
     List<Integer> rSenators = new LinkedList<>();
+
     for(int i=0; i<senate.length(); i++){
       if(senate.charAt(i)=='D') dSenators.add(i);
       else rSenators.add(i);
@@ -3996,15 +3997,78 @@ public class ProblemSolutions {
           remainingDSenators.add(dSenators.get(0));
           dSenators.remove(0);
           if(!remainingRSenators.isEmpty()) remainingRSenators.remove(0);
+          else return "Dire";
         } else if (dSenators.isEmpty()) {
           remainingRSenators.add(rSenators.get(0));
           rSenators.remove(0);
           if(!remainingDSenators.isEmpty()) remainingDSenators.remove(0);
+          else return "Radiant";
         }
       }
       rSenators = remainingRSenators;
       dSenators = remainingDSenators;
     }
     return rSenators.isEmpty()? "Dire":"Radiant";
+  }
+
+  //alt solution using pointers to indeces
+  //not actually better though
+  public String altPredictPartyVictory(String senate) {
+    char[] senateArr = senate.toCharArray();
+    boolean[] banned = new boolean[senateArr.length];
+    boolean atLeastOneR = true;
+    boolean atLeastOneD = true;
+    int firstRemainingD = 0;
+    int firstRemainingR = 0;
+    while(atLeastOneR&&atLeastOneD){
+      for(int i=0; i<senateArr.length; i++){
+        if(banned[i]) continue;
+        if(senateArr[i]=='D'){
+          firstRemainingR = banSenator(senateArr, banned, i, 'R', firstRemainingR);
+          if(firstRemainingR==-1) return "Dire";
+        }
+        else{
+          firstRemainingD = banSenator(senateArr, banned, i, 'D', firstRemainingD);
+          if(firstRemainingD==-1) return "Radiant";
+        }
+      }
+      int remainder = 0;
+      for(int l=0; l<banned.length; l++){
+        if(!banned[l]) remainder++;
+      }
+      char[] nextArr = new char[remainder];
+      int index = 0;
+      atLeastOneD = false;
+      atLeastOneR = false;
+      for(int j=0; j<senateArr.length; j++){
+        if(!banned[j]){
+          if(!atLeastOneD&&senateArr[j]=='D') atLeastOneD = true;
+          if(!atLeastOneR&&senateArr[j]=='R') atLeastOneR = true;
+          nextArr[index] = senateArr[j];
+          index++;
+        }
+      }
+      senateArr = nextArr;
+      banned = new boolean[nextArr.length];
+      firstRemainingD=0;
+      firstRemainingR=0;
+    }
+    return atLeastOneD? "Dire":"Radiant";
+  }
+
+  private int banSenator(char[] arr, boolean[] banned, int curIndex, char opposer, int firstOpposer){
+    for(int i=curIndex+1; i<arr.length; i++){
+      if(!banned[i]&&arr[i]==opposer){
+        banned[i]=true;
+        return firstOpposer;
+      }
+    }
+    for(int j=firstOpposer; j<curIndex; j++){
+      if(!banned[j]&&arr[j]==opposer){
+        banned[j]=true;
+        return j;
+      }
+    }
+    return -1;
   }
 }

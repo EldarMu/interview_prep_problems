@@ -2104,4 +2104,16 @@ public class ProblemSolutionsTest {
     Assert.assertTrue("Dire".equals(tester.predictPartyVictory("DDDDRRRRR")));
     Assert.assertTrue("Radiant".equals(tester.predictPartyVictory("RDDDRRDRRR")));
   }
+
+  @Test
+  public void altPredictPartyVictory() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+
+
+    Assert.assertTrue("Radiant".equals(tester.altPredictPartyVictory("DRRDRDRDRDDRDRDR")));
+    Assert.assertTrue("Dire".equals(tester.altPredictPartyVictory("DR")));
+    Assert.assertTrue("Dire".equals(tester.altPredictPartyVictory("RDD")));
+    Assert.assertTrue("Dire".equals(tester.altPredictPartyVictory("DDDDRRRRR")));
+    Assert.assertTrue("Radiant".equals(tester.altPredictPartyVictory("RDDDRRDRRR")));
+  }
 }
