@@ -2082,6 +2082,14 @@ public class ProblemSolutionsTest {
     expected.right.right.right = new TreeNode(8);
     expected.right.left.left = new TreeNode(5);
     Assert.assertTrue(comparer.isSameTree(expected, tester.addOneRow(input, 1, 3)));
+  }
 
+  @Test
+  public void minSteps() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    Assert.assertEquals(6, tester.minSteps(9));
+    Assert.assertEquals(5, tester.minSteps(6));
+    Assert.assertEquals(4, tester.minSteps(4));
+    Assert.assertEquals(3, tester.minSteps(3));
   }
 }

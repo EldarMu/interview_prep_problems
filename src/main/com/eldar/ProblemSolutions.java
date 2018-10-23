@@ -3938,4 +3938,27 @@ public class ProblemSolutions {
     }
     return root;
   }
+
+  //starting with a single char ('A') in a notepad and able to perform copy all and paste ops
+  //calculate minimum number of steps to get to n chars
+  //https://leetcode.com/problems/2-keys-keyboard/
+  //beats 100% of java submissions
+  public int minSteps(int n) {
+    int curNum = 1;
+    int steps = 0;
+    int curCopy = 0;
+    while(curNum!=n){
+      if(n%(curNum*2)==0||n%curNum==0&&curCopy!=curNum){
+        curCopy=curNum;
+        steps++;
+      }
+      if(curCopy==0){
+        curCopy = curNum;
+        steps++;
+      }
+      curNum+=curCopy;
+      steps++;
+    }
+    return steps;
+  }
 }
