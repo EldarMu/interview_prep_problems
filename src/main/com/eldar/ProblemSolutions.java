@@ -3901,4 +3901,41 @@ public class ProblemSolutions {
     }
     return result.toArray(new String[result.size()]);
   }
+
+  //given a tree, a depth d, and a value v
+  //insert a level of tree nodes at depth d with values v
+  //https://leetcode.com/problems/add-one-row-to-tree/
+  //the depth is guaranteed within range 1->maximum tree depth;
+  //standard solution beats 77% of java submissions
+  public TreeNode addOneRow(TreeNode root, int v, int d) {
+    if(d==1){
+      TreeNode result = new TreeNode(v);
+      result.left=root;
+      return result;
+    }
+    Queue<TreeNode> level = new LinkedList<>();
+    level.offer(root);
+    int curDepth = 1;
+    int levelSize;
+    while(curDepth!=d-1){
+      levelSize = level.size();
+      for(int i=0; i<levelSize; i++){
+        TreeNode tmp = level.poll();
+        if(tmp.left!=null) level.offer(tmp.left);
+        if(tmp.right!=null) level.offer(tmp.right);
+      }
+      curDepth++;
+    }
+    levelSize = level.size();
+    for(int j=0; j<levelSize; j++){
+      TreeNode tmp = level.poll();
+      TreeNode addedRight = new TreeNode(v);
+      TreeNode addedLeft = new TreeNode(v);
+      addedLeft.left = tmp.left;
+      tmp.left = addedLeft;
+      addedRight.right = tmp.right;
+      tmp.right = addedRight;
+    }
+    return root;
+  }
 }

@@ -2046,6 +2046,42 @@ public class ProblemSolutionsTest {
     for(int i=0; i<result.length; i++){
       Assert.assertTrue(expected.contains(result[i]));
     }
+  }
+
+  @Test
+  public void addOneRow() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    BSTComparator comparer = new BSTComparator();
+    TreeNode input;
+    TreeNode expected;
+
+    input = new TreeNode(4);
+    expected = new TreeNode(1);
+    expected.left = new TreeNode(4);
+    Assert.assertTrue(comparer.isSameTree(expected, tester.addOneRow(input,1,1)));
+
+    input = new TreeNode(4);
+    expected = expected.left;
+    expected.left = new TreeNode(1);
+    expected.right = new TreeNode(1);
+    Assert.assertTrue(comparer.isSameTree(expected, tester.addOneRow(input, 1, 2)));
+
+    input = new TreeNode(4);
+    input.left = new TreeNode(3);
+    input.right = new TreeNode(6);
+    input.right.right = new TreeNode(8);
+    input.right.left = new TreeNode(5);
+
+    expected =new TreeNode(4);
+    expected.left = new TreeNode(3);
+    expected.left.left = new TreeNode(1);
+    expected.left.right = new TreeNode(1);
+    expected.right = new TreeNode(6);
+    expected.right.left = new TreeNode(1);
+    expected.right.right = new TreeNode(1);
+    expected.right.right.right = new TreeNode(8);
+    expected.right.left.left = new TreeNode(5);
+    Assert.assertTrue(comparer.isSameTree(expected, tester.addOneRow(input, 1, 3)));
 
   }
 }
