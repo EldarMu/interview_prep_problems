@@ -2166,4 +2166,12 @@ public class ProblemSolutionsTest {
     Assert.assertArrayEquals(new int[] {1,2}, tester.findErrorNums(new int[] {1,1}));
     Assert.assertArrayEquals(new int[] {-1,-1}, tester.findErrorNums(new int[] {1}));
   }
+
+  @Test
+  public void findMaxAverage() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    Assert.assertEquals(12.75, tester.findMaxAverage(new int[] {3,1,12,-5,-6,50}, 4), 0.0001);
+    Assert.assertEquals(0.5, tester.findMaxAverage(new int[] {1,12,-5,-6,-50,50,3}, 4), 0.0001);
+    Assert.assertEquals(26.5, tester.findMaxAverage(new int[] {1,12,-5,-6,-50,50,3}, 2), 0.0001);
+  }
 }

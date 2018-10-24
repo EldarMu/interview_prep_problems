@@ -4111,4 +4111,23 @@ public class ProblemSolutions {
     }
     return new int[] {duplicate, missing};
   }
+
+  //given an array nums and a value k, return the maximum average
+  //produced by summing k contiguous elements in nums
+  //https://leetcode.com/problems/maximum-average-subarray-i/
+  //beats 74% of java submissions
+  public double findMaxAverage(int[] nums, int k) {
+    double kDouble = (double)k;
+    int movingSum = 0;
+    for(int i=0; i<k; i++){
+      movingSum+=nums[i];
+    }
+    double maxAvg = movingSum/kDouble;
+    for(int i=0; i<nums.length-k; i++){
+      movingSum-=nums[i];
+      movingSum+=nums[i+k];
+      if(movingSum/kDouble>maxAvg) maxAvg = movingSum/kDouble;
+    }
+    return maxAvg;
+  }
 }
