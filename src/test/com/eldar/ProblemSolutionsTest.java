@@ -2174,4 +2174,28 @@ public class ProblemSolutionsTest {
     Assert.assertEquals(0.5, tester.findMaxAverage(new int[] {1,12,-5,-6,-50,50,3}, 4), 0.0001);
     Assert.assertEquals(26.5, tester.findMaxAverage(new int[] {1,12,-5,-6,-50,50,3}, 2), 0.0001);
   }
+
+  @Test
+  public void topKFrequentWords() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    List<String> result;
+    String[] expected;
+    String[] input;
+
+    input = new String[] {"i", "love", "leetcode", "i", "love", "coding"};
+    expected = new String[] {"i", "love"};
+    result = tester.topKFrequentWords(input, 2);
+    Assert.assertEquals(expected.length, result.size());
+    for(int i=0; i<expected.length; i++){
+      Assert.assertTrue(expected[i].equals(result.get(i)));
+    }
+
+    input = new String[] {"the", "day", "is", "sunny", "the", "the", "the", "sunny", "is", "is"};
+    expected = new String[] {"the", "is", "sunny", "day"};
+    result = tester.topKFrequentWords(input, 4);
+    Assert.assertEquals(expected.length, result.size());
+    for(int i=0; i<expected.length; i++){
+      Assert.assertTrue(expected[i].equals(result.get(i)));
+    }
+  }
 }

@@ -4130,4 +4130,43 @@ public class ProblemSolutions {
     }
     return maxAvg;
   }
+
+  //given certain text as a list of strings, return the top k most frequent words in sorted order
+  //if two words have same frequency, return in alphabetical order
+  //https://leetcode.com/problems/top-k-frequent-words/
+  //beats 97% of java submissions
+  public List<String> topKFrequentWords(String[] words, int k) {
+    Queue<WordFrequency> maxHeap = new PriorityQueue<>();
+    Map<String, Integer> wordToFreq = new HashMap<>();
+    List<String> results = new ArrayList<>(k);
+    for(int i=0; i<words.length; i++){
+      if(wordToFreq.containsKey(words[i])){
+        wordToFreq.put(words[i], wordToFreq.get(words[i])+1);
+      }
+      else{
+        wordToFreq.put(words[i], 1);
+      }
+    }
+    for(String key: wordToFreq.keySet()){
+      maxHeap.offer(new WordFrequency(key, wordToFreq.get(key)));
+    }
+    for(int j=0; j<k; j++){
+      results.add(maxHeap.poll().word);
+    }
+    return results;
+  }
+
+  class WordFrequency implements Comparable<WordFrequency>{
+    String word;
+    int occurrence;
+
+    public WordFrequency(String word, int occurrence){
+      this.word = word;
+      this.occurrence = occurrence;
+    }
+
+    public int compareTo(WordFrequency wf){
+      return wf.occurrence!=this.occurrence? wf.occurrence-this.occurrence:this.word.compareTo(wf.word);
+    }
+  }
 }
