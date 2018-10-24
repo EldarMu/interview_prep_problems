@@ -2158,4 +2158,12 @@ public class ProblemSolutionsTest {
       index++;
     }
   }
+
+  @Test
+  public void findErrorNums() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    Assert.assertArrayEquals(new int[] {2,3}, tester.findErrorNums(new int[] {2,4,5,6,7,1,2}));
+    Assert.assertArrayEquals(new int[] {1,2}, tester.findErrorNums(new int[] {1,1}));
+    Assert.assertArrayEquals(new int[] {-1,-1}, tester.findErrorNums(new int[] {1}));
+  }
 }

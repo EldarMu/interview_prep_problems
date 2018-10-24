@@ -4088,4 +4088,27 @@ public class ProblemSolutions {
       recursNaryPreorder(ntn, result);
     }
   }
+
+  //given an unsorted array from 1 to n where one value has been replaced with a dupe of another
+  //return an integer array containing [the dupe val, the missing val]
+  //https://leetcode.com/problems/set-mismatch/
+  //beats 96% of java submissions
+  public int[] findErrorNums(int[] nums) {
+    if(nums==null||nums.length<2) return new int[] {-1,-1};
+    boolean[] foundVals = new boolean[nums.length];
+    int duplicate = -1;
+    int missing = -1;
+    for(int i=0; i<nums.length; i++){
+      if(!foundVals[nums[i]-1]) foundVals[nums[i]-1] = true;
+      else duplicate = nums[i];
+    }
+    for(int j=0; j<foundVals.length; j++){
+      if(foundVals[j]) continue;
+      else{
+        missing = j+1;
+        break;
+      }
+    }
+    return new int[] {duplicate, missing};
+  }
 }
