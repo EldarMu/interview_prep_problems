@@ -4071,4 +4071,21 @@ public class ProblemSolutions {
     }
     return -1;
   }
+
+  //N-ary tree traversal
+  //https://leetcode.com/problems/n-ary-tree-preorder-traversal/
+  //trivial problem, beats 77% of java submissions
+  public List<Integer> naryPreorder(NaryTreeNode root) {
+    List<Integer> result = new ArrayList<>();
+    if(root==null) return result;
+    recursNaryPreorder(root, result);
+    return result;
+  }
+
+  private void recursNaryPreorder(NaryTreeNode root, List<Integer> result){
+    result.add(root.val);
+    for(NaryTreeNode ntn: root.children){
+      recursNaryPreorder(ntn, result);
+    }
+  }
 }

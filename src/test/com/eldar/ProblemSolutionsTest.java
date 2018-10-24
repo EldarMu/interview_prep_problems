@@ -2109,11 +2109,53 @@ public class ProblemSolutionsTest {
   public void altPredictPartyVictory() throws Exception{
     ProblemSolutions tester = new ProblemSolutions();
 
-
     Assert.assertTrue("Radiant".equals(tester.altPredictPartyVictory("DRRDRDRDRDDRDRDR")));
     Assert.assertTrue("Dire".equals(tester.altPredictPartyVictory("DR")));
     Assert.assertTrue("Dire".equals(tester.altPredictPartyVictory("RDD")));
     Assert.assertTrue("Dire".equals(tester.altPredictPartyVictory("DDDDRRRRR")));
     Assert.assertTrue("Radiant".equals(tester.altPredictPartyVictory("RDDDRRDRRR")));
+  }
+
+  @Test
+  public void naryPreorder() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    int[] expected;
+    List<Integer> result;
+
+    Assert.assertTrue(tester.naryPreorder(null).isEmpty());
+    NaryTreeNode root = new NaryTreeNode(1, new ArrayList<>());
+    NaryTreeNode tmp = new NaryTreeNode(3, new ArrayList<>());
+    root.children.add(tmp);
+    expected = new int[] {1,3};
+    result = tester.naryPreorder(root);
+    Assert.assertEquals(expected.length, result.size());
+    int index = 0;
+    for(Integer integer: result){
+      Assert.assertEquals(expected[index], (int)integer);
+      index++;
+    }
+
+    tmp.children.add(new NaryTreeNode(5, new ArrayList<>()));
+    tmp.children.add(new NaryTreeNode(6, new ArrayList<>()));
+    expected = new int[] {1,3,5,6};
+    result = tester.naryPreorder(root);
+    Assert.assertEquals(expected.length, result.size());
+    index = 0;
+    for(Integer integer: result){
+      Assert.assertEquals(expected[index], (int)integer);
+      index++;
+    }
+
+
+    root.children.add(new NaryTreeNode(2, new ArrayList<>()));
+    root.children.add(new NaryTreeNode(4, new ArrayList<>()));
+    expected = new int[] {1,3,5,6,2,4};
+    result = tester.naryPreorder(root);
+    Assert.assertEquals(expected.length, result.size());
+    index = 0;
+    for(Integer integer: result){
+      Assert.assertEquals(expected[index], (int)integer);
+      index++;
+    }
   }
 }
