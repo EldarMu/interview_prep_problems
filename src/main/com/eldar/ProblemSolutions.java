@@ -4192,4 +4192,24 @@ public class ProblemSolutions {
     }
     return totalImportance;
   }
+
+  //dfs solution, same performance
+  public int altGetImportance(List<Employee> employees, int id){
+    Map<Integer, Employee> idToIndex = new HashMap<>();
+    for(int i=0; i<employees.size(); i++){
+      idToIndex.put(employees.get(i).id, employees.get(i));
+    }
+    if(!idToIndex.containsKey(id)) return 0;
+    int[] totalVal = new int[] {0};
+    recursGetImportance(idToIndex, id, totalVal);
+    return totalVal[0];
+  }
+
+  private void recursGetImportance(Map<Integer, Employee> idToIndex, int id, int[] totalVal){
+    Employee tmp = idToIndex.get(id);
+    totalVal[0]+=tmp.importance;
+    for(int i=0; i<tmp.subordinates.size(); i++){
+      recursGetImportance(idToIndex, tmp.subordinates.get(i), totalVal);
+    }
+  }
 }
