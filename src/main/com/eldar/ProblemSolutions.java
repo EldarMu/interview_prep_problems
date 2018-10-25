@@ -4169,4 +4169,27 @@ public class ProblemSolutions {
       return wf.occurrence!=this.occurrence? wf.occurrence-this.occurrence:this.word.compareTo(wf.word);
     }
   }
+
+  //given a list of b-tree nodes, each holding an int and a list of child nodes
+  //return the sum of values of the subtree starting at a certain node
+  //https://leetcode.com/problems/employee-importance/
+  //basic bfs solution, only beats 49% of java submissions
+  public int getImportance(List<Employee> employees, int id) {
+    Map<Integer, Employee> idToIndex = new HashMap<>();
+    for(int i=0; i<employees.size(); i++){
+      idToIndex.put(employees.get(i).id, employees.get(i));
+    }
+    if(!idToIndex.containsKey(id)) return 0;
+    Queue<Employee> curList = new LinkedList<>();
+    int totalImportance = 0;
+    curList.add(idToIndex.get(id));
+    while(!curList.isEmpty()){
+      Employee tmp = curList.poll();
+      totalImportance+=tmp.importance;
+      for(int j=0; j<tmp.subordinates.size(); j++){
+        curList.offer(idToIndex.get(tmp.subordinates.get(j)));
+      }
+    }
+    return totalImportance;
+  }
 }

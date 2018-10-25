@@ -2198,4 +2198,48 @@ public class ProblemSolutionsTest {
       Assert.assertTrue(expected[i].equals(result.get(i)));
     }
   }
+
+  @Test
+  public void getImportance() throws Exception {
+    ProblemSolutions tester = new ProblemSolutions();
+    int[] ids;
+    int[] vals;
+    int[][] subordinates;
+    List<Employee> input;
+
+
+    ids = new int[] {1,2,3};
+    vals = new int[] {5,3,3};
+    subordinates = new int[][] {{2,3}, {}, {}};
+    input = new ArrayList<>(ids.length);
+    for(int i=0; i<ids.length; i++){
+      Employee tmp = new Employee();
+      tmp.id = ids[i];
+      tmp.importance = vals[i];
+      tmp.subordinates = new ArrayList<>();
+      for(int j=0; j<subordinates[i].length; j++){
+        tmp.subordinates.add(subordinates[i][j]);
+      }
+      input.add(tmp);
+    }
+    Assert.assertEquals(11, tester.getImportance(input, 1));
+    Assert.assertEquals(3, tester.getImportance(input, 2));
+
+    ids = new int[] {2};
+    vals = new int[] {5};
+    subordinates = new int[][] {{}};
+    input.clear();
+    for(int i=0; i<ids.length; i++){
+      Employee tmp = new Employee();
+      tmp.id = ids[i];
+      tmp.importance = vals[i];
+      tmp.subordinates = new ArrayList<>(subordinates[i].length);
+      for(int j=0; j<subordinates[i].length; i++){
+        tmp.subordinates.add(subordinates[i][j]);
+      }
+      input.add(tmp);
+    }
+    Assert.assertEquals(5, tester.getImportance(input, 2));
+    Assert.assertEquals(0, tester.getImportance(input, 1));
+  }
 }
