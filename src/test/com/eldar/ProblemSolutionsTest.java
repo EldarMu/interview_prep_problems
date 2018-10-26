@@ -2286,4 +2286,12 @@ public class ProblemSolutionsTest {
     Assert.assertEquals(5, tester.altGetImportance(input, 2));
     Assert.assertEquals(0, tester.altGetImportance(input, 1));
   }
+
+  @Test
+  public void judgeCircle() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    Assert.assertTrue(tester.judgeCircle("LDRLLDDUUURR"));
+    Assert.assertTrue(tester.judgeCircle(""));
+    Assert.assertFalse(tester.judgeCircle("LDU"));
+  }
 }

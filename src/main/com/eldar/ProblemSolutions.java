@@ -4212,4 +4212,26 @@ public class ProblemSolutions {
       recursGetImportance(idToIndex, tmp.subordinates.get(i), totalVal);
     }
   }
+
+  //given a sequence of commands provided to a robot in position (n,n)
+  //determine if it will end at same position
+  //commands given as U D L R
+  //basic solutuion beats 49% of java submissions
+  public boolean judgeCircle(String moves) {
+    int[] dirSums = new int[4];
+    for(int i=0; i<moves.length(); i++){
+      dirSums[commandToIndex(moves.charAt(i))]++;
+    }
+    return dirSums[0]==dirSums[1]&&dirSums[2]==dirSums[3];
+  }
+
+  private int commandToIndex(char ch){
+    switch(ch){
+      case 'U': return 0;
+      case 'D': return 1;
+      case 'L': return 2;
+      case 'R': return 3;
+      default: return -1;
+    }
+  }
 }
