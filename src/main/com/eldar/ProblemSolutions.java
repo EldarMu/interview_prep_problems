@@ -4213,6 +4213,35 @@ public class ProblemSolutions {
     }
   }
 
+  //relies on the idea that employee ids will be densely packed into a region
+  //beats 79% of java submissions
+  public int alt2GetImportance(List<Employee> employees, int id) {
+    int biggestVal = Integer.MIN_VALUE;
+    int smallestVal = Integer.MAX_VALUE;
+    for(int i=0; i<employees.size(); i++){
+      int tmpID = employees.get(i).id;
+      if(tmpID<smallestVal) smallestVal=tmpID;
+      if(tmpID>biggestVal) biggestVal=tmpID;
+    }
+    Employee[] employeeArr = new Employee[biggestVal-smallestVal+1];
+    for(int j=0; j<employees.size(); j++){
+      Employee curEmployee = employees.get(j);
+      employeeArr[curEmployee.id-smallestVal]=curEmployee;
+    }
+    if(id-smallestVal<0||id-smallestVal>=employeeArr.length||employeeArr[id-smallestVal]==null) return 0;
+    int[] totalVal = new int[] {0};
+    recurs2GetImportance(employeeArr, smallestVal, id, totalVal);
+    return totalVal[0];
+  }
+
+  private void recurs2GetImportance(Employee[] employees, int smallestVal, int id, int[] totalVal){
+    Employee tmp = employees[id-smallestVal];
+    totalVal[0]+=tmp.importance;
+    for(int i=0; i<tmp.subordinates.size(); i++){
+      recurs2GetImportance(employees, smallestVal, tmp.subordinates.get(i), totalVal);
+    }
+  }
+
   //given a sequence of commands provided to a robot in position (n,n)
   //determine if it will end at same position
   //commands given as U D L R
