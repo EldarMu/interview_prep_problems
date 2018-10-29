@@ -4263,4 +4263,27 @@ public class ProblemSolutions {
       default: return -1;
     }
   }
+
+  //given a lower and upper bound values
+  //return every value in that range, inclusive
+  //such that the number is wholly divisible by each of its digits
+  //no 0s in the number
+  //https://leetcode.com/problems/self-dividing-numbers/
+  //really basic implementation that beats 71% of java submissions
+  public List<Integer> selfDividingNumbers(int left, int right) {
+    List<Integer> results = new ArrayList<>();
+    for(int i=left; i<=right; i++){
+      int tmpNum = i;
+      boolean notFullyDivisible = false;
+      while(tmpNum>0){
+        if(tmpNum%10==0||i%(tmpNum%10)!=0){
+          notFullyDivisible=true;
+          break;
+        }
+        tmpNum/=10;
+      }
+      if(!notFullyDivisible) results.add(i);
+    }
+    return results;
+  }
 }

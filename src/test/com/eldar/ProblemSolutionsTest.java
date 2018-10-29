@@ -2338,4 +2338,18 @@ public class ProblemSolutionsTest {
     Assert.assertTrue(tester.judgeCircle(""));
     Assert.assertFalse(tester.judgeCircle("LDU"));
   }
+
+  @Test
+  public void selfDividingNumbers() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    int[] expected;
+    List<Integer> result;
+
+    expected = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 15, 22};
+    result = tester.selfDividingNumbers(1,22);
+    Assert.assertEquals(expected.length, result.size());
+    for(int i=0; i<expected.length; i++){
+      Assert.assertEquals(expected[i], (int)result.get(i));
+    }
+  }
 }
