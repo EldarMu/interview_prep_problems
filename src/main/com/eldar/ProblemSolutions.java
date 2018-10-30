@@ -4317,4 +4317,24 @@ public class ProblemSolutions {
     }
     return new long[] {minVal, maxVal};
   }
+
+  public String timeConversion(String s) {
+    char[] sArr = s.toCharArray();
+    int hours = Integer.parseInt(s.substring(0,2));
+    if(hours==12){
+      if(sArr[sArr.length-2]=='A'){
+        sArr[0]='0';
+        sArr[1]='0';
+      }
+    }
+    else{
+      if(sArr[sArr.length-2]=='P'){
+        hours+=12;
+        sArr[0]=Character.forDigit(hours/10, 10);
+        sArr[1]=Character.forDigit(hours%10, 10);
+      }
+    }
+    return new String(sArr, 0, sArr.length-2);
+  }
+
 }

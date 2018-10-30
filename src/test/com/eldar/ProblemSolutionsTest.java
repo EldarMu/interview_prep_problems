@@ -2363,5 +2363,15 @@ public class ProblemSolutionsTest {
     Assert.assertArrayEquals(new long[] {10,14}, tester.miniMaxSum(input));
   }
 
+  @Test
+  public void timeConversion() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    Assert.assertTrue("19:05:45".equals(tester.timeConversion("07:05:45PM")));
+    Assert.assertTrue("00:05:45".equals(tester.timeConversion("12:05:45AM")));
+    Assert.assertTrue("12:05:45".equals(tester.timeConversion("12:05:45PM")));
+    Assert.assertTrue("07:05:45".equals(tester.timeConversion("07:05:45AM")));
+  }
+
+
 
 }
