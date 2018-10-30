@@ -4286,4 +4286,35 @@ public class ProblemSolutions {
     }
     return results;
   }
+
+  //hackerrank entry problem
+  //given an int array with 5 elements, return the sum of the 4 smallest
+  //and the sum of the 5 biggest
+  public long[] miniMaxSum(int[] arr) {
+    long maxVal = Long.MIN_VALUE;
+    int maxIndex = 0;
+    Long minVal = Long.MAX_VALUE;
+    int minIndex = 0;
+    for(int i=0; i<arr.length; i++){
+      if(arr[i]>maxVal){
+        maxVal = (long)arr[i];
+        maxIndex = i;
+      }
+      if(arr[i]<minVal){
+        minVal = (long)arr[i];
+        minIndex = i;
+      }
+    }
+    if(minIndex==maxIndex){
+      minVal-=arr[0];
+      maxVal-=arr[0];
+    }
+    for(int i=0; i<arr.length; i++){
+      if(i!=maxIndex&&i!=minIndex){
+        maxVal+=arr[i];
+        minVal+=arr[i];
+      }
+    }
+    return new long[] {minVal, maxVal};
+  }
 }

@@ -2352,4 +2352,16 @@ public class ProblemSolutionsTest {
       Assert.assertEquals(expected[i], (int)result.get(i));
     }
   }
+
+  @Test
+  public void miniMaxSum() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    int[] input = new int[] {5,5,5,5,5};
+    Assert.assertArrayEquals(new long[] {20,20}, tester.miniMaxSum(input));
+
+    input = new int[] {1,2,3,4,5};
+    Assert.assertArrayEquals(new long[] {10,14}, tester.miniMaxSum(input));
+  }
+
+
 }
