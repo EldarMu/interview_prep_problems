@@ -4337,4 +4337,31 @@ public class ProblemSolutions {
     return new String(sArr, 0, sArr.length-2);
   }
 
+  public int utopianTree(int n) {
+    int treeHeight = 1;
+    boolean spring = true;
+    for(int i=n; i>0; i--){
+      if(spring){
+        treeHeight*=2;
+        spring = false;
+      }
+      else{
+        treeHeight++;
+        spring=true;
+      }
+    }
+    return treeHeight;
+  }
+
+  public int viralAdvertising(int n) {
+    int lastLiked = 0;
+    int cumulative = 0;
+    int lastShared = 5;
+    for(int i=1; i<=n; i++){
+      lastLiked = lastShared/2;
+      cumulative += lastLiked;
+      lastShared=lastLiked*3;
+    }
+    return cumulative;
+  }
 }

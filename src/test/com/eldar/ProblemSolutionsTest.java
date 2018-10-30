@@ -2372,6 +2372,26 @@ public class ProblemSolutionsTest {
     Assert.assertTrue("07:05:45".equals(tester.timeConversion("07:05:45AM")));
   }
 
+  @Test
+  public void utopianTree() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    Assert.assertEquals(1, tester.utopianTree(0));
+    Assert.assertEquals(2, tester.utopianTree(1));
+    Assert.assertEquals(3, tester.utopianTree(2));
+    Assert.assertEquals(6, tester.utopianTree(3));
+    Assert.assertEquals(7, tester.utopianTree(4));
+  }
+
+  @Test
+  public void viralAdvertising() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    Assert.assertEquals(2, tester.viralAdvertising(1));
+    Assert.assertEquals(5, tester.viralAdvertising(2));
+    Assert.assertEquals(9, tester.viralAdvertising(3));
+    Assert.assertEquals(15, tester.viralAdvertising(4));
+    Assert.assertEquals(24, tester.viralAdvertising(5));
+  }
+
 
 
 }
