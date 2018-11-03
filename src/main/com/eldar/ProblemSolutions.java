@@ -4364,4 +4364,55 @@ public class ProblemSolutions {
     }
     return cumulative;
   }
+
+  public List<Integer> freqQuery(List<List<Integer>> queries) {
+    Map<Integer, Integer> valCounts = new HashMap<>();
+    Map<Integer, Integer> countsOfVals = new HashMap<>();
+    List<Integer> results = new ArrayList<>();
+    for(int i=0; i<queries.size(); i++){
+      List<Integer> query = queries.get(i);
+      Integer val = query.get(1);
+      if(query.get(0)==1){
+        if(!valCounts.containsKey(val)){
+          valCounts.put(val, 1);
+          addToCount(1, countsOfVals);
+        }
+        else{
+          int prevCount = valCounts.get(val);
+          cutFromCount(prevCount, countsOfVals);
+          valCounts.put(val, prevCount+1);
+          addToCount(prevCount+1, countsOfVals);
+        }
+      }
+      else if(query.get(0)==2){
+        if(valCounts.containsKey(val)){
+          int prevCount = valCounts.get(val);
+          if(prevCount==1){
+            valCounts.remove(val);
+            cutFromCount(prevCount, countsOfVals);
+          }
+          else{
+            cutFromCount(prevCount, countsOfVals);
+            valCounts.put(val, prevCount-1);
+            addToCount(prevCount-1, countsOfVals);
+          }
+        }
+      }
+      else if(query.get(0)==3){
+        int count = query.get(1);
+        results.add(countsOfVals.containsKey(count)?1:0);
+      }
+    }
+    return results;
+  }
+
+  private void cutFromCount(int count, Map<Integer, Integer> countsOfVals){
+    if(!countsOfVals.containsKey(count)) return;
+    if(countsOfVals.get(count)==1) countsOfVals.remove(count);
+    else countsOfVals.put(count, countsOfVals.get(count)-1);
+  }
+  private void addToCount(int count, Map<Integer, Integer> countsOfVals){
+    if(countsOfVals.containsKey(count)) countsOfVals.put(count,countsOfVals.get(count)+1);
+    else countsOfVals.put(count, 1);
+  }
 }

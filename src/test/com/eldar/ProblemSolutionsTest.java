@@ -2392,6 +2392,49 @@ public class ProblemSolutionsTest {
     Assert.assertEquals(24, tester.viralAdvertising(5));
   }
 
+  @Test
+  public void freqQuery() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    int[][] rawInput;
+    List<List<Integer>> boxedInput;
+    List<Integer> result;
+    int[] expected;
+
+    rawInput = new int[][] {{1,1}, {2,2}, {3,2}, {1,1}, {1,1}, {2,1}, {3,2}};
+    expected = new int[] {0,1};
+    boxedInput = new ArrayList<>(rawInput.length);
+    for(int i=0; i<rawInput.length; i++){
+      List<Integer> tmp = new ArrayList<>(2);
+      for(int j=0; j<rawInput[0].length; j++){
+        tmp.add(rawInput[i][j]);
+      }
+      boxedInput.add(tmp);
+    }
+    result = tester.freqQuery(boxedInput);
+    Assert.assertEquals(expected.length, result.size());
+    for(int i=0; i<expected.length; i++){
+      Assert.assertEquals(expected[i], (int)result.get(i));
+    }
+
+    rawInput = new int[][] {{1,5}, {1,6}, {3,2}, {1,10}, {1,10}, {1,6}, {2,5}, {3,2}};
+    expected = new int[] {0,1};
+    boxedInput = new ArrayList<>(rawInput.length);
+    for(int i=0; i<rawInput.length; i++){
+      List<Integer> tmp = new ArrayList<>(2);
+      for(int j=0; j<rawInput[0].length; j++){
+        tmp.add(rawInput[i][j]);
+      }
+      boxedInput.add(tmp);
+    }
+    result = tester.freqQuery(boxedInput);
+    Assert.assertEquals(expected.length, result.size());
+    for(int i=0; i<expected.length; i++){
+      Assert.assertEquals(expected[i], (int)result.get(i));
+    }
+  }
+
+
+
 
 
 }
