@@ -4483,7 +4483,19 @@ public class ProblemSolutions {
     return results;
   }
 
-
-
-
+  //rotate an array to the left d times
+  static int[] rotLeft(int[] a, int d) {
+    d = d%a.length;
+    int[] result = new int[a.length];
+    int index = 0;
+    for(int i=d; i<a.length; i++){
+      result[index]=a[i];
+      index++;
+    }
+    for(int i=0; i<d; i++){
+      result[index]=a[i];
+      index++;
+    }
+    return result;
+  }
 }

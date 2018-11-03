@@ -2476,12 +2476,20 @@ public class ProblemSolutionsTest {
     expected = new int[] {0,0,0};
     actual = tester.dailyTemperatures(input);
     Assert.assertArrayEquals(expected, actual);
-
-
   }
 
+  @Test
+  public void rotLeft() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    int[] input;
+    int[] expected;
 
+    input = new int[] {1,2,3,4,5};
+    expected = new int[] {1,2,3,4,5};
+    Assert.assertArrayEquals(expected, tester.rotLeft(input, 0));
+    Assert.assertArrayEquals(expected, tester.rotLeft(input, input.length*3));
 
-
-
+    expected = new int[] {4,5,1,2,3};
+    Assert.assertArrayEquals(expected, tester.rotLeft(input, 3));
+  }
 }
