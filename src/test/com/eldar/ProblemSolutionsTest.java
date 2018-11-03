@@ -15,6 +15,7 @@ import org.junit.Test;
 
 import java.util.LinkedList;
 import java.util.List;
+import org.junit.runner.notification.RunListener.ThreadSafe;
 
 import static org.junit.Assert.*;
 
@@ -2445,6 +2446,19 @@ public class ProblemSolutionsTest {
     input = new int[][] {{1,1,1,0,0,0}, {0,1,0,0,0,0}, {1,1,1,0,0,0},
         {0,0,2,4,4,0}, {0,0,0,2,0,0}, {0,0,1,2,4,0}};
     Assert.assertEquals(19, tester.hourglassSum(input));
+  }
+
+  @Test
+  public void longestWord() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    String[] input;
+
+    input = new String[] {"w","wo","wor","worl", "world"};
+    Assert.assertTrue("world".equals(tester.longestWord(input)));
+
+    input = new String[] {"a", "banana", "app", "appl", "ap", "apply", "apple"};
+    Assert.assertTrue("apple".equals(tester.longestWord(input)));
+
   }
 
 

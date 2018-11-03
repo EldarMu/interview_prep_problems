@@ -4432,4 +4432,32 @@ public class ProblemSolutions {
     }
     return biggestVal;
   }
+
+  //https://leetcode.com/problems/longest-word-in-dictionary/
+  //beats 72% of java submissions
+  public String longestWord(String[] words) {
+    Queue<String> longerWords = new PriorityQueue<>(new Comparator<String>() {
+      @Override
+      public int compare(String o1, String o2) {
+        return o2.length()!=o1.length()?o2.length()-o1.length():o1.compareTo(o2);
+      }
+    });
+    Set<String> stringInList = new HashSet<>();
+    for(int i=0; i<words.length; i++){
+      longerWords.offer(words[i]);
+      stringInList.add(words[i]);
+    }
+    while(!longerWords.isEmpty()){
+      String curString = longerWords.poll();
+      boolean wordCanBeBuilt = true;
+      for(int j=0; j<curString.length()-1; j++){
+        if(!stringInList.contains(curString.substring(0, j+1))){
+          wordCanBeBuilt=false;
+          break;
+        }
+      }
+      if(wordCanBeBuilt) return new String(curString);
+    }
+    return "";
+  }
 }
