@@ -2433,6 +2433,20 @@ public class ProblemSolutionsTest {
     }
   }
 
+  @Test
+  public void hourglassSum() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    int[][] input;
+
+    input = new int[][] {{1,1,1,0,0,0}, {0,1,0,0,0,0}, {1,1,1,0,0,0},
+        {0,0,0,0,0,0}, {0,0,0,0,0,0}, {0,0,0,0,0,0}};
+    Assert.assertEquals(7, tester.hourglassSum(input));
+
+    input = new int[][] {{1,1,1,0,0,0}, {0,1,0,0,0,0}, {1,1,1,0,0,0},
+        {0,0,2,4,4,0}, {0,0,0,2,0,0}, {0,0,1,2,4,0}};
+    Assert.assertEquals(19, tester.hourglassSum(input));
+  }
+
 
 
 

@@ -4415,4 +4415,21 @@ public class ProblemSolutions {
     if(countsOfVals.containsKey(count)) countsOfVals.put(count,countsOfVals.get(count)+1);
     else countsOfVals.put(count, 1);
   }
+
+  public  int hourglassSum(int[][] arr) {
+    if(arr.length<3||arr[0].length<3) return 0;
+    int biggestVal = 0;
+    for(int i=0; i<arr.length-2; i++){
+      int firstSum = arr[i][0]+arr[i][1]+arr[i][2];
+      firstSum += arr[i+1][1];
+      firstSum+= arr[i+2][0]+arr[i+2][1]+arr[i+2][2];
+      biggestVal = firstSum>=biggestVal? firstSum:biggestVal;
+      for(int j=1; j <arr[i].length-2; j++){
+        firstSum-=arr[i][j-1]+arr[i+2][j-1]+arr[i+1][j];
+        firstSum+=arr[i][j+2]+arr[i+2][j+2]+arr[i+1][j+1];
+        biggestVal = firstSum>=biggestVal? firstSum:biggestVal;
+      }
+    }
+    return biggestVal;
+  }
 }
