@@ -2458,6 +2458,25 @@ public class ProblemSolutionsTest {
 
     input = new String[] {"a", "banana", "app", "appl", "ap", "apply", "apple"};
     Assert.assertTrue("apple".equals(tester.longestWord(input)));
+  }
+
+  @Test
+  public void dailyTemperatures() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    int[] input;
+    int[] expected;
+    int[] actual;
+
+    input = new int[] {73, 74, 75, 71, 69, 72, 76, 73};
+    expected = new int[] {1, 1, 4, 2, 1, 1, 0, 0};
+    actual = tester.dailyTemperatures(input);
+    Assert.assertArrayEquals(expected, actual);
+
+    input = new int[] {0,0,0};
+    expected = new int[] {0,0,0};
+    actual = tester.dailyTemperatures(input);
+    Assert.assertArrayEquals(expected, actual);
+
 
   }
 

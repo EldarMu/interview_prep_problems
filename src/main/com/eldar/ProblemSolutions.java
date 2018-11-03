@@ -4460,4 +4460,30 @@ public class ProblemSolutions {
     }
     return "";
   }
+
+  //https://leetcode.com/problems/daily-temperatures/
+  //beats 78% of java submissions
+  public int[] dailyTemperatures(int[] T) {
+    Queue<TupleWithIndex> lowValFirst = new PriorityQueue<>(new Comparator<TupleWithIndex>() {
+      @Override
+      public int compare(TupleWithIndex o1, TupleWithIndex o2) {
+        return o1.value-o2.value;
+      }
+    });
+    int[] results = new int[T.length];
+    for(int i=T.length-1; i>=0; i--){
+      while(!lowValFirst.isEmpty()&&lowValFirst.peek().value<=T[i]) lowValFirst.poll();
+      if(lowValFirst.isEmpty()) results[i]=0;
+      else{
+        results[i]=lowValFirst.peek().index-i;
+      }
+      TupleWithIndex cur = new TupleWithIndex(T[i], i);
+      lowValFirst.add(cur);
+    }
+    return results;
+  }
+
+
+
+
 }
