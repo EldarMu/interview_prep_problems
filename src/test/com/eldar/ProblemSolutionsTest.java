@@ -2492,4 +2492,19 @@ public class ProblemSolutionsTest {
     expected = new int[] {4,5,1,2,3};
     Assert.assertArrayEquals(expected, tester.rotLeft(input, 3));
   }
+
+  @Test
+  public void networkDelayTime() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    int input[][];
+
+    input = new int[][] {{1,2,1},{2,3,7},{1,3,4},{2,1,2}};
+    Assert.assertEquals(-1, tester.networkDelayTime(input, 4,1));
+
+    input = new int[][] {{2,1,1},{2,3,1},{3,4,1}};
+    Assert.assertEquals(2, tester.networkDelayTime(input, 4, 2));
+
+    input = new int[][] {{1,2,1},{2,3,2},{1,3,2}};
+    Assert.assertEquals(2, tester.networkDelayTime(input, 3, 1));
+  }
 }

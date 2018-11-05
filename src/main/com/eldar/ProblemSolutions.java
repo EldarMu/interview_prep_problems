@@ -4498,4 +4498,55 @@ public class ProblemSolutions {
     }
     return result;
   }
+
+  //https://leetcode.com/problems/network-delay-time
+  //beats 62% of java submissions
+  public int networkDelayTime(int[][] times, int N, int K) {
+    Map<Integer, DjikstraNode> nodes = new HashMap<>();
+    Queue<DjikstraNode> lowestDist = new PriorityQueue<>();
+
+
+    for(int i=0; i<times.length; i++){
+      int source = times[i][0];
+      int dest = times[i][1];
+      int weight = times[i][2];
+      if(!nodes.containsKey(source)){
+        DjikstraNode tmp = new DjikstraNode();
+        nodes.put(source, tmp);
+        lowestDist.offer(tmp);
+      }
+      if(!nodes.containsKey(dest)){
+        DjikstraNode tmp = new DjikstraNode();
+        nodes.put(dest, tmp);
+        lowestDist.offer(tmp);
+      }
+      nodes.get(source).links.add(new int[] {dest, weight});
+    }
+    DjikstraNode startNode = nodes.get(K);
+    lowestDist.remove(startNode);
+    startNode.bestWeight=0;
+    lowestDist.offer(startNode);
+
+    Integer maxDelay = 0;
+    int nodeCounter=0;
+    while(!lowestDist.isEmpty()){
+      DjikstraNode cur = lowestDist.poll();
+      nodeCounter++;
+      List<int[]> links = cur.links;
+      for(int i=0; i<links.size(); i++){
+        DjikstraNode dest = nodes.get(links.get(i)[0]);
+        int weight = links.get(i)[1];
+        if(lowestDist.contains(dest)&&weight+cur.bestWeight<dest.bestWeight){
+          lowestDist.remove(dest);
+          dest.bestWeight=cur.bestWeight+weight;
+          lowestDist.offer(dest);
+        }
+      }
+      maxDelay = cur.bestWeight>maxDelay? cur.bestWeight:maxDelay;
+    }
+    if(nodeCounter!=N) return -1;
+    return maxDelay==Integer.MAX_VALUE?-1:maxDelay;
+  }
+
+
 }
