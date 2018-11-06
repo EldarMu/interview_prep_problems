@@ -4548,5 +4548,38 @@ public class ProblemSolutions {
     return maxDelay==Integer.MAX_VALUE?-1:maxDelay;
   }
 
+  //given an array of values representing asteroids
+  //with the sign representing movement direction and value representing size
+  //a collision between a + and - of same size yields nothing
+  //a collision between a smaller and bigger yields resulting value with sign of bigger
+  //return array after all collisions have occured
+  //https://leetcode.com/problems/asteroid-collision/
+  public int[] asteroidCollision(int[] asteroids) {
+    Deque<Integer> orderedVals = new ArrayDeque<>();
+    for(int i=0; i<asteroids.length; i++){
+      if(orderedVals.isEmpty()) orderedVals.push(asteroids[i]);
+      else{
+        if(orderedVals.peek()<0||asteroids[i]>0) orderedVals.push(asteroids[i]);
+        else{
+          int tmp = asteroids[i];
+          while(tmp<0&&!orderedVals.isEmpty()&&orderedVals.peek()>0){
+            if(-tmp>orderedVals.peek()) orderedVals.pop();
+            else if(-tmp<orderedVals.peek()) tmp = orderedVals.pop();
+            else {
+              orderedVals.pop();
+              tmp = 0;
+            }
+          }
+          if(tmp!=0) orderedVals.push(tmp);
+        }
+      }
+    }
+    int[] result = new int[orderedVals.size()];
+    for(int j=result.length-1; j>=0; j--){
+      result[j]=orderedVals.pop();
+    }
+    return result;
+  }
+
 
 }

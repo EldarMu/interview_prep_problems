@@ -2507,4 +2507,19 @@ public class ProblemSolutionsTest {
     input = new int[][] {{1,2,1},{2,3,2},{1,3,2}};
     Assert.assertEquals(2, tester.networkDelayTime(input, 3, 1));
   }
+
+  @Test
+  public void asteroidCollision() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    int[] input;
+    int[] expected;
+
+    input = new int[] {3, 2, 3, 2, 1, -3, -1, -5};
+    expected = new int[] {-5};
+    Assert.assertArrayEquals(expected, tester.asteroidCollision(input));
+
+    input = new int[] {5, 10, -5};
+    expected = new int[] {5, 10};
+    Assert.assertArrayEquals(expected, tester.asteroidCollision(input));
+  }
 }
