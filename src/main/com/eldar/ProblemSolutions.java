@@ -1200,7 +1200,7 @@ public class ProblemSolutions {
   }
 
   //given a list of non-overlapping intervals sorted by start times
-  //and an interval to be inserted, insert and merge as needed
+  //and an interval to be inserted, book and merge as needed
   //then return the resulting list
   //https://leetcode.com/problems/insert-interval/description/
   //a very verbose solution that worked on the first try
@@ -3903,7 +3903,7 @@ public class ProblemSolutions {
   }
 
   //given a tree, a depth d, and a value v
-  //insert a level of tree nodes at depth d with values v
+  //book a level of tree nodes at depth d with values v
   //https://leetcode.com/problems/add-one-row-to-tree/
   //the depth is guaranteed within range 1->maximum tree depth;
   //standard solution beats 77% of java submissions
