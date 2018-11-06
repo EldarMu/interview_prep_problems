@@ -1,5 +1,6 @@
 package com.eldar;
 
+import com.eldar.commonDataStructs.MyCalendar;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
@@ -30,7 +31,7 @@ public class MyCalendarTest {
     dates = new int[][] {{10, 20}, {15,25}, {20, 30}};
     expected = new boolean[] {true, false, true};
     results = new ArrayList<>(dates.length);
-    test.clearCalendar();
+    test.clear();
     for(int i=0; i<dates.length; i++){
       results.add(test.book(dates[i][0], dates[i][1]));
     }
