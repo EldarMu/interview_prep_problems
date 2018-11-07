@@ -4581,5 +4581,76 @@ public class ProblemSolutions {
     return result;
   }
 
+  //merge accounts where element 0 in list string is name
+  //and the rest are emails associated with the name
+  //duplicate accounts will have same name and at least one same email
+  //https://leetcode.com/problems/accounts-merge/
+  public List<List<String>> accountsMerge(List<List<String>> accounts) {
+    Map<String, List<Integer>> nameToIndices = new HashMap<>();
+    Map<Integer, Set<String>> indexToEmails = new HashMap<>();
+    //we sort as name mapped to every index with that name
+    //and index to the set of emails at that index
+    for(int i=0; i<accounts.size(); i++){
+      String name = accounts.get(i).get(0);
+      if(nameToIndices.containsKey(name)){
+        nameToIndices.get(name).add(i);
+      }
+      else{
+        List<Integer> indices = new ArrayList<>();
+        indices.add(i);
+        nameToIndices.put(name, indices);
+      }
+      List<String> dupeIndices = new ArrayList<>();
+      Set<String> indexEmails = new HashSet<>();
+      for(int j=1; j<accounts.get(i).size(); j++){
+        String email = accounts.get(i).get(j);
+        if(indexEmails.contains(email)) dupeIndices.add(email);
+        else indexEmails.add(email);
+      }
+      for(int k=0; k<dupeIndices.size(); k++){
+        accounts.get(i).remove(dupeIndices.get(k));
+      }
+      indexToEmails.put(i, indexEmails);
+    }
+    List<List<String>> results = new ArrayList<>();
+    //for every name, we look at all the indices associated with it
+    for(String name: nameToIndices.keySet()){
+      List<Integer> indices = nameToIndices.get(name);
+      while(!indices.isEmpty()){
+        Integer mergeIndex = indices.get(0);
+        indices.remove(0);
+        List<String> mergeList = accounts.get(mergeIndex);
+        List<Integer> dupes = new ArrayList<>();
+        for(int k=0; k<mergeList.size(); k++){
+          String curEmail = mergeList.get(k);
+          for(Integer index: indices){
+            if(indexToEmails.get(index).contains(curEmail)){
+              dupes.add(index);
+            }
+          }
+
+          Set<String> mergeSet = indexToEmails.get(mergeIndex);
+          for(Integer index: dupes){
+            indices.remove(index);
+            Set<String> dupeSet = indexToEmails.get(index);
+            dupeSet.removeAll(mergeSet);
+            for(String email: dupeSet){
+              mergeList.add(email);
+              mergeSet.add(email);
+            }
+          }
+          dupes.clear();
+        }
+        //once we've checked every email against the index,
+        //anything that remains is certain not to be a dupe
+        mergeList.remove(0);
+        mergeList.sort(Comparator.naturalOrder());
+        mergeList.add(0, name);
+        results.add(mergeList);
+      }
+    }
+    return results;
+  }
+
 
 }

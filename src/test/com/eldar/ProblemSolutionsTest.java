@@ -2522,4 +2522,64 @@ public class ProblemSolutionsTest {
     expected = new int[] {5, 10};
     Assert.assertArrayEquals(expected, tester.asteroidCollision(input));
   }
+
+  @Test
+  public void accountsMerge() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    String[][] accounts;
+    List<List<String>> input;
+    Map<String, String[]> expected;
+    List<List<String>> results;
+
+    accounts = new String[][] {{"Ethan","Ethan3@m.co","Ethan3@m.co","Ethan0@m.co"}};
+    input = new ArrayList<>(accounts.length);
+    for(int i=0; i<accounts.length; i++){
+      List<String> tmp = new ArrayList<>(accounts[i].length);
+      for(int j=0; j<accounts[i].length; j++){
+        tmp.add(accounts[i][j]);
+      }
+      input.add(tmp);
+    }
+    results = tester.accountsMerge(input);
+    expected = new HashMap<>();
+    expected.put("Ethan", new String[] {"Ethan","Ethan0@m.co","Ethan3@m.co"});
+    for(int i=0; i<results.size(); i++){
+      Assert.assertTrue(expected.containsKey(results.get(i).get(0)));
+      List<String> curResult = results.get(i);
+      String[] curExpected = expected.get(curResult.get(0));
+      for(int j=0; j<curExpected.length; j++){
+        Assert.assertTrue(curExpected[i].equals(curResult.get(i)));
+      }
+    }
+
+
+    accounts = new String[][] {{"Alex","Alex5@m.co","Alex4@m.co","Alex0@m.co"},
+        {"Ethan","Ethan3@m.co","Ethan3@m.co","Ethan0@m.co"},
+        {"Kevin","Kevin4@m.co","Kevin2@m.co","Kevin2@m.co"},
+        {"Gabe","Gabe0@m.co","Gabe3@m.co","Gabe2@m.co"},
+        {"Gabe","Gabe3@m.co","Gabe4@m.co","Gabe2@m.co"}};
+    input = new ArrayList<>(accounts.length);
+    for(int i=0; i<accounts.length; i++){
+      List<String> tmp = new ArrayList<>(accounts[i].length);
+      for(int j=0; j<accounts[i].length; j++){
+        tmp.add(accounts[i][j]);
+      }
+      input.add(tmp);
+    }
+    results = tester.accountsMerge(input);
+    expected = new HashMap<>();
+    expected.put("Ethan", new String[] {"Ethan","Ethan0@m.co","Ethan3@m.co"});
+    expected.put("Gabe", new String[] {"Gabe","Gabe0@m.co","Gabe2@m.co","Gabe3@m.co", "Gabe4@m.co"});
+    expected.put("Kevin", new String[] {"Kevin","Kevin2@m.co","Kevin4@m.co"});
+    expected.put("Alex", new String[] {"Alex","Alex0@m.co","Alex4@m.co","Alex5@m.co"});
+
+    for(int i=0; i<results.size(); i++){
+      Assert.assertTrue(expected.containsKey(results.get(i).get(0)));
+      List<String> curResult = results.get(i);
+      String[] curExpected = expected.get(curResult.get(0));
+      for(int j=0; j<curExpected.length; j++){
+        Assert.assertTrue(curExpected[i].equals(curResult.get(i)));
+      }
+    }
+  }
 }
