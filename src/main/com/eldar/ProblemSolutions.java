@@ -4706,4 +4706,22 @@ public class ProblemSolutions {
     accountSet.remove(dupeAcc);
     return mainAcc;
   }
+
+  public int dominantIndex(int[] nums) {
+    int biggest = -1;
+    int biggestIndex = -1;
+    int secondBiggest = -1;
+    for(int i=0; i<nums.length; i++){
+      if(nums[i]>biggest){
+        biggest=nums[i];
+        biggestIndex=i;
+      }
+    }
+    for(int i=0; i<nums.length; i++){
+      if(i!=biggestIndex&&nums[i]>secondBiggest) secondBiggest=nums[i];
+    }
+    if(secondBiggest==-1) return biggestIndex;
+    else if(secondBiggest*2<=biggest) return biggestIndex;
+    return -1;
+  }
 }

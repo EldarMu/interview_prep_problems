@@ -2741,8 +2741,17 @@ public class ProblemSolutionsTest {
         Assert.assertTrue(curExpected[j].equals(curResult.get(j)));
       }
     }
+  }
 
+  @Test
+  public void dominantIndex() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    int[] input;
 
+    input = new int[] {0,0,0,3};
+    Assert.assertEquals(3, tester.dominantIndex(input));
 
+    input = new int[] {0,0,3,2};
+    Assert.assertEquals(-1, tester.dominantIndex(input));
   }
 }
