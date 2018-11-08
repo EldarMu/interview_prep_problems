@@ -4724,4 +4724,44 @@ public class ProblemSolutions {
     else if(secondBiggest*2<=biggest) return biggestIndex;
     return -1;
   }
+
+
+  //given a matrix of color values (a picture), a coordinate (sr, sc) and a new color to paint it
+  //color every contiguous block of same color the new color
+  //beats 99.9% of java submissions despite being completely standard
+  public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+    if(image==null||image.length==0||image[0].length==0) return image;
+    boolean[][] coloredIn= new boolean[image.length][image[0].length];
+    int srcColor = image[sr][sc];
+    Queue<int[]> colorsToChange = new LinkedList<>();
+    colorsToChange.offer(new int[] {sr, sc});
+    while(!colorsToChange.isEmpty()){
+      int[] curChange = colorsToChange.poll();
+      int row = curChange[0];
+      int col = curChange[1];
+      coloredIn[row][col] = true;
+      image[row][col] = newColor;
+      if(row>0){
+        if(image[row-1][col]==srcColor&&!coloredIn[row-1][col]){
+          colorsToChange.add(new int[] {row-1, col});
+        }
+      }
+      if(col>0){
+        if(image[row][col-1]==srcColor&&!coloredIn[row][col-1]){
+          colorsToChange.add(new int[] {row, col-1});
+        }
+      }
+      if(row<image.length-1){
+        if(image[row+1][col]==srcColor&&!coloredIn[row+1][col]){
+          colorsToChange.add(new int[] {row+1, col});
+        }
+      }
+      if(col<image[0].length-1){
+        if(image[row][col+1]==srcColor&&!coloredIn[row][col+1]){
+          colorsToChange.add(new int[] {row, col+1});
+        }
+      }
+    }
+    return image;
+  }
 }

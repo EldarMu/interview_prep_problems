@@ -2754,4 +2754,21 @@ public class ProblemSolutionsTest {
     input = new int[] {0,0,3,2};
     Assert.assertEquals(-1, tester.dominantIndex(input));
   }
+
+  @Test
+  public void floodFill() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    int[][] image;
+    int[][] expected;
+    int[][] result;
+
+    image = new int[][] {{1,1,1}, {1,1,0}, {1,0,1}};
+    expected = new int[][] {{2,2,2}, {2,2,0}, {2,0,1}};
+
+    result = tester.floodFill(image, 1,1,2);
+    Assert.assertEquals(expected.length, result.length);
+    for(int i=0; i<expected.length; i++){
+      Assert.assertArrayEquals(expected[i], result[i]);
+    }
+  }
 }
