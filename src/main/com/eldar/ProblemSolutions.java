@@ -4582,14 +4582,14 @@ public class ProblemSolutions {
   }
 
   //merge accounts where element 0 in list string is name
-  //and the rest are emails associated with the name
+  //and the rest are emailSet associated with the name
   //duplicate accounts will have same name and at least one same email
   //https://leetcode.com/problems/accounts-merge/
   public List<List<String>> accountsMerge(List<List<String>> accounts) {
     Map<String, List<Integer>> nameToIndices = new HashMap<>();
     Map<Integer, Set<String>> indexToEmails = new HashMap<>();
     //we sort as name mapped to every index with that name
-    //and index to the set of emails at that index
+    //and index to the set of emailSet at that index
     for(int i=0; i<accounts.size(); i++){
       String name = accounts.get(i).get(0);
       if(nameToIndices.containsKey(name)){
@@ -4652,5 +4652,58 @@ public class ProblemSolutions {
     return results;
   }
 
+  //alternative solution to accounts merge, still using sets and maps, now map email->account
+  public List<List<String>> accountsMerge2(List<List<String>> accounts) {
+    Map<String, Account> emailToAccount = new HashMap<>();
+    Set<Account> accountSet = new HashSet<>();
+    for(int i=0; i<accounts.size(); i++){
+      List<String> emails = accounts.get(i);
+      String name = emails.get(0);
+      Account curAccount = null;
+      for(int j=1; j<emails.size(); j++){
+        String email = emails.get(j);
+        //first initializing of an account
+        if(curAccount==null){
+          if(emailToAccount.containsKey(email)){
+            curAccount = emailToAccount.get(email);
+          }
+          else{
+            curAccount = new Account(name);
+            curAccount.emailSet.add(email);
+            emailToAccount.put(email,curAccount);
+          }
+        }
+        //if we're already working with an account
+        else{
+          if(!emailToAccount.containsKey(email)){
+            curAccount.emailSet.add(email);
+            emailToAccount.put(email, curAccount);
+          }
+          else{
+            if(emailToAccount.get(email)!=curAccount){
+              curAccount = mergeAccounts(emailToAccount.get(email), curAccount, emailToAccount, accountSet);
+            }
+          }
+        }
+      }
+      accountSet.add(curAccount);
+    }
+    List<List<String>> results = new ArrayList<>(accountSet.size());
+    for(Account acct: accountSet){
+      List<String> acctAsList = new ArrayList<>(acct.emailSet.size()+1);
+      acctAsList.add(acct.name);
+      while(!acct.emailSet.isEmpty()) acctAsList.add(acct.emailSet.pollFirst());
+      results.add(acctAsList);
+    }
+    return results;
+  }
 
+  private Account mergeAccounts(Account mainAcc, Account dupeAcc,
+      Map<String, Account> emailToAccount, Set<Account> accountSet){
+    dupeAcc.emailSet.removeAll(mainAcc.emailSet);
+    for(String email: dupeAcc.emailSet) emailToAccount.put(email, mainAcc);
+    mainAcc.emailSet.addAll(dupeAcc.emailSet);
+    accountSet.remove(dupeAcc);
+    return mainAcc;
+  }
 }

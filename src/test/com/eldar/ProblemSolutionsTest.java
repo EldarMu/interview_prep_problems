@@ -2582,4 +2582,167 @@ public class ProblemSolutionsTest {
       }
     }
   }
+
+  @Test
+  public void accountsMerge2() throws Exception{
+    ProblemSolutions tester = new ProblemSolutions();
+    String[][] accounts;
+    List<List<String>> input;
+    Map<String, String[]> expected;
+    List<List<String>> results;
+
+    accounts = new String[][]
+        {{"Gabe","Gabe5@m.co","Gabe45@m.co","Gabe46@m.co","Gabe47@m.co","Gabe48@m.co","Gabe49@m.co",
+            "Gabe50@m.co","Gabe51@m.co","Gabe52@m.co"}, {"Gabe","Gabe3@m.co","Gabe27@m.co",
+            "Gabe28@m.co","Gabe29@m.co","Gabe30@m.co","Gabe31@m.co","Gabe32@m.co","Gabe33@m.co",
+            "Gabe34@m.co"},{"Gabe","Gabe6@m.co","Gabe54@m.co","Gabe55@m.co","Gabe56@m.co",
+            "Gabe57@m.co","Gabe58@m.co","Gabe59@m.co","Gabe60@m.co","Gabe61@m.co"},{"Gabe",
+            "Gabe0@m.co","Gabe0@m.co","Gabe1@m.co","Gabe2@m.co","Gabe3@m.co","Gabe4@m.co",
+            "Gabe5@m.co","Gabe6@m.co","Gabe7@m.co"},{"Gabe","Gabe1@m.co","Gabe9@m.co","Gabe10@m.co",
+            "Gabe11@m.co","Gabe12@m.co","Gabe13@m.co","Gabe14@m.co","Gabe15@m.co","Gabe16@m.co"},
+            {"Gabe","Gabe2@m.co","Gabe18@m.co","Gabe19@m.co","Gabe20@m.co","Gabe21@m.co",
+                "Gabe22@m.co","Gabe23@m.co","Gabe24@m.co","Gabe25@m.co"},{"Gabe","Gabe4@m.co",
+            "Gabe36@m.co","Gabe37@m.co","Gabe38@m.co","Gabe39@m.co","Gabe40@m.co","Gabe41@m.co",
+            "Gabe42@m.co","Gabe43@m.co"},{"Gabe","Gabe0@m.co","Gabe0@m.co","Gabe1@m.co",
+            "Gabe2@m.co","Gabe3@m.co","Gabe4@m.co","Gabe5@m.co","Gabe6@m.co","Gabe7@m.co"}};
+    input = new ArrayList<>(accounts.length);
+    for(int i=0; i<accounts.length; i++){
+      List<String> tmp = new ArrayList<>(accounts[i].length);
+      for(int j=0; j<accounts[i].length; j++){
+        tmp.add(accounts[i][j]);
+      }
+      input.add(tmp);
+    }
+    results = tester.accountsMerge2(input);
+    expected = new HashMap<>();
+    expected.put("Gabe", new String[] {"Gabe","Gabe0@m.co","Gabe10@m.co","Gabe11@m.co",
+        "Gabe12@m.co","Gabe13@m.co","Gabe14@m.co","Gabe15@m.co","Gabe16@m.co",
+        "Gabe18@m.co","Gabe19@m.co","Gabe1@m.co","Gabe20@m.co","Gabe21@m.co",
+        "Gabe22@m.co","Gabe23@m.co","Gabe24@m.co","Gabe25@m.co","Gabe27@m.co",
+        "Gabe28@m.co","Gabe29@m.co","Gabe2@m.co","Gabe30@m.co","Gabe31@m.co","Gabe32@m.co",
+        "Gabe33@m.co","Gabe34@m.co","Gabe36@m.co","Gabe37@m.co","Gabe38@m.co","Gabe39@m.co",
+        "Gabe3@m.co","Gabe40@m.co","Gabe41@m.co","Gabe42@m.co","Gabe43@m.co","Gabe45@m.co",
+        "Gabe46@m.co","Gabe47@m.co","Gabe48@m.co","Gabe49@m.co","Gabe4@m.co","Gabe50@m.co",
+        "Gabe51@m.co","Gabe52@m.co","Gabe54@m.co","Gabe55@m.co","Gabe56@m.co","Gabe57@m.co",
+        "Gabe58@m.co","Gabe59@m.co","Gabe5@m.co","Gabe60@m.co","Gabe61@m.co","Gabe6@m.co",
+        "Gabe7@m.co","Gabe9@m.co"});
+
+    for(int i=0; i<results.size(); i++){
+      Assert.assertTrue(expected.containsKey(results.get(i).get(0)));
+      List<String> curResult = results.get(i);
+      String[] curExpected = expected.get(curResult.get(0));
+      for(int j=0; j<curExpected.length; j++){
+        Assert.assertTrue(curExpected[j].equals(curResult.get(j)));
+      }
+    }
+
+
+    accounts = new String[][] {{"Gabe","Gabe1@m.co","Gabe2@m.co"},
+        {"Gabe","Gabe3@m.co","Gabe4@m.co"},
+        {"Gabe","Gabe5@m.co","Gabe6@m.co"},
+        {"Gabe","Gabe2@m.co","Gabe4@m.co"},
+        {"Gabe","Gabe3@m.co","Gabe5@m.co"}};
+    input = new ArrayList<>(accounts.length);
+    for(int i=0; i<accounts.length; i++){
+      List<String> tmp = new ArrayList<>(accounts[i].length);
+      for(int j=0; j<accounts[i].length; j++){
+        tmp.add(accounts[i][j]);
+      }
+      input.add(tmp);
+    }
+    results = tester.accountsMerge2(input);
+    expected = new HashMap<>();
+    expected.put("Gabe", new String[] {"Gabe", "Gabe1@m.co","Gabe2@m.co","Gabe3@m.co",
+        "Gabe4@m.co", "Gabe5@m.co", "Gabe6@m.co"});
+
+    for(int i=0; i<results.size(); i++){
+      Assert.assertTrue(expected.containsKey(results.get(i).get(0)));
+      List<String> curResult = results.get(i);
+      String[] curExpected = expected.get(curResult.get(0));
+      for(int j=0; j<curExpected.length; j++){
+        Assert.assertTrue(curExpected[j].equals(curResult.get(j)));
+      }
+    }
+
+
+    accounts = new String[][] {{"Alex","Alex5@m.co","Alex4@m.co","Alex0@m.co"},
+        {"Ethan","Ethan3@m.co","Ethan3@m.co","Ethan0@m.co"},
+        {"Kevin","Kevin4@m.co","Kevin2@m.co","Kevin2@m.co"},
+        {"Gabe","Gabe0@m.co","Gabe3@m.co","Gabe2@m.co"},
+        {"Gabe","Gabe3@m.co","Gabe4@m.co","Gabe2@m.co"}};
+    input = new ArrayList<>(accounts.length);
+    for(int i=0; i<accounts.length; i++){
+      List<String> tmp = new ArrayList<>(accounts[i].length);
+      for(int j=0; j<accounts[i].length; j++){
+        tmp.add(accounts[i][j]);
+      }
+      input.add(tmp);
+    }
+    results = tester.accountsMerge2(input);
+    expected = new HashMap<>();
+    expected.put("Ethan", new String[] {"Ethan","Ethan0@m.co","Ethan3@m.co"});
+    expected.put("Gabe", new String[] {"Gabe","Gabe0@m.co","Gabe2@m.co","Gabe3@m.co", "Gabe4@m.co"});
+    expected.put("Kevin", new String[] {"Kevin","Kevin2@m.co","Kevin4@m.co"});
+    expected.put("Alex", new String[] {"Alex","Alex0@m.co","Alex4@m.co","Alex5@m.co"});
+
+    for(int i=0; i<results.size(); i++){
+      Assert.assertTrue(expected.containsKey(results.get(i).get(0)));
+      List<String> curResult = results.get(i);
+      String[] curExpected = expected.get(curResult.get(0));
+      for(int j=0; j<curExpected.length; j++){
+        Assert.assertTrue(curExpected[j].equals(curResult.get(j)));
+      }
+    }
+
+    accounts = new String[][] {{"David","David0@m.co","David4@m.co","David3@m.co"},
+        {"David","David5@m.co","David5@m.co","David0@m.co"},
+        {"David","David1@m.co","David4@m.co","David0@m.co"},
+        {"David","David0@m.co","David1@m.co","David3@m.co"},
+        {"David","David4@m.co","David1@m.co","David3@m.co"}};
+    input = new ArrayList<>(accounts.length);
+    for(int i=0; i<accounts.length; i++){
+      List<String> tmp = new ArrayList<>(accounts[i].length);
+      for(int j=0; j<accounts[i].length; j++){
+        tmp.add(accounts[i][j]);
+      }
+      input.add(tmp);
+    }
+    results = tester.accountsMerge2(input);
+    expected = new HashMap<>();
+    expected.put("David", new String[]
+        {"David","David0@m.co","David1@m.co","David3@m.co","David4@m.co","David5@m.co"});
+    for(int i=0; i<results.size(); i++){
+      Assert.assertTrue(expected.containsKey(results.get(i).get(0)));
+      List<String> curResult = results.get(i);
+      String[] curExpected = expected.get(curResult.get(0));
+      for(int j=0; j<curExpected.length; j++){
+        Assert.assertTrue(curExpected[j].equals(curResult.get(j)));
+      }
+    }
+
+
+    accounts = new String[][] {{"Ethan","Ethan3@m.co","Ethan3@m.co","Ethan0@m.co"}};
+    input = new ArrayList<>(accounts.length);
+    for(int i=0; i<accounts.length; i++){
+      List<String> tmp = new ArrayList<>(accounts[i].length);
+      for(int j=0; j<accounts[i].length; j++){
+        tmp.add(accounts[i][j]);
+      }
+      input.add(tmp);
+    }
+    results = tester.accountsMerge2(input);
+    expected = new HashMap<>();
+    expected.put("Ethan", new String[] {"Ethan","Ethan0@m.co","Ethan3@m.co"});
+    for(int i=0; i<results.size(); i++){
+      Assert.assertTrue(expected.containsKey(results.get(i).get(0)));
+      List<String> curResult = results.get(i);
+      String[] curExpected = expected.get(curResult.get(0));
+      for(int j=0; j<curExpected.length; j++){
+        Assert.assertTrue(curExpected[j].equals(curResult.get(j)));
+      }
+    }
+
+
+
+  }
 }
