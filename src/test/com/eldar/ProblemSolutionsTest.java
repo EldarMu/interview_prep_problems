@@ -2771,4 +2771,39 @@ public class ProblemSolutionsTest {
       Assert.assertArrayEquals(expected[i], result[i]);
     }
   }
+
+  @Test
+  public void oddEvenList() throws Exception{
+    ProblemSolutions t = new ProblemSolutions();
+    int[] input;
+    int[] expected;
+    input = new int[] {1,2,3,4,5};
+    expected = new int[] {1,3,5,2,4};
+    ListNode head = populateLinkedList(input);
+    head = t.oddEvenList(head);
+    ListNode tmp = head;
+    for(int i = 0; i < expected.length; i++){
+      if(tmp == null) {
+        Assert.assertNotNull(tmp);
+      } else {
+        Assert.assertEquals(expected[i], tmp.val);
+      }
+      tmp = tmp.next;
+    }
+
+    Assert.assertNull(t.oddEvenList(null));
+    Assert.assertEquals(3, t.oddEvenList(new ListNode(3)).val);
+  }
+
+  private ListNode populateLinkedList(int[] data){
+    ListNode head = new ListNode(data[0]);
+    ListNode tail = head;
+    ListNode tmp;
+    for(int i = 1; i < data.length; i++){
+      tmp = new ListNode(data[i]);
+      tail.next = tmp;
+      tail = tmp;
+    }
+    return head;
+  }
 }

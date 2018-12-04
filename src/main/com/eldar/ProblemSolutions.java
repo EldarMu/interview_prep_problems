@@ -4764,4 +4764,58 @@ public class ProblemSolutions {
     }
     return image;
   }
+
+  public boolean isOneBitCharacter(int[] bits) {
+    boolean oneBitChar = false;
+    int index = 0;
+    while(index<bits.length){
+      if(bits[index]==1){
+        oneBitChar=false;
+        index+=2;
+      }
+      else{
+        oneBitChar=true;
+        index++;
+      }
+    }
+    return oneBitChar;
+  }
+
+  //given a linked-list, order so that all even numbered (0,2,4..) nodes
+  //come before all odd numbered (1,3,5...) ones with O(1) space and O(N) time
+  //3 ms for 71 test cases, beats 99% of java submissions
+  public ListNode oddEvenList(ListNode head) {
+    if(head == null || head.next == null) return head;
+
+    ListNode evenHead = null;
+    ListNode evenTail = null;
+    ListNode oddHead = null;
+    ListNode oddTail = null;
+
+    int count = 0;
+    while(head != null) {
+      if(count%2 == 0){
+        if(evenHead == null) {
+          evenHead = head;
+          evenTail = evenHead;
+        } else {
+          evenTail.next = head;
+          evenTail = head;
+        }
+      } else {
+        if(oddHead == null) {
+          oddHead = head;
+          oddTail = oddHead;
+        } else {
+          oddTail.next = head;
+          oddTail = head;
+        }
+      }
+      count++;
+      head = head.next;
+    }
+    oddTail.next = null;
+    evenTail.next = oddHead;
+    return evenHead;
+  }
 }
