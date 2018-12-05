@@ -4884,4 +4884,20 @@ public class ProblemSolutions {
       return f.count - this.count;
     }
   }
+
+  //given an array of ones and zeros, find max consecutive ones
+  //this is almost too trivial to even commit
+  public int findMaxConsecutiveOnes(int[] nums) {
+    int maxOnes = 0;
+    int tmpOnes = 0;
+    for(int i = 0; i < nums.length; i++){
+      if(nums[i] == 0) {
+        maxOnes = maxOnes >= tmpOnes ? maxOnes : tmpOnes;
+        tmpOnes = 0;
+      } else {
+        tmpOnes++;
+      }
+    }
+    return maxOnes > tmpOnes ? maxOnes : tmpOnes;
+  }
 }

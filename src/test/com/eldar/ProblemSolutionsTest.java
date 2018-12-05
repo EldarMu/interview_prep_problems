@@ -2825,4 +2825,13 @@ public class ProblemSolutionsTest {
       assertEquals(expectedResults[i],(int) results.get(i));
     }
   }
+
+  @Test
+  public void findMaxConsecutiveOnes() throws Exception {
+    ProblemSolutions t = new ProblemSolutions();
+    Assert.assertEquals(3, t.findMaxConsecutiveOnes(new int[] {0,0,1,0,0,1,1,1}));
+    Assert.assertEquals(3, t.findMaxConsecutiveOnes(new int[] {0,1,1,1,0,1,1,1,0,0,1,1}));
+    Assert.assertEquals(0, t.findMaxConsecutiveOnes(new int[] {0,0,0,0,0,0}));
+    Assert.assertEquals(1, t.findMaxConsecutiveOnes(new int[] {1}));
+  }
 }
