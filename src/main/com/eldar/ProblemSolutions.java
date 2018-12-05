@@ -4823,15 +4823,11 @@ public class ProblemSolutions {
   //using ascii representation of lower-case keys as a value from 97-122
   //given an arr of strings, find the max product of string lengths
   //where the two strings don't share any letters
-  //initial version, beats only 40% of java submissions
+  //modified version, got rid of sorting by string length
+  //and all associated early stops
+  //now beats 80% of java submissions
   public int maxProduct(String[] words) {
     if(words == null || words.length < 2) return 0;
-    Arrays.sort(words, new Comparator<String>() {
-      @Override
-      public int compare(String o1, String o2) {
-        return o2.length()-o1.length();
-      }
-    });
     int[] bitWords = new int[words.length];
     int[] wordLens = new int[words.length];
     for(int i = 0; i < words.length; i++) {
@@ -4843,14 +4839,10 @@ public class ProblemSolutions {
 
     int biggestSum = 0;
     for(int i = 0; i < words.length; i++) {
-      if(wordLens[i]==0) break;
-      int minNextStrLen = biggestSum/wordLens[i];
-      if(minNextStrLen >= wordLens[i]) break;
+      if(wordLens[i]==0) continue;
       for(int j = i+1; j < words.length; j++) {
-        if(wordLens[j] <= minNextStrLen) break;
         if((bitWords[i] ^ bitWords[j]) == (bitWords[i] | bitWords[j])) {
-          biggestSum = wordLens[i] * wordLens[j];
-          break;
+          if(biggestSum < wordLens[i]*wordLens[j]) biggestSum = wordLens[i] * wordLens[j];
         }
       }
     }
