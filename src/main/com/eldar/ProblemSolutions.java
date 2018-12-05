@@ -4848,4 +4848,40 @@ public class ProblemSolutions {
     }
     return biggestSum;
   }
+
+  //given an array of n integers and an int k, return the k most frequent elements
+  //https://leetcode.com/problems/top-k-frequent-elements/description/
+  //beats 98% of java runtimes, so I've gotten better since the last time I was doing these.
+  public List<Integer> altTopKFrequent(int[] nums, int k) {
+    Map<Integer, FrequencyCount> numCounts = new HashMap<>();
+    for(int i = 0; i < nums.length; i++) {
+      if(!numCounts.containsKey(nums[i])) {
+        numCounts.put(nums[i], new FrequencyCount(nums[i], 1));
+      } else {
+        numCounts.get(nums[i]).count++;
+      }
+    }
+    Queue<FrequencyCount> maxHeap = new PriorityQueue<>();
+    for(FrequencyCount count: numCounts.values()){
+      maxHeap.offer(count);
+    }
+    List<Integer> result = new ArrayList<>(k);
+    for(int i = 0; i < k; i++) {
+      result.add(i,maxHeap.poll().val);
+    }
+    return result;
+  }
+
+  class FrequencyCount implements Comparable<FrequencyCount>{
+    int val;
+    int count;
+    public FrequencyCount(int val, int count){
+      this.val = val;
+      this.count = count;
+    }
+
+    public int compareTo(FrequencyCount f){
+      return f.count - this.count;
+    }
+  }
 }

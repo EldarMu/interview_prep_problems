@@ -2814,4 +2814,15 @@ public class ProblemSolutionsTest {
     Assert.assertEquals(4, t.maxProduct(new String[] {"a","ab","abc","d","cd","bcd","abcd"}));
     Assert.assertEquals(0, t.maxProduct(new String[] {"a","aa","aaa","aaaa"}));
   }
+
+  @Test
+  public void altTopKFrequent() throws Exception {
+    ProblemSolutions t = new ProblemSolutions();
+    List<Integer> results = t.altTopKFrequent(new int[] {3,2,291,3,5,54,2,2,1,1,6,7,1,1}, 3);
+    int[] expectedResults = new int[] {1,2,3};
+    assertTrue(expectedResults.length == results.size());
+    for(int i = 0; i < expectedResults.length; i++){
+      assertEquals(expectedResults[i],(int) results.get(i));
+    }
+  }
 }
