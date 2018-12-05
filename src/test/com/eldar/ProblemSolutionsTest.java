@@ -2806,4 +2806,12 @@ public class ProblemSolutionsTest {
     }
     return head;
   }
+
+  @Test
+  public void maxProduct() throws Exception{
+    ProblemSolutions t = new ProblemSolutions();
+    Assert.assertEquals(16, t.maxProduct(new String[] {"abcw","baz","foo","bar","xtfn","abcdef"}));
+    Assert.assertEquals(4, t.maxProduct(new String[] {"a","ab","abc","d","cd","bcd","abcd"}));
+    Assert.assertEquals(0, t.maxProduct(new String[] {"a","aa","aaa","aaaa"}));
+  }
 }
