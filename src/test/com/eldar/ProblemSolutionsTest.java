@@ -2850,4 +2850,13 @@ public class ProblemSolutionsTest {
     Assert.assertEquals(0, t.altFindComplement(1));
     Assert.assertEquals(42479185, t.altFindComplement(91738542));
   }
+
+  @Test
+  public void decodeString() throws Exception{
+    ProblemSolutions t = new ProblemSolutions();
+    Assert.assertTrue("aaabcbc".equals(t.decodeString("3[a]2[bc]")));
+    Assert.assertTrue("accaccacc".equals(t.decodeString("3[a2[c]]")));
+    Assert.assertTrue("abcabccdcdcdef".equals(t.decodeString("2[abc]3[cd]ef")));
+
+  }
 }

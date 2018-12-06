@@ -4924,4 +4924,39 @@ public class ProblemSolutions {
     }
     return result;
   }
+
+  //given a string enccded as num[string], possibly nested in itself
+  //return the decoded string
+  //pretty average solution, some overuse of StringBuilder
+  //beats 40% of java submissions at 3 ms
+  public String decodeString(String s) {
+    return recursDecodeStr(s, new int[] {0}, 1);
+  }
+
+
+  //index passed with array wrapper so we can put updated index of closing bracket + 1 into it
+  private String recursDecodeStr(String s, int[] index, int loops){
+    StringBuilder sb = new StringBuilder();
+    int i = index[0];
+    while(i < s.length() && s.charAt(i) != ']') {
+      if(Character.isDigit(s.charAt(i))) {
+        int digitEnd = i+1;
+        while(Character.isDigit(s.charAt(digitEnd))) digitEnd++;
+        int loopCount = Integer.parseInt(s.substring(i, digitEnd));
+
+        int[] updatedIndex = new int[] {digitEnd+1};
+        sb.append(recursDecodeStr(s, updatedIndex, loopCount));
+        i = updatedIndex[0];
+      } else {
+        sb.append(s.charAt(i));
+        i++;
+      }
+    }
+    String oneLoop = sb.toString();
+    for(int j = 1; j < loops; j++){
+      sb.append(oneLoop);
+    }
+    index[0] = ++i;
+    return sb.toString();
+  }
 }
