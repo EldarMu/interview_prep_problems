@@ -4911,4 +4911,17 @@ public class ProblemSolutions {
     }
     return Integer.parseInt(new String(binArr), 2);
   }
+
+  //fairly standard bit op solution
+  //6 ms, beats 80% of java submissions (with 149 test cases)
+  public int altFindComplement(int num) {
+    int result = 0;
+    int shift = 0;
+    while(num != 0){
+      if(num%2 == 0) result |= 1 << shift;
+      shift++;
+      num >>= 1;
+    }
+    return result;
+  }
 }

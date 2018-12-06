@@ -2842,4 +2842,12 @@ public class ProblemSolutionsTest {
     Assert.assertEquals(0, t.findComplement(1));
     Assert.assertEquals(42479185, t.findComplement(91738542));
   }
+
+  @Test
+  public void altFindComplement() throws Exception {
+    ProblemSolutions t = new ProblemSolutions();
+    Assert.assertEquals(2, t.altFindComplement(5));
+    Assert.assertEquals(0, t.altFindComplement(1));
+    Assert.assertEquals(42479185, t.altFindComplement(91738542));
+  }
 }
