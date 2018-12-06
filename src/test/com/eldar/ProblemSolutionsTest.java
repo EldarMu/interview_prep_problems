@@ -2834,4 +2834,12 @@ public class ProblemSolutionsTest {
     Assert.assertEquals(0, t.findMaxConsecutiveOnes(new int[] {0,0,0,0,0,0}));
     Assert.assertEquals(1, t.findMaxConsecutiveOnes(new int[] {1}));
   }
+
+  @Test
+  public void findComplement() throws Exception {
+    ProblemSolutions t = new ProblemSolutions();
+    Assert.assertEquals(2, t.findComplement(5));
+    Assert.assertEquals(0, t.findComplement(1));
+    Assert.assertEquals(42479185, t.findComplement(91738542));
+  }
 }

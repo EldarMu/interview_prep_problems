@@ -4900,4 +4900,15 @@ public class ProblemSolutions {
     }
     return maxOnes > tmpOnes ? maxOnes : tmpOnes;
   }
+
+  //get the complement of a given number (but without flipping all leading zeros as ~ would do)
+  //basic solution using string as an intermediary. Less than stellar (beat 14% of java submissions)
+  public int findComplement(int num) {
+    char[] binArr = Integer.toBinaryString(num).toCharArray();
+    for(int i = 0; i < binArr.length; i++){
+      if(binArr[i] == '1') binArr[i] = '0';
+      else binArr[i] = '1';
+    }
+    return Integer.parseInt(new String(binArr), 2);
+  }
 }
