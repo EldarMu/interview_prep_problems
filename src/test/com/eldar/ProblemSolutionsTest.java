@@ -2859,4 +2859,16 @@ public class ProblemSolutionsTest {
     Assert.assertTrue("abcabccdcdcdef".equals(t.decodeString("2[abc]3[cd]ef")));
 
   }
+
+  @Test
+  public void findModeInTree() throws Exception {
+    ProblemSolutions t = new ProblemSolutions();
+    TreeNode head = new TreeNode(1);
+    head.right = new TreeNode(2);
+    head.right.left = new TreeNode(2);
+
+    Assert.assertArrayEquals(new int[] {Integer.MAX_VALUE},
+        t.findModeInTree(new TreeNode(Integer.MAX_VALUE)));
+    Assert.assertArrayEquals(new int[] {2}, t.findModeInTree(head));
+  }
 }

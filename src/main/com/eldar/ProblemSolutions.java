@@ -4959,4 +4959,58 @@ public class ProblemSolutions {
     index[0] = ++i;
     return sb.toString();
   }
+
+  //find mode in bst that can store duplicates
+  //let's start off with a recursive solution that doesn't use extra memory storage
+  //beats 56% of java submissions at 5 ms for 25 test cases, pretty average
+  public int[] findModeInTree(TreeNode root) {
+    if(root == null) return new int[] {};
+    CountsOfVals counts = new CountsOfVals();
+    int[] curValCount = new int[] {0, 0};
+    recurFindMode(root, counts, curValCount);
+    counts.offerVal(curValCount[0], curValCount[1]);
+
+    int[] results = new int[counts.valList.size()];
+    int i = 0;
+    for(Integer val : counts.valList) {
+      results[i] = val;
+      i++;
+    }
+    return results;
+  }
+
+  private void recurFindMode(TreeNode root, CountsOfVals valCounts, int[] curValCount) {
+    if(root.left != null) recurFindMode(root.left, valCounts, curValCount);
+    if(curValCount[1] == 0){
+      curValCount[0] = root.val;
+      curValCount[1] = 1;
+    }
+    else {
+      if(curValCount[0] == root.val) curValCount[1]++;
+      else {
+        valCounts.offerVal(curValCount[0], curValCount[1]);
+        curValCount[0] = root.val;
+        curValCount[1] = 1;
+      }
+    }
+    if(root.right != null) recurFindMode(root.right, valCounts, curValCount);
+  }
+
+  class CountsOfVals{
+    int count;
+    List<Integer> valList;
+    public CountsOfVals() {
+      count = 0;
+      valList = new LinkedList<>();
+    }
+
+    public void offerVal(int val, int count){
+      if(this.count == count) valList.add(val);
+      else if(this.count < count){
+        this.count = count;
+        valList.clear();
+        valList.add(val);
+      }
+    }
+  }
 }
