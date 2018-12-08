@@ -2871,4 +2871,17 @@ public class ProblemSolutionsTest {
         t.findModeInTree(new TreeNode(Integer.MAX_VALUE)));
     Assert.assertArrayEquals(new int[] {2}, t.findModeInTree(head));
   }
+
+  @Test
+  public void altFindMode() throws Exception {
+      ProblemSolutions t = new ProblemSolutions();
+      TreeNode head = new TreeNode(1);
+      head.right = new TreeNode(2);
+      head.right.left = new TreeNode(2);
+
+      Assert.assertArrayEquals(new int[] {Integer.MAX_VALUE},
+              t.altFindMode(new TreeNode(Integer.MAX_VALUE)));
+      Assert.assertArrayEquals(new int[] {2}, t.altFindMode(head));
+  }
+
 }

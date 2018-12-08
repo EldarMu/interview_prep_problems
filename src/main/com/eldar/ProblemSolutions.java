@@ -5013,4 +5013,35 @@ public class ProblemSolutions {
       }
     }
   }
+
+  //now let's do the same, but with a map for extra storage instead of the special data struct
+  //aaand it runs worse
+  public int[] altFindMode(TreeNode root) {
+    if(root == null) return new int[] {};
+    Map<Integer, Integer> valCounts  = new HashMap<>();
+    altRecursFindMode(root, valCounts);
+    List<Integer> topVals = new ArrayList<>();
+    int topFreq = 0;
+    for(Integer key: valCounts.keySet()){
+      int freq = valCounts.get(key);
+      if(freq == topFreq) topVals.add(key);
+      else if(freq > topFreq){
+        topVals.clear();
+        topVals.add(key);
+        topFreq = freq;
+      }
+    }
+    int[] results = new int[topVals.size()];
+    for(int i = 0; i < results.length; i++) {
+      results[i] = topVals.get(i);
+    }
+    return results;
+  }
+
+  private void altRecursFindMode(TreeNode root, Map<Integer, Integer> valCounts){
+    if(root.left != null) altRecursFindMode(root.left, valCounts);
+    if(!valCounts.containsKey(root.val)) valCounts.put(root.val, 1);
+    else valCounts.put(root.val, valCounts.get(root.val)+1);
+    if(root.right != null) altRecursFindMode(root.right, valCounts);
+  }
 }
