@@ -4,7 +4,6 @@
 .gitignore
 .idea/codeStyleSettings.xml
 .idea/sonarlint/
-.idea/workspace.xml
 out/
 /src/main/com/eldar/FailedTrials.java
 /src/main/com/eldar/ScratchPaper.java
@@ -12,3 +11,4 @@ out/
 /.idea/
 /src/test/com/eldar/PickRandPointInRectangleTest.java
 /src/main/com/eldar/commonDataStructs/PickRandPointInRectangle.java
+

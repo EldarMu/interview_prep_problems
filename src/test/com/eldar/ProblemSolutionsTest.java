@@ -15,7 +15,6 @@ import org.junit.Test;
 
 import java.util.LinkedList;
 import java.util.List;
-import org.junit.runner.notification.RunListener.ThreadSafe;
 
 import static org.junit.Assert.*;
 
@@ -2882,6 +2881,15 @@ public class ProblemSolutionsTest {
       Assert.assertArrayEquals(new int[] {Integer.MAX_VALUE},
               t.altFindMode(new TreeNode(Integer.MAX_VALUE)));
       Assert.assertArrayEquals(new int[] {2}, t.altFindMode(head));
+  }
+
+  @Test
+  public void trap() {
+      ProblemSolutions t = new ProblemSolutions();
+      Assert.assertEquals(9, t.trap(new int[] {4,2,0,3,2,5}));
+      Assert.assertEquals(6, t.trap(new int[] {0,1,0,2,1,0,1,3,2,1,2,1}));
+      Assert.assertEquals(0, t.trap(new int[] {1,1,1,1,1,1,1,1,1}));
+
   }
 
 }

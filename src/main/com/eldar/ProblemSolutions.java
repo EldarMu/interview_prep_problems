@@ -5044,4 +5044,55 @@ public class ProblemSolutions {
     else valCounts.put(root.val, valCounts.get(root.val)+1);
     if(root.right != null) altRecursFindMode(root.right, valCounts);
   }
+
+  //https://leetcode.com/problems/trapping-rain-water/description/
+  //given an array of ints representing heights
+  //after it rains, how much water will get trapped between these heights
+  //going to try this approach - go through array, find any instance of tallest height
+  //separate mirrored algorithm going left to right or right to left to this height
+  //keep track of last tallest height until a height equal or greater is reached
+  //once a height greater or equal is reached, calculate the water trapped as the
+  //difference between those vals and the lesser of the two edge heights
+  //then set the reached height as the new 'tallest height'
+  //beats 72% of java submissions at 11 ms for 315 unit tests
+  public int trap(int[] height) {
+    if(height == null || height.length < 3) return 0;
+    int tallestIndex = -1;
+    int tallestVal = -1;
+    for(int i = 0; i < height.length; i++) {
+      if(height[i] > tallestVal) {
+        tallestVal = height[i];
+        tallestIndex = i;
+      }
+    }
+    int collectedWater = 0;
+    //left to right
+    int leftIndex = 0;
+    int leftHeight = height[leftIndex];
+    for(int i = 1; i <= tallestIndex; i++) {
+      if(height[i] >= leftHeight) {
+        for(int j = leftIndex + 1; j < i; j++) {
+          collectedWater += leftHeight - height[j];
+        }
+        leftIndex = i;
+        leftHeight = height[i];
+      }
+    }
+
+    //right to left
+    int rightIndex = height.length-1;
+    int rightHeight = height[rightIndex];
+    for(int i = rightIndex - 1; i >= tallestIndex; i--){
+      if(height[i] >= rightHeight) {
+        for(int j = i+1; j < rightIndex; j++) {
+          collectedWater += rightHeight - height[j];
+        }
+        rightIndex = i;
+        rightHeight = height[i];
+      }
+    }
+
+    return collectedWater;
+  }
+
 }
