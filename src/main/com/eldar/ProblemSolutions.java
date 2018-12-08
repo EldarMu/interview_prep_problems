@@ -5095,4 +5095,15 @@ public class ProblemSolutions {
     return collectedWater;
   }
 
+  //return sum of ones in an integer (treat as an unsigned integer)
+  //1 ms for 600 unit tests, technically beats 100% of java submissions
+  //despite the fact that they're at the same value
+  public int hammingWeight(int n) {
+    int sumOfOnes = 0;
+    for(int i = 0; i < 32; i++){
+      sumOfOnes =  (n & (1 << i)) == 0 ? sumOfOnes : sumOfOnes + 1;
+    }
+    return sumOfOnes;
+  }
+
 }

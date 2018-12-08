@@ -2889,7 +2889,15 @@ public class ProblemSolutionsTest {
       Assert.assertEquals(9, t.trap(new int[] {4,2,0,3,2,5}));
       Assert.assertEquals(6, t.trap(new int[] {0,1,0,2,1,0,1,3,2,1,2,1}));
       Assert.assertEquals(0, t.trap(new int[] {1,1,1,1,1,1,1,1,1}));
+  }
 
+  @Test
+  public void hammingWeight() {
+      ProblemSolutions t = new ProblemSolutions();
+      Assert.assertEquals(3, t.hammingWeight(11));
+      Assert.assertEquals(1, t.hammingWeight(128));
+      Assert.assertEquals(1, t.hammingWeight(Integer.MIN_VALUE));
+      Assert.assertEquals(31, t.hammingWeight(Integer.MAX_VALUE));
   }
 
 }
