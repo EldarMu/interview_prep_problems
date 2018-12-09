@@ -5141,15 +5141,16 @@ public class ProblemSolutions {
   //given an array of integers and a value s
   //find such the minimal number of contiguous elements
   //such that their sum is greater or equal to s
+  //refactored to use subarray start index rather than queue
+  //now is a bog-standard solution beating 50% of java submissions
   public int minSubArrayLen(int s, int[] nums) {
-    Queue<Integer> inOrderVals = new LinkedList<>();
+    int subArrStart = 0;
     int curSum = 0;
     int minElems = Integer.MAX_VALUE;
     for(int i = 0; i < nums.length; i++){
-      inOrderVals.offer(nums[i]);
       curSum += nums[i];
-      while(curSum - inOrderVals.peek() >= s) curSum -= inOrderVals.poll();
-      if(curSum >= s && inOrderVals.size() < minElems) minElems = inOrderVals.size();
+      while(curSum - nums[subArrStart] >= s) curSum -= nums[subArrStart++];
+      if(curSum >= s && i - subArrStart +1 < minElems) minElems = i - subArrStart +1;
     }
     return minElems == Integer.MAX_VALUE ? 0 : minElems;
   }
