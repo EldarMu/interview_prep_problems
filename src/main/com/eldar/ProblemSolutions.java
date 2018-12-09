@@ -5106,4 +5106,36 @@ public class ProblemSolutions {
     return sumOfOnes;
   }
 
+  //find total area of rectangles with potential overlap
+  //(A,B), (C,D) and (E, F), (G, H) (A,B and E,F are the lowest leftest corner coords)
+  //first step - establish if there is overlap in both x and y planes
+  //second step - establish the size of the overlap
+  //subtract overlap if any such exists, else return area of both rectangles
+  //beats 100% of java submissions at 2 s for 2082 test cases
+  public int computeArea(int A, int B, int C, int D, int E, int F, int G, int H) {
+    int sumArea = (C-A)*(D-B) + (G-E)*(H-F);
+    int xOverlap = 0;
+    int yOverlap = 0;
+
+    boolean eInside = A <= E && E <= C;
+    boolean gInside = A <= G && G <= C;
+    boolean xEncompassing = E < A && C < G;
+    if(eInside && gInside) xOverlap = G - E;
+    else if(eInside) xOverlap = C - E;
+    else if(gInside) xOverlap = G - A;
+    else if(xEncompassing) xOverlap = C - A;
+    else return sumArea;
+
+    boolean fInside = B <= F && F <= D;
+    boolean hInside = B <= H && H <= D;
+    boolean yEncompassing = F < B && D < H;
+    if(fInside && hInside) yOverlap = H - F;
+    else if(fInside) yOverlap = D - F;
+    else if(hInside) yOverlap = H - B;
+    else if(yEncompassing) yOverlap = D - B;
+    else return sumArea;
+
+    return sumArea - xOverlap*yOverlap;
+  }
+
 }

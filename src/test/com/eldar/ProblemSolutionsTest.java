@@ -2900,4 +2900,12 @@ public class ProblemSolutionsTest {
       Assert.assertEquals(31, t.hammingWeight(Integer.MAX_VALUE));
   }
 
+  @Test
+  public void computeArea() {
+    ProblemSolutions t = new ProblemSolutions();
+    Assert.assertEquals(24, t.computeArea(-2, -2, 2, 2, -3, -3, 3, -1));
+    Assert.assertEquals(45, t.computeArea(-3, 0, 3, 4, 0, -1, 9, 2));
+    Assert.assertEquals(16, t.computeArea(-2, -2, 2, 2, -2, -2, 2, 2));
+  }
+
 }
