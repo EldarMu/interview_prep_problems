@@ -5138,4 +5138,20 @@ public class ProblemSolutions {
     return sumArea - xOverlap*yOverlap;
   }
 
+  //given an array of integers and a value s
+  //find such the minimal number of contiguous elements
+  //such that their sum is greater or equal to s
+  public int minSubArrayLen(int s, int[] nums) {
+    Queue<Integer> inOrderVals = new LinkedList<>();
+    int curSum = 0;
+    int minElems = Integer.MAX_VALUE;
+    for(int i = 0; i < nums.length; i++){
+      inOrderVals.offer(nums[i]);
+      curSum += nums[i];
+      while(curSum - inOrderVals.peek() >= s) curSum -= inOrderVals.poll();
+      if(curSum >= s && inOrderVals.size() < minElems) minElems = inOrderVals.size();
+    }
+    return minElems == Integer.MAX_VALUE ? 0 : minElems;
+  }
+
 }

@@ -2908,4 +2908,11 @@ public class ProblemSolutionsTest {
     Assert.assertEquals(16, t.computeArea(-2, -2, 2, 2, -2, -2, 2, 2));
   }
 
+  @Test
+  public void minSubArrayLen() {
+      ProblemSolutions t = new ProblemSolutions();
+      Assert.assertEquals(0, t.minSubArrayLen(0, new int[] {}));
+      Assert.assertEquals(2, t.minSubArrayLen(7, new int[] {2,3,1,2,4,3}));
+  }
+
 }
