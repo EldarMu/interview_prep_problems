@@ -2961,4 +2961,29 @@ public class ProblemSolutionsTest {
       Assert.assertEquals(7, t.longestPalindromeFromSet("abccccdd"));
   }
 
+  @Test
+  public void pacificAtlantic() {
+      ProblemSolutions t = new ProblemSolutions();
+      int[][] input;
+      List<int[]> result;
+      boolean[][] expected;
+      int[][] expectedLoader;
+      input = new int[][] {{1,2,2,3,5}, {3,2,3,4,4},
+          {2,4,5,3,1}, {6,7,1,4,5}, {5,1,1,2,4}};
+      expected = new boolean[input.length][input[0].length];
+      expectedLoader = new int[][] {{0,4}, {1,3}, {1,4}, {2,2}, {3, 0}, {3,1}, {4, 0}};
+      for(int i = 0; i < expectedLoader.length; i++){
+        expected[expectedLoader[i][0]][expectedLoader[i][1]] = true;
+      }
+      result = t.pacificAtlantic(input);
+
+      for(int i = 0; i < result.size(); i++){
+        int[] curResult = result.get(i);
+        Assert.assertTrue(expected[curResult[0]][curResult[1]]);
+      }
+
+      Assert.assertTrue(t.pacificAtlantic(new int[][] {{}}).isEmpty());
+      Assert.assertTrue(t.pacificAtlantic(null).isEmpty());
+  }
+
 }

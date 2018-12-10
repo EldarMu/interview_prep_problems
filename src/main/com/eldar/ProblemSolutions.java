@@ -5249,4 +5249,69 @@ public class ProblemSolutions {
     return palinLen;
   }
 
+  //given an mxn matrix of values representing two oceans
+  //with values as heights and water only able to flow down
+  //find the set of values where water is able to reach both
+  //the top/left and the bottom/right edges
+  //https://leetcode.com/problems/pacific-atlantic-water-flow/description/
+  //beats 93% of java submissions at 9 ms for 113 test cases
+  public List<int[]> pacificAtlantic(int[][] matrix) {
+    if(matrix ==  null || matrix.length == 0 || matrix[0].length == 0) return new ArrayList<>();
+    int[][] visitedBy = new int[matrix.length][matrix[0].length];
+    for(int i = 0; i < matrix.length; i++) {
+      if(visitedBy[i][0] == 0) pacificPourIn(matrix, visitedBy, i, 0);
+    }
+    for(int i = 1; i < matrix[0].length; i++) {
+      if(visitedBy[0][i] == 0) pacificPourIn(matrix, visitedBy, 0, i);
+    }
+
+    List<int[]> result = new ArrayList<>();
+    for(int i = 0; i < matrix.length; i++) {
+      if(visitedBy[i][matrix[0].length-1] != 2){
+        atlanticPourIn(matrix, visitedBy, i, matrix[0].length-1, result);
+      }
+    }
+    for(int i = 0; i < matrix[0].length; i++) {
+      if(visitedBy[matrix.length-1][i] != 2){
+        atlanticPourIn(matrix, visitedBy, matrix.length-1, i, result);
+      }
+    }
+    return result;
+  }
+
+  private void pacificPourIn(int[][] matrix, int[][] visited, int r, int c){
+    int curVal = matrix[r][c];
+    visited[r][c] = 1;
+    if(r > 0 && curVal <= matrix[r-1][c] && visited[r-1][c] == 0) {
+      pacificPourIn(matrix, visited, r-1, c);
+    }
+    if(c > 0 && curVal <= matrix[r][c-1] && visited[r][c-1] == 0) {
+      pacificPourIn(matrix, visited, r, c-1);
+    }
+    if(r < matrix.length -1 && curVal <= matrix[r+1][c] && visited[r+1][c] == 0) {
+      pacificPourIn(matrix, visited, r+1, c);
+    }
+    if(c < matrix[0].length -1 && curVal <= matrix[r][c+1] && visited[r][c+1] == 0) {
+      pacificPourIn(matrix, visited, r, c+1);
+    }
+  }
+
+
+  private void atlanticPourIn(int[][] matrix, int[][] visited, int r, int c, List<int[]> result) {
+    if(visited[r][c]==1) result.add(new int[] {r, c});
+    int curVal = matrix[r][c];
+    visited[r][c] = 2;
+    if(r > 0 && curVal <= matrix[r-1][c] && visited[r-1][c] != 2) {
+      atlanticPourIn(matrix, visited, r-1, c, result);
+    }
+    if(c > 0 && curVal <= matrix[r][c-1] && visited[r][c-1] != 2) {
+      atlanticPourIn(matrix, visited, r, c-1, result);
+    }
+    if(r < matrix.length -1 && curVal <= matrix[r+1][c] && visited[r+1][c] != 2) {
+      atlanticPourIn(matrix, visited, r+1, c, result);
+    }
+    if(c < matrix[0].length -1 && curVal <= matrix[r][c+1] && visited[r][c+1] != 2) {
+      atlanticPourIn(matrix, visited, r, c+1, result);
+    }
+  }
 }
