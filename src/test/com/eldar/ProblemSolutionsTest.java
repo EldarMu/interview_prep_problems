@@ -2915,4 +2915,36 @@ public class ProblemSolutionsTest {
       Assert.assertEquals(2, t.minSubArrayLen(7, new int[] {2,3,1,2,4,3}));
   }
 
+  @Test
+  public void majorityElements() {
+      ProblemSolutions t = new ProblemSolutions();
+      int[] expected;
+      int[] input;
+      List<Integer> result;
+
+      input = new int[] {1,1,1,3,3,2,2,2};
+      expected = new int[] {1,2};
+      result = t.majorityElements(input);
+      checkListAgainstArray(result, expected);
+
+      input = new int[] {1,2};
+      expected = new int[] {1,2};
+      result = t.majorityElements(input);
+      checkListAgainstArray(result, expected);
+
+      input = new int[] {1,1,2};
+      expected = new int[] {1};
+      result = t.majorityElements(input);
+      checkListAgainstArray(result, expected);
+
+
+  }
+
+  private void checkListAgainstArray(List<Integer> result, int[] expected){
+    Assert.assertEquals(expected.length, result.size());
+    for(int i = 0; i < expected.length; i++){
+      Assert.assertEquals(expected[i], (int) result.get(i));
+    }
+  }
+
 }

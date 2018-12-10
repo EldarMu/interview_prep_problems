@@ -5155,4 +5155,45 @@ public class ProblemSolutions {
     return minElems == Integer.MAX_VALUE ? 0 : minElems;
   }
 
+  //given an array where some values may constitute more than a third of the array
+  //find such values if they exist
+  //completely standard majority-voting algorithm beats 47% of java submissions
+  public List<Integer> majorityElements(int[] nums) {
+    int firstVal = 0;
+    int firstCount = 0;
+    int secondVal = 0;
+    int secondCount = 0;
+    for(int i = 0; i < nums.length; i++) {
+      if(nums[i] == firstVal) {
+        firstCount ++;
+        continue;
+      } else if(nums[i] == secondVal) {
+        secondCount ++;
+        continue;
+      } else if(firstCount == 0) {
+        firstVal = nums[i];
+        firstCount = 1;
+      } else if(secondCount == 0) {
+        secondVal = nums[i];
+        secondCount = 1;
+      } else {
+        firstCount--;
+        secondCount--;
+      }
+    }
+
+    //second step is verification
+    firstCount = 0;
+    secondCount = 0;
+    for(int j = 0; j < nums.length; j++) {
+      if(nums[j] == firstVal) firstCount++;
+      else if(nums[j] == secondVal) secondCount++;
+    }
+
+    List<Integer> results = new ArrayList<>(2);
+    if(firstCount*3 > nums.length) results.add(firstVal);
+    if(secondCount*3 > nums.length) results.add(secondVal);
+    return results;
+  }
+
 }
