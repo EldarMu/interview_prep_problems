@@ -2947,4 +2947,13 @@ public class ProblemSolutionsTest {
     }
   }
 
+  @Test
+  public void integerReplacement() {
+      ProblemSolutions t = new ProblemSolutions();
+      Assert.assertEquals(32, t.integerReplacement(Integer.MAX_VALUE));
+      Assert.assertEquals(3, t.integerReplacement(8));
+      Assert.assertEquals(6, t.integerReplacement(23));
+
+  }
+
 }

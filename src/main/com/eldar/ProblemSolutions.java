@@ -5196,4 +5196,42 @@ public class ProblemSolutions {
     return results;
   }
 
+
+  //a dp solution on the slower end
+  //beats 30% of java submissions
+  public int integerReplacement(int n) {
+   Map<Double, Integer> dpMap = new HashMap<>();
+   dpMap.put(1.0,0);
+    return recurIntReplacement(n, dpMap);
+  }
+
+  private int recurIntReplacement(double n, Map<Double, Integer> dpMap) {
+    if(dpMap.containsKey(n)) return dpMap.get(n);
+    double val = n;
+    int withMinus = 0;
+    int withPlus = 0;
+    int divByTwo = 0;
+    if(val % 2 == 0){
+      while(val % 2 == 0){
+        val /= 2;
+        divByTwo++;
+        int afterDivide = recurIntReplacement(val, dpMap);
+        dpMap.put(val, afterDivide);
+        return afterDivide + divByTwo;
+      }
+      val /= 2;
+      divByTwo = recurIntReplacement(val, dpMap);
+      dpMap.put(val, divByTwo);
+    } else {
+      withMinus = recurIntReplacement(val -1, dpMap);
+      dpMap.put(val-1, withMinus);
+      withPlus = recurIntReplacement(val+1, dpMap);
+      dpMap.put(val+1, withPlus);
+    }
+    int lesser = withMinus < withPlus ? withMinus : withPlus;
+    lesser += divByTwo;
+
+    return 1 + lesser;
+  }
+
 }
