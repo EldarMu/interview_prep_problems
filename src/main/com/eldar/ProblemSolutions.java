@@ -5197,8 +5197,8 @@ public class ProblemSolutions {
   }
 
 
-  //a dp solution on the slower end
-  //beats 30% of java submissions
+  //refactored dp solution
+  //beat 67% of java submissions at 3 ms for 47 unit tests
   public int integerReplacement(int n) {
    Map<Double, Integer> dpMap = new HashMap<>();
    dpMap.put(1.0,0);
@@ -5215,22 +5215,17 @@ public class ProblemSolutions {
       while(val % 2 == 0){
         val /= 2;
         divByTwo++;
-        int afterDivide = recurIntReplacement(val, dpMap);
-        dpMap.put(val, afterDivide);
-        return afterDivide + divByTwo;
       }
-      val /= 2;
-      divByTwo = recurIntReplacement(val, dpMap);
-      dpMap.put(val, divByTwo);
+      int afterDivide = dpMap.containsKey(val)? dpMap.get(val) : recurIntReplacement(val, dpMap);
+      dpMap.put(val, afterDivide);
+      return afterDivide + divByTwo;
     } else {
-      withMinus = recurIntReplacement(val -1, dpMap);
-      dpMap.put(val-1, withMinus);
-      withPlus = recurIntReplacement(val+1, dpMap);
-      dpMap.put(val+1, withPlus);
+      withMinus = dpMap.containsKey(val-1)? dpMap.get(val-1) : recurIntReplacement(val -1, dpMap);
+      withPlus = dpMap.containsKey(val+1)? dpMap.get(val+1) : recurIntReplacement(val+1, dpMap);
     }
     int lesser = withMinus < withPlus ? withMinus : withPlus;
     lesser += divByTwo;
-
+    dpMap.put(n, 1+lesser);
     return 1 + lesser;
   }
 
