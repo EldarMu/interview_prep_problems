@@ -2953,7 +2953,12 @@ public class ProblemSolutionsTest {
       Assert.assertEquals(32, t.integerReplacement(Integer.MAX_VALUE));
       Assert.assertEquals(3, t.integerReplacement(8));
       Assert.assertEquals(6, t.integerReplacement(23));
+  }
 
+  @Test
+  public void longestPalindromeFromSet() {
+      ProblemSolutions t = new ProblemSolutions();
+      Assert.assertEquals(7, t.longestPalindromeFromSet("abccccdd"));
   }
 
 }

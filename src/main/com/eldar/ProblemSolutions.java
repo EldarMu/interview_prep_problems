@@ -5229,4 +5229,24 @@ public class ProblemSolutions {
     return 1 + lesser;
   }
 
+  //given a set of letters as a string, find the longest palindrome it is possible to build with it
+  //much shorter, faster solution beats 95% of java submissions at 5 ms for 95 test cases
+  public int longestPalindromeFromSet(String s) {
+    int[] asciiCounts = new int[58];
+    for(int i = 0; i < s.length(); i++) {
+      char c = s.charAt(i);
+      asciiCounts[c - 65]++;
+    }
+
+    int palinLen = 0;
+    boolean atLeastOneOdd = false;
+    for(int j = 0; j < asciiCounts.length; j++){
+      palinLen += asciiCounts[j] - asciiCounts[j] % 2;
+      if(atLeastOneOdd == false && asciiCounts[j] % 2 == 1) atLeastOneOdd = true;
+    }
+
+    if(atLeastOneOdd) palinLen++;
+    return palinLen;
+  }
+
 }
