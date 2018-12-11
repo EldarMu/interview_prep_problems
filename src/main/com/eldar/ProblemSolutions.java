@@ -5314,4 +5314,70 @@ public class ProblemSolutions {
       atlanticPourIn(matrix, visited, r, c+1, result);
     }
   }
+
+  //given two numbers as linked linsts of digits (most significant digit at start of list)
+  //add the two numbers
+  //bog-standard solution beats 58% of java submissions at 31 ms for 1563 test cases
+  //low readability code though
+  public ListNode addTwoNumbersList(ListNode l1, ListNode l2) {
+    Stack<ListNode> l1Stack = new Stack<>();
+    Stack<ListNode> l2Stack = new Stack<>();
+
+    ListNode tmp1 = l1;
+    while(tmp1 != null) {
+      l1Stack.push(tmp1);
+      tmp1 = tmp1.next;
+    }
+    ListNode tmp2 = l2;
+    while(tmp2 != null) {
+      l2Stack.push(tmp2);
+      tmp2 = tmp2.next;
+    }
+
+    boolean l1Longer = l1Stack.size() >= l2Stack.size() ? true : false;
+    boolean carryOne = false;
+    int curSum = 0;
+
+    while(!l1Stack.isEmpty() && !l2Stack.isEmpty()) {
+      curSum = l1Stack.peek().val + l2Stack.peek().val;
+      curSum += carryOne? 1 : 0;
+      carryOne = false;
+      if(curSum > 9){
+        carryOne = true;
+        curSum %= 10;
+      }
+
+      if(l1Longer) l1Stack.peek().val = curSum;
+      else l2Stack.peek().val = curSum;
+      l1Stack.pop();
+      l2Stack.pop();
+    }
+
+    if(l1Stack.isEmpty() && l2Stack.isEmpty()){
+      if(carryOne) {
+        ListNode head = new ListNode(1);
+        head.next = l1Longer? l1 : l2;
+        return head;
+      } else return l1Longer? l1 : l2;
+    } else {
+      Stack<ListNode> remStack = l1Longer? l1Stack : l2Stack;
+      if(carryOne) {
+        while(!remStack.isEmpty() && carryOne) {
+          int curVal = remStack.peek().val;
+          curVal++;
+          if(curVal  < 10) carryOne = false;
+          else curVal %= 10;
+          remStack.pop().val = curVal;
+        }
+        if(!carryOne) return l1Longer ? l1 : l2;
+        else{
+          ListNode head = new ListNode(1);
+          head.next = l1Longer? l1 : l2;
+          return head;
+        }
+      } else {
+        return l1Longer? l1 : l2;
+      }
+    }
+  }
 }

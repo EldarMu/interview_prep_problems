@@ -2986,4 +2986,39 @@ public class ProblemSolutionsTest {
       Assert.assertTrue(t.pacificAtlantic(null).isEmpty());
   }
 
+  @Test
+  public void addTwoNumbersList() {
+      ProblemSolutions t = new ProblemSolutions();
+      ListNode l1;
+      ListNode l2;
+      ListNode result;
+      int[] expected;
+      int[] l1AsArr;
+      int[] l2AsArr;
+
+      l1AsArr = new int[] {7,2,4,3};
+      l2AsArr = new int[] {5,6,4};
+      l1 = new ListNode(7);
+      ListNode tmp1 = l1;
+      for(int i = 1; i < l1AsArr.length; i++) {
+        tmp1.next = new ListNode(l1AsArr[i]);
+        tmp1 = tmp1.next;
+      }
+
+      l2 = new ListNode(5);
+      ListNode tmp2 = l2;
+      for(int i = 1; i < l2AsArr.length; i++) {
+        tmp2.next = new ListNode(l2AsArr[i]);
+        tmp2 = tmp2.next;
+      }
+
+      result = t.addTwoNumbersList(l1, l2);
+      expected = new int[] {7,8,0,7};
+      for(int i = 0; i < expected.length; i++){
+        Assert.assertNotNull(result);
+        Assert.assertEquals(expected[i], result.val);
+        result = result.next;
+      }
+  }
+
 }
