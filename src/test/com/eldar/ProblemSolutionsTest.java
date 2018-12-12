@@ -3021,4 +3021,22 @@ public class ProblemSolutionsTest {
       }
   }
 
+  @Test
+  public void findDuplicates() {
+      ProblemSolutions t = new ProblemSolutions();
+      int[] input;
+      int[] expected;
+      List<Integer> result;
+
+      input = new int[] {3,4,1,5,2,6,3,6};
+      expected = new int[] {3,6};
+      result = t.findDuplicates(input);
+      checkListAgainstArray(result, expected);
+
+      input = new int[] {4,3,2,7,8,2,3,1};
+      expected = new int[] {3,2};
+      result = t.findDuplicates(input);
+      checkListAgainstArray(result, expected);
+  }
+
 }

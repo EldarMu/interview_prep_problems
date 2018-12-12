@@ -5380,4 +5380,27 @@ public class ProblemSolutions {
       }
     }
   }
+
+  //given an array of size n of integers with values 1 <= a[i] <= n
+  //find all duplicate values with constant extra space use
+  //not the fastest solution (beats 58% of java submissions) but is constant space use
+  public List<Integer> findDuplicates(int[] nums) {
+    List<Integer> result = new ArrayList<>();
+
+    for(int i = 0; i < nums.length; i++){
+      if(nums[i] != i+1) {
+        int storedVal = nums[i];
+        nums[i] = -1;
+        while(nums[storedVal-1] != storedVal && nums[storedVal-1] != -1){
+          int newVal = nums[storedVal-1];
+          nums[storedVal-1] = storedVal;
+          storedVal = newVal;
+        }
+
+        if(nums[storedVal-1] == -1) nums[storedVal-1] = storedVal;
+        else result.add(storedVal);
+      }
+    }
+    return result;
+  }
 }
