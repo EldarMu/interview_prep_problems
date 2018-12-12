@@ -3039,4 +3039,12 @@ public class ProblemSolutionsTest {
       checkListAgainstArray(result, expected);
   }
 
+  @Test
+  public void countBattleships() {
+      ProblemSolutions t = new ProblemSolutions();
+      char[][] input;
+
+      input = new char[][] {{'X','.','.','X'},{'.','.','.','X'},{'.','.','.','X'}};
+      Assert.assertEquals(2, t.countBattleships(input));
+  }
 }

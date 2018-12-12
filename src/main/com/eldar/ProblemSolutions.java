@@ -5403,4 +5403,38 @@ public class ProblemSolutions {
     }
     return result;
   }
+
+  //given a board of battleships (marked as x, no adjacent battleships)
+  //count the number of battleships in a single pass without modifying the board
+  //with constant space
+  //constant space solution, but the hashmap slows it down significantly
+  //beats only 12% of solutions (4 ms for 28 test cases) primarily due to hashmap
+  //that is the constant space tradeoff
+  public int countBattleships(char[][] board) {
+    Map<Integer, Boolean> vertShips = new HashMap<>();
+    int result = 0;
+    final char SHIP = 'X';
+    for(int i = 0; i < board.length; i++) {
+      for(int j = 0; j < board[0].length; j++) {
+        char curChar = board[i][j];
+        if(curChar != SHIP) continue;
+        if(j+1 < board[0].length && board[i][j+1] == SHIP){
+          result++;
+          while(j < board[0].length && board[i][j] == SHIP) j++;
+          continue;
+        }
+        if(vertShips.containsKey(j)) {
+          if(i+1 == board.length || board[i+1][j] != SHIP){
+            result++;
+            vertShips.remove(j);
+            continue;
+          }
+        } else if (i + 1 < board.length && board[i+1][j] == SHIP){
+          vertShips.put(j, true);
+          continue;
+        } else result++;
+      }
+    }
+    return result;
+  }
 }
