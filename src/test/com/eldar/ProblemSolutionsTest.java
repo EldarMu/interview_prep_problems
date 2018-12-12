@@ -3046,5 +3046,16 @@ public class ProblemSolutionsTest {
 
       input = new char[][] {{'X','.','.','X'},{'.','.','.','X'},{'.','.','.','X'}};
       Assert.assertEquals(2, t.countBattleships(input));
+      Assert.assertEquals(0, t.countBattleships(new char[][] {{}}));
+  }
+
+  @Test
+  public void altCountBattleships() {
+    ProblemSolutions t = new ProblemSolutions();
+    char[][] input;
+
+    input = new char[][] {{'X','.','.','X'},{'.','.','.','X'},{'.','.','.','X'}};
+    Assert.assertEquals(2, t.countBattleships(input));
+    Assert.assertEquals(0, t.countBattleships(new char[][] {{}}));
   }
 }

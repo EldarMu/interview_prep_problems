@@ -5437,4 +5437,40 @@ public class ProblemSolutions {
     }
     return result;
   }
+
+  //to illustrate that it's a space-time tradeoff, let's do the same thing
+  //but ignore constant space constraints
+  //beats 100% of java submissions at 2 ms for 28 test cases
+  //but uses O(M) extra space where M is the number of columns on the board
+  //https://leetcode.com/problems/battleships-in-a-board/
+  public int altCountBattleships(char[][] board) {
+    boolean[] vertShip = new boolean[board[0].length];
+    int result = 0;
+    final char SHIP = 'X';
+    for (int i = 0; i < board.length; i++) {
+      for (int j = 0; j < board[0].length; j++) {
+        char curChar = board[i][j];
+        if (curChar != SHIP)
+          continue;
+        if (j + 1 < board[0].length && board[i][j + 1] == SHIP) {
+          result++;
+          while (j < board[0].length && board[i][j] == SHIP)
+            j++;
+          continue;
+        }
+        if (vertShip[j]) {
+          if (i + 1 == board.length || board[i + 1][j] != SHIP) {
+            result++;
+            vertShip[j] = false;
+            continue;
+          }
+        } else if (i + 1 < board.length && board[i + 1][j] == SHIP) {
+          vertShip[j] = true;
+          continue;
+        } else
+          result++;
+      }
+    }
+    return result;
+  }
 }
