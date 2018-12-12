@@ -5473,4 +5473,24 @@ public class ProblemSolutions {
     }
     return result;
   }
+
+  //count number of space-separated segments in string
+  //worth noting that string.split fails here
+  //https://leetcode.com/problems/number-of-segments-in-a-string/description/
+  //beats 100% of java submissions at 1 ms for 26 test cases
+  public int countSegments(String s) {
+    int segmentCount = 0;
+    boolean inSegment = false;
+    char curChar = ' ';
+    for(int i = 0; i < s.length(); i++) {
+      curChar = s.charAt(i);
+      if(inSegment){
+        if(curChar == ' ') inSegment = false;
+      } else if(curChar != ' ') {
+        inSegment = true;
+        segmentCount++;
+      }
+    }
+    return segmentCount;
+  }
 }

@@ -3058,4 +3058,11 @@ public class ProblemSolutionsTest {
     Assert.assertEquals(2, t.countBattleships(input));
     Assert.assertEquals(0, t.countBattleships(new char[][] {{}}));
   }
+
+  @Test
+  public void countSegments() {
+      ProblemSolutions t = new ProblemSolutions();
+      Assert.assertEquals(5, t.countSegments("hello from the inter nets"));
+      Assert.assertEquals(6, t.countSegments(".   ,  ,,,. ' 0ad an.,,"));
+  }
 }
