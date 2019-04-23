@@ -5493,4 +5493,30 @@ public class ProblemSolutions {
     }
     return segmentCount;
   }
+
+
+  //there was a meme about doing this wrong on r/programmerhumor and I wanted to try to do it right
+  //the reason I only do half of each line is that I timed it and it's ~twice as fast
+  public String[] drawFigure(int size, char whitespace, char mark){
+    String[] results = new String[size];
+    int halfSize = size%2==0?size/2:size/2+1;
+    char[] curStr = new char[size];
+
+    for(int i=0; i<halfSize; i++){
+      for(int j=0; j<halfSize; j++){
+        if(i==0 || j==0 || i==j || i==size-1-j){
+          curStr[j] = mark;
+          curStr[size-1-j] = mark;
+        } else {
+          curStr[j] = whitespace;
+          curStr[size-1-j] = whitespace;
+        }
+      }
+      results[i] = new String(curStr);
+    }
+    for(int i=0; i<halfSize; i++){
+      results[size-1-i] = results[i];
+    }
+    return results;
+  }
 }

@@ -3065,4 +3065,48 @@ public class ProblemSolutionsTest {
       Assert.assertEquals(5, t.countSegments("hello from the inter nets"));
       Assert.assertEquals(6, t.countSegments(".   ,  ,,,. ' 0ad an.,,"));
   }
+
+  @Test
+  public void drawFigureTest(){
+      ProblemSolutions t = new ProblemSolutions();
+
+      String[] expected;
+      String[] result;
+
+      expected = new String[]{
+          "###########",
+          "##       ##",
+          "# #     # #",
+          "#  #   #  #",
+          "#   # #   #",
+          "#    #    #",
+          "#   # #   #",
+          "#  #   #  #",
+          "# #     # #",
+          "##       ##",
+          "###########"
+      };
+
+      result = t.drawFigure(11, ' ', '#');
+
+      Assert.assertEquals(expected.length, result.length);
+      for(int i=0; i<expected.length; i++){
+        Assert.assertTrue(expected[i].equals(result[i]));
+      }
+
+      expected = new String[]{
+          "HHHHHH",
+          "HH  HH",
+          "H HH H",
+          "H HH H",
+          "HH  HH",
+          "HHHHHH"
+      };
+
+      result = t.drawFigure(6, ' ', 'H');
+      Assert.assertEquals(expected.length, result.length);
+      for(int i=0; i<expected.length; i++){
+        Assert.assertTrue(expected[i].equals(result[i]));
+      }
+  }
 }
