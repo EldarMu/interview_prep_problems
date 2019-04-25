@@ -3109,4 +3109,12 @@ public class ProblemSolutionsTest {
         Assert.assertTrue(expected[i].equals(result[i]));
       }
   }
+
+  @Test
+  public void gloveBagTest(){
+      ProblemSolutions test = new ProblemSolutions();
+      Assert.assertEquals('b', test.gloveBag(24, 20));
+      Assert.assertEquals('w', test.gloveBag(21, 20));
+      Assert.assertEquals('b', test.gloveBag(24, 21));
+  }
 }

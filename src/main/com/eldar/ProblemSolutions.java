@@ -5519,4 +5519,42 @@ public class ProblemSolutions {
     }
     return results;
   }
+
+  //given a bag of n white gloves and n black gloves
+  //grabbing two random gloves out at a time
+  //if two same colored gloves are grabbed, a black glove is added to the bag
+  //otherwise, a white colored glove is added to the bag
+  //what is the color of the last glove
+  public char gloveBag(int white, int black){
+    char[] bag = new char[white+black];
+    Random rnd = new Random();
+
+    for(int i=0; i<white; i++){
+      bag[i] = 'w';
+    }
+    for(int i=white; i<white+black; i++){
+      bag[i] = 'b';
+    }
+    for(int i=0; i<white+black-1; i++){
+      char tmp = bag[white+black-1-i];
+      int rndInd = rnd.nextInt(white+black-i);
+      bag[white+black-1-i] = bag[rndInd];
+      bag[rndInd] = tmp;
+    }
+
+    int remGlvs = white+black;
+    while(remGlvs>1){
+      int rndVal = rnd.nextInt(remGlvs-1);
+      char first = bag[rndVal];
+      bag[rndVal] = bag[remGlvs-1];
+      rndVal = rnd.nextInt(remGlvs-1);
+      if(bag[rndVal]==first){
+        bag[rndVal] = 'b';
+      } else {
+        bag[rndVal] = 'w';
+      }
+      remGlvs--;
+    }
+    return bag[0];
+  }
 }
